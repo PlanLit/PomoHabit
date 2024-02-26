@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-// MARK: - BaseView
+// MARK: - NoteView
 
 final class NoteView: BaseView {
     private let noteLabel : UILabel = {
