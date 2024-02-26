@@ -20,6 +20,12 @@ class NoteView: BaseView {
         label.textAlignment = .left
         return label
     }()
+    
+    private lazy var noteTextView : NoteTextView = {
+        let textView = NoteTextView()
+        return textView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -36,16 +42,32 @@ class NoteView: BaseView {
 // MARK: - Layout Helpers
 
 extension NoteView {
-    
     private func setAddSubViews() {
-        self.addSubViews([noteLabel])
+        self.addSubViews([noteLabel,noteTextView])
     }
     
     private func setAutoLayout() {
         noteLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(100) // 임시 설정값
+            make.top.equalToSuperview().offset(24) // Spacing Static 설정 필요
             make.left.equalToSuperview().offset(20) // Spacing Static 설정 필요
-            make.right.equalToSuperview().offset(-20)
+            make.right.equalToSuperview().offset(-20) // Spacing Static 설정 필요
+        }
+        
+        noteTextView.snp.makeConstraints { make in
+            make.top.equalTo(noteLabel.snp.bottom).offset(12) // Spacing Static 설정 필요
+            make.left.equalToSuperview().offset(20) // Spacing Static 설정 필요
+            make.right.equalToSuperview().offset(-20) // Spacing Static 설정 필요
+            make.bottom.equalToSuperview().offset(-24) // Spacing Static 설정 필요
         }
     }
 }
+
+//MARK: - Public Methods
+
+extension NoteView {
+    public func getNoteTextViewText() -> String{
+        return noteTextView.text
+    }
+
+}
+
