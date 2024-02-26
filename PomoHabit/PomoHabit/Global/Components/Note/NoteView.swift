@@ -9,9 +9,9 @@ import UIKit
 
 import SnapKit
 
-//MARK: - View
+// MARK: - BaseView
 
-class NoteView: BaseView {
+final class NoteView: BaseView {
     private let noteLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24) // CustomFont
@@ -21,10 +21,7 @@ class NoteView: BaseView {
         return label
     }()
     
-    private lazy var noteTextView : NoteTextView = {
-        let textView = NoteTextView()
-        return textView
-    }()
+    private lazy var noteTextView = NoteTextView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,20 +46,20 @@ extension NoteView {
     private func setAutoLayout() {
         noteLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(24) // Spacing Static 설정 필요
-            make.left.equalToSuperview().offset(20) // Spacing Static 설정 필요
-            make.right.equalToSuperview().offset(-20) // Spacing Static 설정 필요
+            make.leading.equalToSuperview().offset(20) // Spacing Static 설정 필요
+            make.trailing.equalToSuperview().offset(-20) // Spacing Static 설정 필요
         }
         
         noteTextView.snp.makeConstraints { make in
             make.top.equalTo(noteLabel.snp.bottom).offset(12) // Spacing Static 설정 필요
-            make.left.equalToSuperview().offset(20) // Spacing Static 설정 필요
-            make.right.equalToSuperview().offset(-20) // Spacing Static 설정 필요
+            make.leading.equalToSuperview().offset(20) // Spacing Static 설정 필요
+            make.trailing.equalToSuperview().offset(-20) // Spacing Static 설정 필요
             make.bottom.equalToSuperview().offset(-24) // Spacing Static 설정 필요
         }
     }
 }
 
-//MARK: - Public Methods
+// MARK: - Public Methods
 
 extension NoteView {
     public func getNoteTextViewText() -> String{

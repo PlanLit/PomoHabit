@@ -8,10 +8,10 @@
 import UIKit
 
 
-//MARK: - View
+// MARK: - NoteTextView
 
 class NoteTextView: UITextView{
-    let placeHolderText = "메모를 입력해주세요."
+    private let placeHolderText = "메모를 입력해주세요."
     
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
@@ -37,7 +37,7 @@ extension NoteTextView {
         self.layer.masksToBounds = true
     }
 }
-//MARK: - Delgate
+// MARK: - Delgate
 
 extension NoteTextView {
     private func setTextViewDelegate() {
@@ -60,7 +60,7 @@ extension NoteTextView : UITextViewDelegate {
         }
     }
 }
-//MARK: - Public Methods
+// MARK: - Public Methods
 
 extension NoteTextView {
     public func getText() -> String{
