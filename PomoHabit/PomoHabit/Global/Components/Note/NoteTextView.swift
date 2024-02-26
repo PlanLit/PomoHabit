@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - NoteTextView
 
-class NoteTextView: UITextView{
+class NoteTextView: UITextView {
     private let placeHolderText = "메모를 입력해주세요."
     
     override init(frame: CGRect, textContainer: NSTextContainer?) {
@@ -24,10 +24,11 @@ class NoteTextView: UITextView{
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 // MARK: - Layout Helpers
 
 extension NoteTextView {
-    private func configureTextView(){
+    private func configureTextView() {
         self.text = placeHolderText
         self.textColor = .gray
         self.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
@@ -37,6 +38,15 @@ extension NoteTextView {
         self.layer.masksToBounds = true
     }
 }
+
+// MARK: - Methods
+
+extension NoteTextView {
+    func getText() -> String {
+        return self.text
+    }
+}
+
 // MARK: - Delgate
 
 extension NoteTextView {
@@ -45,7 +55,7 @@ extension NoteTextView {
     }
 }
 
-extension NoteTextView : UITextViewDelegate {
+extension NoteTextView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == placeHolderText {
             textView.text = nil
@@ -60,11 +70,5 @@ extension NoteTextView : UITextViewDelegate {
         }
     }
 }
-// MARK: - Public Methods
 
-extension NoteTextView {
-    public func getText() -> String{
-        return self.text
-    }
 
-}

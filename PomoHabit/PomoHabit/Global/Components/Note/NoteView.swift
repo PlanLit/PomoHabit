@@ -33,7 +33,6 @@ final class NoteView: BaseView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:\(coder) has not been implemented")
     }
-    
 }
 
 // MARK: - Layout Helpers
@@ -59,12 +58,11 @@ extension NoteView {
     }
 }
 
-// MARK: - Public Methods
+// MARK: - Methods
 
 extension NoteView {
-    public func getNoteTextViewText() -> String{
+    func getNoteTextViewText() -> String {
         return noteTextView.text
     }
-
 }
 
