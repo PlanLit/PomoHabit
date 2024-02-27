@@ -21,6 +21,9 @@
 		37144C972B8C5674008565C4 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C962B8C5674008565C4 /* UITextField+Extension.swift */; };
 		37144C9A2B8C57AF008565C4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 37144C992B8C57AF008565C4 /* SnapKit */; };
 		37144C9C2B8C57AF008565C4 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 37144C9B2B8C57AF008565C4 /* SnapKit-Dynamic */; };
+		BACB15DD2B8D682F003CBC50 /* MyPageViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACB15DC2B8D682F003CBC50 /* MyPageViews.swift */; };
+		BACB15DF2B8D9A76003CBC50 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACB15DE2B8D9A76003CBC50 /* MyPageViewController.swift */; };
+		BACB15E32B8DB999003CBC50 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACB15E22B8DB999003CBC50 /* CustomLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,9 @@
 		37144C922B8C544D008565C4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		37144C942B8C5472008565C4 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		37144C962B8C5674008565C4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		BACB15DC2B8D682F003CBC50 /* MyPageViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViews.swift; sourceTree = "<group>"; };
+		BACB15DE2B8D9A76003CBC50 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		BACB15E22B8DB999003CBC50 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +131,7 @@
 		37144C7D2B8C3413008565C4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				BACB15E22B8DB999003CBC50 /* CustomLabel.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -209,6 +216,7 @@
 		37144C862B8C34F1008565C4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BACB15DC2B8D682F003CBC50 /* MyPageViews.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -216,6 +224,7 @@
 		37144C872B8C34F6008565C4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BACB15DE2B8D9A76003CBC50 /* MyPageViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -397,7 +406,10 @@
 				37144C662B8C32D6008565C4 /* AppDelegate.swift in Sources */,
 				37144C8E2B8C5339008565C4 /* UIView+Extension.swift in Sources */,
 				37144C932B8C544D008565C4 /* BaseViewController.swift in Sources */,
+				BACB15DF2B8D9A76003CBC50 /* MyPageViewController.swift in Sources */,
+				BACB15DD2B8D682F003CBC50 /* MyPageViews.swift in Sources */,
 				37144C682B8C32D6008565C4 /* SceneDelegate.swift in Sources */,
+				BACB15E32B8DB999003CBC50 /* CustomLabel.swift in Sources */,
 				37144C902B8C53B0008565C4 /* UIStackView+Extension.swift in Sources */,
 				37144C952B8C5472008565C4 /* BaseView.swift in Sources */,
 			);
