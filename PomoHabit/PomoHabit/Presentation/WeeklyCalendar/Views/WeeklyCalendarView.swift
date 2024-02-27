@@ -68,6 +68,7 @@ class WeeklyCalendarView: BaseView {
     private lazy var weeklyCollectionView : UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: weeklyCollectionViewFlowLayout)
         collectionView.register(WeeklyCollectionViewCell.self, forCellWithReuseIdentifier: WeeklyCollectionViewCell.identifier)
+        collectionView.showsHorizontalScrollIndicator = false
         
         return collectionView
     }()
@@ -135,12 +136,9 @@ extension WeeklyCalendarView: UICollectionViewDelegateFlowLayout,UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 65, height: 58)
+        return CGSize(width: 65, height: 80)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
+
 }
 
 // MARK: - DataSource
