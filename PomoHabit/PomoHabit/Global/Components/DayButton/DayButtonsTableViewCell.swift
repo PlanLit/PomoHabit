@@ -7,7 +7,7 @@
 
 import UIKit
 
-//MARK: - DayButtonsTableViewCell
+// MARK: - DayButtonsTableViewCell
 
 class DayButtonsTableViewCell: UITableViewCell {
     /// 7개 필수 (월화수목...)
@@ -15,10 +15,6 @@ class DayButtonsTableViewCell: UITableViewCell {
     
     /// 버튼 누르면 인덱스와 누르고 나서 바뀐 버튼 상태 Bool 값 반환
     var action: ((Int, Bool) -> Void)?
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -27,7 +23,7 @@ class DayButtonsTableViewCell: UITableViewCell {
     }
 }
 
-//MARK: - Views
+// MARK: - Layout Helpers
 
 extension DayButtonsTableViewCell {
     private func setUpView() {

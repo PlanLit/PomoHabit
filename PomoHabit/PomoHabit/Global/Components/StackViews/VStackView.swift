@@ -7,10 +7,9 @@
 
 import UIKit
 
-//MARK: - VStackView
+// MARK: - VStackView
 
 class VStackView: UIStackView {
-    
     init(spacing: CGFloat = 10, alignment: UIStackView.Alignment = .center, distribution: UIStackView.Distribution = .equalSpacing,_ views: [UIView]) {
         super.init(frame: .zero)
         self.axis = .vertical

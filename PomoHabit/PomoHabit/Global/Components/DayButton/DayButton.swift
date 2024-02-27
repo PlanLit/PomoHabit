@@ -7,7 +7,7 @@
 
 import UIKit
 
-//MARK: - DayButton
+// MARK: - DayButton
 
 class DayButton: UIView {
     private var dayType: Day?
@@ -31,6 +31,7 @@ class DayButton: UIView {
         button.heightAnchor.constraint(equalToConstant: 49).isActive = true
         button.layer.cornerRadius = 10
         button.layer.borderColor = UIColor.systemGray5.cgColor
+        
         return button
     }()
     
@@ -41,13 +42,13 @@ class DayButton: UIView {
         self.action = action
         setupButton()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-//MARK: - Views
+// MARK: - Layout Helpers
 
 extension DayButton {
     private func setupButton() {
@@ -69,7 +70,7 @@ extension DayButton {
     }
 }
 
-//MARK: - Types
+// MARK: - Types
 
 extension DayButton {
     enum Day: String {
