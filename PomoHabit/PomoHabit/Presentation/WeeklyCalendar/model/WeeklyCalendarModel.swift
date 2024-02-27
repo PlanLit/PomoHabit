@@ -25,4 +25,14 @@ extension HabbitState {
             return .white
         }
     }
+    var image : UIImage {
+        switch self {
+        case .done:
+            return UIImage(named: "DoneImage") ?? UIImage(systemName: "smiley.fill")!
+        case .doNot:
+            return UIImage(named: "DoNotImage") ?? UIImage(systemName: "smiley.fill")!
+        case .notStart:
+            return UIImage(named: "NotStartImage") ?? UIImage(systemName: "smiley.fill")!
+        }
+    }
 }

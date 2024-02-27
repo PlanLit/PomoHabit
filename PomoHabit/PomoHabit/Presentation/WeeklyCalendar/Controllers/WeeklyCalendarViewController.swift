@@ -10,7 +10,7 @@ import UIKit
 // MARK: - WeeklyCalendarViewController
 
 class WeeklyCalendarViewController: BaseViewController {
-
+    
     // MARK: - Properties
     
     private lazy var weeklyCalendarView = WeeklyCalendarView()
@@ -19,9 +19,15 @@ class WeeklyCalendarViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setAddSubViews()
         setSetAutoLayout()
+        
+    }
+    
+    override func viewDidLayoutSubviews() { // 해당 메소드 안에서만 오토레이 아웃으로 설정된 UI/View의 Frame 사이즈를 알 수 있음
+        super.viewDidLayoutSubviews()
+        setUpWeeklyHabbitProgressView(progress: 0.6)
+        
     }
 }
 
@@ -52,13 +58,19 @@ extension WeeklyCalendarViewController {
 // MARK: - Methods
 
 extension WeeklyCalendarViewController {
-
+    private func setUpWeeklyHabbitProgressView(progress : Float){
+        let weeklyCalendarViewWidth = weeklyCalendarView.frame.width
+        let progressCircleOffset = Int(weeklyCalendarViewWidth * CGFloat(progress)) - 5
+        
+        weeklyCalendarView.setProgressCircleImg(offset: progressCircleOffset)
+        weeklyCalendarView.setWeeklyHabbitProgressView(progress: progress)
+    }
 }
 
 // MARK: - Private Methods
 
 extension WeeklyCalendarViewController {
-
+    
 }
 
 
