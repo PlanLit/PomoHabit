@@ -20,7 +20,7 @@
 		37144C972B8C5674008565C4 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C962B8C5674008565C4 /* UITextField+Extension.swift */; };
 		37144C9A2B8C57AF008565C4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 37144C992B8C57AF008565C4 /* SnapKit */; };
 		37144C9C2B8C57AF008565C4 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 37144C9B2B8C57AF008565C4 /* SnapKit-Dynamic */; };
-		7306F5B32B8D7E0D004E6055 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7306F5B22B8D7E0D004E6055 /* AlertViewController.swift */; };
+		73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */; };
 		F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD372B8C7FC900712CBF /* NoteView.swift */; };
 		F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD392B8C7FF200712CBF /* NoteTextView.swift */; };
 /* End PBXBuildFile section */
@@ -39,7 +39,7 @@
 		37144C922B8C544D008565C4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		37144C942B8C5472008565C4 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		37144C962B8C5674008565C4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
-		7306F5B22B8D7E0D004E6055 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 		F8E3CD372B8C7FC900712CBF /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		F8E3CD392B8C7FF200712CBF /* NoteTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +122,7 @@
 				37144C8D2B8C5339008565C4 /* UIView+Extension.swift */,
 				37144C8F2B8C53B0008565C4 /* UIStackView+Extension.swift */,
 				37144C962B8C5674008565C4 /* UITextField+Extension.swift */,
+				73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -129,7 +130,6 @@
 		37144C7D2B8C3413008565C4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				7306F5B12B8D7DF1004E6055 /* AlertController */,
 				F8E3CD362B8C7FB600712CBF /* Note */,
 			);
 			path = Components;
@@ -318,14 +318,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		7306F5B12B8D7DF1004E6055 /* AlertController */ = {
-			isa = PBXGroup;
-			children = (
-				7306F5B22B8D7E0D004E6055 /* AlertViewController.swift */,
-			);
-			path = AlertController;
-			sourceTree = "<group>";
-		};
 		F8E3CD362B8C7FB600712CBF /* Note */ = {
 			isa = PBXGroup;
 			children = (
@@ -419,7 +411,7 @@
 				37144C662B8C32D6008565C4 /* AppDelegate.swift in Sources */,
 				37144C8E2B8C5339008565C4 /* UIView+Extension.swift in Sources */,
 				37144C932B8C544D008565C4 /* BaseViewController.swift in Sources */,
-				7306F5B32B8D7E0D004E6055 /* AlertViewController.swift in Sources */,
+				73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */,
 				F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */,
 				37144C682B8C32D6008565C4 /* SceneDelegate.swift in Sources */,
 				37144C902B8C53B0008565C4 /* UIStackView+Extension.swift in Sources */,
