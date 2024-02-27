@@ -10,6 +10,8 @@ import UIKit
 // MARK: - DayButtonsTableViewCell
 
 class DayButtonsTableViewCell: UITableViewCell {
+    private var container: VStackView?
+    
     /// 7개 필수 (월화수목...)
     var buttonSelectionStates: [Bool]?
     
@@ -19,17 +21,21 @@ class DayButtonsTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        setUpView()
+        setUpSelf()
+        setAddSubviews()
+        setAutoLayout()
     }
 }
 
 // MARK: - Layout Helpers
 
 extension DayButtonsTableViewCell {
-    private func setUpView() {
+    private func setUpSelf() {
         self.selectionStyle = .none
-        
-        let container = VStackView(spacing: 5, alignment: .leading, [
+    }
+    
+    private func setAddSubviews() {
+        container = VStackView(spacing: 5, alignment: .leading, [
             HStackView(spacing: 5, [
                 DayButton(dayType: .mon, isSelected: buttonSelectionStates?[0] ?? false) { state in
                     self.action?(0, state)
@@ -56,14 +62,12 @@ extension DayButtonsTableViewCell {
                 },
             ])
         ])
-        
-        contentView.addSubview(container)
-        
-        NSLayoutConstraint.activate([
-            container.topAnchor.constraint(equalTo: contentView.topAnchor),
-            container.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            container.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            container.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-        ])
+        contentView.addSubview(container ?? UIView())
+    }
+    
+    private func setAutoLayout() {
+        container?.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 }
