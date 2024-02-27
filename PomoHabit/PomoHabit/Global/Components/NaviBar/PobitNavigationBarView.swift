@@ -12,6 +12,7 @@ import SnapKit
 // MARK: - PobitNavigationBarView
 
 class PobitNavigationBarView: UIView {
+    
     // MARK: - Properties
     
     private var titleLabel: UILabel = {
