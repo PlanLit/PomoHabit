@@ -10,19 +10,19 @@ import UIKit
 struct Pretendard {
     private init() {}
     
-    static func pretendardBold(size: CGFloat) -> UIFont? {
+    static func bold(size: CGFloat) -> UIFont? {
         return UIFont(name: "Pretendard-Bold", size: size) ?? .systemFont(ofSize: size)
     }
     
-    static func pretendardSemiBold(size: CGFloat) -> UIFont? {
+    static func semiBold(size: CGFloat) -> UIFont? {
         return UIFont(name: "Pretendard-SemiBold", size: size) ?? .systemFont(ofSize: size)
     }
     
-    static func pretendardMedium(size: CGFloat) -> UIFont? {
+    static func medium(size: CGFloat) -> UIFont? {
         return UIFont(name: "Pretendard-Medium", size: size) ?? .systemFont(ofSize: size)
     }
     
-    static func pretendardRegular(size: CGFloat) -> UIFont? {
+    static func regular(size: CGFloat) -> UIFont? {
         return UIFont(name: "Pretendard-Regular", size: size) ?? .systemFont(ofSize: size)
     }
 }
