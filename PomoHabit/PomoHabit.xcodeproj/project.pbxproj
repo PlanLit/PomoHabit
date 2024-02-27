@@ -35,6 +35,7 @@
 		E0C5B5472B8D63B200A77BAE /* DayButtonsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5462B8D63B200A77BAE /* DayButtonsTableViewCell.swift */; };
 		F85F8F572B8DE33C00E69922 /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F562B8DE33C00E69922 /* BasePaddingLabel.swift */; };
 		F85F8F592B8DE54F00E69922 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F582B8DE54F00E69922 /* Date+Extension.swift */; };
+		F85F8F5B2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F5A2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift */; };
 		F88EB2D82B8DC0EB0073BDDA /* WeeklyCalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2D72B8DC0EB0073BDDA /* WeeklyCalendarModel.swift */; };
 		F88EB2DA2B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2D92B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift */; };
 		F88EB2DC2B8DC1120073BDDA /* WeeklyCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2DB2B8DC1120073BDDA /* WeeklyCalendarView.swift */; };
@@ -71,6 +72,7 @@
 		E0C5B5462B8D63B200A77BAE /* DayButtonsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButtonsTableViewCell.swift; sourceTree = "<group>"; };
 		F85F8F562B8DE33C00E69922 /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
 		F85F8F582B8DE54F00E69922 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		F85F8F5A2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCollectionViewCell.swift; sourceTree = "<group>"; };
 		F88EB2D72B8DC0EB0073BDDA /* WeeklyCalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarModel.swift; sourceTree = "<group>"; };
 		F88EB2D92B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarViewController.swift; sourceTree = "<group>"; };
 		F88EB2DB2B8DC1120073BDDA /* WeeklyCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarView.swift; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 			children = (
 				F88EB2DB2B8DC1120073BDDA /* WeeklyCalendarView.swift */,
 				F85F8F562B8DE33C00E69922 /* BasePaddingLabel.swift */,
+				F85F8F5A2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 			files = (
 				F88EB2D82B8DC0EB0073BDDA /* WeeklyCalendarModel.swift in Sources */,
 				F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */,
+				F85F8F5B2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift in Sources */,
 				37144C972B8C5674008565C4 /* UITextField+Extension.swift in Sources */,
 				37144C8C2B8C3582008565C4 /* UIViewController+Extension.swift in Sources */,
 				376B91BA2B8CE6B6004CBB16 /* PobitButton.swift in Sources */,
