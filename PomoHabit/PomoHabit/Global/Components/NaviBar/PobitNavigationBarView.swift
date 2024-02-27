@@ -1,5 +1,5 @@
 //
-//  NaviBarView.swift
+//  PobitNavigationBarView.swift
 //  PomoHabit
 //
 //  Created by 최유리 on 2/27/24.
@@ -11,19 +11,17 @@ import SnapKit
 
 // MARK: - NaviBarView
 
-class NaviBarView: UIView {
-    
+class PobitNavigationBarView: UIView {
     // MARK: - Properties
     
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 25)
         
         return label
     }()
     
-    private var divider: UIView = {
+    private var dividerView: UIView = {
         let view = UIView()
         view.backgroundColor = .lightGray
         
@@ -33,7 +31,8 @@ class NaviBarView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setUI()
+        setAddSubViews()
+        setAutoLayout()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -44,22 +43,22 @@ class NaviBarView: UIView {
 // MARK: - Layout Helpers
 
 extension NaviBarView {
+    private func setAddSubViews() {
+        self.addSubViews([titleLabel, dividerView])
+    }
     
-    private func setUI() {
+    private func setAutoLayout() {
         backgroundColor = .white
         
-        addSubview(titleLabel)
-        addSubview(divider)
-        
-        titleLabel.snp.makeConstraints {
-            $0.left.equalToSuperview().inset(20)
-            $0.centerY.equalTo(self.snp.centerY)
+        titleLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().inset(20)
+            make.centerY.equalTo(self.snp.centerY)
         }
         
-        divider.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
-            $0.width.equalTo(430)
-            $0.height.equalTo(1)
+        dividerView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.width.equalTo(430)
+            make.height.equalTo(1)
         }
     }
 }
