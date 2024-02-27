@@ -21,6 +21,11 @@
 		37144C9A2B8C57AF008565C4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 37144C992B8C57AF008565C4 /* SnapKit */; };
 		37144C9C2B8C57AF008565C4 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 37144C9B2B8C57AF008565C4 /* SnapKit-Dynamic */; };
 		73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */; };
+		7306F5B02B8D66EE004E6055 /* NaviBar in Resources */ = {isa = PBXBuildFile; fileRef = 7306F5AF2B8D66EE004E6055 /* NaviBar */; };
+		E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */; };
+		E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5412B8D5D9900A77BAE /* HStackView.swift */; };
+		E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */; };
+		E0C5B5472B8D63B200A77BAE /* DayButtonsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5462B8D63B200A77BAE /* DayButtonsTableViewCell.swift */; };
 		F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD372B8C7FC900712CBF /* NoteView.swift */; };
 		F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD392B8C7FF200712CBF /* NoteTextView.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +45,11 @@
 		37144C942B8C5472008565C4 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		37144C962B8C5674008565C4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
+		7306F5AF2B8D66EE004E6055 /* NaviBar */ = {isa = PBXFileReference; lastKnownFileType = folder; path = NaviBar; sourceTree = "<group>"; };
+		E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButton.swift; sourceTree = "<group>"; };
+		E0C5B5412B8D5D9900A77BAE /* HStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HStackView.swift; sourceTree = "<group>"; };
+		E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VStackView.swift; sourceTree = "<group>"; };
+		E0C5B5462B8D63B200A77BAE /* DayButtonsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButtonsTableViewCell.swift; sourceTree = "<group>"; };
 		F8E3CD372B8C7FC900712CBF /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		F8E3CD392B8C7FF200712CBF /* NoteTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,6 +140,9 @@
 		37144C7D2B8C3413008565C4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				7306F5AF2B8D66EE004E6055 /* NaviBar */,
+				E0C5B53F2B8D5D8300A77BAE /* StackViews */,
+				E0C5B53C2B8D5AC000A77BAE /* DayButton */,
 				F8E3CD362B8C7FB600712CBF /* Note */,
 			);
 			path = Components;
@@ -318,6 +331,24 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		E0C5B53C2B8D5AC000A77BAE /* DayButton */ = {
+			isa = PBXGroup;
+			children = (
+				E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */,
+				E0C5B5462B8D63B200A77BAE /* DayButtonsTableViewCell.swift */,
+			);
+			path = DayButton;
+			sourceTree = "<group>";
+		};
+		E0C5B53F2B8D5D8300A77BAE /* StackViews */ = {
+			isa = PBXGroup;
+			children = (
+				E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */,
+				E0C5B5412B8D5D9900A77BAE /* HStackView.swift */,
+			);
+			path = StackViews;
+			sourceTree = "<group>";
+		};
 		F8E3CD362B8C7FB600712CBF /* Note */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,6 +423,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7306F5B02B8D66EE004E6055 /* NaviBar in Resources */,
 				37144C722B8C32D7008565C4 /* LaunchScreen.storyboard in Resources */,
 				37144C6F2B8C32D7008565C4 /* Assets.xcassets in Resources */,
 			);
@@ -407,11 +439,15 @@
 				F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */,
 				37144C972B8C5674008565C4 /* UITextField+Extension.swift in Sources */,
 				37144C8C2B8C3582008565C4 /* UIViewController+Extension.swift in Sources */,
+				E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */,
 				37144C6A2B8C32D6008565C4 /* ViewController.swift in Sources */,
+				E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */,
 				37144C662B8C32D6008565C4 /* AppDelegate.swift in Sources */,
 				37144C8E2B8C5339008565C4 /* UIView+Extension.swift in Sources */,
+				E0C5B5472B8D63B200A77BAE /* DayButtonsTableViewCell.swift in Sources */,
 				37144C932B8C544D008565C4 /* BaseViewController.swift in Sources */,
 				73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */,
+				E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */,
 				F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */,
 				37144C682B8C32D6008565C4 /* SceneDelegate.swift in Sources */,
 				37144C902B8C53B0008565C4 /* UIStackView+Extension.swift in Sources */,
