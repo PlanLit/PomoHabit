@@ -36,6 +36,10 @@
 		F85F8F572B8DE33C00E69922 /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F562B8DE33C00E69922 /* BasePaddingLabel.swift */; };
 		F85F8F592B8DE54F00E69922 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F582B8DE54F00E69922 /* Date+Extension.swift */; };
 		F85F8F5B2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F5A2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift */; };
+		F85F8F5D2B8E14D000E69922 /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F5C2B8E14D000E69922 /* DividerView.swift */; };
+		F85F8F5F2B8E166300E69922 /* SubTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F5E2B8E166300E69922 /* SubTitleLabel.swift */; };
+		F85F8F612B8E25EE00E69922 /* HabbitInfoVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F602B8E25EE00E69922 /* HabbitInfoVIew.swift */; };
+		F85F8F632B8E26E100E69922 /* ImageViewAndLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F622B8E26E100E69922 /* ImageViewAndLabelView.swift */; };
 		F88EB2D82B8DC0EB0073BDDA /* WeeklyCalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2D72B8DC0EB0073BDDA /* WeeklyCalendarModel.swift */; };
 		F88EB2DA2B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2D92B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift */; };
 		F88EB2DC2B8DC1120073BDDA /* WeeklyCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2DB2B8DC1120073BDDA /* WeeklyCalendarView.swift */; };
@@ -73,6 +77,10 @@
 		F85F8F562B8DE33C00E69922 /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
 		F85F8F582B8DE54F00E69922 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		F85F8F5A2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCollectionViewCell.swift; sourceTree = "<group>"; };
+		F85F8F5C2B8E14D000E69922 /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
+		F85F8F5E2B8E166300E69922 /* SubTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTitleLabel.swift; sourceTree = "<group>"; };
+		F85F8F602B8E25EE00E69922 /* HabbitInfoVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabbitInfoVIew.swift; sourceTree = "<group>"; };
+		F85F8F622B8E26E100E69922 /* ImageViewAndLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewAndLabelView.swift; sourceTree = "<group>"; };
 		F88EB2D72B8DC0EB0073BDDA /* WeeklyCalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarModel.swift; sourceTree = "<group>"; };
 		F88EB2D92B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarViewController.swift; sourceTree = "<group>"; };
 		F88EB2DB2B8DC1120073BDDA /* WeeklyCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarView.swift; sourceTree = "<group>"; };
@@ -173,6 +181,7 @@
 				E0C5B53C2B8D5AC000A77BAE /* DayButton */,
 				F8E3CD362B8C7FB600712CBF /* Note */,
 				376B91B92B8CE6B6004CBB16 /* PobitButton.swift */,
+				F85F8F5C2B8E14D000E69922 /* DividerView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -378,6 +387,18 @@
 			path = StackViews;
 			sourceTree = "<group>";
 		};
+		F85F8F642B8E376F00E69922 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F85F8F562B8DE33C00E69922 /* BasePaddingLabel.swift */,
+				F85F8F5A2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift */,
+				F85F8F602B8E25EE00E69922 /* HabbitInfoVIew.swift */,
+				F85F8F622B8E26E100E69922 /* ImageViewAndLabelView.swift */,
+				F85F8F5E2B8E166300E69922 /* SubTitleLabel.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		F88EB2D42B8DC07B0073BDDA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,8 +411,7 @@
 			isa = PBXGroup;
 			children = (
 				F88EB2DB2B8DC1120073BDDA /* WeeklyCalendarView.swift */,
-				F85F8F562B8DE33C00E69922 /* BasePaddingLabel.swift */,
-				F85F8F5A2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift */,
+				F85F8F642B8E376F00E69922 /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -503,14 +523,17 @@
 				376B91BA2B8CE6B6004CBB16 /* PobitButton.swift in Sources */,
 				F85F8F592B8DE54F00E69922 /* Date+Extension.swift in Sources */,
 				E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */,
+				F85F8F612B8E25EE00E69922 /* HabbitInfoVIew.swift in Sources */,
 				37144C6A2B8C32D6008565C4 /* ViewController.swift in Sources */,
 				E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */,
 				37144C662B8C32D6008565C4 /* AppDelegate.swift in Sources */,
 				376B91AA2B8C681A004CBB16 /* Pretendard.swift in Sources */,
+				F85F8F5F2B8E166300E69922 /* SubTitleLabel.swift in Sources */,
 				37144C8E2B8C5339008565C4 /* UIView+Extension.swift in Sources */,
 				F88EB2DC2B8DC1120073BDDA /* WeeklyCalendarView.swift in Sources */,
 				E0C5B5472B8D63B200A77BAE /* DayButtonsTableViewCell.swift in Sources */,
 				37144C932B8C544D008565C4 /* BaseViewController.swift in Sources */,
+				F85F8F632B8E26E100E69922 /* ImageViewAndLabelView.swift in Sources */,
 				73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */,
 				E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */,
 				F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */,
@@ -519,6 +542,7 @@
 				F88EB2DA2B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift in Sources */,
 				F85F8F572B8DE33C00E69922 /* BasePaddingLabel.swift in Sources */,
 				37144C952B8C5472008565C4 /* BaseView.swift in Sources */,
+				F85F8F5D2B8E14D000E69922 /* DividerView.swift in Sources */,
 				376B91AC2B8C6835004CBB16 /* ColorLiterals.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
