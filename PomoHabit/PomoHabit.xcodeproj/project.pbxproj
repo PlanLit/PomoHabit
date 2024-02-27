@@ -33,6 +33,9 @@
 		E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5412B8D5D9900A77BAE /* HStackView.swift */; };
 		E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */; };
 		E0C5B5472B8D63B200A77BAE /* DayButtonsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5462B8D63B200A77BAE /* DayButtonsTableViewCell.swift */; };
+		F88EB2D82B8DC0EB0073BDDA /* WeeklyCalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2D72B8DC0EB0073BDDA /* WeeklyCalendarModel.swift */; };
+		F88EB2DA2B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2D92B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift */; };
+		F88EB2DC2B8DC1120073BDDA /* WeeklyCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2DB2B8DC1120073BDDA /* WeeklyCalendarView.swift */; };
 		F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD372B8C7FC900712CBF /* NoteView.swift */; };
 		F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD392B8C7FF200712CBF /* NoteTextView.swift */; };
 /* End PBXBuildFile section */
@@ -64,6 +67,9 @@
 		E0C5B5412B8D5D9900A77BAE /* HStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HStackView.swift; sourceTree = "<group>"; };
 		E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VStackView.swift; sourceTree = "<group>"; };
 		E0C5B5462B8D63B200A77BAE /* DayButtonsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButtonsTableViewCell.swift; sourceTree = "<group>"; };
+		F88EB2D72B8DC0EB0073BDDA /* WeeklyCalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarModel.swift; sourceTree = "<group>"; };
+		F88EB2D92B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarViewController.swift; sourceTree = "<group>"; };
+		F88EB2DB2B8DC1120073BDDA /* WeeklyCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarView.swift; sourceTree = "<group>"; };
 		F8E3CD372B8C7FC900712CBF /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		F8E3CD392B8C7FF200712CBF /* NoteTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -207,9 +213,9 @@
 		37144C822B8C3437008565C4 /* WeeklyCalendar */ = {
 			isa = PBXGroup;
 			children = (
-				376B91942B8C5B4D004CBB16 /* Controllers */,
-				376B91952B8C5B4D004CBB16 /* Views */,
-				376B91932B8C5B4D004CBB16 /* Models */,
+				F88EB2D62B8DC0AE0073BDDA /* model */,
+				F88EB2D52B8DC0A60073BDDA /* Views */,
+				F88EB2D42B8DC07B0073BDDA /* Controllers */,
 			);
 			path = WeeklyCalendar;
 			sourceTree = "<group>";
@@ -279,27 +285,6 @@
 			sourceTree = "<group>";
 		};
 		376B91922B8C5B4C004CBB16 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		376B91932B8C5B4D004CBB16 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		376B91942B8C5B4D004CBB16 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		376B91952B8C5B4D004CBB16 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -384,6 +369,30 @@
 				E0C5B5412B8D5D9900A77BAE /* HStackView.swift */,
 			);
 			path = StackViews;
+			sourceTree = "<group>";
+		};
+		F88EB2D42B8DC07B0073BDDA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F88EB2D92B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		F88EB2D52B8DC0A60073BDDA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F88EB2DB2B8DC1120073BDDA /* WeeklyCalendarView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F88EB2D62B8DC0AE0073BDDA /* model */ = {
+			isa = PBXGroup;
+			children = (
+				F88EB2D72B8DC0EB0073BDDA /* WeeklyCalendarModel.swift */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		F8E3CD362B8C7FB600712CBF /* Note */ = {
@@ -477,6 +486,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F88EB2D82B8DC0EB0073BDDA /* WeeklyCalendarModel.swift in Sources */,
 				F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */,
 				37144C972B8C5674008565C4 /* UITextField+Extension.swift in Sources */,
 				37144C8C2B8C3582008565C4 /* UIViewController+Extension.swift in Sources */,
@@ -487,6 +497,7 @@
 				37144C662B8C32D6008565C4 /* AppDelegate.swift in Sources */,
 				376B91AA2B8C681A004CBB16 /* Pretendard.swift in Sources */,
 				37144C8E2B8C5339008565C4 /* UIView+Extension.swift in Sources */,
+				F88EB2DC2B8DC1120073BDDA /* WeeklyCalendarView.swift in Sources */,
 				E0C5B5472B8D63B200A77BAE /* DayButtonsTableViewCell.swift in Sources */,
 				37144C932B8C544D008565C4 /* BaseViewController.swift in Sources */,
 				73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */,
@@ -494,6 +505,7 @@
 				F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */,
 				37144C682B8C32D6008565C4 /* SceneDelegate.swift in Sources */,
 				37144C902B8C53B0008565C4 /* UIStackView+Extension.swift in Sources */,
+				F88EB2DA2B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift in Sources */,
 				37144C952B8C5472008565C4 /* BaseView.swift in Sources */,
 				376B91AC2B8C6835004CBB16 /* ColorLiterals.swift in Sources */,
 			);
