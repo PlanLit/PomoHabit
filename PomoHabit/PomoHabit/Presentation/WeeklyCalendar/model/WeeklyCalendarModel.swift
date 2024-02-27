@@ -7,3 +7,22 @@
 import UIKit
 
 import SnapKit
+
+enum HabbitState : Int{
+    case done = 0
+    case doNot = 1
+    case notStart = 2
+}
+
+extension HabbitState {
+    var backgroundColor : UIColor {
+        switch self {
+        case .done: 
+            return UIColor.pobitRed
+        case .doNot:
+            return UIColor.pobitStone1
+        case .notStart:
+            return .white
+        }
+    }
+}

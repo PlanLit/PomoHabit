@@ -13,7 +13,8 @@ class WeeklyCalendarViewController: BaseViewController {
 
     // MARK: - Properties
     
-    let weeklyCalendarView = WeeklyCalendarView()
+    private lazy var weeklyCalendarView = WeeklyCalendarView()
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -33,7 +34,10 @@ extension WeeklyCalendarViewController {
     
     private func setSetAutoLayout() {
         weeklyCalendarView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
 }
