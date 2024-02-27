@@ -20,6 +20,13 @@
 		37144C972B8C5674008565C4 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C962B8C5674008565C4 /* UITextField+Extension.swift */; };
 		37144C9A2B8C57AF008565C4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 37144C992B8C57AF008565C4 /* SnapKit */; };
 		37144C9C2B8C57AF008565C4 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 37144C9B2B8C57AF008565C4 /* SnapKit-Dynamic */; };
+		376B91AA2B8C681A004CBB16 /* Pretendard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B91A92B8C681A004CBB16 /* Pretendard.swift */; };
+		376B91AC2B8C6835004CBB16 /* ColorLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B91AB2B8C6835004CBB16 /* ColorLiterals.swift */; };
+		376B91B22B8C6ABA004CBB16 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 376B91AE2B8C6AB9004CBB16 /* Pretendard-Medium.otf */; };
+		376B91B32B8C6ABA004CBB16 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 376B91AF2B8C6AB9004CBB16 /* Pretendard-Bold.otf */; };
+		376B91B52B8C6ABA004CBB16 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 376B91B12B8C6ABA004CBB16 /* Pretendard-Regular.otf */; };
+		376B91B72B8C6AF6004CBB16 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 376B91B62B8C6AF6004CBB16 /* Pretendard-SemiBold.otf */; };
+		376B91BA2B8CE6B6004CBB16 /* PobitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B91B92B8CE6B6004CBB16 /* PobitButton.swift */; };
 		73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */; };
 		7306F5B02B8D66EE004E6055 /* NaviBar in Resources */ = {isa = PBXBuildFile; fileRef = 7306F5AF2B8D66EE004E6055 /* NaviBar */; };
 		E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */; };
@@ -44,6 +51,13 @@
 		37144C922B8C544D008565C4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		37144C942B8C5472008565C4 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		37144C962B8C5674008565C4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		376B91A92B8C681A004CBB16 /* Pretendard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pretendard.swift; sourceTree = "<group>"; };
+		376B91AB2B8C6835004CBB16 /* ColorLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorLiterals.swift; sourceTree = "<group>"; };
+		376B91AE2B8C6AB9004CBB16 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		376B91AF2B8C6AB9004CBB16 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		376B91B12B8C6ABA004CBB16 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		376B91B62B8C6AF6004CBB16 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		376B91B92B8CE6B6004CBB16 /* PobitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PobitButton.swift; sourceTree = "<group>"; };
 		73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 		7306F5AF2B8D66EE004E6055 /* NaviBar */ = {isa = PBXFileReference; lastKnownFileType = folder; path = NaviBar; sourceTree = "<group>"; };
 		E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButton.swift; sourceTree = "<group>"; };
@@ -108,6 +122,8 @@
 				37144C792B8C3379008565C4 /* CoreData */,
 				37144C7E2B8C3419008565C4 /* Utilites */,
 				37144C7D2B8C3413008565C4 /* Components */,
+				376B91A82B8C66EC004CBB16 /* Constants */,
+				376B91B82B8CE44E004CBB16 /* Literals */,
 				37144C7F2B8C341E008565C4 /* Supports */,
 			);
 			path = Global;
@@ -144,6 +160,7 @@
 				E0C5B53F2B8D5D8300A77BAE /* StackViews */,
 				E0C5B53C2B8D5AC000A77BAE /* DayButton */,
 				F8E3CD362B8C7FB600712CBF /* Note */,
+				376B91B92B8CE6B6004CBB16 /* PobitButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -158,6 +175,7 @@
 		37144C7F2B8C341E008565C4 /* Supports */ = {
 			isa = PBXGroup;
 			children = (
+				376B91AD2B8C69B6004CBB16 /* Fonts */,
 				37144C652B8C32D6008565C4 /* AppDelegate.swift */,
 				37144C672B8C32D6008565C4 /* SceneDelegate.swift */,
 				37144C692B8C32D6008565C4 /* ViewController.swift */,
@@ -331,6 +349,31 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		376B91A82B8C66EC004CBB16 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		376B91AD2B8C69B6004CBB16 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				376B91AF2B8C6AB9004CBB16 /* Pretendard-Bold.otf */,
+				376B91B62B8C6AF6004CBB16 /* Pretendard-SemiBold.otf */,
+				376B91AE2B8C6AB9004CBB16 /* Pretendard-Medium.otf */,
+				376B91B12B8C6ABA004CBB16 /* Pretendard-Regular.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		376B91B82B8CE44E004CBB16 /* Literals */ = {
+			isa = PBXGroup;
+			children = (
+				376B91A92B8C681A004CBB16 /* Pretendard.swift */,
+				376B91AB2B8C6835004CBB16 /* ColorLiterals.swift */,
+			);
+			path = Literals;
 		E0C5B53C2B8D5AC000A77BAE /* DayButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -425,7 +468,11 @@
 			files = (
 				7306F5B02B8D66EE004E6055 /* NaviBar in Resources */,
 				37144C722B8C32D7008565C4 /* LaunchScreen.storyboard in Resources */,
+				376B91B32B8C6ABA004CBB16 /* Pretendard-Bold.otf in Resources */,
+				376B91B72B8C6AF6004CBB16 /* Pretendard-SemiBold.otf in Resources */,
 				37144C6F2B8C32D7008565C4 /* Assets.xcassets in Resources */,
+				376B91B52B8C6ABA004CBB16 /* Pretendard-Regular.otf in Resources */,
+				376B91B22B8C6ABA004CBB16 /* Pretendard-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,10 +486,12 @@
 				F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */,
 				37144C972B8C5674008565C4 /* UITextField+Extension.swift in Sources */,
 				37144C8C2B8C3582008565C4 /* UIViewController+Extension.swift in Sources */,
+				376B91BA2B8CE6B6004CBB16 /* PobitButton.swift in Sources */,
 				E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */,
 				37144C6A2B8C32D6008565C4 /* ViewController.swift in Sources */,
 				E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */,
 				37144C662B8C32D6008565C4 /* AppDelegate.swift in Sources */,
+				376B91AA2B8C681A004CBB16 /* Pretendard.swift in Sources */,
 				37144C8E2B8C5339008565C4 /* UIView+Extension.swift in Sources */,
 				E0C5B5472B8D63B200A77BAE /* DayButtonsTableViewCell.swift in Sources */,
 				37144C932B8C544D008565C4 /* BaseViewController.swift in Sources */,
@@ -452,6 +501,7 @@
 				37144C682B8C32D6008565C4 /* SceneDelegate.swift in Sources */,
 				37144C902B8C53B0008565C4 /* UIStackView+Extension.swift in Sources */,
 				37144C952B8C5472008565C4 /* BaseView.swift in Sources */,
+				376B91AC2B8C6835004CBB16 /* ColorLiterals.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
