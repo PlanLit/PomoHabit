@@ -17,7 +17,7 @@ class DayButton: UIView {
     
     private var isSelected: Bool = false {
         didSet {
-            updateButtonAppearance()
+            setupCustomButtonAppearance()
         }
     }
     
@@ -26,9 +26,6 @@ class DayButton: UIView {
             self.isSelected.toggle()
             self.action?(self.isSelected)
         }))
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.widthAnchor.constraint(equalToConstant: 49).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 49).isActive = true
         button.layer.cornerRadius = 10
         button.layer.borderColor = UIColor.systemGray5.cgColor
         
@@ -37,32 +34,36 @@ class DayButton: UIView {
     
     init(dayType: Day, isSelected: Bool = false, action: @escaping ((Bool) -> Void)) {
         super.init(frame: .zero)
+        
         self.dayType = dayType
         self.isSelected = isSelected
         self.action = action
-        setupButton()
+        setupCustomButton()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+        
     }
 }
 
 // MARK: - Layout Helpers
 
 extension DayButton {
-    private func setupButton() {
+    private func setupCustomButton() {
         addSubview(customButton)
-        NSLayoutConstraint.activate([
-            customButton.topAnchor.constraint(equalTo: topAnchor),
-            customButton.bottomAnchor.constraint(equalTo: bottomAnchor),
-            customButton.leadingAnchor.constraint(equalTo: leadingAnchor),
-            customButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-        ])
-        updateButtonAppearance()
+        customButton.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.width.equalTo(49)
+            make.height.equalTo(49)
+        }
+        setupCustomButtonAppearance()
     }
     
-    private func updateButtonAppearance() {
+    private func setupCustomButtonAppearance() {
         customButton.setTitle(dayType?.rawValue, for: .normal)
         customButton.backgroundColor = isSelected ? .systemGreen : .white // 색 변경 필요
         customButton.setTitleColor(isSelected ? .white : .black, for: .normal)
