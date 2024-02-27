@@ -7,7 +7,11 @@
 
 import UIKit
 
+// MARK: - AlertViewController
+
 class AlertViewController: UIViewController {
+    // MARK: - Methods
+    
     static func showAlert(title: String, message: String, viewController: UIViewController) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
