@@ -7,26 +7,54 @@
 
 import UIKit
 
-class WeeklyCalendarViewController: UIViewController {
-    private lazy var weeklyCalendarView : WeeklyCalendarView = {
-        let view = WeeklyCalendarView()
-        return view
-    }()
+// MARK: - WeeklyCalendarViewController
+
+class WeeklyCalendarViewController: BaseViewController {
+
+    // MARK: - Properties
+    
+    let weeklyCalendarView = WeeklyCalendarView()
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        setAddSubViews()
+        setSetAutoLayout()
+    }
+}
+
+// MARK: - Layout Helpers
+
+extension WeeklyCalendarViewController {
+    private func setAddSubViews() {
+        view.addSubview(weeklyCalendarView)
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+    private func setSetAutoLayout() {
+        weeklyCalendarView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
 }
+
+// MARK: - Action Helpers
+
+extension WeeklyCalendarViewController {
+    @objc private func name() {
+    }
+}
+
+// MARK: - Methods
+
+extension WeeklyCalendarViewController {
+
+}
+
+// MARK: - Private Methods
+
+extension WeeklyCalendarViewController {
+
+}
+
+
