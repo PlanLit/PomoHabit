@@ -11,7 +11,7 @@ import SnapKit
 
 // MARK: - NoteView
 
-class NoteView: BaseView {
+final class NoteView: BaseView {
     private let noteLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24) // CustomFont

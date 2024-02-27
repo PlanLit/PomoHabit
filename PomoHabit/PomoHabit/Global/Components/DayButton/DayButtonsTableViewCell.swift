@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - DayButtonsTableViewCell
 
-class DayButtonsTableViewCell: UITableViewCell {
+final class DayButtonsTableViewCell: UITableViewCell {
     private var container: VStackView?
     
     /// 7개 필수 (월화수목...)

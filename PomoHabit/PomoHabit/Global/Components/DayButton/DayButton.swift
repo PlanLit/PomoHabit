@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - DayButton
 
-class DayButton: UIView {
+final class DayButton: UIView {
     private var dayType: Day?
     
     /// 버튼 누르고 나서 바뀐 버튼 상태 Bool 값 반환
