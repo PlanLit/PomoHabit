@@ -20,6 +20,7 @@
 		37144C972B8C5674008565C4 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C962B8C5674008565C4 /* UITextField+Extension.swift */; };
 		37144C9A2B8C57AF008565C4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 37144C992B8C57AF008565C4 /* SnapKit */; };
 		37144C9C2B8C57AF008565C4 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 37144C9B2B8C57AF008565C4 /* SnapKit-Dynamic */; };
+		7306F5B02B8D66EE004E6055 /* NaviBar in Resources */ = {isa = PBXBuildFile; fileRef = 7306F5AF2B8D66EE004E6055 /* NaviBar */; };
 		E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */; };
 		E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5412B8D5D9900A77BAE /* HStackView.swift */; };
 		E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */; };
@@ -42,6 +43,7 @@
 		37144C922B8C544D008565C4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		37144C942B8C5472008565C4 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		37144C962B8C5674008565C4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		7306F5AF2B8D66EE004E6055 /* NaviBar */ = {isa = PBXFileReference; lastKnownFileType = folder; path = NaviBar; sourceTree = "<group>"; };
 		E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButton.swift; sourceTree = "<group>"; };
 		E0C5B5412B8D5D9900A77BAE /* HStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HStackView.swift; sourceTree = "<group>"; };
 		E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VStackView.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		37144C7D2B8C3413008565C4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				7306F5AF2B8D66EE004E6055 /* NaviBar */,
 				E0C5B53F2B8D5D8300A77BAE /* StackViews */,
 				E0C5B53C2B8D5AC000A77BAE /* DayButton */,
 				F8E3CD362B8C7FB600712CBF /* Note */,
@@ -417,6 +420,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7306F5B02B8D66EE004E6055 /* NaviBar in Resources */,
 				37144C722B8C32D7008565C4 /* LaunchScreen.storyboard in Resources */,
 				37144C6F2B8C32D7008565C4 /* Assets.xcassets in Resources */,
 			);
