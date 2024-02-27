@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-// MARK: - NaviBarView
+// MARK: - PobitNavigationBarView
 
 class PobitNavigationBarView: UIView {
     // MARK: - Properties
