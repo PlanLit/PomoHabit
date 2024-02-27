@@ -23,6 +23,7 @@
 		E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */; };
 		E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5412B8D5D9900A77BAE /* HStackView.swift */; };
 		E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */; };
+		E0C5B5472B8D63B200A77BAE /* DayButtonsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5462B8D63B200A77BAE /* DayButtonsTableViewCell.swift */; };
 		F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD372B8C7FC900712CBF /* NoteView.swift */; };
 		F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD392B8C7FF200712CBF /* NoteTextView.swift */; };
 /* End PBXBuildFile section */
@@ -44,6 +45,7 @@
 		E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButton.swift; sourceTree = "<group>"; };
 		E0C5B5412B8D5D9900A77BAE /* HStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HStackView.swift; sourceTree = "<group>"; };
 		E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VStackView.swift; sourceTree = "<group>"; };
+		E0C5B5462B8D63B200A77BAE /* DayButtonsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButtonsTableViewCell.swift; sourceTree = "<group>"; };
 		F8E3CD372B8C7FC900712CBF /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		F8E3CD392B8C7FF200712CBF /* NoteTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -327,6 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */,
+				E0C5B5462B8D63B200A77BAE /* DayButtonsTableViewCell.swift */,
 			);
 			path = DayButton;
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 				E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */,
 				37144C662B8C32D6008565C4 /* AppDelegate.swift in Sources */,
 				37144C8E2B8C5339008565C4 /* UIView+Extension.swift in Sources */,
+				E0C5B5472B8D63B200A77BAE /* DayButtonsTableViewCell.swift in Sources */,
 				37144C932B8C544D008565C4 /* BaseViewController.swift in Sources */,
 				E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */,
 				F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */,
