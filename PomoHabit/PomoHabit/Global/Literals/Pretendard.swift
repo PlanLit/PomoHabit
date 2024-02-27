@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct FontLiterals {
+struct Pretendard {
     private init() {}
     
     static func pretendardBold(size: CGFloat) -> UIFont? {
