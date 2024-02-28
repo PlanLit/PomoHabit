@@ -30,6 +30,10 @@
 		376B91B52B8C6ABA004CBB16 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 376B91B12B8C6ABA004CBB16 /* Pretendard-Regular.otf */; };
 		376B91B72B8C6AF6004CBB16 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 376B91B62B8C6AF6004CBB16 /* Pretendard-SemiBold.otf */; };
 		376B91BA2B8CE6B6004CBB16 /* PobitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B91B92B8CE6B6004CBB16 /* PobitButton.swift */; };
+		378034A12B8F8D830046E6B8 /* PomoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278202B8F88E200BA7373 /* PomoViewController.swift */; };
+		378034A22B8F8D860046E6B8 /* PomoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278212B8F88F700BA7373 /* PomoView.swift */; };
+		378034A32B8F8D8A0046E6B8 /* PomoProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278222B8F88FB00BA7373 /* PomoProgressBar.swift */; };
+		378034A42B8F8D8D0046E6B8 /* PomoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278232B8F88FF00BA7373 /* PomoModel.swift */; };
 		73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */; };
 		E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */; };
 		E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5412B8D5D9900A77BAE /* HStackView.swift */; };
@@ -538,11 +542,14 @@
 				F85F8F612B8E25EE00E69922 /* HabbitInfoVIew.swift in Sources */,
 				37144C6A2B8C32D6008565C4 /* ViewController.swift in Sources */,
 				E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */,
+				378034A12B8F8D830046E6B8 /* PomoViewController.swift in Sources */,
 				37144C662B8C32D6008565C4 /* AppDelegate.swift in Sources */,
 				376B91AA2B8C681A004CBB16 /* Pretendard.swift in Sources */,
 				37144C8E2B8C5339008565C4 /* UIView+Extension.swift in Sources */,
 				F88EB2DC2B8DC1120073BDDA /* WeeklyCalendarView.swift in Sources */,
+				378034A22B8F8D860046E6B8 /* PomoView.swift in Sources */,
 				E0C5B5472B8D63B200A77BAE /* DayButtonsTableViewCell.swift in Sources */,
+				378034A42B8F8D8D0046E6B8 /* PomoModel.swift in Sources */,
 				37144C932B8C544D008565C4 /* BaseViewController.swift in Sources */,
 				F85F8F632B8E26E100E69922 /* ImageViewAndLabelView.swift in Sources */,
 				73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */,
@@ -552,6 +559,7 @@
 				37144C682B8C32D6008565C4 /* SceneDelegate.swift in Sources */,
 				37144C902B8C53B0008565C4 /* UIStackView+Extension.swift in Sources */,
 				373D0DF42B8F7B5B004CC2C7 /* LayoutLiterals.swift in Sources */,
+				378034A32B8F8D8A0046E6B8 /* PomoProgressBar.swift in Sources */,
 				F88EB2DA2B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift in Sources */,
 				F85F8F572B8DE33C00E69922 /* BasePaddingLabel.swift in Sources */,
 				37144C952B8C5472008565C4 /* BaseView.swift in Sources */,
