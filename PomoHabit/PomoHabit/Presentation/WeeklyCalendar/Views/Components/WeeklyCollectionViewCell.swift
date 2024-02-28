@@ -78,7 +78,7 @@ extension WeeklyCollectionViewCell {
     
     private func setLabel() {
         [dayLabel,dateLabel].forEach { label in
-            label.font = Pretendard.pretendardSemiBold(size: 15)
+            label.font = Pretendard.semiBold(size: 15)
             label.textAlignment = .center
         }
     }

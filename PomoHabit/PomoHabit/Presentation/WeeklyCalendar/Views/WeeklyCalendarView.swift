@@ -39,7 +39,7 @@ class WeeklyCalendarView: BaseView {
         let label = UILabel()
         label.text = "주간 캘린더"
         label.textColor = UIColor.pobitBlack
-        label.font = Pretendard.pretendardBold(size: 26)
+        label.font = Pretendard.bold(size: 26)
         
         return label
     }()
@@ -50,7 +50,7 @@ class WeeklyCalendarView: BaseView {
         let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         label.text = "Today"
         label.textColor = .white
-        label.font = Pretendard.pretendardBold(size: 12)
+        label.font = Pretendard.bold(size: 12)
         
         label.backgroundColor = UIColor.pobitRed2
         
@@ -60,7 +60,7 @@ class WeeklyCalendarView: BaseView {
     private lazy var todayDateLabel: UILabel = {
         let label = UILabel()
         label.text = Date().monthAndDaytoString()
-        label.font = Pretendard.pretendardBold(size: 50)
+        label.font = Pretendard.bold(size: 50)
         label.textColor = UIColor.pobitBlack
         
         return label
@@ -139,7 +139,7 @@ class WeeklyCalendarView: BaseView {
     private lazy var noteContentLabel: BasePaddingLabel = {
         let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         label.text = "메모글 입니다."
-        label.font = Pretendard.pretendardMedium(size: 15)
+        label.font = Pretendard.medium(size: 15)
         label.textColor = UIColor.black
         label.numberOfLines = 0
         label.layer.cornerRadius = 10

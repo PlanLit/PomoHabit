@@ -28,7 +28,7 @@ class SubTitleLabel: UILabel {
 extension SubTitleLabel {
     private func setUpSubTitleLabel() {
         self.textColor = UIColor.pobitStone5
-        self.font = Pretendard.pretendardBold(size: 24)
+        self.font = Pretendard.bold(size: 24)
     }
 }
 

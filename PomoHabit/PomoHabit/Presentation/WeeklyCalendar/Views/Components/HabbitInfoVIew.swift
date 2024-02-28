@@ -10,20 +10,20 @@ import UIKit
 class HabbitInfoView: UIView {
     private lazy var titleInfoView: ImageViewAndLabelStackView = {
         let stackView = ImageViewAndLabelStackView()
-        stackView.setUplabel(text: "독서", font: Pretendard.pretendardBold(size: 20))
+        stackView.setUplabel(text: "독서", font: Pretendard.bold(size: 20))
         return stackView
     }()
     
     private lazy var timeInfoView: ImageViewAndLabelStackView = {
         let stackView = ImageViewAndLabelStackView()
-        stackView.setUplabel(text: "09:00 ~ 09:05", font: Pretendard.pretendardMedium(size: 15))
+        stackView.setUplabel(text: "09:00 ~ 09:05", font: Pretendard.medium(size: 15))
         stackView.setUIImageViewImage(image: UIImage(named: "TimeImage"))
         return stackView
     }()
     
     private lazy var targetInfoView: ImageViewAndLabelStackView = {
         let stackView = ImageViewAndLabelStackView()
-        stackView.setUplabel(text: "목표시간 : 5m", font: Pretendard.pretendardMedium(size: 15))
+        stackView.setUplabel(text: "목표시간 : 5m", font: Pretendard.medium(size: 15))
         stackView.setUIImageViewImage(image: UIImage(named: "TargetImage"))
         return stackView
     }()
