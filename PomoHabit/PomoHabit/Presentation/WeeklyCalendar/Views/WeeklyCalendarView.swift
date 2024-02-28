@@ -21,21 +21,6 @@ class WeeklyCalendarView: BaseView {
     
     let habbitStates = [HabbitState.done,HabbitState.doNot,HabbitState.done,HabbitState.notStart,HabbitState.notStart,HabbitState.notStart,HabbitState.notStart]
     
-    private lazy var scrollView : UIScrollView = {
-        let scrollView = UIScrollView()
-        
-        return scrollView
-    }()
-    
-    private lazy var titleLabel : UILabel = {
-        let label = UILabel()
-        label.text = "주간 캘린더"
-        label.font = Pretendard.pretendardBold(size: 26)
-        label.textColor = UIColor.pobitBlack
-        
-        return label
-    }()
-    
     // MARK: - DividerView
     
     private lazy var firstDivider = DividerView()
@@ -44,22 +29,35 @@ class WeeklyCalendarView: BaseView {
     
     private lazy var thirdDivider = DividerView()
     
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        
+        return scrollView
+    }()
     
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "주간 캘린더"
+        label.textColor = UIColor.pobitBlack
+        label.font = Pretendard.pretendardBold(size: 26)
+        
+        return label
+    }()
+
     // MARK: - 오늘 날짜 UI
     
-    private lazy var todayLabel : BasePaddingLabel = {
+    private lazy var todayLabel: BasePaddingLabel = {
         let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         label.text = "Today"
-        label.font = Pretendard.pretendardBold(size: 12)
         label.textColor = .white
+        label.font = Pretendard.pretendardBold(size: 12)
+        
         label.backgroundColor = UIColor.pobitRed2
-        label.layer.cornerRadius = 8
-        label.layer.masksToBounds = true
         
         return label
     }()
     
-    private lazy var todayDateLabel : UILabel = {
+    private lazy var todayDateLabel: UILabel = {
         let label = UILabel()
         label.text = Date().monthAndDaytoString()
         label.font = Pretendard.pretendardBold(size: 50)
@@ -70,7 +68,7 @@ class WeeklyCalendarView: BaseView {
     
     // MARK: - 주간 캘린더
     
-    private lazy var weeklyCollectionViewFlowLayout : UICollectionViewFlowLayout = {
+    private lazy var weeklyCollectionViewFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 12
@@ -78,7 +76,7 @@ class WeeklyCalendarView: BaseView {
         return layout
     }()
     
-    private lazy var weeklyCollectionView : UICollectionView = {
+    private lazy var weeklyCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: weeklyCollectionViewFlowLayout)
         collectionView.register(WeeklyCollectionViewCell.self, forCellWithReuseIdentifier: WeeklyCollectionViewCell.identifier)
         collectionView.showsHorizontalScrollIndicator = false
@@ -88,7 +86,7 @@ class WeeklyCalendarView: BaseView {
     
     // MARK: - 진행 상태
     
-    private lazy var weeklyHabbitProgressLabel : SubTitleLabel = {
+    private lazy var weeklyHabbitProgressLabel: SubTitleLabel = {
         let label = SubTitleLabel()
         label.setSubTitleLabelText(text: "진행 상태")
         
@@ -120,7 +118,7 @@ class WeeklyCalendarView: BaseView {
         return label
     }()
     
-    private lazy var habbitInfoView : HabbitInfoView = {
+    private lazy var habbitInfoView: HabbitInfoView = {
         let view = HabbitInfoView()
         view.setTitleStackViewImaeg(state: HabbitState.notStart)
         view.layer.cornerRadius = 10
@@ -131,14 +129,14 @@ class WeeklyCalendarView: BaseView {
     
     // MARK: - 메모
     
-    private lazy var noteInfoLabel : SubTitleLabel = {
+    private lazy var noteInfoLabel: SubTitleLabel = {
         let label = SubTitleLabel()
         label.setSubTitleLabelText(text: "메모")
         
         return label
     }()
     
-    private lazy var noteContentLabel : BasePaddingLabel = {
+    private lazy var noteContentLabel: BasePaddingLabel = {
         let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         label.text = "메모글 입니다."
         label.font = Pretendard.pretendardMedium(size: 15)
@@ -226,7 +224,7 @@ extension WeeklyCalendarView {
         }
         
         progressCircleImageView.snp.makeConstraints { make in
-            make.top.equalTo(weeklyHabbitProgressLabel.snp.bottom).offset(10)
+            make.top.equalTo(weeklyHabbitProgressLabel.snp.bottom).offset(9)
             make.leading.equalToSuperview().offset(0)
         }
         
