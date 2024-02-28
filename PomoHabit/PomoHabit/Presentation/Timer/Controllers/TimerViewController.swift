@@ -11,8 +11,9 @@ import UIKit
 
 final class TimerViewController: BaseViewController {
     
-    private var rootView = TimerView()
+    // MARK: - Properties
     
+    private var rootView = TimerView()
     
     // MARK: - Life Cycle
     
@@ -24,7 +25,6 @@ final class TimerViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
     }
 }
 

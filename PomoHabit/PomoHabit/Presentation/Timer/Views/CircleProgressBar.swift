@@ -10,6 +10,8 @@ final class CircleProgressBar: UIView {
     private lazy var trackLayer = makeLayer(strokeColor: .pobitSkin, strokeEnd: 1.0)
     private lazy var dashedCircleLayer = makeDashedCircleLayer()
     
+    private let tempRedLabel = UILabel()
+    
     private let timeLabel: UILabel = {
         let label = UILabel()
         label.text = "22:01"
@@ -43,10 +45,12 @@ final class CircleProgressBar: UIView {
 
 extension CircleProgressBar {
     private func setAddSubViews() {
-        addSubViews([timeLabel])
+        addSubViews([tempRedLabel, timeLabel])
     }
     
     private func setAutoLayout() {
+        // TODO: redLabelLayout
+        
         timeLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }

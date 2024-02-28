@@ -16,14 +16,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if let windowScene = scene as? UIWindowScene {
             
+            let rootVC = TimerViewController()
+            
             let window = UIWindow(windowScene: windowScene)
             window.overrideUserInterfaceStyle = UIUserInterfaceStyle.light
-            
-            let rootVC = ViewController()
-            let navigationController = UINavigationController(rootViewController: rootVC)
-            
-            window.rootViewController = navigationController
+            window.rootViewController = rootVC
             window.makeKeyAndVisible()
+            
             self.window = window
         }
     }
