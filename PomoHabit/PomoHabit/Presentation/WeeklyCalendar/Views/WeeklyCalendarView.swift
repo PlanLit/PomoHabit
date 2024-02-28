@@ -51,7 +51,6 @@ class WeeklyCalendarView: BaseView {
         label.text = "Today"
         label.textColor = .white
         label.font = Pretendard.bold(size: 12)
-        
         label.backgroundColor = UIColor.pobitRed2
         
         return label
