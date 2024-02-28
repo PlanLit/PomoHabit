@@ -44,6 +44,10 @@ extension UIColor {
         return UIColor(hex: "#DEDEDE")
     }
     
+    static var pobitStone5: UIColor {
+        return UIColor(hex: "#6F6F7D")
+    }
+    
     static var pobitSkin: UIColor {
         return UIColor(hex: "#EFE9E7")
     }
