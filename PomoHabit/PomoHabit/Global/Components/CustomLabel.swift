@@ -5,20 +5,22 @@
 //  Created by 洪立妍 on 2/27/24.
 //
 
-import Foundation
-import UIKit
 
-import SnapKit
+import UIKit
 
 // MARK: - CustomLabel
 
 class CustomLabel: UILabel {
     
-    var edgeInset: UIEdgeInsets = .zero
+    // MARK: - Properties
+    
+    private var edgeInset: UIEdgeInsets = .zero
+    
+    // MARK: - Life Cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        text = "Today"
+        
         setupLabel()
     }
     
