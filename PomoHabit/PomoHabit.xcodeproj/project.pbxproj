@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		370A50862B8DCBC000BD691A /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370A50852B8DCBC000BD691A /* TimerModel.swift */; };
+		371078872B8ED52F0049EB9C /* LayoutLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371078862B8ED52F0049EB9C /* LayoutLiterals.swift */; };
 		37144C662B8C32D6008565C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C652B8C32D6008565C4 /* AppDelegate.swift */; };
 		37144C682B8C32D6008565C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C672B8C32D6008565C4 /* SceneDelegate.swift */; };
 		37144C6A2B8C32D6008565C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C692B8C32D6008565C4 /* ViewController.swift */; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		370A50852B8DCBC000BD691A /* TimerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimerModel.swift; path = PomoHabit/Presentation/Timer/Controllers/TimerModel.swift; sourceTree = SOURCE_ROOT; };
+		371078862B8ED52F0049EB9C /* LayoutLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutLiterals.swift; sourceTree = "<group>"; };
 		37144C622B8C32D6008565C4 /* PomoHabit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomoHabit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37144C652B8C32D6008565C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37144C672B8C32D6008565C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 			children = (
 				376B91A92B8C681A004CBB16 /* Pretendard.swift */,
 				376B91AB2B8C6835004CBB16 /* ColorLiterals.swift */,
+				371078862B8ED52F0049EB9C /* LayoutLiterals.swift */,
 			);
 			path = Literals;
 			sourceTree = "<group>";
@@ -549,6 +552,7 @@
 				37144C6A2B8C32D6008565C4 /* ViewController.swift in Sources */,
 				E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */,
 				374E7B7A2B8DBF6C00BC9B26 /* TimerView.swift in Sources */,
+				371078872B8ED52F0049EB9C /* LayoutLiterals.swift in Sources */,
 				37144C662B8C32D6008565C4 /* AppDelegate.swift in Sources */,
 				376B91AA2B8C681A004CBB16 /* Pretendard.swift in Sources */,
 				37144C8E2B8C5339008565C4 /* UIView+Extension.swift in Sources */,
