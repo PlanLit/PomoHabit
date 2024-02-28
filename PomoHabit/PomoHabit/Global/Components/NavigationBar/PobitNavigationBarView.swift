@@ -11,54 +11,53 @@ import SnapKit
 
 // MARK: - PobitNavigationBarView
 
-class PobitNavigationBarView: UIView {
+final class PobitNavigationBarView: UIView {
     
     // MARK: - Properties
     
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 25)
+        label.font = Pretendard.bold(size: 25)
         
         return label
     }()
     
     private var dividerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .pobitStone3
         
         return view
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(title: String) {
+        super.init(frame: .zero)
         
         setAddSubViews()
         setAutoLayout()
+        setTitle(title)
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
 // MARK: - Layout Helpers
 
-extension NaviBarView {
+extension PobitNavigationBarView {
     private func setAddSubViews() {
-        self.addSubViews([titleLabel, dividerView])
+        addSubViews([titleLabel, dividerView])
     }
     
     private func setAutoLayout() {
-        backgroundColor = .white
-        
         titleLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(20)
-            make.centerY.equalTo(self.snp.centerY)
+            make.leading.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
+            make.centerY.equalToSuperview()
         }
         
         dividerView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
-            make.width.equalTo(430)
+            make.top.equalTo(titleLabel.snp.bottom).offset(LayoutLiterals.minimumVerticalSpacing)
+            make.leading.trailing.equalToSuperview()
             make.height.equalTo(1)
         }
     }
@@ -66,7 +65,7 @@ extension NaviBarView {
 
 // MARK: - Methods
 
-extension NaviBarView {
+extension PobitNavigationBarView {
     func setTitle(_ title: String) {
         titleLabel.text = title
     }

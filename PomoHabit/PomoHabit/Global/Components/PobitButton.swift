@@ -14,6 +14,7 @@ protocol PobitButtonStyle {
     var borderColor: UIColor { get }
 }
 
+/// 테두리 없는 버튼
 struct PlainButtonStyle: PobitButtonStyle {
     var backgroundColor: UIColor
     var borderColor: UIColor = .clear
@@ -55,7 +56,7 @@ final class PobitButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.layer.cornerRadius = 15
+        self.layer.cornerRadius = 20
         self.layer.borderWidth = 1
     }
     
@@ -67,6 +68,7 @@ final class PobitButton: UIButton {
 // MARK: - Methods
 
 extension PobitButton {
+    /// 컴포지션 설정
     func setStyle(_ style: PobitButtonStyle) {
         self.style = style
     }
@@ -78,5 +80,21 @@ extension PobitButton {
     /// 런타임에 동적으로 font 업데이트 필요할 경우
     func updateFont(font: UIFont?) {
         self.buttonFont = font ?? .systemFont(ofSize: 20)
+    }
+}
+
+// MARK: - Factory Methods
+
+extension PobitButton {
+    static func makeSquareButton(title: String) -> PobitButton {
+        let button = PobitButton()
+        let style = WithBorderButtonStyle(borderColor: .pobitStone4)
+        
+        button.setStyle(style)
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(.pobitBlack, for: .normal)
+        button.titleLabel?.font = Pretendard.regular(size: 20)
+        
+        return button
     }
 }
