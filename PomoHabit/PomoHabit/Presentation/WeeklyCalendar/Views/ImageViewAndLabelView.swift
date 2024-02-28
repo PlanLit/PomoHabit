@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - ImageViewAndLabelView
 
-class ImageViewAndLabelView: UIView {
+final class ImageViewAndLabelView: UIView {
     
     // MARK: - Properties
     
@@ -43,6 +43,7 @@ extension ImageViewAndLabelView {
             make.bottom.equalToSuperview()
         }
         imageView.setContentHuggingPriority(.init(251), for: .horizontal)
+        imageView.setContentCompressionResistancePriority(.required, for: .horizontal)
         
         label.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -57,13 +58,13 @@ extension ImageViewAndLabelView {
 // MARK: - Methods
 
 extension ImageViewAndLabelView {
-    func setUplabel(text : String, font : UIFont?) {
+    func setUplabel(text: String, font: UIFont?) {
         label.font = font
         label.text = text
         label.textColor = UIColor.pobitStone5
     }
     
-    func setUIImageViewImage(image : UIImage?) {
+    func setUIImageViewImage(image: UIImage?) {
         imageView.image = image
     }
 }

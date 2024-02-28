@@ -36,7 +36,6 @@
 		F85F8F572B8DE33C00E69922 /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F562B8DE33C00E69922 /* BasePaddingLabel.swift */; };
 		F85F8F592B8DE54F00E69922 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F582B8DE54F00E69922 /* Date+Extension.swift */; };
 		F85F8F5B2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F5A2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift */; };
-		F85F8F5D2B8E14D000E69922 /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F5C2B8E14D000E69922 /* DividerView.swift */; };
 		F85F8F612B8E25EE00E69922 /* HabbitInfoVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F602B8E25EE00E69922 /* HabbitInfoVIew.swift */; };
 		F85F8F632B8E26E100E69922 /* ImageViewAndLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F622B8E26E100E69922 /* ImageViewAndLabelView.swift */; };
 		F870D85C2B8EFF3900DA4659 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F870D85B2B8EFF3900DA4659 /* UILabel+Extension.swift */; };
@@ -77,7 +76,6 @@
 		F85F8F562B8DE33C00E69922 /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
 		F85F8F582B8DE54F00E69922 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		F85F8F5A2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCollectionViewCell.swift; sourceTree = "<group>"; };
-		F85F8F5C2B8E14D000E69922 /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
 		F85F8F602B8E25EE00E69922 /* HabbitInfoVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabbitInfoVIew.swift; sourceTree = "<group>"; };
 		F85F8F622B8E26E100E69922 /* ImageViewAndLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewAndLabelView.swift; sourceTree = "<group>"; };
 		F870D85B2B8EFF3900DA4659 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
@@ -182,7 +180,6 @@
 				E0C5B53C2B8D5AC000A77BAE /* DayButton */,
 				F8E3CD362B8C7FB600712CBF /* Note */,
 				376B91B92B8CE6B6004CBB16 /* PobitButton.swift */,
-				F85F8F5C2B8E14D000E69922 /* DividerView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -534,7 +531,6 @@
 				F88EB2DA2B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift in Sources */,
 				F85F8F572B8DE33C00E69922 /* BasePaddingLabel.swift in Sources */,
 				37144C952B8C5472008565C4 /* BaseView.swift in Sources */,
-				F85F8F5D2B8E14D000E69922 /* DividerView.swift in Sources */,
 				376B91AC2B8C6835004CBB16 /* ColorLiterals.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -686,7 +682,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -718,7 +714,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

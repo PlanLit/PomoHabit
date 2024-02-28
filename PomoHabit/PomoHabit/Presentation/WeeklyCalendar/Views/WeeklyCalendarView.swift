@@ -23,12 +23,13 @@ final class WeeklyCalendarView: BaseView {
     
     // MARK: - DividerView
     
-    private lazy var firstDivider = DividerView()
-    private lazy var secondDivider = DividerView()
-    private lazy var thirdDivider = DividerView()
+    private lazy var firstDivider = UIView().makeDividerView(width: 1)
+    private lazy var secondDivider = UIView().makeDividerView(width: 1)
+    private lazy var thirdDivider = UIView().makeDividerView(width: 1)
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
         
         return scrollView
     }()
@@ -250,11 +251,11 @@ extension WeeklyCalendarView {
 // MARK: - Methods
 
 extension WeeklyCalendarView {
-    func setWeeklyHabbitProgressView(progress : Float) {
+    func setWeeklyHabbitProgressView(progress: Float) {
         weeklyHabbitProgressView.progress = progress
     }
     
-    func setProgressCircleImg(offset : Int) {
+    func setProgressCircleImg(offset: Int) {
         progressCircleImageView.snp.updateConstraints { make in
             make.leading.equalToSuperview().offset(offset)
         }

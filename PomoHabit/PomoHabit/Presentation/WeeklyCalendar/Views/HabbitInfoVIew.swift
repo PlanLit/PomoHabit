@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - HabbitInfoView
 
-class HabbitInfoView: UIView {
+final class HabbitInfoView: UIView {
     
     // MARK: - Properties
     
@@ -78,7 +78,7 @@ extension HabbitInfoView {
         }
     }
     
-    private func setUpView(){
+    private func setUpView() {
         self.layer.cornerRadius = 10
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.pobitStone4.cgColor
@@ -88,7 +88,7 @@ extension HabbitInfoView {
 // MARK: - Methods
 
 extension HabbitInfoView {
-    func setTitleInfoViewImage(state : HabbitState){
+    func setTitleInfoViewImage(state: HabbitState) {
         titleInfoView.setUIImageViewImage(image: state.image)
     }
 }
