@@ -11,7 +11,7 @@ import SnapKit
 
 // MARK: - WeeklyCalendarView
 
-class WeeklyCalendarView: BaseView {
+final class WeeklyCalendarView: BaseView {
     
     // MARK: - Properties
     
@@ -19,14 +19,12 @@ class WeeklyCalendarView: BaseView {
     
     let dates = ["26","27","28","29","1","2","3"] // 임시
     
-    let habbitStates = [HabbitState.done,HabbitState.doNot,HabbitState.done,HabbitState.notStart,HabbitState.notStart,HabbitState.notStart,HabbitState.notStart]
+    let habbitStates = [HabbitState.done,HabbitState.doNot,HabbitState.done,HabbitState.notStart,HabbitState.notStart,HabbitState.notStart,HabbitState.notStart] // 임시 데이터
     
     // MARK: - DividerView
     
     private lazy var firstDivider = DividerView()
-    
     private lazy var secondDivider = DividerView()
-    
     private lazy var thirdDivider = DividerView()
     
     private lazy var scrollView: UIScrollView = {
@@ -43,7 +41,7 @@ class WeeklyCalendarView: BaseView {
         
         return label
     }()
-
+    
     // MARK: - 오늘 날짜 UI
     
     private lazy var todayLabel: BasePaddingLabel = {
@@ -85,14 +83,9 @@ class WeeklyCalendarView: BaseView {
     
     // MARK: - 진행 상태
     
-    private lazy var weeklyHabbitProgressLabel: SubTitleLabel = {
-        let label = SubTitleLabel()
-        label.setSubTitleLabelText(text: "진행 상태")
-        
-        return label
-    }()
+    private lazy var weeklyHabbitProgressLabel = UILabel()
     
-    private lazy var weeklyHabbitProgressView : UIProgressView = {
+    private lazy var weeklyHabbitProgressView: UIProgressView = {
         let progressView = UIProgressView()
         progressView.layer.cornerRadius = 20
         progressView.layer.sublayers?[1].cornerRadius = 20
@@ -102,7 +95,7 @@ class WeeklyCalendarView: BaseView {
         return progressView
     }()
     
-    private lazy var progressCircleImageView : UIImageView = {
+    private lazy var progressCircleImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "ProgressCircleImage")
         return imageView
@@ -110,36 +103,23 @@ class WeeklyCalendarView: BaseView {
     
     // MARK: - 습관 정보
     
-    private lazy var habbitInfoLabel : SubTitleLabel = {
-        let label = SubTitleLabel()
-        label.setSubTitleLabelText(text: "습관 정보")
-        
-        return label
-    }()
+    private lazy var habbitInfoLabel = UILabel()
     
     private lazy var habbitInfoView: HabbitInfoView = {
         let view = HabbitInfoView()
-        view.setTitleStackViewImaeg(state: HabbitState.notStart)
-        view.layer.cornerRadius = 10
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.pobitStone4.cgColor
+        view.setTitleInfoViewImage(state: HabbitState.notStart)
         return view
     }()
     
     // MARK: - 메모
     
-    private lazy var noteInfoLabel: SubTitleLabel = {
-        let label = SubTitleLabel()
-        label.setSubTitleLabelText(text: "메모")
-        
-        return label
-    }()
+    private lazy var noteInfoLabel = UILabel()
     
     private lazy var noteContentLabel: BasePaddingLabel = {
         let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         label.text = "메모글 입니다."
         label.font = Pretendard.medium(size: 15)
-        label.textColor = UIColor.black
+        label.textColor = UIColor.pobitBlack
         label.numberOfLines = 0
         label.layer.cornerRadius = 10
         label.layer.masksToBounds = true
@@ -154,7 +134,7 @@ class WeeklyCalendarView: BaseView {
         
         setAddSubViews()
         setAutoLayout()
-        weeklyCollectionView.dataSource = self
+        setSubTitleLabel()
         setWeeklyCollectionViewDelegate()
         setWeeklyCollectionViewDataSource()
     }
@@ -179,9 +159,7 @@ extension WeeklyCalendarView {
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.top.trailing.left.equalToSuperview()
         }
         
         // MARK: - 오늘 날짜 UI
@@ -224,7 +202,7 @@ extension WeeklyCalendarView {
         
         progressCircleImageView.snp.makeConstraints { make in
             make.top.equalTo(weeklyHabbitProgressLabel.snp.bottom).offset(9)
-            make.leading.equalToSuperview().offset(0)
+            make.leading.equalToSuperview()
         }
         
         secondDivider.snp.makeConstraints { make in
@@ -261,6 +239,12 @@ extension WeeklyCalendarView {
             make.bottom.equalToSuperview()
         }
     }
+    
+    private func setSubTitleLabel() {
+        weeklyHabbitProgressLabel.setSubTitleLabel(text: "진행 상태")
+        habbitInfoLabel.setSubTitleLabel(text: "습관 정보")
+        noteInfoLabel.setSubTitleLabel(text: "메모")
+    }
 }
 
 // MARK: - Methods
@@ -289,7 +273,6 @@ extension WeeklyCalendarView: UICollectionViewDelegateFlowLayout,UICollectionVie
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 65, height: 80)
     }
-    
 }
 
 // MARK: - DataSource

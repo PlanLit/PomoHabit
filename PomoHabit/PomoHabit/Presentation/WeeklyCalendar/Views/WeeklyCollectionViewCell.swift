@@ -9,16 +9,14 @@ import UIKit
 
 // MARK: - WeeklyCollectionViewCell
 
-class WeeklyCollectionViewCell: UICollectionViewCell {
+final class WeeklyCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
     static let identifier = "WeeklyCollectionViewCellid"
-    private lazy var upperStackView : UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
+    
+    private lazy var labelsContainer: VStackView = {
+        let stackView = VStackView(spacing: 5,alignment: .fill,distribution: .fillEqually, [dayLabel,dateLabel])
         stackView.layer.cornerRadius = 10
         stackView.layer.masksToBounds = true
         return stackView
@@ -28,12 +26,14 @@ class WeeklyCollectionViewCell: UICollectionViewCell {
     
     private lazy var dateLabel = UILabel()
     
-    private lazy var circleImageView : UIImageView = {
+    private lazy var circleImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "CircleImage")
         imageView.isHidden = true
+        
         return imageView
     }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -61,18 +61,17 @@ class WeeklyCollectionViewCell: UICollectionViewCell {
 
 extension WeeklyCollectionViewCell {
     private func setAddSubViews() {
-        contentView.addSubViews([upperStackView,circleImageView])
-        upperStackView.addArrangedSubviews([dayLabel,dateLabel])
+        contentView.addSubViews([labelsContainer,circleImageView])
     }
     
     private func setAutoLayout() {
-        upperStackView.snp.makeConstraints { make in
+        labelsContainer.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
         }
+        
         circleImageView.snp.makeConstraints { make in
-            make.top.equalTo(upperStackView.snp.bottom).offset(5)
-            make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.top.equalTo(labelsContainer.snp.bottom).offset(5)
+            make.centerX.bottom.equalToSuperview()
         }
     }
     
@@ -87,32 +86,28 @@ extension WeeklyCollectionViewCell {
 // MARK: - Methods
 
 extension WeeklyCollectionViewCell{
-    func setDayLabelText(text : String) {
+    func setDayLabelText(text: String) {
         dayLabel.text = text
     }
     
-    func setDateLabelText(text : String) { // 임시
+    func setDateLabelText(text: String) { // 임시
         dateLabel.text = text
     }
     
-    func setCellBackgroundColor(state: HabbitState) {
-        upperStackView.backgroundColor = state.backgroundColor
+    func setCellBackgroundColor(state: HabbitState) { //습관 정보에 따라 달라지는 cell배경및 border 함수
+        labelsContainer.backgroundColor = state.backgroundColor
         
         if state == HabbitState.notStart{
             [dayLabel,dateLabel].forEach { label in
                 label.textColor = UIColor.pobitBlack
             }
             
-            upperStackView.layer.borderWidth = 1
-            upperStackView.layer.borderColor = UIColor.pobitStone4.cgColor
+            labelsContainer.layer.borderWidth = 1
+            labelsContainer.layer.borderColor = UIColor.pobitStone4.cgColor
         }else {
             [dayLabel,dateLabel].forEach { label in
                 label.textColor = UIColor.white
             }
         }
-    }
-    
-    func selectedCell() {
-        circleImageView.isHidden = false
     }
 }

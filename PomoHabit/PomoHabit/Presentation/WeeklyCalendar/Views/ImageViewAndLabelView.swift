@@ -7,9 +7,11 @@
 
 import UIKit
 
-// MARK: - ImageViewAndLabelStackView
+// MARK: - ImageViewAndLabelView
 
-class ImageViewAndLabelStackView: UIView {
+class ImageViewAndLabelView: UIView {
+    
+    // MARK: - Properties
     
     private lazy var imageView = UIImageView()
     
@@ -25,14 +27,11 @@ class ImageViewAndLabelStackView: UIView {
     required init(coder: NSCoder) {
         fatalError("init(coder:\(coder) has not been implemented")
     }
-    
-    
-    
 }
 
 // MARK: - Layout Helpers
 
-extension ImageViewAndLabelStackView {
+extension ImageViewAndLabelView {
     private func setAddSubViews() {
         self.addSubViews([imageView,label])
     }
@@ -57,7 +56,7 @@ extension ImageViewAndLabelStackView {
 
 // MARK: - Methods
 
-extension ImageViewAndLabelStackView {
+extension ImageViewAndLabelView {
     func setUplabel(text : String, font : UIFont?) {
         label.font = font
         label.text = text
@@ -66,6 +65,5 @@ extension ImageViewAndLabelStackView {
     
     func setUIImageViewImage(image : UIImage?) {
         imageView.image = image
-        
     }
 }

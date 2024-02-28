@@ -7,24 +7,32 @@
 
 import UIKit
 
+// MARK: - HabbitInfoView
+
 class HabbitInfoView: UIView {
-    private lazy var titleInfoView: ImageViewAndLabelStackView = {
-        let stackView = ImageViewAndLabelStackView()
+    
+    // MARK: - Properties
+    
+    private lazy var titleInfoView: ImageViewAndLabelView = {
+        let stackView = ImageViewAndLabelView()
         stackView.setUplabel(text: "독서", font: Pretendard.bold(size: 20))
+        
         return stackView
     }()
     
-    private lazy var timeInfoView: ImageViewAndLabelStackView = {
-        let stackView = ImageViewAndLabelStackView()
+    private lazy var timeInfoView: ImageViewAndLabelView = {
+        let stackView = ImageViewAndLabelView()
         stackView.setUplabel(text: "09:00 ~ 09:05", font: Pretendard.medium(size: 15))
         stackView.setUIImageViewImage(image: UIImage(named: "TimeImage"))
+        
         return stackView
     }()
     
-    private lazy var targetInfoView: ImageViewAndLabelStackView = {
-        let stackView = ImageViewAndLabelStackView()
+    private lazy var targetInfoView: ImageViewAndLabelView = {
+        let stackView = ImageViewAndLabelView()
         stackView.setUplabel(text: "목표시간 : 5m", font: Pretendard.medium(size: 15))
         stackView.setUIImageViewImage(image: UIImage(named: "TargetImage"))
+        
         return stackView
     }()
     
@@ -33,6 +41,7 @@ class HabbitInfoView: UIView {
         
         setAddSubViews()
         setAutoLayout()
+        setUpView()
     }
     
     required init?(coder: NSCoder) {
@@ -68,12 +77,18 @@ extension HabbitInfoView {
             make.bottom.equalToSuperview().offset(-12)
         }
     }
+    
+    private func setUpView(){
+        self.layer.cornerRadius = 10
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.pobitStone4.cgColor
+    }
 }
 
 // MARK: - Methods
 
 extension HabbitInfoView {
-    func setTitleStackViewImaeg(state : HabbitState){
+    func setTitleInfoViewImage(state : HabbitState){
         titleInfoView.setUIImageViewImage(image: state.image)
     }
 }
