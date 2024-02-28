@@ -4,7 +4,7 @@ import SnapKit
 
 final class CircleProgressBar: UIView {
     
-    // MARK: - UIProperties
+    // MARK: - UI Properties
     
     private lazy var progressLayer = makeLayer(strokeColor: .pobitRed, strokeEnd: 0)
     private lazy var trackLayer = makeLayer(strokeColor: .pobitSkin, strokeEnd: 1.0)
@@ -14,7 +14,8 @@ final class CircleProgressBar: UIView {
         let label = UILabel()
         label.text = "22:01"
         label.textColor = .pobitBlack
-        label.font = Pretendard.bold(size: 50)
+        label.font = Pretendard.bold(size: 44)
+        
         return label
     }()
     
@@ -54,14 +55,8 @@ extension CircleProgressBar {
     private func configureCircularPath() {
         self.layer.cornerRadius = self.frame.size.width / 2
         
-        // 시작점과 종료점을 설정하여 원을 그림
-        let circularPath = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2,
-                                                           y: frame.size.height / 2),
-                                        radius: frame.size.width / 2, startAngle: -.pi / 2,
-                                        endAngle: 3 * .pi / 2, clockwise: true)
-        
-        trackLayer.path = circularPath.cgPath
-        progressLayer.path = circularPath.cgPath
+        trackLayer.path = CAShapeLayer.primeCirclePath(in: frame)
+        progressLayer.path = CAShapeLayer.primeCirclePath(in: frame)
         
         [ trackLayer, progressLayer, dashedCircleLayer ].forEach { layer.addSublayer($0) }
     }
@@ -93,15 +88,10 @@ extension CircleProgressBar {
     }
     
     private func makeDashedCircleLayer() -> CAShapeLayer {
-        let circlePath = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2.0,
-                                                         y: frame.size.height / 2.0),
-                                      radius: 100,
-                                      startAngle: 0.0,
-                                      endAngle: .pi * 2.0,
-                                      clockwise: true)
+        let circlePath = CAShapeLayer.subCirclePath(in: frame)
         
         let layer = CAShapeLayer()
-        layer.path = circlePath.cgPath
+        layer.path = circlePath
         layer.strokeColor = UIColor.pobitStone4.cgColor
         layer.fillColor = UIColor.clear.cgColor
         layer.lineWidth = 1
