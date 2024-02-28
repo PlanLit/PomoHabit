@@ -45,15 +45,7 @@ final class WeeklyCalendarView: BaseView {
     
     // MARK: - 오늘 날짜 UI
     
-    private lazy var todayLabel: BasePaddingLabel = {
-        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-        label.text = "Today"
-        label.textColor = .white
-        label.font = Pretendard.bold(size: 12)
-        label.backgroundColor = UIColor.pobitRed2
-        
-        return label
-    }()
+    private lazy var todayLabel = UILabel().setPrimaryColorLabel(text: "Today")
     
     private lazy var todayDateLabel: UILabel = {
         let label = UILabel()
@@ -66,16 +58,11 @@ final class WeeklyCalendarView: BaseView {
     
     // MARK: - 주간 캘린더
     
-    private lazy var weeklyCollectionViewFlowLayout: UICollectionViewFlowLayout = {
+    private lazy var weeklyCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 12
-        
-        return layout
-    }()
-    
-    private lazy var weeklyCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: weeklyCollectionViewFlowLayout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(WeeklyCollectionViewCell.self, forCellWithReuseIdentifier: WeeklyCollectionViewCell.identifier)
         collectionView.showsHorizontalScrollIndicator = false
         
@@ -160,7 +147,7 @@ extension WeeklyCalendarView {
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.trailing.left.equalToSuperview()
+            make.top.leading.trailing.equalToSuperview()
         }
         
         // MARK: - 오늘 날짜 UI

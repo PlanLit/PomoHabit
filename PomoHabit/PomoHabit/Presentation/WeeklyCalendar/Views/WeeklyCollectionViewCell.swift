@@ -34,6 +34,18 @@ final class WeeklyCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                circleImageView.isHidden = false
+            } else {
+                circleImageView.isHidden = true
+            }
+        }
+    }
+    
+    // MARK: - Life Cycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -44,16 +56,6 @@ final class WeeklyCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:\(coder) has not been implemented")
-    }
-    
-    override var isSelected: Bool {
-        didSet {
-            if isSelected {
-                circleImageView.isHidden = false
-            }else{
-                circleImageView.isHidden = true
-            }
-        }
     }
 }
 
@@ -104,7 +106,7 @@ extension WeeklyCollectionViewCell{
             
             labelsContainer.layer.borderWidth = 1
             labelsContainer.layer.borderColor = UIColor.pobitStone4.cgColor
-        }else {
+        } else {
             [dayLabel,dateLabel].forEach { label in
                 label.textColor = UIColor.white
             }
