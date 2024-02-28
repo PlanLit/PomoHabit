@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		370A50862B8DCBC000BD691A /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370A50852B8DCBC000BD691A /* TimerModel.swift */; };
-		3710787F2B8DDE580049EB9C /* CircleProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3710787E2B8DDE580049EB9C /* CircleProgressBar.swift */; };
-		371078812B8E36A70049EB9C /* CAShapeLayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371078802B8E36A70049EB9C /* CAShapeLayer+Extension.swift */; };
-		371078852B8EC67F0049EB9C /* PobitNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371078842B8EC67F0049EB9C /* PobitNavigationBarView.swift */; };
-		371078872B8ED52F0049EB9C /* LayoutLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371078862B8ED52F0049EB9C /* LayoutLiterals.swift */; };
 		37144C662B8C32D6008565C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C652B8C32D6008565C4 /* AppDelegate.swift */; };
 		37144C682B8C32D6008565C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C672B8C32D6008565C4 /* SceneDelegate.swift */; };
 		37144C6A2B8C32D6008565C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C692B8C32D6008565C4 /* ViewController.swift */; };
@@ -25,8 +20,9 @@
 		37144C972B8C5674008565C4 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C962B8C5674008565C4 /* UITextField+Extension.swift */; };
 		37144C9A2B8C57AF008565C4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 37144C992B8C57AF008565C4 /* SnapKit */; };
 		37144C9C2B8C57AF008565C4 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 37144C9B2B8C57AF008565C4 /* SnapKit-Dynamic */; };
-		374E7B752B8DBECE00BC9B26 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374E7B742B8DBECE00BC9B26 /* TimerViewController.swift */; };
-		374E7B7A2B8DBF6C00BC9B26 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374E7B792B8DBF6C00BC9B26 /* TimerView.swift */; };
+		373D0DF22B8F7B45004CC2C7 /* PobitNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D0DF12B8F7B45004CC2C7 /* PobitNavigationBarView.swift */; };
+		373D0DF42B8F7B5B004CC2C7 /* LayoutLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D0DF32B8F7B5B004CC2C7 /* LayoutLiterals.swift */; };
+		375AC9D52B8F817B002F82FF /* CAShapeLayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AC9D42B8F817B002F82FF /* CAShapeLayer+Extension.swift */; };
 		376B91AA2B8C681A004CBB16 /* Pretendard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B91A92B8C681A004CBB16 /* Pretendard.swift */; };
 		376B91AC2B8C6835004CBB16 /* ColorLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B91AB2B8C6835004CBB16 /* ColorLiterals.swift */; };
 		376B91B22B8C6ABA004CBB16 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 376B91AE2B8C6AB9004CBB16 /* Pretendard-Medium.otf */; };
@@ -53,11 +49,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		370A50852B8DCBC000BD691A /* TimerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimerModel.swift; path = PomoHabit/Presentation/Timer/Controllers/TimerModel.swift; sourceTree = SOURCE_ROOT; };
-		3710787E2B8DDE580049EB9C /* CircleProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressBar.swift; sourceTree = "<group>"; };
-		371078802B8E36A70049EB9C /* CAShapeLayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Extension.swift"; sourceTree = "<group>"; };
-		371078842B8EC67F0049EB9C /* PobitNavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PobitNavigationBarView.swift; sourceTree = "<group>"; };
-		371078862B8ED52F0049EB9C /* LayoutLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutLiterals.swift; sourceTree = "<group>"; };
 		37144C622B8C32D6008565C4 /* PomoHabit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomoHabit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37144C652B8C32D6008565C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37144C672B8C32D6008565C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,8 +62,13 @@
 		37144C922B8C544D008565C4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		37144C942B8C5472008565C4 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		37144C962B8C5674008565C4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
-		374E7B742B8DBECE00BC9B26 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerViewController.swift; path = PomoHabit/Presentation/Timer/Controllers/TimerViewController.swift; sourceTree = SOURCE_ROOT; };
-		374E7B792B8DBF6C00BC9B26 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerView.swift; path = PomoHabit/Presentation/Timer/Views/TimerView.swift; sourceTree = SOURCE_ROOT; };
+		373D0DF12B8F7B45004CC2C7 /* PobitNavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PobitNavigationBarView.swift; sourceTree = "<group>"; };
+		373D0DF32B8F7B5B004CC2C7 /* LayoutLiterals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutLiterals.swift; sourceTree = "<group>"; };
+		375AC9D42B8F817B002F82FF /* CAShapeLayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Extension.swift"; sourceTree = "<group>"; };
+		376278202B8F88E200BA7373 /* PomoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoViewController.swift; sourceTree = "<group>"; };
+		376278212B8F88F700BA7373 /* PomoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoView.swift; sourceTree = "<group>"; };
+		376278222B8F88FB00BA7373 /* PomoProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoProgressBar.swift; sourceTree = "<group>"; };
+		376278232B8F88FF00BA7373 /* PomoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoModel.swift; sourceTree = "<group>"; };
 		376B91A92B8C681A004CBB16 /* Pretendard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pretendard.swift; sourceTree = "<group>"; };
 		376B91AB2B8C6835004CBB16 /* ColorLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorLiterals.swift; sourceTree = "<group>"; };
 		376B91AE2B8C6AB9004CBB16 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
@@ -111,31 +107,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		370A507C2B8DC8FA00BD691A /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				374E7B792B8DBF6C00BC9B26 /* TimerView.swift */,
-				3710787E2B8DDE580049EB9C /* CircleProgressBar.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		370A50842B8DCBA400BD691A /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				370A50852B8DCBC000BD691A /* TimerModel.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		371078832B8EC6590049EB9C /* NavigationBar */ = {
-			isa = PBXGroup;
-			children = (
-				371078842B8EC67F0049EB9C /* PobitNavigationBarView.swift */,
-			);
-			path = NavigationBar;
-			sourceTree = "<group>";
-		};
 		37144C592B8C32D6008565C4 = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +169,7 @@
 		37144C7C2B8C340E008565C4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				375AC9D42B8F817B002F82FF /* CAShapeLayer+Extension.swift */,
 				37144C8B2B8C3582008565C4 /* UIViewController+Extension.swift */,
 				37144C8D2B8C5339008565C4 /* UIView+Extension.swift */,
 				37144C8F2B8C53B0008565C4 /* UIStackView+Extension.swift */,
@@ -205,7 +177,6 @@
 				73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */,
 				F85F8F582B8DE54F00E69922 /* Date+Extension.swift */,
 				F870D85B2B8EFF3900DA4659 /* UILabel+Extension.swift */,
-				371078802B8E36A70049EB9C /* CAShapeLayer+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -213,7 +184,7 @@
 		37144C7D2B8C3413008565C4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				371078832B8EC6590049EB9C /* NavigationBar */,
+				373D0DF02B8F7B45004CC2C7 /* NavigationBar */,
 				E0C5B53F2B8D5D8300A77BAE /* StackViews */,
 				E0C5B53C2B8D5AC000A77BAE /* DayButton */,
 				F8E3CD362B8C7FB600712CBF /* Note */,
@@ -255,9 +226,9 @@
 		37144C812B8C3434008565C4 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
-				374E7B782B8DBF4A00BC9B26 /* Controllers */,
-				370A507C2B8DC8FA00BD691A /* Views */,
-				370A50842B8DCBA400BD691A /* Models */,
+				375AC9CB2B8F7FF0002F82FF /* ViewControllers */,
+				375AC9C82B8F7FC4002F82FF /* Views */,
+				375AC9CA2B8F7FE0002F82FF /* Models */,
 			);
 			path = Timer;
 			sourceTree = "<group>";
@@ -322,12 +293,37 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		374E7B782B8DBF4A00BC9B26 /* Controllers */ = {
+		373D0DF02B8F7B45004CC2C7 /* NavigationBar */ = {
 			isa = PBXGroup;
 			children = (
-				374E7B742B8DBECE00BC9B26 /* TimerViewController.swift */,
+				373D0DF12B8F7B45004CC2C7 /* PobitNavigationBarView.swift */,
 			);
-			path = Controllers;
+			path = NavigationBar;
+			sourceTree = "<group>";
+		};
+		375AC9C82B8F7FC4002F82FF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				376278212B8F88F700BA7373 /* PomoView.swift */,
+				376278222B8F88FB00BA7373 /* PomoProgressBar.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		375AC9CA2B8F7FE0002F82FF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				376278232B8F88FF00BA7373 /* PomoModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		375AC9CB2B8F7FF0002F82FF /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				376278202B8F88E200BA7373 /* PomoViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		376B91902B8C5B4C004CBB16 /* Models */ = {
@@ -345,27 +341,6 @@
 			sourceTree = "<group>";
 		};
 		376B91922B8C5B4C004CBB16 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		376B91962B8C5B4F004CBB16 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		376B91972B8C5B4F004CBB16 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		376B91982B8C5B4F004CBB16 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -394,7 +369,6 @@
 			sourceTree = "<group>";
 		};
 		376B91AD2B8C69B6004CBB16 /* Fonts */ = {
-		376B91992B8C5B51004CBB16 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				376B91AF2B8C6AB9004CBB16 /* Pretendard-Bold.otf */,
@@ -410,7 +384,7 @@
 			children = (
 				376B91A92B8C681A004CBB16 /* Pretendard.swift */,
 				376B91AB2B8C6835004CBB16 /* ColorLiterals.swift */,
-				371078862B8ED52F0049EB9C /* LayoutLiterals.swift */,
+				373D0DF32B8F7B5B004CC2C7 /* LayoutLiterals.swift */,
 			);
 			path = Literals;
 			sourceTree = "<group>";
@@ -555,19 +529,15 @@
 				F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */,
 				F870D85C2B8EFF3900DA4659 /* UILabel+Extension.swift in Sources */,
 				F85F8F5B2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift in Sources */,
+				375AC9D52B8F817B002F82FF /* CAShapeLayer+Extension.swift in Sources */,
 				37144C972B8C5674008565C4 /* UITextField+Extension.swift in Sources */,
 				37144C8C2B8C3582008565C4 /* UIViewController+Extension.swift in Sources */,
 				376B91BA2B8CE6B6004CBB16 /* PobitButton.swift in Sources */,
 				F85F8F592B8DE54F00E69922 /* Date+Extension.swift in Sources */,
-				3710787F2B8DDE580049EB9C /* CircleProgressBar.swift in Sources */,
-				371078852B8EC67F0049EB9C /* PobitNavigationBarView.swift in Sources */,
 				E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */,
 				F85F8F612B8E25EE00E69922 /* HabbitInfoVIew.swift in Sources */,
-				374E7B752B8DBECE00BC9B26 /* TimerViewController.swift in Sources */,
 				37144C6A2B8C32D6008565C4 /* ViewController.swift in Sources */,
 				E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */,
-				374E7B7A2B8DBF6C00BC9B26 /* TimerView.swift in Sources */,
-				371078872B8ED52F0049EB9C /* LayoutLiterals.swift in Sources */,
 				37144C662B8C32D6008565C4 /* AppDelegate.swift in Sources */,
 				376B91AA2B8C681A004CBB16 /* Pretendard.swift in Sources */,
 				37144C8E2B8C5339008565C4 /* UIView+Extension.swift in Sources */,
@@ -576,12 +546,12 @@
 				37144C932B8C544D008565C4 /* BaseViewController.swift in Sources */,
 				F85F8F632B8E26E100E69922 /* ImageViewAndLabelView.swift in Sources */,
 				73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */,
+				373D0DF22B8F7B45004CC2C7 /* PobitNavigationBarView.swift in Sources */,
 				E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */,
-				371078812B8E36A70049EB9C /* CAShapeLayer+Extension.swift in Sources */,
 				F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */,
 				37144C682B8C32D6008565C4 /* SceneDelegate.swift in Sources */,
-				370A50862B8DCBC000BD691A /* TimerModel.swift in Sources */,
 				37144C902B8C53B0008565C4 /* UIStackView+Extension.swift in Sources */,
+				373D0DF42B8F7B5B004CC2C7 /* LayoutLiterals.swift in Sources */,
 				F88EB2DA2B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift in Sources */,
 				F85F8F572B8DE33C00E69922 /* BasePaddingLabel.swift in Sources */,
 				37144C952B8C5472008565C4 /* BaseView.swift in Sources */,
