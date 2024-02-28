@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		370A50862B8DCBC000BD691A /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370A50852B8DCBC000BD691A /* TimerModel.swift */; };
+		3710787F2B8DDE580049EB9C /* CircleProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3710787E2B8DDE580049EB9C /* CircleProgressBar.swift */; };
+		371078812B8E36A70049EB9C /* CAShapeLayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371078802B8E36A70049EB9C /* CAShapeLayer+Extension.swift */; };
+		371078852B8EC67F0049EB9C /* PobitNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371078842B8EC67F0049EB9C /* PobitNavigationBarView.swift */; };
 		371078872B8ED52F0049EB9C /* LayoutLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371078862B8ED52F0049EB9C /* LayoutLiterals.swift */; };
 		37144C662B8C32D6008565C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C652B8C32D6008565C4 /* AppDelegate.swift */; };
 		37144C682B8C32D6008565C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C672B8C32D6008565C4 /* SceneDelegate.swift */; };
@@ -22,6 +25,8 @@
 		37144C972B8C5674008565C4 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C962B8C5674008565C4 /* UITextField+Extension.swift */; };
 		37144C9A2B8C57AF008565C4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 37144C992B8C57AF008565C4 /* SnapKit */; };
 		37144C9C2B8C57AF008565C4 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 37144C9B2B8C57AF008565C4 /* SnapKit-Dynamic */; };
+		374E7B752B8DBECE00BC9B26 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374E7B742B8DBECE00BC9B26 /* TimerViewController.swift */; };
+		374E7B7A2B8DBF6C00BC9B26 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374E7B792B8DBF6C00BC9B26 /* TimerView.swift */; };
 		376B91AA2B8C681A004CBB16 /* Pretendard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B91A92B8C681A004CBB16 /* Pretendard.swift */; };
 		376B91AC2B8C6835004CBB16 /* ColorLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B91AB2B8C6835004CBB16 /* ColorLiterals.swift */; };
 		376B91B22B8C6ABA004CBB16 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 376B91AE2B8C6AB9004CBB16 /* Pretendard-Medium.otf */; };
@@ -29,10 +34,7 @@
 		376B91B52B8C6ABA004CBB16 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 376B91B12B8C6ABA004CBB16 /* Pretendard-Regular.otf */; };
 		376B91B72B8C6AF6004CBB16 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 376B91B62B8C6AF6004CBB16 /* Pretendard-SemiBold.otf */; };
 		376B91BA2B8CE6B6004CBB16 /* PobitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B91B92B8CE6B6004CBB16 /* PobitButton.swift */; };
-		7306F5B02B8D66EE004E6055 /* NaviBar in Resources */ = {isa = PBXBuildFile; fileRef = 7306F5AF2B8D66EE004E6055 /* NaviBar */; };
 		73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */; };
-		374E7B752B8DBECE00BC9B26 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374E7B742B8DBECE00BC9B26 /* TimerViewController.swift */; };
-		374E7B7A2B8DBF6C00BC9B26 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374E7B792B8DBF6C00BC9B26 /* TimerView.swift */; };
 		E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */; };
 		E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5412B8D5D9900A77BAE /* HStackView.swift */; };
 		E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */; };
@@ -52,6 +54,9 @@
 
 /* Begin PBXFileReference section */
 		370A50852B8DCBC000BD691A /* TimerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimerModel.swift; path = PomoHabit/Presentation/Timer/Controllers/TimerModel.swift; sourceTree = SOURCE_ROOT; };
+		3710787E2B8DDE580049EB9C /* CircleProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressBar.swift; sourceTree = "<group>"; };
+		371078802B8E36A70049EB9C /* CAShapeLayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Extension.swift"; sourceTree = "<group>"; };
+		371078842B8EC67F0049EB9C /* PobitNavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PobitNavigationBarView.swift; sourceTree = "<group>"; };
 		371078862B8ED52F0049EB9C /* LayoutLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutLiterals.swift; sourceTree = "<group>"; };
 		37144C622B8C32D6008565C4 /* PomoHabit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomoHabit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37144C652B8C32D6008565C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +71,8 @@
 		37144C922B8C544D008565C4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		37144C942B8C5472008565C4 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		37144C962B8C5674008565C4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		374E7B742B8DBECE00BC9B26 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerViewController.swift; path = PomoHabit/Presentation/Timer/Controllers/TimerViewController.swift; sourceTree = SOURCE_ROOT; };
+		374E7B792B8DBF6C00BC9B26 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerView.swift; path = PomoHabit/Presentation/Timer/Views/TimerView.swift; sourceTree = SOURCE_ROOT; };
 		376B91A92B8C681A004CBB16 /* Pretendard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pretendard.swift; sourceTree = "<group>"; };
 		376B91AB2B8C6835004CBB16 /* ColorLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorLiterals.swift; sourceTree = "<group>"; };
 		376B91AE2B8C6AB9004CBB16 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
@@ -73,10 +80,7 @@
 		376B91B12B8C6ABA004CBB16 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		376B91B62B8C6AF6004CBB16 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		376B91B92B8CE6B6004CBB16 /* PobitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PobitButton.swift; sourceTree = "<group>"; };
-		7306F5AF2B8D66EE004E6055 /* NaviBar */ = {isa = PBXFileReference; lastKnownFileType = folder; path = NaviBar; sourceTree = "<group>"; };
 		73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
-		374E7B742B8DBECE00BC9B26 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerViewController.swift; path = PomoHabit/Presentation/Timer/Controllers/TimerViewController.swift; sourceTree = SOURCE_ROOT; };
-		374E7B792B8DBF6C00BC9B26 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerView.swift; path = PomoHabit/Presentation/Timer/Views/TimerView.swift; sourceTree = SOURCE_ROOT; };
 		E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButton.swift; sourceTree = "<group>"; };
 		E0C5B5412B8D5D9900A77BAE /* HStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HStackView.swift; sourceTree = "<group>"; };
 		E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VStackView.swift; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				374E7B792B8DBF6C00BC9B26 /* TimerView.swift */,
+				3710787E2B8DDE580049EB9C /* CircleProgressBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -121,6 +126,14 @@
 				370A50852B8DCBC000BD691A /* TimerModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		371078832B8EC6590049EB9C /* NavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				371078842B8EC67F0049EB9C /* PobitNavigationBarView.swift */,
+			);
+			path = NavigationBar;
 			sourceTree = "<group>";
 		};
 		37144C592B8C32D6008565C4 = {
@@ -192,6 +205,7 @@
 				73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */,
 				F85F8F582B8DE54F00E69922 /* Date+Extension.swift */,
 				F870D85B2B8EFF3900DA4659 /* UILabel+Extension.swift */,
+				371078802B8E36A70049EB9C /* CAShapeLayer+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -199,7 +213,7 @@
 		37144C7D2B8C3413008565C4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				7306F5AF2B8D66EE004E6055 /* NaviBar */,
+				371078832B8EC6590049EB9C /* NavigationBar */,
 				E0C5B53F2B8D5D8300A77BAE /* StackViews */,
 				E0C5B53C2B8D5AC000A77BAE /* DayButton */,
 				F8E3CD362B8C7FB600712CBF /* Note */,
@@ -521,7 +535,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7306F5B02B8D66EE004E6055 /* NaviBar in Resources */,
 				37144C722B8C32D7008565C4 /* LaunchScreen.storyboard in Resources */,
 				376B91B32B8C6ABA004CBB16 /* Pretendard-Bold.otf in Resources */,
 				376B91B72B8C6AF6004CBB16 /* Pretendard-SemiBold.otf in Resources */,
@@ -546,6 +559,8 @@
 				37144C8C2B8C3582008565C4 /* UIViewController+Extension.swift in Sources */,
 				376B91BA2B8CE6B6004CBB16 /* PobitButton.swift in Sources */,
 				F85F8F592B8DE54F00E69922 /* Date+Extension.swift in Sources */,
+				3710787F2B8DDE580049EB9C /* CircleProgressBar.swift in Sources */,
+				371078852B8EC67F0049EB9C /* PobitNavigationBarView.swift in Sources */,
 				E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */,
 				F85F8F612B8E25EE00E69922 /* HabbitInfoVIew.swift in Sources */,
 				374E7B752B8DBECE00BC9B26 /* TimerViewController.swift in Sources */,
@@ -562,6 +577,7 @@
 				F85F8F632B8E26E100E69922 /* ImageViewAndLabelView.swift in Sources */,
 				73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */,
 				E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */,
+				371078812B8E36A70049EB9C /* CAShapeLayer+Extension.swift in Sources */,
 				F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */,
 				37144C682B8C32D6008565C4 /* SceneDelegate.swift in Sources */,
 				370A50862B8DCBC000BD691A /* TimerModel.swift in Sources */,

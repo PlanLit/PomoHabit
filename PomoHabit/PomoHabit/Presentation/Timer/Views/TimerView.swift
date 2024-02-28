@@ -15,7 +15,7 @@ final class TimerView: BaseView {
     
     // MARK: - UI Properties
     
-//    private let navigationBar: PobitNavigationBarView
+    private let navigationBar = PobitNavigationBarView(title: "타이머")
     
     private lazy var container: HStackView = {
         return HStackView(spacing: 16, [
@@ -30,16 +30,17 @@ final class TimerView: BaseView {
     private let habitLabel: UILabel = {
         let label = UILabel()
         label.text = "블라블라블라"
-        label.font = Pretendard.medium(size: 36)
+        label.font = Pretendard.regular(size: 36)
+        
         return label
     }()
     
     private let circleProgressBar = CircleProgressBar()
     
     private lazy var timerButton: PobitButton = {
-        let button = PobitButton()
         let style = PlainButtonStyle(backgroundColor: .pobitStone1)
         
+        let button = PobitButton()
         button.setStyle(style)
         button.setTitle("시작", for: .normal)
         button.titleLabel?.font = Pretendard.bold(size: 20)
@@ -71,12 +72,18 @@ final class TimerView: BaseView {
 
 extension TimerView {
     private func setAddSubViews() {
-        addSubViews([container, habitLabel, circleProgressBar, timerButton])
+        addSubViews([navigationBar, container, habitLabel, circleProgressBar, timerButton])
     }
     
     private func setAutoLayout() {
-        container.snp.makeConstraints { make in
+        navigationBar.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(58)
+        }
+        
+        container.snp.makeConstraints { make in
+            make.top.equalTo(navigationBar.snp.bottom).offset(25)
             make.trailing.equalToSuperview().offset(-20)
         }
         
@@ -94,10 +101,9 @@ extension TimerView {
         }
         
         circleProgressBar.snp.makeConstraints { make in
-            make.top.equalTo(habitLabel.snp.bottom).offset(48)
+            make.top.equalTo(habitLabel.snp.bottom).offset(82)
             make.centerX.equalToSuperview()
-            make.leading.equalToSuperview().offset(66)
-            make.height.equalTo(self.snp.width)
+            make.size.equalTo(280)
         }
         
         timerButton.snp.makeConstraints { make in
@@ -108,4 +114,3 @@ extension TimerView {
         }
     }
 }
-
