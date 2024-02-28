@@ -25,6 +25,7 @@ extension HabbitState {
             return .white
         }
     }
+    
     var image : UIImage {
         switch self {
         case .done:
