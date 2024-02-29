@@ -38,6 +38,7 @@
 		378034AB2B8F9D7A0046E6B8 /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378034AA2B8F9D7A0046E6B8 /* MemoView.swift */; };
 		378034AD2B8FAB5B0046E6B8 /* WhiteNoiseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378034AC2B8FAB5B0046E6B8 /* WhiteNoiseView.swift */; };
 		378034AF2B8FACE50046E6B8 /* WhiteNoiseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378034AE2B8FACE50046E6B8 /* WhiteNoiseTableViewCell.swift */; };
+		37CC614C2B90C07900CBAB45 /* BottomSheetPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CC614B2B90C07900CBAB45 /* BottomSheetPresentable.swift */; };
 		73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */; };
 		E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */; };
 		E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5412B8D5D9900A77BAE /* HStackView.swift */; };
@@ -88,6 +89,7 @@
 		378034AA2B8F9D7A0046E6B8 /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
 		378034AC2B8FAB5B0046E6B8 /* WhiteNoiseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteNoiseView.swift; sourceTree = "<group>"; };
 		378034AE2B8FACE50046E6B8 /* WhiteNoiseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteNoiseTableViewCell.swift; sourceTree = "<group>"; };
+		37CC614B2B90C07900CBAB45 /* BottomSheetPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetPresentable.swift; sourceTree = "<group>"; };
 		73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 		E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButton.swift; sourceTree = "<group>"; };
 		E0C5B5412B8D5D9900A77BAE /* HStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HStackView.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 			children = (
 				378034A92B8F9D360046E6B8 /* Views */,
 				378034A72B8F9C810046E6B8 /* BottomSheetViewController.swift */,
+				37CC614B2B90C07900CBAB45 /* BottomSheetPresentable.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				378034A42B8F8D8D0046E6B8 /* PomoModel.swift in Sources */,
 				37144C932B8C544D008565C4 /* BaseViewController.swift in Sources */,
 				F85F8F632B8E26E100E69922 /* ImageViewAndLabelView.swift in Sources */,
+				37CC614C2B90C07900CBAB45 /* BottomSheetPresentable.swift in Sources */,
 				73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */,
 				373D0DF22B8F7B45004CC2C7 /* PobitNavigationBarView.swift in Sources */,
 				E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */,
