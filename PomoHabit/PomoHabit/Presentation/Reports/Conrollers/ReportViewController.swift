@@ -15,20 +15,20 @@ final class ReportViewController: BaseViewController {
     
     // MARK: - Properties
     
-    let todayDate = { // 오늘 날짜 정수
+    private let todayDate = { // 오늘 날짜 정수
         let currentDate = Date()
         let calendar = Calendar.current
         
         return calendar.component(.day, from: currentDate)
     }()
     
-    var headerView: HStackView!
+    private var headerView: HStackView?
     
-    var calendarNaviView: VStackView!
+    private var calendarNaviView: VStackView?
     
-    var imageCollectionViewController: ReportImageCollectionViewController!
+    private var imageCollectionViewController: ReportImageCollectionViewController?
     
-    var gridView: VStackView!
+    private var gridView: VStackView?
     
     // MARK: - Life Cycles
     
@@ -49,6 +49,11 @@ final class ReportViewController: BaseViewController {
 
 extension ReportViewController {
     private func setAddSubviews() {
+        guard let headerView = headerView else {return}
+        guard let imageCollectionViewController = imageCollectionViewController else {return}
+        guard let calendarNaviView = calendarNaviView else {return}
+        guard let gridView = gridView else {return}
+        
         addChild(imageCollectionViewController)
         
         view.addSubViews([
@@ -60,6 +65,11 @@ extension ReportViewController {
     }
     
     private func setAutoLayout() {
+        guard let headerView = headerView else {return}
+        guard let imageCollectionViewController = imageCollectionViewController else {return}
+        guard let calendarNaviView = calendarNaviView else {return}
+        guard let gridView = gridView else {return}
+        
         headerView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.left.equalTo(15)
@@ -146,7 +156,7 @@ extension ReportViewController {
     private func setUpImageCollectionViewController() {
         let layout = UICollectionViewFlowLayout()
         imageCollectionViewController = ReportImageCollectionViewController(collectionViewLayout: layout)
-        imageCollectionViewController.didMove(toParent: self)
+        imageCollectionViewController?.didMove(toParent: self)
     }
     
     // MARK: - CalendarNaviView
@@ -249,7 +259,7 @@ extension ReportViewController {
         ])
         
         // 월별 마다 이거 조정 필요
-        gridView.addArrangedSubview(
+        gridView?.addArrangedSubview(
             HStackView([
                 getTheBoxView(29, .complete),
                 getTheBoxView(30, .complete),
@@ -257,7 +267,7 @@ extension ReportViewController {
             ])
         )
         
-        gridView.backgroundColor = UIColor(red: 253, green: 249, blue: 249, alpha: 1)
+        gridView?.backgroundColor = UIColor(red: 253, green: 249, blue: 249, alpha: 1)
         
         func getTheBoxView(_ day: Int,_ state: Check) -> UIButton {
             let boxView = {

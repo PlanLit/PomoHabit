@@ -1,5 +1,5 @@
 //
-//  ReportDaysCell.swift
+//  ReportDayButtonCell.swift
 //  PomoHabit
 //
 //  Created by JiHoon K on 2/29/24.
@@ -9,14 +9,19 @@ import UIKit
 
 // MARK: - ReportDaysCell
 
-final class ReportDaysCell: UITableViewCell {
-    private var collectionViewCellID = "\(ReportDaysCell.self)CollectionViewCell"
+final class ReportDayButtonCell: UITableViewCell {
     
-    var collectionView: UICollectionView!
+    // MARK: - Properties
     
-    let dayStates: [DayButton.Day] = [.mon, .tue, .wed, .thu, .fri, .sat, .sun]
+    private var collectionViewCellID = "\(ReportDayButtonCell.self)CollectionViewCell"
     
-    var buttonSelectionStates: [Bool]?
+    private var dayButtonCollectionView: UICollectionView!
+    
+    private let dayStates: [DayButton.Day] = [.mon, .tue, .wed, .thu, .fri, .sat, .sun]
+    
+    var dayButtonSelectionStates: [Bool]?
+    
+    // MARK: - Life Cycles
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -31,7 +36,7 @@ final class ReportDaysCell: UITableViewCell {
 
 // MARK: - Layout Helpers
 
-extension ReportDaysCell {
+extension ReportDayButtonCell {
     private func setUpSelf() {
         self.selectionStyle = .none
     }
@@ -46,18 +51,18 @@ extension ReportDaysCell {
             return layout
         }()
         
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.dataSource = self
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: collectionViewCellID)
+        dayButtonCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        dayButtonCollectionView.dataSource = self
+        dayButtonCollectionView.showsHorizontalScrollIndicator = false
+        dayButtonCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: collectionViewCellID)
     }
     
     private func setAddSubviews() {
-        contentView.addSubview(collectionView)
+        contentView.addSubview(dayButtonCollectionView)
     }
     
     private func setAutoLayout() {
-        collectionView.snp.makeConstraints { make in
+        dayButtonCollectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
@@ -65,7 +70,7 @@ extension ReportDaysCell {
 
 // MARK: - UICollectionViewDataSource
 
-extension ReportDaysCell: UICollectionViewDataSource {
+extension ReportDayButtonCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 7
     }
@@ -73,7 +78,7 @@ extension ReportDaysCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionViewCellID, for: indexPath)
         
-        let dayButton = DayButton(dayType: dayStates[indexPath.row], isSelected: buttonSelectionStates?[indexPath.row] ?? false) { _ in }
+        let dayButton = DayButton(dayType: dayStates[indexPath.row], isSelected: dayButtonSelectionStates?[indexPath.row] ?? false) { _ in }
         dayButton.isUserInteractionEnabled = false
         dayButton.snp.makeConstraints { make in
             make.width.equalTo(65)

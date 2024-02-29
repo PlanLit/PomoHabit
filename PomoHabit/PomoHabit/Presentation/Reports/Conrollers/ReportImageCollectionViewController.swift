@@ -12,10 +12,16 @@ import SnapKit
 // MARK: - ReportImageCollectionViewController
 
 final class ReportImageCollectionViewController: UICollectionViewController {
+    
+    // MARK: - Properties
+    
     private let cellID = "reportImageCell"
+    
     private let itemSize: Int = 80
     
     private var centeredItemIndex: IndexPath = [0, 0]
+    
+    // MARK: - Life Cycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +45,27 @@ extension ReportImageCollectionViewController {
             let inset = (view.frame.width - layout.itemSize.width) / 2
             layout.sectionInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
         }
+    }
+    
+    private func configureCell(_ cell: UICollectionViewCell, for indexPath: IndexPath) {
+        let imageView: UIImageView = {
+            let imageView = UIImageView(frame: cell.bounds)
+            imageView.image = .tomatoCharacter
+            imageView.contentMode = .scaleAspectFit
+            imageView.layer.cornerRadius = imageView.frame.height / 2
+            imageView.clipsToBounds = true
+            
+            return imageView
+        }()
+        
+        if indexPath != centeredItemIndex {
+            let reducedSize = itemSize-(itemSize/7)
+            imageView.frame.size = .init(width: reducedSize, height: reducedSize)
+            imageView.alpha = 0.5
+        }
+        
+        cell.contentView.subviews.forEach { $0.removeFromSuperview() }
+        cell.contentView.addSubview(imageView)
     }
 }
 
@@ -100,30 +127,5 @@ extension ReportImageCollectionViewController {
                 configureCell(cell, for: indexPath)
             }
         }
-    }
-}
-
-// MARK: - Layout Helpers
-
-extension ReportImageCollectionViewController {
-    private func configureCell(_ cell: UICollectionViewCell, for indexPath: IndexPath) {
-        let imageView: UIImageView = {
-            let imageView = UIImageView(frame: cell.bounds)
-            imageView.image = .tomatoCharacter
-            imageView.contentMode = .scaleAspectFit
-            imageView.layer.cornerRadius = imageView.frame.height / 2
-            imageView.clipsToBounds = true
-            
-            return imageView
-        }()
-        
-        if indexPath != centeredItemIndex {
-            let reducedSize = itemSize-(itemSize/7)
-            imageView.frame.size = .init(width: reducedSize, height: reducedSize)
-            imageView.alpha = 0.5
-        }
-        
-        cell.contentView.subviews.forEach { $0.removeFromSuperview() }
-        cell.contentView.addSubview(imageView)
     }
 }

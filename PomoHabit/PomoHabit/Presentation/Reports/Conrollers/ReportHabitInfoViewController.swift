@@ -9,15 +9,21 @@ import UIKit
 
 // MARK: - ReportHabitInfoViewController
 
-class ReportHabitInfoViewController: BaseViewController {
-    var tableView: UITableView!
+final class ReportHabitInfoViewController: BaseViewController {
     
-    var buttonSelectionStates = [true, true, true, true, false, false, false] // 유저가 입력했던 월화수 데이터 (임시)
+    // MARK: - Properties
+    
+    private var tableView: UITableView?
+    
+    private var dayButtonSelectionStates = [true, true, true, true, false, false, false] // 유저가 입력했던 월화수 데이터 (임시)
+    
+    // MARK: - Life Cycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpTableView()
+        
         setAddSubviews()
         setAutoLayout()
     }
@@ -28,18 +34,18 @@ class ReportHabitInfoViewController: BaseViewController {
 extension ReportHabitInfoViewController {
     private func setUpTableView() {
         tableView = UITableView(frame: .zero, style: .plain)
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(ReportDaysCell.self, forCellReuseIdentifier: "\(ReportDaysCell.self)")
-        tableView.register(ReportDaysCell.self, forCellReuseIdentifier: "StartTimeCell")
+        tableView?.dataSource = self
+        tableView?.delegate = self
+        tableView?.register(ReportDayButtonCell.self, forCellReuseIdentifier: "\(ReportDayButtonCell.self)")
+        tableView?.register(ReportDayButtonCell.self, forCellReuseIdentifier: "StartTimeCell")
     }
     
     private func setAddSubviews() {
-        view.addSubview(tableView)
+        view.addSubview(tableView ?? UIView())
     }
     
     private func setAutoLayout() {
-        tableView.snp.makeConstraints { make in
+        tableView?.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
@@ -67,8 +73,8 @@ extension ReportHabitInfoViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(ReportDaysCell.self)", for: indexPath) as? ReportDaysCell else { return UITableViewCell() }
-            cell.buttonSelectionStates = buttonSelectionStates
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(ReportDayButtonCell.self)", for: indexPath) as? ReportDayButtonCell else { return UITableViewCell() }
+            cell.dayButtonSelectionStates = dayButtonSelectionStates
             
             return cell
         } else if indexPath.section == 1 {

@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - ReportHabitEditViewController
 
-class ReportHabitEditViewController: BaseViewController { // 구현 중
+final class ReportHabitEditViewController: BaseViewController { // 구현 중
     override func viewDidLoad() {
         super.viewDidLoad()
 

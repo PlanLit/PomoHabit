@@ -33,7 +33,7 @@
 		378034A32B8F8D8A0046E6B8 /* PomoProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278222B8F88FB00BA7373 /* PomoProgressBar.swift */; };
 		378034A42B8F8D8D0046E6B8 /* PomoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278232B8F88FF00BA7373 /* PomoModel.swift */; };
 		73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */; };
-		E0443C512B90263A004FC1F6 /* ReportDaysCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0443C502B90263A004FC1F6 /* ReportDaysCell.swift */; };
+		E0443C512B90263A004FC1F6 /* ReportDayButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0443C502B90263A004FC1F6 /* ReportDayButtonCell.swift */; };
 		E061E1302B901AC400A9174F /* ReportHabitEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12C2B901AC400A9174F /* ReportHabitEditViewController.swift */; };
 		E061E1312B901AC400A9174F /* ReportImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12D2B901AC400A9174F /* ReportImageCollectionViewController.swift */; };
 		E061E1322B901AC400A9174F /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12E2B901AC400A9174F /* ReportViewController.swift */; };
@@ -88,7 +88,7 @@
 		376B91B62B8C6AF6004CBB16 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		376B91B92B8CE6B6004CBB16 /* PobitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PobitButton.swift; sourceTree = "<group>"; };
 		73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
-		E0443C502B90263A004FC1F6 /* ReportDaysCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDaysCell.swift; sourceTree = "<group>"; };
+		E0443C502B90263A004FC1F6 /* ReportDayButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDayButtonCell.swift; sourceTree = "<group>"; };
 		E061E12C2B901AC400A9174F /* ReportHabitEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHabitEditViewController.swift; sourceTree = "<group>"; };
 		E061E12D2B901AC400A9174F /* ReportImageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportImageCollectionViewController.swift; sourceTree = "<group>"; };
 		E061E12E2B901AC400A9174F /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
@@ -315,7 +315,7 @@
 		E0443C4F2B90244C004FC1F6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E0443C502B90263A004FC1F6 /* ReportDaysCell.swift */,
+				E0443C502B90263A004FC1F6 /* ReportDayButtonCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -506,7 +506,7 @@
 				73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */,
 				373D0DF22B8F7B45004CC2C7 /* PobitNavigationBarView.swift in Sources */,
 				E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */,
-				E0443C512B90263A004FC1F6 /* ReportDaysCell.swift in Sources */,
+				E0443C512B90263A004FC1F6 /* ReportDayButtonCell.swift in Sources */,
 				E061E1312B901AC400A9174F /* ReportImageCollectionViewController.swift in Sources */,
 				E061E1332B901AC400A9174F /* ReportHabitInfoViewController.swift in Sources */,
 				F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */,
