@@ -35,6 +35,10 @@
 		378034A32B8F8D8A0046E6B8 /* PomoProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278222B8F88FB00BA7373 /* PomoProgressBar.swift */; };
 		378034A42B8F8D8D0046E6B8 /* PomoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278232B8F88FF00BA7373 /* PomoModel.swift */; };
 		73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */; };
+		BACB15FE2B90511E003CBC50 /* MypageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACB15FD2B90511E003CBC50 /* MypageModel.swift */; };
+		BACB16002B905263003CBC50 /* MypageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACB15FF2B905263003CBC50 /* MypageView.swift */; };
+		BACB16022B905281003CBC50 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACB16012B905281003CBC50 /* MypageViewController.swift */; };
+		BACB16042B90541E003CBC50 /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACB16032B90541E003CBC50 /* MyPageTableViewCell.swift */; };
 		E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */; };
 		E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5412B8D5D9900A77BAE /* HStackView.swift */; };
 		E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */; };
@@ -81,6 +85,10 @@
 		376B91B62B8C6AF6004CBB16 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		376B91B92B8CE6B6004CBB16 /* PobitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PobitButton.swift; sourceTree = "<group>"; };
 		73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
+		BACB15FD2B90511E003CBC50 /* MypageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageModel.swift; sourceTree = "<group>"; };
+		BACB15FF2B905263003CBC50 /* MypageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageView.swift; sourceTree = "<group>"; };
+		BACB16012B905281003CBC50 /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
+		BACB16032B90541E003CBC50 /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButton.swift; sourceTree = "<group>"; };
 		E0C5B5412B8D5D9900A77BAE /* HStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HStackView.swift; sourceTree = "<group>"; };
 		E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VStackView.swift; sourceTree = "<group>"; };
@@ -161,6 +169,7 @@
 		37144C7B2B8C33AC008565C4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				BACB15F72B905073003CBC50 /* Mypage */,
 				37144C822B8C3437008565C4 /* WeeklyCalendar */,
 				37144C812B8C3434008565C4 /* Timer */,
 			);
@@ -295,6 +304,41 @@
 				373D0DF32B8F7B5B004CC2C7 /* LayoutLiterals.swift */,
 			);
 			path = Literals;
+			sourceTree = "<group>";
+		};
+		BACB15F72B905073003CBC50 /* Mypage */ = {
+			isa = PBXGroup;
+			children = (
+				BACB15FA2B9050B1003CBC50 /* Controllers */,
+				BACB15F92B9050A7003CBC50 /* Views */,
+				BACB15F82B90509B003CBC50 /* model */,
+			);
+			path = Mypage;
+			sourceTree = "<group>";
+		};
+		BACB15F82B90509B003CBC50 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				BACB15FD2B90511E003CBC50 /* MypageModel.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		BACB15F92B9050A7003CBC50 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BACB15FF2B905263003CBC50 /* MypageView.swift */,
+				BACB16032B90541E003CBC50 /* MyPageTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BACB15FA2B9050B1003CBC50 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BACB16012B905281003CBC50 /* MypageViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		E0C5B53C2B8D5AC000A77BAE /* DayButton */ = {
@@ -434,11 +478,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F88EB2D82B8DC0EB0073BDDA /* WeeklyCalendarModel.swift in Sources */,
+				BACB16022B905281003CBC50 /* MypageViewController.swift in Sources */,
 				F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */,
 				F870D85C2B8EFF3900DA4659 /* UILabel+Extension.swift in Sources */,
 				F85F8F5B2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift in Sources */,
 				375AC9D52B8F817B002F82FF /* CAShapeLayer+Extension.swift in Sources */,
 				37144C972B8C5674008565C4 /* UITextField+Extension.swift in Sources */,
+				BACB16002B905263003CBC50 /* MypageView.swift in Sources */,
 				37144C8C2B8C3582008565C4 /* UIViewController+Extension.swift in Sources */,
 				376B91BA2B8CE6B6004CBB16 /* PobitButton.swift in Sources */,
 				F85F8F592B8DE54F00E69922 /* Date+Extension.swift in Sources */,
@@ -465,6 +511,8 @@
 				373D0DF42B8F7B5B004CC2C7 /* LayoutLiterals.swift in Sources */,
 				378034A32B8F8D8A0046E6B8 /* PomoProgressBar.swift in Sources */,
 				F88EB2DA2B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift in Sources */,
+				BACB16042B90541E003CBC50 /* MyPageTableViewCell.swift in Sources */,
+				BACB15FE2B90511E003CBC50 /* MypageModel.swift in Sources */,
 				F85F8F572B8DE33C00E69922 /* BasePaddingLabel.swift in Sources */,
 				37144C952B8C5472008565C4 /* BaseView.swift in Sources */,
 				376B91AC2B8C6835004CBB16 /* ColorLiterals.swift in Sources */,
