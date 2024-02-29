@@ -9,7 +9,8 @@ import UIKit
 
 // MARK: - TabBarController
 
-class TabBarController: UITabBarController {
+final class TabBarController: UITabBarController {
+    
     // MARK: - Properties
     
     let firstVC = ViewController()
@@ -34,6 +35,6 @@ extension TabBarController {
         firstVC.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "HomeImage"), tag: 1)
         secondVC.tabBarItem = UITabBarItem(title: "타이머", image: UIImage(named: "TimerImage"), tag: 2)
         thirdVC.tabBarItem = UITabBarItem(title: "주간 캘린더", image: UIImage(named: "WeeklyCalendarImage"), tag: 3)
-        fourthVC.tabBarItem = UITabBarItem(title: "마이페이지", image: UIImage(named: "MyPageImage"), tag: 4)
+        fourthVC.tabBarItem = UITabBarItem(title: "마이 페이지", image: UIImage(named: "MyPageImage"), tag: 4)
     }
 }
