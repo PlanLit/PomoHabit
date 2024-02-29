@@ -15,8 +15,19 @@ final class WhiteNoiseView: BaseView {
 
     // MARK: - UI Properties
     
+    private lazy var dismissButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .pobitStone2
+        return button
+    }()
+    
     private let whiteNoiseLabel = UILabel().setPrimaryColorLabel(text: "White Noise")
-    private let editButton = PobitButton.makeSquareButton(title: "수정")
+    
+    private lazy var editButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .pobitStone3
+        return button
+    }()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -48,13 +59,32 @@ final class WhiteNoiseView: BaseView {
 
 extension WhiteNoiseView {
     private func setAddSubViews() {
-        addSubViews([whiteNoiseLabel, editButton, tableView])
-        
+        addSubViews([dismissButton, whiteNoiseLabel, editButton, tableView])
     }
     
     private func setAutoLayout() {
+        dismissButton.snp.makeConstraints { make in
+            make.top.equalTo(LayoutLiterals.upperPrimarySpacing)
+            make.leading.equalToSuperview().offset(LayoutLiterals.minimumHorizontalSpacing)
+            make.size.equalTo(24)
+        }
+        
+        whiteNoiseLabel.snp.makeConstraints { make in
+            make.top.equalTo(dismissButton.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
+            make.leading.equalTo(dismissButton)
+        }
+        
+        editButton.snp.makeConstraints { make in
+            make.centerY.equalTo(whiteNoiseLabel)
+            make.trailing.equalToSuperview().offset(-LayoutLiterals.minimumHorizontalSpacing)
+            make.size.equalTo(24)
+        }
+        
         tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(whiteNoiseLabel.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
+            make.leading.equalTo(dismissButton)
+            make.trailing.equalTo(editButton)
+            make.bottom.equalToSuperview()
         }
     }
 }
