@@ -13,7 +13,7 @@ import SnapKit
 
 final class BottomSheetViewController: BaseViewController {
 
-    private let containerView = MemoView()
+    private let containerView = WhiteNoiseView()
     private var bottomConstraint: Constraint?
 
     override func viewDidLoad() {
@@ -67,8 +67,3 @@ extension BottomSheetViewController {
         }
     }
 }
-
-//@available(iOS 17, *)
-//#Preview {
-//    TimerViewController()
-//}
