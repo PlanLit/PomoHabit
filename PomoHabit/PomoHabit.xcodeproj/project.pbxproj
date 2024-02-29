@@ -161,11 +161,8 @@
 		37144C7B2B8C33AC008565C4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				37144C842B8C348E008565C4 /* Mypage */,
-				37144C832B8C343F008565C4 /* Reports */,
 				37144C822B8C3437008565C4 /* WeeklyCalendar */,
 				37144C812B8C3434008565C4 /* Timer */,
-				37144C802B8C342D008565C4 /* Onboarding */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -217,16 +214,6 @@
 			path = Supports;
 			sourceTree = "<group>";
 		};
-		37144C802B8C342D008565C4 /* Onboarding */ = {
-			isa = PBXGroup;
-			children = (
-				376B91992B8C5B51004CBB16 /* Controllers */,
-				376B919B2B8C5B51004CBB16 /* Views */,
-				376B919A2B8C5B51004CBB16 /* Models */,
-			);
-			path = Onboarding;
-			sourceTree = "<group>";
-		};
 		37144C812B8C3434008565C4 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,47 +232,6 @@
 				F88EB2D42B8DC07B0073BDDA /* Controllers */,
 			);
 			path = WeeklyCalendar;
-			sourceTree = "<group>";
-		};
-		37144C832B8C343F008565C4 /* Reports */ = {
-			isa = PBXGroup;
-			children = (
-				376B91912B8C5B4C004CBB16 /* Controllers */,
-				376B91922B8C5B4C004CBB16 /* Views */,
-				376B91902B8C5B4C004CBB16 /* Models */,
-			);
-			path = Reports;
-			sourceTree = "<group>";
-		};
-		37144C842B8C348E008565C4 /* Mypage */ = {
-			isa = PBXGroup;
-			children = (
-				37144C872B8C34F6008565C4 /* Controllers */,
-				37144C862B8C34F1008565C4 /* Views */,
-				37144C852B8C34EC008565C4 /* Models */,
-			);
-			path = Mypage;
-			sourceTree = "<group>";
-		};
-		37144C852B8C34EC008565C4 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		37144C862B8C34F1008565C4 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		37144C872B8C34F6008565C4 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		37144C912B8C543D008565C4 /* Base */ = {
@@ -328,48 +274,6 @@
 				376278202B8F88E200BA7373 /* PomoViewController.swift */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		376B91902B8C5B4C004CBB16 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		376B91912B8C5B4C004CBB16 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		376B91922B8C5B4C004CBB16 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		376B91992B8C5B51004CBB16 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		376B919A2B8C5B51004CBB16 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		376B919B2B8C5B51004CBB16 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		376B91AD2B8C69B6004CBB16 /* Fonts */ = {
