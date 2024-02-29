@@ -6,15 +6,10 @@
 //
 
 import UIKit
-import SnapKit
 
 // MARK: - BottomSheetViewController
 
 final class BottomSheetViewController: BaseViewController {
-
-    // MARK: - Properties
-    
-    private var bottomConstraint: Constraint?
     
     // MARK: - UI Properties
     
@@ -33,49 +28,5 @@ final class BottomSheetViewController: BaseViewController {
     
     override func loadView() {
         view = rootView
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setupGesture()
-    }
-}
-
-// MARK: - Setups
-
-extension BottomSheetViewController {
-    private func setupContainerView() {
-        rootView.snp.makeConstraints { make in
-            make.height.equalToSuperview().multipliedBy(0.5) // 화면 높이의 절반
-            bottomConstraint = make.bottom.equalToSuperview().constraint
-        }
-    }
-    
-    private func setupGesture() {
-        let gesture = UIPanGestureRecognizer(target: self, action: #selector(handleGesture(_:)))
-        rootView.addGestureRecognizer(gesture)
-    }
-}
-
-// MARK: - Action Helpers
-
-extension BottomSheetViewController {
-    @objc private func handleGesture(_ gesture: UIPanGestureRecognizer) {
-        let translation = gesture.translation(in: rootView)
-
-        switch gesture.state {
-        case .changed:
-            if translation.y > 0 {
-                bottomConstraint?.update(inset: translation.y)
-            }
-        case .ended:
-            UIView.animate(withDuration: 0.3) {
-                self.bottomConstraint?.update(inset: 0)
-                self.view.layoutIfNeeded()
-            }
-        default:
-            break
-        }
     }
 }

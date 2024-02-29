@@ -7,18 +7,28 @@
 
 import UIKit
 
+/**
+ .medium() - halfScreen
+ .large() - fullScreen
+ prefersGrabberVisible - 상단 중앙에 위치한 수평 바
+ */
+
 protocol BottomSheetPresentable: UIViewController, UISheetPresentationControllerDelegate {
     func presentBottomSheet(rootView: UIView, detents: [UISheetPresentationController.Detent], prefersGrabberVisible: Bool)
 }
 
 extension BottomSheetPresentable {
+    func setupSheet(_ sheet: UISheetPresentationController, with detents: [UISheetPresentationController.Detent], prefersGrabberVisible: Bool) {
+        sheet.delegate = self
+        sheet.detents = detents
+        sheet.prefersGrabberVisible = prefersGrabberVisible
+    }
+    
     func presentBottomSheet(rootView: UIView, detents: [UISheetPresentationController.Detent] = [.large()], prefersGrabberVisible: Bool = true) {
         let viewController = BottomSheetViewController(rootView: rootView)
         
         guard let sheet = viewController.sheetPresentationController else { return }
-        sheet.delegate = self
-        sheet.detents = detents
-        sheet.prefersGrabberVisible = prefersGrabberVisible
+        setupSheet(sheet, with: detents, prefersGrabberVisible: prefersGrabberVisible)
         
         present(viewController, animated: true)
     }
