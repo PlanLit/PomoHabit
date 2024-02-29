@@ -6,3 +6,21 @@
 //
 
 import Foundation
+
+enum ChatType: CaseIterable {
+    case receive
+    case send
+}
+
+enum cellSection: CaseIterable {
+    case notice
+    case habbitName
+    case habbitDays
+    case habbitTime
+}
+
+struct Model {
+    let message: String
+    let chatType: ChatType
+}
+

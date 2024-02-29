@@ -35,6 +35,11 @@
 		378034A32B8F8D8A0046E6B8 /* PomoProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278222B8F88FB00BA7373 /* PomoProgressBar.swift */; };
 		378034A42B8F8D8D0046E6B8 /* PomoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278232B8F88FF00BA7373 /* PomoModel.swift */; };
 		73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */; };
+		73DFA2592B90274700C381A7 /* OnboardingChattingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA2582B90274700C381A7 /* OnboardingChattingCell.swift */; };
+		73DFA25B2B90275600C381A7 /* OnboardingChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA25A2B90275600C381A7 /* OnboardingChattingViewController.swift */; };
+		73DFA25D2B90276400C381A7 /* OnboardingFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA25C2B90276400C381A7 /* OnboardingFirstViewController.swift */; };
+		73DFA2612B90280000C381A7 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA2602B90280000C381A7 /* Message.swift */; };
+		73DFA2632B903DB600C381A7 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA2622B903DB600C381A7 /* String+Extension.swift */; };
 		E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */; };
 		E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5412B8D5D9900A77BAE /* HStackView.swift */; };
 		E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */; };
@@ -81,6 +86,11 @@
 		376B91B62B8C6AF6004CBB16 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		376B91B92B8CE6B6004CBB16 /* PobitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PobitButton.swift; sourceTree = "<group>"; };
 		73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
+		73DFA2582B90274700C381A7 /* OnboardingChattingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingChattingCell.swift; sourceTree = "<group>"; };
+		73DFA25A2B90275600C381A7 /* OnboardingChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingChattingViewController.swift; sourceTree = "<group>"; };
+		73DFA25C2B90276400C381A7 /* OnboardingFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFirstViewController.swift; sourceTree = "<group>"; };
+		73DFA2602B90280000C381A7 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		73DFA2622B903DB600C381A7 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButton.swift; sourceTree = "<group>"; };
 		E0C5B5412B8D5D9900A77BAE /* HStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HStackView.swift; sourceTree = "<group>"; };
 		E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VStackView.swift; sourceTree = "<group>"; };
@@ -165,7 +175,7 @@
 				37144C832B8C343F008565C4 /* Reports */,
 				37144C822B8C3437008565C4 /* WeeklyCalendar */,
 				37144C812B8C3434008565C4 /* Timer */,
-				37144C802B8C342D008565C4 /* Onboarding */,
+				73DFA2542B9026C900C381A7 /* Onboarding */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -181,6 +191,7 @@
 				73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */,
 				F85F8F582B8DE54F00E69922 /* Date+Extension.swift */,
 				F870D85B2B8EFF3900DA4659 /* UILabel+Extension.swift */,
+				73DFA2622B903DB600C381A7 /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -215,16 +226,6 @@
 				37144C702B8C32D7008565C4 /* LaunchScreen.storyboard */,
 			);
 			path = Supports;
-			sourceTree = "<group>";
-		};
-		37144C802B8C342D008565C4 /* Onboarding */ = {
-			isa = PBXGroup;
-			children = (
-				376B91992B8C5B51004CBB16 /* Controllers */,
-				376B919B2B8C5B51004CBB16 /* Views */,
-				376B919A2B8C5B51004CBB16 /* Models */,
-			);
-			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		37144C812B8C3434008565C4 /* Timer */ = {
@@ -351,27 +352,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		376B91992B8C5B51004CBB16 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		376B919A2B8C5B51004CBB16 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		376B919B2B8C5B51004CBB16 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		376B91AD2B8C69B6004CBB16 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,6 +371,41 @@
 				373D0DF32B8F7B5B004CC2C7 /* LayoutLiterals.swift */,
 			);
 			path = Literals;
+			sourceTree = "<group>";
+		};
+		73DFA2542B9026C900C381A7 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				73DFA2572B90270E00C381A7 /* ViewControllers */,
+				73DFA2562B90270900C381A7 /* Views */,
+				73DFA2552B90270000C381A7 /* Models */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		73DFA2552B90270000C381A7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				73DFA2602B90280000C381A7 /* Message.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		73DFA2562B90270900C381A7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		73DFA2572B90270E00C381A7 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				73DFA2582B90274700C381A7 /* OnboardingChattingCell.swift */,
+				73DFA25A2B90275600C381A7 /* OnboardingChattingViewController.swift */,
+				73DFA25C2B90276400C381A7 /* OnboardingFirstViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		E0C5B53C2B8D5AC000A77BAE /* DayButton */ = {
@@ -537,6 +552,7 @@
 				37144C972B8C5674008565C4 /* UITextField+Extension.swift in Sources */,
 				37144C8C2B8C3582008565C4 /* UIViewController+Extension.swift in Sources */,
 				376B91BA2B8CE6B6004CBB16 /* PobitButton.swift in Sources */,
+				73DFA25B2B90275600C381A7 /* OnboardingChattingViewController.swift in Sources */,
 				F85F8F592B8DE54F00E69922 /* Date+Extension.swift in Sources */,
 				E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */,
 				F85F8F612B8E25EE00E69922 /* HabbitInfoVIew.swift in Sources */,
@@ -550,6 +566,7 @@
 				378034A22B8F8D860046E6B8 /* PomoView.swift in Sources */,
 				E0C5B5472B8D63B200A77BAE /* DayButtonsTableViewCell.swift in Sources */,
 				378034A42B8F8D8D0046E6B8 /* PomoModel.swift in Sources */,
+				73DFA25D2B90276400C381A7 /* OnboardingFirstViewController.swift in Sources */,
 				37144C932B8C544D008565C4 /* BaseViewController.swift in Sources */,
 				F85F8F632B8E26E100E69922 /* ImageViewAndLabelView.swift in Sources */,
 				73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */,
@@ -557,13 +574,16 @@
 				E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */,
 				F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */,
 				37144C682B8C32D6008565C4 /* SceneDelegate.swift in Sources */,
+				73DFA2592B90274700C381A7 /* OnboardingChattingCell.swift in Sources */,
 				37144C902B8C53B0008565C4 /* UIStackView+Extension.swift in Sources */,
 				373D0DF42B8F7B5B004CC2C7 /* LayoutLiterals.swift in Sources */,
 				378034A32B8F8D8A0046E6B8 /* PomoProgressBar.swift in Sources */,
 				F88EB2DA2B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift in Sources */,
 				F85F8F572B8DE33C00E69922 /* BasePaddingLabel.swift in Sources */,
+				73DFA2612B90280000C381A7 /* Message.swift in Sources */,
 				37144C952B8C5472008565C4 /* BaseView.swift in Sources */,
 				376B91AC2B8C6835004CBB16 /* ColorLiterals.swift in Sources */,
+				73DFA2632B903DB600C381A7 /* String+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
