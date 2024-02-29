@@ -317,10 +317,10 @@
 		E061E1342B901AC900A9174F /* Conrollers */ = {
 			isa = PBXGroup;
 			children = (
-				E061E12C2B901AC400A9174F /* ReportHabitEditViewController.swift */,
-				E061E12F2B901AC400A9174F /* ReportHabitInfoViewController.swift */,
-				E061E12D2B901AC400A9174F /* ReportImageCollectionViewController.swift */,
 				E061E12E2B901AC400A9174F /* ReportViewController.swift */,
+				E061E12D2B901AC400A9174F /* ReportImageCollectionViewController.swift */,
+				E061E12F2B901AC400A9174F /* ReportHabitInfoViewController.swift */,
+				E061E12C2B901AC400A9174F /* ReportHabitEditViewController.swift */,
 			);
 			path = Conrollers;
 			sourceTree = "<group>";
