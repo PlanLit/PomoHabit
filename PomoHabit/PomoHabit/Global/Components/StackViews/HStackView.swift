@@ -17,6 +17,7 @@ final class HStackView: UIStackView {
         self.alignment = alignment
         self.distribution = distribution
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.isUserInteractionEnabled = true
         
         for v in views {
             addArrangedSubview(v)

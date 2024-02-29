@@ -38,7 +38,7 @@ final class ReportViewController: BaseViewController {
         setUpHeaderView()
         setUpImageCollectionViewController()
         setUpCalendarNaviView()
-        setUpGridView(31)
+        setUpGridView(31) // 월마다 바뀌는 일 수 주입
         
         setAddSubviews()
         setAutoLayout()
@@ -248,6 +248,7 @@ extension ReportViewController {
             ]),
         ])
         
+        // 월별 마다 이거 조정 필요
         gridView.addArrangedSubview(
             HStackView([
                 getTheBoxView(29, .complete),
@@ -273,6 +274,7 @@ extension ReportViewController {
                     make.width.equalTo(62)
                     make.height.equalTo(50)
                 }
+                
                 return boxView
             }()
             

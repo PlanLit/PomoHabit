@@ -53,19 +53,14 @@ extension DayButton {
     private func setupCustomButton() {
         addSubview(customButton)
         customButton.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.width.equalTo(49)
-            make.height.equalTo(49)
+            make.edges.equalToSuperview()
         }
         setupCustomButtonAppearance()
     }
     
     private func setupCustomButtonAppearance() {
         customButton.setTitle(dayType?.rawValue, for: .normal)
-        customButton.backgroundColor = isSelected ? .systemGreen : .white // 색 변경 필요
+        customButton.backgroundColor = isSelected ? .pobitGreen : .white // 색 변경 필요
         customButton.setTitleColor(isSelected ? .white : .black, for: .normal)
         customButton.layer.borderWidth = isSelected ? 0 : 1
     }

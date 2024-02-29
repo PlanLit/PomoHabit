@@ -66,7 +66,7 @@ extension ReportImageCollectionViewController {
 
 extension ReportImageCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        // 토마토 누르기 구현 할거라 미리 작성
     }
     
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -113,6 +113,7 @@ extension ReportImageCollectionViewController {
             imageView.contentMode = .scaleAspectFit
             imageView.layer.cornerRadius = imageView.frame.height / 2
             imageView.clipsToBounds = true
+            
             return imageView
         }()
         
