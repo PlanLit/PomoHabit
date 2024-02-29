@@ -35,6 +35,10 @@
 		378034A32B8F8D8A0046E6B8 /* PomoProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278222B8F88FB00BA7373 /* PomoProgressBar.swift */; };
 		378034A42B8F8D8D0046E6B8 /* PomoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278232B8F88FF00BA7373 /* PomoModel.swift */; };
 		73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */; };
+		E061E1302B901AC400A9174F /* ReportHabitEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12C2B901AC400A9174F /* ReportHabitEditViewController.swift */; };
+		E061E1312B901AC400A9174F /* ReportImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12D2B901AC400A9174F /* ReportImageCollectionViewController.swift */; };
+		E061E1322B901AC400A9174F /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12E2B901AC400A9174F /* ReportViewController.swift */; };
+		E061E1332B901AC400A9174F /* ReportHabitInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12F2B901AC400A9174F /* ReportHabitInfoViewController.swift */; };
 		E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */; };
 		E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5412B8D5D9900A77BAE /* HStackView.swift */; };
 		E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */; };
@@ -81,6 +85,10 @@
 		376B91B62B8C6AF6004CBB16 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		376B91B92B8CE6B6004CBB16 /* PobitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PobitButton.swift; sourceTree = "<group>"; };
 		73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
+		E061E12C2B901AC400A9174F /* ReportHabitEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHabitEditViewController.swift; sourceTree = "<group>"; };
+		E061E12D2B901AC400A9174F /* ReportImageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportImageCollectionViewController.swift; sourceTree = "<group>"; };
+		E061E12E2B901AC400A9174F /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		E061E12F2B901AC400A9174F /* ReportHabitInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHabitInfoViewController.swift; sourceTree = "<group>"; };
 		E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButton.swift; sourceTree = "<group>"; };
 		E0C5B5412B8D5D9900A77BAE /* HStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HStackView.swift; sourceTree = "<group>"; };
 		E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VStackView.swift; sourceTree = "<group>"; };
@@ -161,6 +169,7 @@
 		37144C7B2B8C33AC008565C4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				E061E12B2B901AA100A9174F /* Reports */,
 				37144C822B8C3437008565C4 /* WeeklyCalendar */,
 				37144C812B8C3434008565C4 /* Timer */,
 			);
@@ -295,6 +304,25 @@
 				373D0DF32B8F7B5B004CC2C7 /* LayoutLiterals.swift */,
 			);
 			path = Literals;
+			sourceTree = "<group>";
+		};
+		E061E12B2B901AA100A9174F /* Reports */ = {
+			isa = PBXGroup;
+			children = (
+				E061E1342B901AC900A9174F /* Conrollers */,
+			);
+			path = Reports;
+			sourceTree = "<group>";
+		};
+		E061E1342B901AC900A9174F /* Conrollers */ = {
+			isa = PBXGroup;
+			children = (
+				E061E12C2B901AC400A9174F /* ReportHabitEditViewController.swift */,
+				E061E12F2B901AC400A9174F /* ReportHabitInfoViewController.swift */,
+				E061E12D2B901AC400A9174F /* ReportImageCollectionViewController.swift */,
+				E061E12E2B901AC400A9174F /* ReportViewController.swift */,
+			);
+			path = Conrollers;
 			sourceTree = "<group>";
 		};
 		E0C5B53C2B8D5AC000A77BAE /* DayButton */ = {
@@ -435,6 +463,7 @@
 			files = (
 				F88EB2D82B8DC0EB0073BDDA /* WeeklyCalendarModel.swift in Sources */,
 				F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */,
+				E061E1322B901AC400A9174F /* ReportViewController.swift in Sources */,
 				F870D85C2B8EFF3900DA4659 /* UILabel+Extension.swift in Sources */,
 				F85F8F5B2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift in Sources */,
 				375AC9D52B8F817B002F82FF /* CAShapeLayer+Extension.swift in Sources */,
@@ -452,6 +481,7 @@
 				37144C8E2B8C5339008565C4 /* UIView+Extension.swift in Sources */,
 				F88EB2DC2B8DC1120073BDDA /* WeeklyCalendarView.swift in Sources */,
 				378034A22B8F8D860046E6B8 /* PomoView.swift in Sources */,
+				E061E1302B901AC400A9174F /* ReportHabitEditViewController.swift in Sources */,
 				E0C5B5472B8D63B200A77BAE /* DayButtonsTableViewCell.swift in Sources */,
 				378034A42B8F8D8D0046E6B8 /* PomoModel.swift in Sources */,
 				37144C932B8C544D008565C4 /* BaseViewController.swift in Sources */,
@@ -459,6 +489,8 @@
 				73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */,
 				373D0DF22B8F7B45004CC2C7 /* PobitNavigationBarView.swift in Sources */,
 				E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */,
+				E061E1312B901AC400A9174F /* ReportImageCollectionViewController.swift in Sources */,
+				E061E1332B901AC400A9174F /* ReportHabitInfoViewController.swift in Sources */,
 				F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */,
 				37144C682B8C32D6008565C4 /* SceneDelegate.swift in Sources */,
 				37144C902B8C53B0008565C4 /* UIStackView+Extension.swift in Sources */,
