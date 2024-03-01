@@ -9,11 +9,11 @@ import UIKit
 
 // MARK: - ReportDaysCell
 
-final class ReportDayButtonCell: UITableViewCell {
+final class ReportDayButtonTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    private var collectionViewCellID = "\(ReportDayButtonCell.self)CollectionViewCell"
+    private var collectionViewCellID = "\(ReportDayButtonTableViewCell.self)CollectionViewCell"
     
     private var dayButtonCollectionView: UICollectionView!
     
@@ -36,7 +36,7 @@ final class ReportDayButtonCell: UITableViewCell {
 
 // MARK: - Layout Helpers
 
-extension ReportDayButtonCell {
+extension ReportDayButtonTableViewCell {
     private func setUpSelf() {
         self.selectionStyle = .none
     }
@@ -70,7 +70,7 @@ extension ReportDayButtonCell {
 
 // MARK: - UICollectionViewDataSource
 
-extension ReportDayButtonCell: UICollectionViewDataSource {
+extension ReportDayButtonTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 7
     }

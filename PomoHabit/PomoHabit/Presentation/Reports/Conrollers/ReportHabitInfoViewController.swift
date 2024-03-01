@@ -36,8 +36,9 @@ extension ReportHabitInfoViewController {
         tableView = UITableView(frame: .zero, style: .plain)
         tableView?.dataSource = self
         tableView?.delegate = self
-        tableView?.register(ReportDayButtonCell.self, forCellReuseIdentifier: "\(ReportDayButtonCell.self)")
-        tableView?.register(ReportDayButtonCell.self, forCellReuseIdentifier: "StartTimeCell")
+        tableView?.separatorStyle = .none
+        tableView?.register(ReportDayButtonTableViewCell.self, forCellReuseIdentifier: "\(ReportDayButtonTableViewCell.self)")
+        tableView?.register(ReportDayButtonTableViewCell.self, forCellReuseIdentifier: "StartTimeCell")
     }
     
     private func setAddSubviews() {
@@ -46,7 +47,10 @@ extension ReportHabitInfoViewController {
     
     private func setAutoLayout() {
         tableView?.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(view.snp.top)
+            make.trailing.equalTo(view.snp.trailing).offset(-20)
+            make.bottom.equalTo(view.snp.bottom)
+            make.leading.equalTo(view.snp.leading).offset(20)
         }
     }
     
@@ -57,6 +61,25 @@ extension ReportHabitInfoViewController {
         label.textColor = .secondaryLabel
         
         return label
+    }
+    
+    private func getSeparatorView() -> UIView {
+        let containerView = UIView()
+        containerView.backgroundColor = .clear
+        
+        let separatorView = UIView()
+        separatorView.backgroundColor = .lightGray
+        
+        containerView.addSubview(separatorView)
+        
+        separatorView.snp.makeConstraints { make in
+            make.trailing.equalTo(containerView.snp.trailing)
+            make.bottom.equalTo(containerView.snp.bottom)
+            make.leading.equalTo(containerView.snp.leading)
+            make.height.equalTo(0.5)
+        }
+        
+        return containerView
     }
 }
 
@@ -72,15 +95,16 @@ extension ReportHabitInfoViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(ReportDayButtonCell.self)", for: indexPath) as? ReportDayButtonCell else { return UITableViewCell() }
+        switch indexPath.section {
+        case 0:
+            let cell = ReportDayButtonTableViewCell()
             cell.dayButtonSelectionStates = dayButtonSelectionStates
             
             return cell
-        } else if indexPath.section == 1 {
+        case 1:
             let cell = UITableViewCell()
             cell.isUserInteractionEnabled = false
-            
+
             let label = UILabel()
             label.text = "8 : 40 AM"
             label.font = Pretendard.bold(size: 20)
@@ -93,15 +117,20 @@ extension ReportHabitInfoViewController: UITableViewDataSource {
             cell.contentView.addSubview(container)
             
             return cell
+            
+        default:
+            return UITableViewCell()
         }
-
-        return UITableViewCell()
     }
 }
 
 // MARK: - UITableViewDelegate
 
 extension ReportHabitInfoViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 65
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             return getHeaderLabelView("습관 실행 요일")
@@ -112,11 +141,19 @@ extension ReportHabitInfoViewController: UITableViewDelegate {
         return nil
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 65
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 80
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 100
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section%2 == 0 && section != tableView.numberOfSections - 1 {
+            return getSeparatorView()
+        }
+        
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 40.25
     }
 }

@@ -195,9 +195,9 @@ extension ReportViewController {
         
         let bottomLine = {
             let bottomLine = UIView()
-            bottomLine.backgroundColor = .black
+            bottomLine.backgroundColor = .lightGray
             bottomLine.snp.makeConstraints { make in
-                make.height.equalTo(0.25)
+                make.height.equalTo(0.5)
             }
             return bottomLine
         }()
