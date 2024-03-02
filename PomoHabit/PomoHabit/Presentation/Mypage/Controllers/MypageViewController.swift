@@ -7,29 +7,41 @@
 
 import UIKit
 
+import SnapKit
+
 // MARK: - MyPageViewController
 
 final class MyPageViewController: UIViewController {
-
+    
     // MARK: - Properties
     
-    let myPageView = MyPageView()
-
-    // MARK: - Life Cycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.addSubview(myPageView)
-        myPageView.frame = view.bounds
-        myPageView.backgroundColor = .white
-    }
-
-
+    private let myPageView = MyPageView()
     
-    // MARK: - Action Helpers
+    // MARK: - View Lifecycle
+    
+    override func loadView() {
+        super.loadView()
+        
+        setAddSubViews()
+        setSetAutoLayout()
+    }
+}
 
-        @objc func editButtonTapped() {
+// MARK: - Life Cycle
+
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//}
+
+// MARK: - Layout Helpers
+
+extension MyPageViewController {
+    private func setAddSubViews() {
+        view.addSubview(myPageView)
+    }
+    private func setSetAutoLayout() {
+        myPageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
-
+}

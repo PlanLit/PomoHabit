@@ -15,178 +15,137 @@ final class MyPageView: BaseView {
     
     // MARK: - Properties
     
-    var myPageTableView: UITableView!
+    private lazy var myPageTableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        
+        return tableView
+    }()
     
     // MARK: - Life Cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setupSubviews()
+        setAddSubviews()
+        setupConstraints()
+        setupTableView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupSubviews() {
-        setupNickName()
-        setupEditButton()
-        setupTableView()
-        setupGrayBar()
-        setupHabbitSituation()
-        setupOvalView()
-        setupGrayBar2()
-        setupTotalAndDidDaysLabels()
-    }
-    
     // MARK: - 닉네임 UI
     
-    func setupNickName() {
-        let nicknameLabel = UILabel()
-        nicknameLabel.text = "닉네임"
-        nicknameLabel.textColor = .darkGray
-        nicknameLabel.font = UIFont.boldSystemFont(ofSize: 20)
+    private let setupNickNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "닉네임"
+        label.textColor = .darkGray
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         
-        addSubview(nicknameLabel)
-        
-        nicknameLabel.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
-            make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(20)
-        }
-    }
+        return label
+    }()
     
-    // MARK: - 수정버튼 UI
-    
-    func setupEditButton() {
-        let editButton = UIButton(type: .system)
-        editButton.setTitle("수정", for: .normal)
-        editButton.setTitleColor(.black, for: .normal)
-        editButton.backgroundColor = .clear
-        editButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        editButton.layer.borderWidth = 1
-        editButton.layer.borderColor = UIColor.gray.cgColor
-        editButton.layer.cornerRadius = 9
-        addSubview(editButton)
+    private let setupEditButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("수정", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .clear
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.gray.cgColor
+        button.layer.cornerRadius = 9
         
-        editButton.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
-            make.trailing.lessThanOrEqualToSuperview().offset(-20)
-            make.width.equalTo(30)
-            make.height.equalTo(20)
-        }
-    }
+        return button
+    }()
     
     // MARK: - DividerView
     
-    func setupGrayBar() {
-        let grayBarView = UIView()
-        grayBarView.backgroundColor = UIColor.systemGray5
-        addSubview(grayBarView)
+    private let setupGrayBar: UIView = {
+        let bar = UIView()
+        bar.backgroundColor = UIColor.systemGray5
         
-        grayBarView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(60)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(7)
-        }
-    }
+        return bar
+    }()
     
     // MARK: - 습관 진행 상태 UI
     
-    func setupHabbitSituation() {
-        let habbitSituationLabel = UILabel()
-        habbitSituationLabel.text = "습관 진행 상태"
-        habbitSituationLabel.textColor = .darkGray
-        habbitSituationLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        addSubview(habbitSituationLabel)
+    private let setupHabbitSituation: UILabel = {
+        let label = UILabel()
+        label.text = "습관 진행 상태"
+        label.textColor = .darkGray
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         
-        habbitSituationLabel.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(90)
-            make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(20)
-        }
-    }
+        return label
+    }()
     
     // MARK: - layerView
     
-    func setupOvalView() {
+    private let setupOvalView: UIView = {
         let ovalView = UIView()
         ovalView.backgroundColor = .clear
         ovalView.layer.cornerRadius = 15
         ovalView.layer.borderWidth = 1
         ovalView.layer.borderColor = UIColor.systemGray4.cgColor
         ovalView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(ovalView)
         
-        ovalView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(120)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
-            make.height.equalTo(80)
-        }
-    }
+        return ovalView
+    }()
     
     // MARK: - DividerView
     
-    func setupGrayBar2() {
-        let grayBarView = UIView()
-        grayBarView.backgroundColor = UIColor.systemGray5
-        addSubview(grayBarView)
+    private let setupGrayBar2: UIView = {
+        let bar = UIView()
+        bar.backgroundColor = UIColor.systemGray5
         
-        grayBarView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(230)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(7)
-        }
-    }
+        return bar
+    }()
+    
+    
+    // MARK: - 습관 진행 상태 내용 UI
+    
+    private lazy var totalDaysLabel: UILabel = {
+        let label = UILabel().setPrimaryColorLabel(text: "4일")
+        
+        return label
+    }()
+    
+    private lazy var didDaysLabel: UILabel = {
+        let label = UILabel().makeMyPageLabel(text: "진행 일수")
+        
+        return label
+    }()
+    
+    private lazy var totalMinutesLabel: UILabel = {
+        let label = UILabel().setPrimaryColorLabel(text: "5분")
+        
+        return label
+    }()
+    
+    private lazy var didMinutesLabel: UILabel = {
+        let label = UILabel().makeMyPageLabel(text: "진행 총시간")
+        
+        return label
+    }()
+    
+    private lazy var totalHabbitsLabel: UILabel = {
+        let label = UILabel().setPrimaryColorLabel(text: "0개")
+        
+        return label
+    }()
+    
+    private lazy var didHabbitsLabel: UILabel = {
+        let label = UILabel().makeMyPageLabel(text: "완료한 습관수")
+        
+        return label
+    }()
     
     // MARK: - 습관 진행 상태 내용 StackView
     
-    func setupTotalAndDidDaysLabels() {
-        
-        let totalDaysLabel = UILabel().setPrimaryColorLabel(text: "4일")
-        
-        let didDaysLabel = UILabel()
-        didDaysLabel.text = "진행 일수"
-        didDaysLabel.textColor = .darkGray
-        didDaysLabel.font = UIFont.systemFont(ofSize: 13)
-        didDaysLabel.translatesAutoresizingMaskIntoConstraints = false
-       
-        let totalMinutesLabel = UILabel().setPrimaryColorLabel(text: "5분")
-        
-        let didMinutesLabel = UILabel()
-        didMinutesLabel.text = "진행 총시간"
-        didMinutesLabel.textColor = .darkGray
-        didMinutesLabel.font = UIFont.systemFont(ofSize: 13)
-        didMinutesLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        let totalHabbitsLabel = UILabel().setPrimaryColorLabel(text: "0개")
-        
-        let didHabbitsLabel = UILabel()
-        didHabbitsLabel.text = "완료한 습관수"
-        didHabbitsLabel.textColor = .darkGray
-        didHabbitsLabel.font = UIFont.systemFont(ofSize: 13)
-        didHabbitsLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+    private lazy var setupTotalAndDidDaysLabels: UIStackView = {
         let vStackView1 = VStackView(spacing: 3, alignment: .center, distribution: .equalSpacing, [totalDaysLabel, didDaysLabel])
-        addSubview(vStackView1)
-        
-        vStackView1.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(140)
-        }
-        
         let vStackView2 = VStackView(spacing: 3, alignment: .center, distribution: .equalSpacing, [totalMinutesLabel, didMinutesLabel])
-        addSubview(vStackView2)
-        
-        vStackView2.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(140)
-        }
-        
         let vStackView3 = VStackView(spacing: 3, alignment: .center, distribution: .equalSpacing, [totalHabbitsLabel, didHabbitsLabel])
-        addSubview(vStackView3)
-        
-        vStackView3.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(140)
-        }
         
         let hStackView = HStackView(spacing: 20, alignment: .center, distribution: .equalSpacing, [vStackView1, vStackView2, vStackView3])
         addSubview(hStackView)
@@ -196,17 +155,21 @@ final class MyPageView: BaseView {
             make.leading.equalToSuperview().offset(70)
             make.trailing.equalToSuperview().offset(-70)
         }
-    }
+        
+        return hStackView
+    }()
     
-    func setupTableView() {
-        let topMargin: CGFloat = 350
-        let tableViewFrame = CGRect(x: 0, y: topMargin, width: bounds.width, height: bounds.height - topMargin)
-        myPageTableView = UITableView(frame: tableViewFrame, style: .plain)
+    // MARK: - TableView
+    
+    private lazy var setupTableView: () -> Void = {
+        let topMargin: CGFloat = 360
+        let tableViewFrame = CGRect(x: 0, y: topMargin, width: self.bounds.width, height: self.bounds.height - topMargin)
+        let myPageTableView = UITableView(frame: tableViewFrame, style: .plain)
         myPageTableView.separatorStyle = .none
         myPageTableView.dataSource = self
         myPageTableView.delegate = self
         myPageTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: "cell")
-        addSubview(myPageTableView)
+        self.addSubview(myPageTableView)
         
         myPageTableView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(topMargin)
@@ -215,7 +178,55 @@ final class MyPageView: BaseView {
     }
 }
 
-// MARK: - DataSource
+// MARK: - Layout Helpers
+
+extension MyPageView {
+    private func setAddSubviews() {
+        self.addSubview(setupNickNameLabel)
+        self.addSubview(setupEditButton)
+        self.addSubview(myPageTableView)
+        self.addSubview(setupGrayBar)
+        self.addSubview(setupHabbitSituation)
+        self.addSubview(setupOvalView)
+        self.addSubview(setupGrayBar2)
+        self.addSubview(setupTotalAndDidDaysLabels)
+    }
+    
+    private func setupConstraints() {
+        setupNickNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
+            make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(20)
+        }
+        setupEditButton.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
+            make.trailing.lessThanOrEqualToSuperview().offset(-20)
+            make.width.equalTo(30)
+            make.height.equalTo(20)
+        }
+        setupGrayBar.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(60)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(7)
+        }
+        setupHabbitSituation.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(90)
+            make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(20)
+        }
+        setupOvalView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(120)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(80)
+        }
+        setupGrayBar2.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(230)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(7)
+        }
+    }
+}
+
+// MARK: - UITableViewDataSource
 
 extension MyPageView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -232,10 +243,9 @@ extension MyPageView: UITableViewDataSource {
         
         return cell
     }
-    
 }
 
-// MARK: - Delegate
+// MARK: - UITableViewDelegate
 
 extension MyPageView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

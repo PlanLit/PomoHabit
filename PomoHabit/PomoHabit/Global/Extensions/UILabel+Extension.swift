@@ -24,4 +24,12 @@ extension UILabel {
         
         return label
     }
+    func makeMyPageLabel(text: String) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.textColor = .darkGray
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }
 }
