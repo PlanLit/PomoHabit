@@ -9,6 +9,8 @@ import UIKit
 
 import SnapKit
 
+// MARK: - OnboardingChattingCell
+
 class OnboardingChattingCell: UICollectionViewCell {
     
     var model: Model?
