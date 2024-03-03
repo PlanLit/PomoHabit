@@ -11,11 +11,10 @@ import SnapKit
 
 // MARK: - OnboardingFirstViewController
 
-class OnboardingFirstViewController: UIViewController {
-    
+final class OnboardingFirstViewController: UIViewController {
     // MARK: - Properties
     
-    private let imageView: UIImageView = {
+    private let mainImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "mainTomato")
         imageView.frame.size = CGSize(width: 185, height: 185)
@@ -23,7 +22,7 @@ class OnboardingFirstViewController: UIViewController {
         return imageView
     }()
     
-    private let textField: UITextField = {
+    private let nicknameTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .none
         textField.backgroundColor = UIColor.pobitWhite
@@ -35,7 +34,7 @@ class OnboardingFirstViewController: UIViewController {
         return textField
     }()
     
-    private let button: UIButton = {
+    private let saveButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "arrow"), for: .normal)
         
@@ -51,7 +50,7 @@ class OnboardingFirstViewController: UIViewController {
         setAddSubviews()
         setAutoLayout()
         
-        button.addTarget(self, action: #selector(tappedSubmitButton), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(tappedSubmitButton), for: .touchUpInside)
     }
 }
 
@@ -59,26 +58,24 @@ class OnboardingFirstViewController: UIViewController {
 
 extension OnboardingFirstViewController {
     private func setAddSubviews() {
-        view.addSubview(imageView)
-        view.addSubview(textField)
-        view.addSubview(button)
+        view.addSubViews([mainImage, nicknameTextField, saveButton])
     }
     
     private func setAutoLayout() {
-        imageView.snp.makeConstraints { make in
+        mainImage.snp.makeConstraints { make in
             make.centerX.equalTo(view)
             make.top.equalTo(view.safeAreaLayoutGuide).offset(136)
         }
         
-        textField.snp.makeConstraints { make in
-            make.top.equalTo(imageView.snp.bottom).offset(96)
+        nicknameTextField.snp.makeConstraints { make in
+            make.top.equalTo(mainImage.snp.bottom).offset(96)
             make.leading.equalTo(view.snp.leading).inset(89)
-            make.height.equalTo(button.snp.height)
+            make.height.equalTo(saveButton.snp.height)
         }
         
-        button.snp.makeConstraints { make in
-            make.top.equalTo(imageView.snp.bottom).offset(96)
-            make.leading.equalTo(textField.snp.trailing).offset(8)
+        saveButton.snp.makeConstraints { make in
+            make.top.equalTo(mainImage.snp.bottom).offset(96)
+            make.leading.equalTo(nicknameTextField.snp.trailing).offset(8)
         }
     }
 }
@@ -87,7 +84,7 @@ extension OnboardingFirstViewController {
 
 extension OnboardingFirstViewController {
     @objc private func tappedSubmitButton() {
-        let nextViewController = OnboardingChattingViewController()
-        self.present(nextViewController, animated: true)
+        let onboardingChattingViewController = OnboardingChattingViewController()
+        self.navigationController?.pushViewController(onboardingChattingViewController, animated: true)
     }
 }

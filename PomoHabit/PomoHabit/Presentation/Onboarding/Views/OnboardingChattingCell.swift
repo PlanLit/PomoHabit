@@ -11,8 +11,7 @@ import SnapKit
 
 // MARK: - OnboardingChattingCell
 
-class OnboardingChattingCell: UICollectionViewCell {
-    
+final class OnboardingChattingCell: UICollectionViewCell {
     var model: Model?
     
     // MARK: - Properties
@@ -34,7 +33,6 @@ class OnboardingChattingCell: UICollectionViewCell {
         super.init(frame: frame)
         
         setupLabel()
-//        setAutoLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -49,12 +47,6 @@ extension OnboardingChattingCell {
     private func setupLabel() {
         contentView.addSubview(chattingLabel)
     }
-    
-//    private func setAutoLayout() {
-//        chattingLabel.snp.makeConstraints { make in
-//            make.centerY.equalTo(contentView)
-//        }
-//    }
 }
 
 // MARK: - Methods
@@ -69,7 +61,7 @@ extension OnboardingChattingCell {
                 make.width.equalTo(chattingLabelWidth + 35)
                 make.leading.equalTo(contentView.snp.leading).offset(10)
             }
-        
+            
         } else  {
             chattingLabel.snp.makeConstraints { make in
                 make.trailing.equalTo(contentView.snp.trailing).offset(-10)
@@ -78,5 +70,12 @@ extension OnboardingChattingCell {
             chattingLabel.backgroundColor = .pobitGreen
             chattingLabel.textColor = .pobitWhite
         }
+    }
+    
+    func configureCell(with model: Model) {
+        self.backgroundColor = .pobitSkin
+        self.layer.cornerRadius = 20
+        self.chattingLabel.text = model.message
+        self.model = model
     }
 }

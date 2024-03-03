@@ -9,11 +9,12 @@ import UIKit
 
 import SnapKit
 
-class OnboardingChattingViewController: UIViewController {
-    
+// MARK: - OnboardingChattingViewController
+
+final class OnboardingChattingViewController: UIViewController {
     // MARK: - Properties
     
-    var messages = [Model(message: "안녕! 앱을 처음 실행해줘서 고마워!", chatType: .receive), Model(message: "나는 새로운 습관 형성을 도와줄 가이드야.", chatType: .receive), Model(message: "준비됐어?", chatType: .receive), Model(message: "응 준비됐어!", chatType: .send), Model(message: "어떤 습관을 만들고 싶어?", chatType: .receive)]
+    var messages = [Model(message: "안녕! 앱을 처음 실행해줘서 고마워!", chatType: .receive), Model(message: "나는 새로운 습관 형성을 도와줄 가이드야.", chatType: .receive), Model(message: "준비됐어?", chatType: .receive), Model(message: "응 준비됐어!", chatType: .send), Model(message: "어떤 습관을 만들고 싶어?", chatType: .receive), Model(message: "영단어 외우기", chatType: .send), Model(message: "무슨 요일에 할거야?", chatType: .receive), Model(message: "", chatType: .receive),Model(message: "몇시에 할거야?", chatType: .receive), Model(message: "AM 9:00마다 할게", chatType: .send)]
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -24,12 +25,14 @@ class OnboardingChattingViewController: UIViewController {
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 10
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .pobitSkin
         
         return collectionView
     }()
     
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +42,7 @@ class OnboardingChattingViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(OnboardingChattingCell.self, forCellWithReuseIdentifier: OnboardingChattingCell.identifier)
+        collectionView.register(DaysCollectionViewCell.self, forCellWithReuseIdentifier: DaysCollectionViewCell.identifier)
         
         setAddSubviews()
         setAutoLayout()
@@ -49,8 +53,7 @@ class OnboardingChattingViewController: UIViewController {
 
 extension OnboardingChattingViewController {
     private func setAddSubviews() {
-        view.addSubview(imageView)
-        view.addSubview(collectionView)
+        view.addSubViews([imageView, collectionView])
     }
     
     private func setAutoLayout() {
@@ -71,22 +74,28 @@ extension OnboardingChattingViewController {
 // MARK: - UICollectionViewDataSource
 
 extension OnboardingChattingViewController: UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return messages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OnboardingChattingCell.identifier, for: indexPath) as? OnboardingChattingCell else {
             return UICollectionViewCell()
         }
         
-        cell.backgroundColor = .pobitSkin
-        cell.layer.cornerRadius = 20
-        cell.chattingLabel.text = messages[indexPath.item].message
-        cell.model = messages[indexPath.item]
+        if indexPath.item == 7 {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DaysCollectionViewCell.identifier, for: indexPath) as? DaysCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            return cell
+        }
+        
+        let model = messages[indexPath.item]
+        cell.configureCell(with: model)
         cell.bind()
-
+        
+        print(indexPath.item)
         return cell
     }
 }
@@ -95,6 +104,10 @@ extension OnboardingChattingViewController: UICollectionViewDataSource {
 
 extension OnboardingChattingViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 50)
+        if indexPath.item == 7 {
+            return CGSize(width: collectionView.frame.width, height: 100)
+        } else {
+            return CGSize(width: collectionView.frame.width, height: 50)
+        }
     }
 }

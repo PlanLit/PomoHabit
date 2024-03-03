@@ -11,11 +11,10 @@ import SnapKit
 
 // MARK: - DaysViewCell
 
-class DaysCollectionViewCell: UICollectionViewCell {
-    
+final class DaysCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     
-    static let identifier = "DaysViewCell"
+    static let identifier = "DaysCollectionViewCell"
     
     private var container: VStackView?
     var buttonSelectionStates: [Bool]?
@@ -70,6 +69,7 @@ extension DaysCollectionViewCell {
     private func setAutoLayout() {
         container?.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(100)
         }
     }
 }
