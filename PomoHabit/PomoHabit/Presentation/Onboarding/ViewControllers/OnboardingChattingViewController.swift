@@ -23,11 +23,15 @@ final class OnboardingChattingViewController: UIViewController {
         return imageView
     }()
     
-    private let collectionView: UICollectionView = {
+    private lazy var onboardingCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .pobitSkin
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(OnboardingChattingCell.self, forCellWithReuseIdentifier: OnboardingChattingCell.identifier)
+        collectionView.register(DaysCollectionViewCell.self, forCellWithReuseIdentifier: DaysCollectionViewCell.identifier)
         
         return collectionView
     }()
@@ -39,11 +43,6 @@ final class OnboardingChattingViewController: UIViewController {
         
         view.backgroundColor = UIColor.pobitSkin
         
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(OnboardingChattingCell.self, forCellWithReuseIdentifier: OnboardingChattingCell.identifier)
-        collectionView.register(DaysCollectionViewCell.self, forCellWithReuseIdentifier: DaysCollectionViewCell.identifier)
-        
         setAddSubviews()
         setAutoLayout()
     }
@@ -53,7 +52,7 @@ final class OnboardingChattingViewController: UIViewController {
 
 extension OnboardingChattingViewController {
     private func setAddSubviews() {
-        view.addSubViews([imageView, collectionView])
+        view.addSubViews([imageView, onboardingCollectionView])
     }
     
     private func setAutoLayout() {
@@ -63,7 +62,7 @@ extension OnboardingChattingViewController {
             make.width.height.equalTo(60)
         }
         
-        collectionView.snp.makeConstraints { make in
+        onboardingCollectionView.snp.makeConstraints { make in
             make.top.equalTo(imageView.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide)
