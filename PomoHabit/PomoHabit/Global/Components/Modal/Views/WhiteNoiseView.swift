@@ -18,6 +18,7 @@ final class WhiteNoiseView: BaseView {
     private lazy var dismissButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .pobitStone2
+        
         return button
     }()
     
@@ -26,6 +27,7 @@ final class WhiteNoiseView: BaseView {
     private lazy var editButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .pobitStone3
+        
         return button
     }()
     
@@ -35,6 +37,7 @@ final class WhiteNoiseView: BaseView {
         tableView.dataSource = self
         tableView.register(WhiteNoiseTableViewCell.self,
                            forCellReuseIdentifier: WhiteNoiseTableViewCell.identifier)
+        
         return tableView
     }()
     
