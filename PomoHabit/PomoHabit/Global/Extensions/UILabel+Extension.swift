@@ -15,7 +15,7 @@ extension UILabel {
     }
     
     func setPrimaryColorLabel(text: String) -> BasePaddingLabel {
-        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
         label.text = text
         label.textColor = .white
         label.font = Pretendard.bold(size: 12)

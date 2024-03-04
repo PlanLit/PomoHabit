@@ -15,21 +15,21 @@ final class MyPageView: BaseView {
     
     // MARK: - Properties
     
+    private let pobitNavigationBarView = PobitNavigationBarView(title: "마이페이지")
+    
     private lazy var myPageTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         
         return tableView
     }()
     
-    private lazy var topMargin: CGFloat = 360
-    
     // MARK: - 닉네임 UI
     
     private let nickNameLabel: UILabel = {
         let label = UILabel()
         label.text = "닉네임"
-        label.textColor = .darkGray
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .pobitStone2
+        label.font = Pretendard.bold(size: 20)
         
         return label
     }()
@@ -37,11 +37,11 @@ final class MyPageView: BaseView {
     private let editButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("수정", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.pobitStone2, for: .normal)
         button.backgroundColor = .clear
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        button.titleLabel?.font = Pretendard.regular(size: 15)
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.gray.cgColor
+        button.layer.borderColor = UIColor.pobitStone4.cgColor
         button.layer.cornerRadius = 9
         
         return button
@@ -51,18 +51,18 @@ final class MyPageView: BaseView {
     
     private let grayBar: UIView = {
         let bar = UIView()
-        bar.backgroundColor = UIColor.systemGray5
+        bar.backgroundColor = .pobitStone4
         
         return bar
     }()
     
     // MARK: - 습관 진행 상태 UI
     
-    private let habbitSituation: UILabel = {
+    private let habbitSituationLabel: UILabel = {
         let label = UILabel()
         label.text = "습관 진행 상태"
-        label.textColor = .darkGray
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .pobitStone2
+        label.font = Pretendard.bold(size: 20)
         
         return label
     }()
@@ -74,7 +74,7 @@ final class MyPageView: BaseView {
         ovalView.backgroundColor = .clear
         ovalView.layer.cornerRadius = 15
         ovalView.layer.borderWidth = 1
-        ovalView.layer.borderColor = UIColor.systemGray4.cgColor
+        ovalView.layer.borderColor = UIColor.pobitStone4.cgColor
         ovalView.translatesAutoresizingMaskIntoConstraints = false
         
         return ovalView
@@ -84,11 +84,10 @@ final class MyPageView: BaseView {
     
     private let grayBar2: UIView = {
         let bar = UIView()
-        bar.backgroundColor = UIColor.systemGray5
+        bar.backgroundColor = .pobitStone4
         
         return bar
     }()
-    
     
     // MARK: - 습관 진행 상태 내용 UI
     
@@ -128,13 +127,12 @@ final class MyPageView: BaseView {
         return label
     }()
     
-    
     // MARK: - 습관 진행 상태 내용 StackView
     
     private lazy var totalAndDidDaysLabels: UIView = {
-        let vStackView1 = VStackView(spacing: 3, alignment: .center, distribution: .equalSpacing, [totalDaysLabel, didDaysLabel])
-        let vStackView2 = VStackView(spacing: 3, alignment: .center, distribution: .equalSpacing, [totalMinutesLabel, didMinutesLabel])
-        let vStackView3 = VStackView(spacing: 3, alignment: .center, distribution: .equalSpacing, [totalHabbitsLabel, didHabbitsLabel])
+        let vStackView1 = VStackView(spacing: 6, alignment: .center, distribution: .equalSpacing, [totalDaysLabel, didDaysLabel])
+        let vStackView2 = VStackView(spacing: 6, alignment: .center, distribution: .equalSpacing, [totalMinutesLabel, didMinutesLabel])
+        let vStackView3 = VStackView(spacing: 6, alignment: .center, distribution: .equalSpacing, [totalHabbitsLabel, didHabbitsLabel])
         
         let hStackView = HStackView(spacing: 20, alignment: .center, distribution: .equalSpacing, [vStackView1, vStackView2, vStackView3])
         addSubview(hStackView)
@@ -175,10 +173,11 @@ final class MyPageView: BaseView {
 extension MyPageView {
     private func setAddSubviews() {
         addSubViews([
+            pobitNavigationBarView,
             nickNameLabel,
             editButton,
             grayBar,
-            habbitSituation,
+            habbitSituationLabel,
             ovalView,
             grayBar2,
             totalAndDidDaysLabels,
@@ -187,55 +186,60 @@ extension MyPageView {
     }
     
     private func setupConstraints() {
+        pobitNavigationBarView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top)
+            make.height.equalTo(58)
+            make.width.equalTo(395)
+        }
+        
         nickNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
-            make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(20)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(85)
+            make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
         }
         
         editButton.snp.makeConstraints { make in
-            make.top.equalTo(nickNameLabel.snp.top)
+            make.centerY.equalTo(nickNameLabel)
             make.trailing.equalToSuperview().offset(-20)
-            make.width.equalTo(30)
-            make.height.equalTo(20)
+            make.width.equalTo(42)
+            make.height.equalTo(28)
         }
         
         grayBar.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(60)
+            make.top.equalTo(nickNameLabel.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(7)
+            make.height.equalTo(10)
         }
         
-        habbitSituation.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(90)
-            make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(20)
+        habbitSituationLabel.snp.makeConstraints { make in
+            make.top.equalTo(grayBar.snp.bottom).offset(34)
+            make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
         }
         
         ovalView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(120)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
-            make.height.equalTo(80)
+            make.top.equalTo(habbitSituationLabel.snp.bottom).offset(12)
+            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
+            make.height.equalTo(83)
         }
         
         grayBar2.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(230)
+            make.top.equalTo(ovalView.snp.bottom).offset(LayoutLiterals.lowerPrimarySpacing)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(7)
+            make.width.equalTo(390)
+            make.height.equalTo(10)
         }
         
         totalAndDidDaysLabels.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(140)
+            make.top.equalTo(ovalView.snp.top).offset(17)
             make.leading.equalToSuperview().offset(70)
             make.trailing.equalToSuperview().offset(-70)
         }
         
         tableView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(topMargin)
+            make.top.equalTo(grayBar2.snp.top).offset(LayoutLiterals.upperPrimarySpacing)
             make.left.right.bottom.equalToSuperview()
         }
     }
 }
-
 
 // MARK: - UITableViewDataSource
 
