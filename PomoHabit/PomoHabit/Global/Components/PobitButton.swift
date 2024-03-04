@@ -97,4 +97,16 @@ extension PobitButton {
         
         return button
     }
+    
+    static func makePlainButton(title: String, backgroundColor: UIColor) -> PobitButton {
+        let button = PobitButton()
+        let style = PlainButtonStyle(backgroundColor: backgroundColor)
+        
+        button.style = style
+        button.buttonTitle = title
+        button.setTitleColor(.pobitWhite, for: .normal)
+        button.titleLabel?.font = Pretendard.medium(size: 24)
+        
+        return button
+    }
 }
