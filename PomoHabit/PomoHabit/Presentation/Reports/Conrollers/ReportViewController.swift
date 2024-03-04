@@ -125,7 +125,7 @@ extension ReportViewController {
             })
             
             let habitEdit = UIAction(title: "습관 변경", handler: { _ in
-                self.present(ReportHabitEditView(), animated: true)
+                self.presentBottomSheet(rootView: ReportHabitEditView(), detents: [.medium()], prefersGrabberVisible: true)
             })
             
             let menus = UIMenu(children: [habitInfo, habitEdit])
