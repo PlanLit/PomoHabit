@@ -98,17 +98,19 @@ extension ReportHabitEditView {
                 
             }))
             button.setImage(UIImage(systemName: "trash"), for: .normal)
+            button.tintColor = .pobitStone1
+            button.layer.borderColor = UIColor.pobitRed.cgColor
+            button.layer.cornerRadius = 10
             button.snp.makeConstraints { make in
                 make.width.equalTo(62)
             }
-            button.tintColor = .pobitStone1
-            button.layer.borderColor = UIColor.pobitRed.cgColor
             
             return button
         }()
         
         let registButton = {
             let button = PobitButton.makePlainButton(title: "수정하기", backgroundColor: .pobitRed)
+            button.layer.cornerRadius = 10
             
             return button
         }()
