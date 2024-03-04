@@ -25,7 +25,7 @@ final class MyPageView: BaseView {
     
     // MARK: - 닉네임 UI
     
-    private let setupNickNameLabel: UILabel = {
+    private let nickNameLabel: UILabel = {
         let label = UILabel()
         label.text = "닉네임"
         label.textColor = .darkGray
@@ -34,7 +34,7 @@ final class MyPageView: BaseView {
         return label
     }()
     
-    private let setupEditButton: UIButton = {
+    private let editButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("수정", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -49,7 +49,7 @@ final class MyPageView: BaseView {
     
     // MARK: - DividerView
     
-    private let setupGrayBar: UIView = {
+    private let grayBar: UIView = {
         let bar = UIView()
         bar.backgroundColor = UIColor.systemGray5
         
@@ -58,7 +58,7 @@ final class MyPageView: BaseView {
     
     // MARK: - 습관 진행 상태 UI
     
-    private let setupHabbitSituation: UILabel = {
+    private let habbitSituation: UILabel = {
         let label = UILabel()
         label.text = "습관 진행 상태"
         label.textColor = .darkGray
@@ -69,7 +69,7 @@ final class MyPageView: BaseView {
     
     // MARK: - layerView
     
-    private let setupOvalView: UIView = {
+    private let ovalView: UIView = {
         let ovalView = UIView()
         ovalView.backgroundColor = .clear
         ovalView.layer.cornerRadius = 15
@@ -82,7 +82,7 @@ final class MyPageView: BaseView {
     
     // MARK: - DividerView
     
-    private let setupGrayBar2: UIView = {
+    private let grayBar2: UIView = {
         let bar = UIView()
         bar.backgroundColor = UIColor.systemGray5
         
@@ -131,7 +131,7 @@ final class MyPageView: BaseView {
     
     // MARK: - 습관 진행 상태 내용 StackView
     
-    private lazy var setupTotalAndDidDaysLabels: UIView = {
+    private lazy var totalAndDidDaysLabels: UIView = {
         let vStackView1 = VStackView(spacing: 3, alignment: .center, distribution: .equalSpacing, [totalDaysLabel, didDaysLabel])
         let vStackView2 = VStackView(spacing: 3, alignment: .center, distribution: .equalSpacing, [totalMinutesLabel, didMinutesLabel])
         let vStackView3 = VStackView(spacing: 3, alignment: .center, distribution: .equalSpacing, [totalHabbitsLabel, didHabbitsLabel])
@@ -144,14 +144,14 @@ final class MyPageView: BaseView {
     
     // MARK: - TableView
     
-    private lazy var setupTableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let topMargin: CGFloat = 360
         let tableViewFrame = CGRect(x: 0, y: topMargin, width: self.bounds.width, height: self.bounds.height - topMargin)
         let myPageTableView = UITableView(frame: tableViewFrame, style: .plain)
         myPageTableView.separatorStyle = .none
         myPageTableView.dataSource = self
         myPageTableView.delegate = self
-        myPageTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: "cell")
+        myPageTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: MyPageTableViewCell.reuseIdentifier)
         
         return myPageTableView
     }()
@@ -163,7 +163,6 @@ final class MyPageView: BaseView {
         
         setAddSubviews()
         setupConstraints()
-        setupTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: MyPageTableViewCell.reuseIdentifier)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -176,61 +175,61 @@ final class MyPageView: BaseView {
 extension MyPageView {
     private func setAddSubviews() {
         addSubViews([
-            setupNickNameLabel,
-            setupEditButton,
-            setupGrayBar,
-            setupHabbitSituation,
-            setupOvalView,
-            setupGrayBar2,
-            setupTotalAndDidDaysLabels,
-            setupTableView
+            nickNameLabel,
+            editButton,
+            grayBar,
+            habbitSituation,
+            ovalView,
+            grayBar2,
+            totalAndDidDaysLabels,
+            tableView
         ])
     }
     
     private func setupConstraints() {
-        setupNickNameLabel.snp.makeConstraints { make in
+        nickNameLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
             make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(20)
         }
         
-        setupEditButton.snp.makeConstraints { make in
-            make.top.equalTo(setupNickNameLabel.snp.top)
+        editButton.snp.makeConstraints { make in
+            make.top.equalTo(nickNameLabel.snp.top)
             make.trailing.lessThanOrEqualToSuperview().offset(-20)
             make.width.equalTo(30)
             make.height.equalTo(20)
         }
         
-        setupGrayBar.snp.makeConstraints { make in
+        grayBar.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(60)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(7)
         }
         
-        setupHabbitSituation.snp.makeConstraints { make in
+        habbitSituation.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(90)
             make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(20)
         }
         
-        setupOvalView.snp.makeConstraints { make in
+        ovalView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(120)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(80)
         }
         
-        setupGrayBar2.snp.makeConstraints { make in
+        grayBar2.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(230)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(7)
         }
         
-        setupTotalAndDidDaysLabels.snp.makeConstraints { make in
+        totalAndDidDaysLabels.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).offset(140)
             make.leading.equalToSuperview().offset(70)
             make.trailing.equalToSuperview().offset(-70)
         }
         
-        setupTableView.snp.makeConstraints { make in
+        tableView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(topMargin)
             make.left.right.bottom.equalToSuperview()
         }
