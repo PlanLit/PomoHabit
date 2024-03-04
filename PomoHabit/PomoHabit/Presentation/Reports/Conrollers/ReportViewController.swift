@@ -7,8 +7,6 @@
 
 import UIKit
 
-import SnapKit
-
 // MARK: - ReportViewController
 
 final class ReportViewController: BaseViewController, BottomSheetPresentable {
@@ -30,6 +28,8 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
     
     private var gridView: VStackView?
     
+    private var messageBoxView: UILabel?
+    
     // MARK: - Life Cycles
     
     override func viewDidLoad() {
@@ -39,6 +39,7 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
         setUpImageCollectionViewController()
         setUpCalendarNaviView()
         setUpGridView(31) // 월마다 바뀌는 일 수 주입
+        setUpMessageBoxView("모두 완료하면 토마토가 웃는 얼굴이 돼요")
         
         setAddSubviews()
         setAutoLayout()
@@ -53,6 +54,7 @@ extension ReportViewController {
         guard let imageCollectionViewController = imageCollectionViewController else {return}
         guard let calendarNaviView = calendarNaviView else {return}
         guard let gridView = gridView else {return}
+        guard let messageBoxView = messageBoxView else {return}
         
         addChild(imageCollectionViewController)
         
@@ -60,7 +62,8 @@ extension ReportViewController {
             headerView,
             calendarNaviView,
             imageCollectionViewController.view,
-            gridView
+            gridView,
+            messageBoxView
         ])
     }
     
@@ -69,11 +72,12 @@ extension ReportViewController {
         guard let imageCollectionViewController = imageCollectionViewController else {return}
         guard let calendarNaviView = calendarNaviView else {return}
         guard let gridView = gridView else {return}
+        guard let messageBoxView = messageBoxView else {return}
         
         headerView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.left.equalTo(LayoutLiterals.minimumHorizontalSpacing)
+            make.right.equalTo(-LayoutLiterals.minimumHorizontalSpacing)
             make.height.equalTo(55)
         }
         
@@ -84,16 +88,23 @@ extension ReportViewController {
         }
         
         calendarNaviView.snp.makeConstraints { make in
-            make.top.equalTo(imageCollectionViewController.view.snp.bottom)
+            make.top.equalTo(imageCollectionViewController.view.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
             make.left.equalToSuperview().offset(35)
             make.right.equalToSuperview().offset(-35)
             make.height.equalTo(55)
         }
         
         gridView.snp.makeConstraints { make in
-            make.top.equalTo(calendarNaviView.snp.bottom).offset(30)
+            make.top.equalTo(calendarNaviView.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
             make.left.right.equalToSuperview()
             make.height.equalTo(400)
+        }
+        
+        messageBoxView.snp.makeConstraints { make in
+            make.height.equalTo(35)
+            make.top.equalTo(gridView.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
+            make.right.equalTo(view.snp.right).offset(-LayoutLiterals.minimumHorizontalSpacing)
+            make.left.equalTo(view.snp.left).offset(LayoutLiterals.minimumHorizontalSpacing)
         }
     }
 }
@@ -101,9 +112,6 @@ extension ReportViewController {
 // MARK: - SetUpViews
 
 extension ReportViewController {
-    
-    // MARK: - HeaderView
-    
     private func setUpHeaderView() {
         let titleLabel = {
             let label = UILabel()
@@ -151,15 +159,11 @@ extension ReportViewController {
         ])
     }
     
-    // MARK: - ImageCollectionViewController
-    
     private func setUpImageCollectionViewController() {
         let layout = UICollectionViewFlowLayout()
         imageCollectionViewController = ReportImageCollectionViewController(collectionViewLayout: layout)
         imageCollectionViewController?.didMove(toParent: self)
     }
-    
-    // MARK: - CalendarNaviView
     
     private func setUpCalendarNaviView() {
         let leftButton = {
@@ -199,10 +203,11 @@ extension ReportViewController {
             bottomLine.snp.makeConstraints { make in
                 make.height.equalTo(0.5)
             }
+            
             return bottomLine
         }()
         
-        calendarNaviView = VStackView(alignment: .fill, [
+        calendarNaviView = VStackView(spacing: CGFloat(LayoutLiterals.upperPrimarySpacing), alignment: .fill, [
             HStackView(alignment: .center, [
                 leftButton,
                 centerTitle,
@@ -211,10 +216,39 @@ extension ReportViewController {
             bottomLine
         ])
     }
-    
-    // MARK: - GridView
 
     private func setUpGridView(_ days: Int) {
+        func getTheBoxView(_ day: Int,_ state: Check) -> UIButton {
+            let boxView = {
+                let boxView = UIButton(type: .system, primaryAction: .init(handler: { _ in
+                    print("day: \(day)")
+                    print()
+                }))
+                
+                boxView.backgroundColor = .pobitRed
+                boxView.layer.cornerRadius = 10
+                boxView.alpha = day <= todayDate ? 1 : 0.1
+                
+                boxView.snp.makeConstraints { make in
+                    make.width.equalTo(62)
+                    make.height.equalTo(50)
+                }
+                
+                return boxView
+            }()
+            
+            switch state {
+            case .complete:
+                boxView.backgroundColor = day <= 3 ? .pobitGreen : .pobitRed
+            case .fail:
+                boxView.backgroundColor = .pobitStone2
+            case .rest:
+                boxView.backgroundColor = .white
+            }
+             
+            return boxView
+        }
+        
         gridView = VStackView(spacing: 0, alignment: .center, [
             HStackView([
                 getTheBoxView(1, .complete),
@@ -268,37 +302,14 @@ extension ReportViewController {
         )
         
         gridView?.backgroundColor = UIColor(red: 253, green: 249, blue: 249, alpha: 1)
-        
-        func getTheBoxView(_ day: Int,_ state: Check) -> UIButton {
-            let boxView = {
-                let boxView = UIButton(type: .system, primaryAction: .init(handler: { _ in
-                    print("day: \(day)")
-                    print()
-                }))
-                
-                boxView.backgroundColor = .pobitRed
-                boxView.layer.cornerRadius = 10
-                boxView.alpha = day <= todayDate ? 1 : 0.1
-                
-                boxView.snp.makeConstraints { make in
-                    make.width.equalTo(62)
-                    make.height.equalTo(50)
-                }
-                
-                return boxView
-            }()
-            
-            switch state {
-            case .complete:
-                boxView.backgroundColor = day <= 3 ? .pobitGreen : .pobitRed
-            case .fail:
-                boxView.backgroundColor = .pobitStone2
-            case .rest:
-                boxView.backgroundColor = .white
-            }
-             
-            return boxView
-        }
+    }
+    
+    private func setUpMessageBoxView(_ message: String) {
+        messageBoxView = UILabel()
+        messageBoxView?.font = Pretendard.regular(size: 16)
+        messageBoxView?.text = message
+        messageBoxView?.backgroundColor = UIColor(hex: "#FFDADA")
+        messageBoxView?.textAlignment = .center
     }
 }
 

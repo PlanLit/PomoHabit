@@ -14,6 +14,7 @@ final class ReportHabitEditView: BaseView { // 구현 중
     // MARK: - Properties
 
     var headerView: VStackView?
+    
     var mainContainerView: VStackView?
     
     // MARK: - Life Cycles
@@ -50,17 +51,15 @@ extension ReportHabitEditView {
         
         headerView.snp.makeConstraints { make in
             make.top.equalTo(self.snp.top).offset(50)
-            make.trailing.equalTo(self.snp.trailing).offset(-20)
-            make.leading.equalTo(self.snp.leading).offset(20)
+            make.trailing.equalTo(self.snp.trailing).offset(-LayoutLiterals.minimumHorizontalSpacing)
+            make.leading.equalTo(self.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
         }
         
         mainContainerView.snp.makeConstraints { make in
-            make.top.equalTo(headerView.snp.bottom).offset(20)
-            make.trailing.equalTo(self.snp.trailing).offset(-20)
-            make.leading.equalTo(self.snp.leading).offset(20)
+            make.top.equalTo(headerView.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
+            make.trailing.equalTo(self.snp.trailing).offset(-LayoutLiterals.minimumHorizontalSpacing)
+            make.leading.equalTo(self.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
         }
-        
-
     }
 }
 
@@ -129,7 +128,7 @@ extension ReportHabitEditView {
             make.height.equalTo(300)
         }
         
-        mainContainerView = VStackView(spacing: 30, alignment: .fill, [
+        mainContainerView = VStackView(spacing: CGFloat(LayoutLiterals.upperPrimarySpacing), alignment: .fill, [
             dividerView,
             HStackView(spacing: 5, alignment: .fill, distribution: .fill, [
                 getTextLabel("목표시간", Pretendard.bold(size: 20), .darkGray),

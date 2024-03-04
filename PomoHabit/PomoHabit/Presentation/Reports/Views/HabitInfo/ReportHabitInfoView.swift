@@ -52,9 +52,9 @@ extension ReportHabitInfoView {
     private func setAutoLayout() {
         tableView?.snp.makeConstraints { make in
             make.top.equalTo(self.snp.top)
-            make.trailing.equalTo(self.snp.trailing).offset(-20)
+            make.trailing.equalTo(self.snp.trailing).offset(-LayoutLiterals.minimumHorizontalSpacing)
             make.bottom.equalTo(self.snp.bottom)
-            make.leading.equalTo(self.snp.leading).offset(20)
+            make.leading.equalTo(self.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
         }
     }
     
@@ -122,7 +122,6 @@ extension ReportHabitInfoView: UITableViewDataSource {
             cell.contentView.addSubview(container)
             
             return cell
-            
         default:
             return UITableViewCell()
         }

@@ -7,8 +7,6 @@
 
 import UIKit
 
-import SnapKit
-
 // MARK: - ReportImageCollectionViewController
 
 final class ReportImageCollectionViewController: UICollectionViewController {
@@ -41,7 +39,7 @@ extension ReportImageCollectionViewController {
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
             layout.itemSize = CGSize(width: itemSize, height: itemSize)
-            layout.minimumLineSpacing = 10
+            layout.minimumLineSpacing = CGFloat(LayoutLiterals.upperSecondarySpacing)
             let inset = (view.frame.width - layout.itemSize.width) / 2
             layout.sectionInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
         }
