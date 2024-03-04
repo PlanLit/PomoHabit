@@ -38,18 +38,16 @@ extension ImageViewAndLabelView {
     
     private func setAutoLayout() {
         imageView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.bottom.equalToSuperview()
             make.leading.equalToSuperview()
-            make.bottom.equalToSuperview()
         }
         imageView.setContentHuggingPriority(.init(251), for: .horizontal)
         imageView.setContentCompressionResistancePriority(.required, for: .horizontal)
         
         label.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.bottom.equalToSuperview()
             make.leading.equalTo(imageView.snp.trailing).offset(5)
             make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
         }
         label.setContentHuggingPriority(.init(250), for: .horizontal)
     }

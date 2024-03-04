@@ -41,10 +41,8 @@ extension WeeklyCalendarViewController {
     
     private func setSetAutoLayout() {
         weeklyCalendarView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.top.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
         }
     }
 }
