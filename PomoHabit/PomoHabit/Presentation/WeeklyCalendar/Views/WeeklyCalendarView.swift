@@ -34,14 +34,7 @@ final class WeeklyCalendarView: BaseView {
         return scrollView
     }()
     
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "주간 캘린더"
-        label.textColor = .pobitBlack
-        label.font = Pretendard.bold(size: 26)
-        
-        return label
-    }()
+    private lazy var navigationBarView = PobitNavigationBarView(title: "주간 캘린더")
     
     // MARK: - 오늘 날짜 UI
     
@@ -138,7 +131,7 @@ final class WeeklyCalendarView: BaseView {
 extension WeeklyCalendarView {
     private func setAddSubViews() {
         self.addSubview(scrollView)
-        scrollView.addSubViews([titleLabel,todayLabel,todayDateLabel,weeklyCollectionView,firstDivider,weeklyHabbitProgressLabel,weeklyHabbitProgressView,progressCircleImageView,secondDivider,habbitInfoLabel,habbitInfoView,thirdDivider,noteInfoLabel,noteContentLabel])
+        scrollView.addSubViews([navigationBarView,todayLabel,todayDateLabel,weeklyCollectionView,firstDivider,weeklyHabbitProgressLabel,weeklyHabbitProgressView,progressCircleImageView,secondDivider,habbitInfoLabel,habbitInfoView,thirdDivider,noteInfoLabel,noteContentLabel])
     }
     
     private func setAutoLayout() {
@@ -146,14 +139,14 @@ extension WeeklyCalendarView {
             make.edges.equalToSuperview()
         }
         
-        titleLabel.snp.makeConstraints { make in
+        navigationBarView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
         }
         
         // MARK: - 오늘 날짜 UI
         
         todayLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(24)
+            make.top.equalTo(navigationBarView.snp.bottom).offset(24)
             make.centerX.equalToSuperview()
         }
         
