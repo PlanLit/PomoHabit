@@ -37,7 +37,7 @@ final class WeeklyCalendarView: BaseView {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "주간 캘린더"
-        label.textColor = UIColor.pobitBlack
+        label.textColor = .pobitBlack
         label.font = Pretendard.bold(size: 26)
         
         return label
@@ -51,7 +51,7 @@ final class WeeklyCalendarView: BaseView {
         let label = UILabel()
         label.text = Date().monthAndDaytoString()
         label.font = Pretendard.bold(size: 50)
-        label.textColor = UIColor.pobitBlack
+        label.textColor = .pobitBlack
         
         return label
     }()
@@ -77,7 +77,7 @@ final class WeeklyCalendarView: BaseView {
         let progressView = UIProgressView()
         progressView.layer.cornerRadius = 20
         progressView.layer.sublayers?[1].cornerRadius = 20
-        progressView.progressTintColor = UIColor.pobitRed
+        progressView.progressTintColor = .pobitRed
         progressView.trackTintColor = UIColor(hex: "D9D9D9")
         
         return progressView
@@ -107,7 +107,7 @@ final class WeeklyCalendarView: BaseView {
         let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         label.text = "메모글 입니다."
         label.font = Pretendard.medium(size: 15)
-        label.textColor = UIColor.pobitBlack
+        label.textColor = .pobitBlack
         label.numberOfLines = 0
         label.layer.cornerRadius = 10
         label.layer.masksToBounds = true
