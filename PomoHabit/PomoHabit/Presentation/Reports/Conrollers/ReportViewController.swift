@@ -11,7 +11,7 @@ import SnapKit
 
 // MARK: - ReportViewController
 
-final class ReportViewController: BaseViewController {
+final class ReportViewController: BaseViewController, BottomSheetPresentable {
     
     // MARK: - Properties
     
@@ -121,11 +121,11 @@ extension ReportViewController {
             button.overrideUserInterfaceStyle = .dark
             
             let habitInfo = UIAction(title: "습관 정보", handler: { _ in
-                self.present(ReportHabitInfoViewController(), animated: true)
+                self.presentBottomSheet(rootView: ReportHabitInfoView(), detents: [.medium()], prefersGrabberVisible: true)
             })
             
             let habitEdit = UIAction(title: "습관 변경", handler: { _ in
-                self.present(ReportHabitEditViewController(), animated: true)
+                self.present(ReportHabitEditView(), animated: true)
             })
             
             let menus = UIMenu(children: [habitInfo, habitEdit])

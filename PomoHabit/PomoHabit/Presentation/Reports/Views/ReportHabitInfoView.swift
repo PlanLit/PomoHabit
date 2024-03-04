@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - ReportHabitInfoViewController
 
-final class ReportHabitInfoViewController: BaseViewController {
+final class ReportHabitInfoView: BaseView {
     
     // MARK: - Properties
     
@@ -19,19 +19,23 @@ final class ReportHabitInfoViewController: BaseViewController {
     
     // MARK: - Life Cycles
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         setUpTableView()
         
         setAddSubviews()
         setAutoLayout()
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 // MARK: - Layout Helpers
 
-extension ReportHabitInfoViewController {
+extension ReportHabitInfoView {
     private func setUpTableView() {
         tableView = UITableView(frame: .zero, style: .plain)
         tableView?.dataSource = self
@@ -42,20 +46,21 @@ extension ReportHabitInfoViewController {
     }
     
     private func setAddSubviews() {
-        view.addSubview(tableView ?? UIView())
+        self.addSubview(tableView ?? UIView())
     }
     
     private func setAutoLayout() {
         tableView?.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.top)
-            make.trailing.equalTo(view.snp.trailing).offset(-20)
-            make.bottom.equalTo(view.snp.bottom)
-            make.leading.equalTo(view.snp.leading).offset(20)
+            make.top.equalTo(self.snp.top)
+            make.trailing.equalTo(self.snp.trailing).offset(-20)
+            make.bottom.equalTo(self.snp.bottom)
+            make.leading.equalTo(self.snp.leading).offset(20)
         }
     }
     
     private func getHeaderLabelView(_ title: String) -> UILabel {
         let label = UILabel()
+        label.backgroundColor = .white
         label.text = title
         label.font = Pretendard.bold(size: 20)
         label.textColor = .secondaryLabel
@@ -85,7 +90,7 @@ extension ReportHabitInfoViewController {
 
 // MARK: - UITableViewDataSource
 
-extension ReportHabitInfoViewController: UITableViewDataSource {
+extension ReportHabitInfoView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -126,7 +131,7 @@ extension ReportHabitInfoViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 
-extension ReportHabitInfoViewController: UITableViewDelegate {
+extension ReportHabitInfoView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 65
     }
