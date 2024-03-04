@@ -12,10 +12,9 @@ import UIKit
 final class ReportHabitEditView: BaseView { // 구현 중
     
     // MARK: - Properties
-    
+
     var headerView: VStackView?
     var mainContainerView: VStackView?
-    let textView = NoteTextView()
     
     // MARK: - Life Cycles
     
@@ -47,23 +46,21 @@ extension ReportHabitEditView {
     
     private func setAutoLayout() {
         guard let headerView = headerView else {return}
-        guard let mainView = mainContainerView else {return}
+        guard let mainContainerView = mainContainerView else {return}
         
         headerView.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top).offset(40)
+            make.top.equalTo(self.snp.top).offset(50)
             make.trailing.equalTo(self.snp.trailing).offset(-20)
             make.leading.equalTo(self.snp.leading).offset(20)
         }
         
-        mainView.snp.makeConstraints { make in
-            make.top.equalTo(headerView.snp.bottom).offset(30)
+        mainContainerView.snp.makeConstraints { make in
+            make.top.equalTo(headerView.snp.bottom).offset(20)
             make.trailing.equalTo(self.snp.trailing).offset(-20)
             make.leading.equalTo(self.snp.leading).offset(20)
         }
         
-        textView.snp.makeConstraints { make in
-            make.height.equalTo(300)
-        }
+
     }
 }
 
@@ -97,6 +94,41 @@ extension ReportHabitEditView {
             return view
         }()
         
+        let trashButton = {
+            let button = PobitButton(primaryAction: .init(handler: { _ in
+                
+            }))
+            button.setImage(UIImage(systemName: "trash"), for: .normal)
+            button.snp.makeConstraints { make in
+                make.width.equalTo(62)
+            }
+            button.tintColor = .pobitStone1
+            button.layer.borderColor = UIColor.pobitRed.cgColor
+            
+            return button
+        }()
+        
+        let registButton = {
+            let button = PobitButton.makePlainButton(title: "수정하기", backgroundColor: .pobitRed)
+            
+            return button
+        }()
+        
+        let textView = NoteTextView()
+        
+        let bottomButtonContainer = HStackView(alignment: .fill, distribution: .fill, [
+            trashButton,
+            registButton
+        ])
+        
+        bottomButtonContainer.snp.makeConstraints { make in
+            make.height.equalTo(62)
+        }
+        
+        textView.snp.makeConstraints { make in
+            make.height.equalTo(300)
+        }
+        
         mainContainerView = VStackView(spacing: 30, alignment: .fill, [
             dividerView,
             HStackView(spacing: 5, alignment: .fill, distribution: .fill, [
@@ -106,7 +138,8 @@ extension ReportHabitEditView {
                 UIView()
             ]),
             getTextLabel("메모", Pretendard.bold(size: 24), .darkGray),
-            textView
+            textView,
+            bottomButtonContainer
         ])
     }
 }
