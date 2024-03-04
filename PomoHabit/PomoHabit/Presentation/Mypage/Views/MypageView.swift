@@ -194,7 +194,7 @@ extension MyPageView {
         
         editButton.snp.makeConstraints { make in
             make.top.equalTo(nickNameLabel.snp.top)
-            make.trailing.lessThanOrEqualToSuperview().offset(-20)
+            make.trailing.equalToSuperview().offset(-20)
             make.width.equalTo(30)
             make.height.equalTo(20)
         }
@@ -251,8 +251,8 @@ extension MyPageView: UITableViewDataSource {
         }
         let model = myPageCellModels[indexPath.row]
         cell.textLabel?.text = model.title
-        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        cell.textLabel?.textColor = .darkGray
+        cell.textLabel?.font = Pretendard.bold(size: 20)
+        cell.textLabel?.textColor = .pobitStone2
         
         return cell
     }

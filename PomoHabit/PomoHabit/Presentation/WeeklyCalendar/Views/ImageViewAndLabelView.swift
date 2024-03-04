@@ -61,7 +61,7 @@ extension ImageViewAndLabelView {
     func setUplabel(text: String, font: UIFont?) {
         label.font = font
         label.text = text
-        label.textColor = UIColor.pobitStone5
+        label.textColor = .pobitStone5
     }
     
     func setUIImageViewImage(image: UIImage?) {

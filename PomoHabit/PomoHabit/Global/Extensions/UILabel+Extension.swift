@@ -9,27 +9,29 @@ import UIKit
 
 extension UILabel {
     func setSubTitleLabel(text: String) {
-        self.textColor = UIColor.pobitStone5
+        self.textColor = .pobitStone5
         self.font = Pretendard.bold(size: 24)
         self.text = text
     }
+    
     func setPrimaryColorLabel(text: String) -> BasePaddingLabel {
         let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         label.text = text
         label.textColor = .white
         label.font = Pretendard.bold(size: 12)
-        label.backgroundColor = UIColor.pobitRed2
+        label.backgroundColor = .pobitRed2
         label.layer.cornerRadius = 8
         label.layer.masksToBounds = true
         
         return label
     }
+    
     func makeMyPageLabel(text: String) -> UILabel {
         let label = UILabel()
         label.text = text
-        label.textColor = .darkGray
-        label.font = UIFont.systemFont(ofSize: 13)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .pobitStone2
+        label.font = Pretendard.regular(size: 12)
+        
         return label
     }
 }
