@@ -42,10 +42,8 @@
 		E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5412B8D5D9900A77BAE /* HStackView.swift */; };
 		E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */; };
 		E0C5B5472B8D63B200A77BAE /* DayButtonsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5462B8D63B200A77BAE /* DayButtonsTableViewCell.swift */; };
-		E0F115982B901D5E003E6459 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115972B901D5E003E6459 /* SnapKit */; };
+		E0C78EE82B955FE600CA686D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115972B901D5E003E6459 /* SnapKit */; };
 		E0F1159A2B901D5E003E6459 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115992B901D5E003E6459 /* SnapKit-Dynamic */; };
-		E0F1159C2B901DFA003E6459 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E0F1159B2B901DFA003E6459 /* SnapKit */; };
-		E0F1159E2B901DFA003E6459 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = E0F1159D2B901DFA003E6459 /* SnapKit-Dynamic */; };
 		F85F8F572B8DE33C00E69922 /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F562B8DE33C00E69922 /* BasePaddingLabel.swift */; };
 		F85F8F592B8DE54F00E69922 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F582B8DE54F00E69922 /* Date+Extension.swift */; };
 		F85F8F5B2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F5A2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift */; };
@@ -116,8 +114,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0F1159C2B901DFA003E6459 /* SnapKit in Frameworks */,
-				E0F115982B901D5E003E6459 /* SnapKit in Frameworks */,
-				E0F1159A2B901D5E003E6459 /* SnapKit-Dynamic in Frameworks */,
 				E0F1159E2B901DFA003E6459 /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,6 +308,26 @@
 			path = Literals;
 			sourceTree = "<group>";
 		};
+		378034A62B8F9C610046E6B8 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				378034A92B8F9D360046E6B8 /* Views */,
+				378034A72B8F9C810046E6B8 /* BottomSheetViewController.swift */,
+				37CC614B2B90C07900CBAB45 /* BottomSheetPresentable.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		378034A92B8F9D360046E6B8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				378034AA2B8F9D7A0046E6B8 /* MemoView.swift */,
+				378034AC2B8FAB5B0046E6B8 /* WhiteNoiseView.swift */,
+				378034AE2B8FACE50046E6B8 /* WhiteNoiseTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E0443C4F2B90244C004FC1F6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,8 +430,6 @@
 			packageProductDependencies = (
 				E0F115972B901D5E003E6459 /* SnapKit */,
 				E0F115992B901D5E003E6459 /* SnapKit-Dynamic */,
-				E0F1159B2B901DFA003E6459 /* SnapKit */,
-				E0F1159D2B901DFA003E6459 /* SnapKit-Dynamic */,
 			);
 			productName = PomoHabit;
 			productReference = 37144C622B8C32D6008565C4 /* PomoHabit.app */;
@@ -759,16 +773,6 @@
 			productName = SnapKit;
 		};
 		E0F115992B901D5E003E6459 /* SnapKit-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E0F115962B901D5E003E6459 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
-		};
-		E0F1159B2B901DFA003E6459 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E0F115962B901D5E003E6459 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-		E0F1159D2B901DFA003E6459 /* SnapKit-Dynamic */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E0F115962B901D5E003E6459 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = "SnapKit-Dynamic";
