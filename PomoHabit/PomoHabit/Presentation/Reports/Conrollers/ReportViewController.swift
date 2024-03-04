@@ -72,8 +72,8 @@ extension ReportViewController {
         
         headerView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            make.left.equalTo(15)
-            make.right.equalTo(-15)
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
             make.height.equalTo(55)
         }
         
@@ -125,7 +125,7 @@ extension ReportViewController {
             })
             
             let habitEdit = UIAction(title: "습관 변경", handler: { _ in
-                self.presentBottomSheet(rootView: ReportHabitEditView(), detents: [.medium()], prefersGrabberVisible: true)
+                self.presentBottomSheet(rootView: ReportHabitEditView(), detents: [.large()], prefersGrabberVisible: true)
             })
             
             let menus = UIMenu(children: [habitInfo, habitEdit])
@@ -176,7 +176,7 @@ extension ReportViewController {
         let centerTitle = {
             let label = UILabel()
             label.font = Pretendard.bold(size: 20)
-            label.textColor = .darkText
+            label.textColor = .darkGray
             label.text = "1월"
             
             return label

@@ -395,9 +395,8 @@
 		E0443C4F2B90244C004FC1F6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E061E12F2B901AC400A9174F /* ReportHabitInfoView.swift */,
-				E061E12C2B901AC400A9174F /* ReportHabitEditView.swift */,
-				E0443C502B90263A004FC1F6 /* ReportDayButtonTableViewCell.swift */,
+				E0A029292B95A63400DE8CA0 /* HabitInfo */,
+				E0A0292A2B95A68600DE8CA0 /* HabitEdit */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -418,6 +417,23 @@
 				E061E12D2B901AC400A9174F /* ReportImageCollectionViewController.swift */,
 			);
 			path = Conrollers;
+			sourceTree = "<group>";
+		};
+		E0A029292B95A63400DE8CA0 /* HabitInfo */ = {
+			isa = PBXGroup;
+			children = (
+				E061E12F2B901AC400A9174F /* ReportHabitInfoView.swift */,
+				E0443C502B90263A004FC1F6 /* ReportDayButtonTableViewCell.swift */,
+			);
+			path = HabitInfo;
+			sourceTree = "<group>";
+		};
+		E0A0292A2B95A68600DE8CA0 /* HabitEdit */ = {
+			isa = PBXGroup;
+			children = (
+				E061E12C2B901AC400A9174F /* ReportHabitEditView.swift */,
+			);
+			path = HabitEdit;
 			sourceTree = "<group>";
 		};
 		E0C5B53C2B8D5AC000A77BAE /* DayButton */ = {
