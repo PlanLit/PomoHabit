@@ -21,19 +21,7 @@ final class MyPageView: BaseView {
         return tableView
     }()
     
-    // MARK: - Life Cycle
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        setAddSubviews()
-        setupConstraints()
-        setupTableView()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    private lazy var topMargin: CGFloat = 360
     
     // MARK: - 닉네임 UI
     
@@ -140,9 +128,10 @@ final class MyPageView: BaseView {
         return label
     }()
     
+    
     // MARK: - 습관 진행 상태 내용 StackView
     
-    private lazy var setupTotalAndDidDaysLabels: UIStackView = {
+    private lazy var setupTotalAndDidDaysLabels: UIView = {
         let vStackView1 = VStackView(spacing: 3, alignment: .center, distribution: .equalSpacing, [totalDaysLabel, didDaysLabel])
         let vStackView2 = VStackView(spacing: 3, alignment: .center, distribution: .equalSpacing, [totalMinutesLabel, didMinutesLabel])
         let vStackView3 = VStackView(spacing: 3, alignment: .center, distribution: .equalSpacing, [totalHabbitsLabel, didHabbitsLabel])
@@ -150,18 +139,12 @@ final class MyPageView: BaseView {
         let hStackView = HStackView(spacing: 20, alignment: .center, distribution: .equalSpacing, [vStackView1, vStackView2, vStackView3])
         addSubview(hStackView)
         
-        hStackView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(140)
-            make.leading.equalToSuperview().offset(70)
-            make.trailing.equalToSuperview().offset(-70)
-        }
-        
         return hStackView
     }()
     
     // MARK: - TableView
     
-    private lazy var setupTableView: () -> Void = {
+    private lazy var setupTableView: UITableView = {
         let topMargin: CGFloat = 360
         let tableViewFrame = CGRect(x: 0, y: topMargin, width: self.bounds.width, height: self.bounds.height - topMargin)
         let myPageTableView = UITableView(frame: tableViewFrame, style: .plain)
@@ -169,12 +152,22 @@ final class MyPageView: BaseView {
         myPageTableView.dataSource = self
         myPageTableView.delegate = self
         myPageTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: "cell")
-        self.addSubview(myPageTableView)
         
-        myPageTableView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(topMargin)
-            make.left.right.bottom.equalToSuperview()
-        }
+        return myPageTableView
+    }()
+    
+    // MARK: - Life Cycle
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setAddSubviews()
+        setupConstraints()
+        setupTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: MyPageTableViewCell.reuseIdentifier)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -182,14 +175,16 @@ final class MyPageView: BaseView {
 
 extension MyPageView {
     private func setAddSubviews() {
-        self.addSubview(setupNickNameLabel)
-        self.addSubview(setupEditButton)
-        self.addSubview(myPageTableView)
-        self.addSubview(setupGrayBar)
-        self.addSubview(setupHabbitSituation)
-        self.addSubview(setupOvalView)
-        self.addSubview(setupGrayBar2)
-        self.addSubview(setupTotalAndDidDaysLabels)
+        addSubViews([
+            setupNickNameLabel,
+            setupEditButton,
+            setupGrayBar,
+            setupHabbitSituation,
+            setupOvalView,
+            setupGrayBar2,
+            setupTotalAndDidDaysLabels,
+            setupTableView
+        ])
     }
     
     private func setupConstraints() {
@@ -197,34 +192,51 @@ extension MyPageView {
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
             make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(20)
         }
+        
         setupEditButton.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
+            make.top.equalTo(setupNickNameLabel.snp.top)
             make.trailing.lessThanOrEqualToSuperview().offset(-20)
             make.width.equalTo(30)
             make.height.equalTo(20)
         }
+        
         setupGrayBar.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(60)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(7)
         }
+        
         setupHabbitSituation.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(90)
             make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(20)
         }
+        
         setupOvalView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(120)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(80)
         }
+        
         setupGrayBar2.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(230)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(7)
         }
+        
+        setupTotalAndDidDaysLabels.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(140)
+            make.leading.equalToSuperview().offset(70)
+            make.trailing.equalToSuperview().offset(-70)
+        }
+        
+        setupTableView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(topMargin)
+            make.left.right.bottom.equalToSuperview()
+        }
     }
 }
+
 
 // MARK: - UITableViewDataSource
 
@@ -235,7 +247,9 @@ extension MyPageView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MyPageTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MyPageTableViewCell.reuseIdentifier, for: indexPath) as? MyPageTableViewCell else {
+            fatalError("Error")
+        }
         let model = myPageCellModels[indexPath.row]
         cell.textLabel?.text = model.title
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)

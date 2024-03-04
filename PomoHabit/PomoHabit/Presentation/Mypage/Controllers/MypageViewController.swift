@@ -15,15 +15,14 @@ final class MyPageViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let myPageView = MyPageView()
+    private let myPageRootView = MyPageView()
     
     // MARK: - View Lifecycle
     
     override func loadView() {
         super.loadView()
         
-        setAddSubViews()
-        setSetAutoLayout()
+        view = myPageRootView
     }
 }
 
@@ -31,16 +30,17 @@ final class MyPageViewController: UIViewController {
 
 //    override func viewDidLoad() {
 //        super.viewDidLoad()
+
 //}
 
 // MARK: - Layout Helpers
 
 extension MyPageViewController {
     private func setAddSubViews() {
-        view.addSubview(myPageView)
+        view.addSubview(myPageRootView)
     }
     private func setSetAutoLayout() {
-        myPageView.snp.makeConstraints { make in
+        myPageRootView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }

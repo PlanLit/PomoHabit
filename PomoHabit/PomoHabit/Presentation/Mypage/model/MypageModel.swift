@@ -5,8 +5,6 @@
 //  Created by 洪立妍 on 2/29/24.
 //
 
-import Foundation
-
 struct MyPageCellModel {
     let title: String
 }
