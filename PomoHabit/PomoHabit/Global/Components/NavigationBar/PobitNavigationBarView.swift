@@ -51,6 +51,7 @@ extension PobitNavigationBarView {
     
     private func setAutoLayout() {
         titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
             make.centerY.equalToSuperview()
         }
