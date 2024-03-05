@@ -497,8 +497,8 @@
 		F8A4FB8C2B96F2A300E46EA1 /* Conrollers */ = {
 			isa = PBXGroup;
 			children = (
-				F8A4FB8D2B96F2A300E46EA1 /* ReportImageCollectionViewController.swift */,
 				F8A4FB8E2B96F2A300E46EA1 /* ReportViewController.swift */,
+				F8A4FB8D2B96F2A300E46EA1 /* ReportImageCollectionViewController.swift */,
 			);
 			path = Conrollers;
 			sourceTree = "<group>";

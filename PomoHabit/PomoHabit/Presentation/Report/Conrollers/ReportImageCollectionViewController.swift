@@ -25,6 +25,13 @@ final class ReportImageCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         
         setUpCollectionView()
+        setUpCollectionViewFlowLayout()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setUpCollectionViewFlowLayout()
     }
 }
 
@@ -35,7 +42,9 @@ extension ReportImageCollectionViewController {
         collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellID)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.decelerationRate = .normal
-
+    }
+    
+    private func setUpCollectionViewFlowLayout() {
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
             layout.itemSize = CGSize(width: itemSize, height: itemSize)
