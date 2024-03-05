@@ -267,7 +267,7 @@ extension ReportViewController {
             ])
         )
         
-        gridView?.backgroundColor = UIColor(red: 253, green: 249, blue: 249, alpha: 1)
+        gridView?.backgroundColor = UIColor(red: 253/255, green: 249/255, blue: 249/255, alpha: 0.1)
         
         func getTheBoxView(_ day: Int,_ state: Check) -> UIButton {
             let boxView = {
