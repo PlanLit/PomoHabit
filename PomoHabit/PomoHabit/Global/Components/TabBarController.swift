@@ -13,9 +13,9 @@ final class TabBarController: UITabBarController {
     
     // MARK: - Properties
     
-    let firstVC = ViewController()
-    let secondVC = ViewController()
-    let thirdVC = ViewController()
+    let firstVC = ReportViewController()
+    let secondVC = TimerViewController()
+    let thirdVC = WeeklyCalendarViewController()
     let fourthVC = ViewController()
     
     override func viewDidLoad() {
