@@ -15,7 +15,7 @@ final class ReportDayButtonTableViewCell: UITableViewCell {
     
     private var collectionViewCellID = "\(ReportDayButtonTableViewCell.self)CollectionViewCell"
     
-    private var dayButtonCollectionView: UICollectionView!
+    private lazy var dayButtonCollectionView: UICollectionView = makeCollectionView()
     
     private let dayStates: [DayButton.Day] = [.mon, .tue, .wed, .thu, .fri, .sat, .sun]
     
@@ -27,7 +27,6 @@ final class ReportDayButtonTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         setUpSelf()
-        setUpCollectionView()
         
         setAddSubviews()
         setAutoLayout()
@@ -41,7 +40,21 @@ extension ReportDayButtonTableViewCell {
         self.selectionStyle = .none
     }
     
-    private func setUpCollectionView() {
+    private func setAddSubviews() {
+        contentView.addSubview(dayButtonCollectionView)
+    }
+    
+    private func setAutoLayout() {
+        dayButtonCollectionView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+}
+
+// MARK: - Factory Methods
+
+extension ReportDayButtonTableViewCell {
+    private func makeCollectionView() -> UICollectionView {
         let layout = {
             let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal
@@ -51,20 +64,12 @@ extension ReportDayButtonTableViewCell {
             return layout
         }()
         
-        dayButtonCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let dayButtonCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         dayButtonCollectionView.dataSource = self
         dayButtonCollectionView.showsHorizontalScrollIndicator = false
         dayButtonCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: collectionViewCellID)
-    }
-    
-    private func setAddSubviews() {
-        contentView.addSubview(dayButtonCollectionView)
-    }
-    
-    private func setAutoLayout() {
-        dayButtonCollectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+        
+        return dayButtonCollectionView
     }
 }
 

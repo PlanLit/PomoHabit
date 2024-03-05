@@ -13,17 +13,14 @@ final class ReportHabitEditView: BaseView { // 구현 중
     
     // MARK: - Properties
 
-    var headerView: VStackView?
+    private lazy var headerView: VStackView = makeHeaderView()
     
-    var mainContainerView: VStackView?
+    private lazy var mainContainerView: VStackView = makeMainContainerView()
     
     // MARK: - Life Cycles
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        setUpHeaderView()
-        setUpMainContainerView()
         
         setAddSubviews()
         setAutoLayout()
@@ -36,19 +33,13 @@ final class ReportHabitEditView: BaseView { // 구현 중
 
 extension ReportHabitEditView {
     private func setAddSubviews() {
-        guard let headerView = headerView else {return}
-        guard let mainView = mainContainerView else {return}
-        
         addSubViews([
             headerView,
-            mainView
+            mainContainerView
         ])
     }
     
     private func setAutoLayout() {
-        guard let headerView = headerView else {return}
-        guard let mainContainerView = mainContainerView else {return}
-        
         headerView.snp.makeConstraints { make in
             make.top.equalTo(self.snp.top).offset(50)
             make.trailing.equalTo(self.snp.trailing).offset(-LayoutLiterals.minimumHorizontalSpacing)
@@ -63,10 +54,10 @@ extension ReportHabitEditView {
     }
 }
 
-// MARK: - SetUpViews
+// MARK: - Factory Methods
 
 extension ReportHabitEditView {
-    private func setUpHeaderView() {
+    private func makeHeaderView() -> VStackView {
         let dateLabel = {
             let label = UILabel()
             label.text = "02.21 수요일"
@@ -76,13 +67,13 @@ extension ReportHabitEditView {
             return label
         }()
         
-        headerView = VStackView([
+        return VStackView([
             UILabel().setPrimaryColorLabel(text: "Date"),
             dateLabel,
         ])
     }
     
-    private func setUpMainContainerView() {
+    private func makeMainContainerView() -> VStackView {
         let dividerView = {
             let view = UIView()
             view.backgroundColor = .lightGray
@@ -130,25 +121,21 @@ extension ReportHabitEditView {
             make.height.equalTo(300)
         }
         
-        mainContainerView = VStackView(spacing: CGFloat(LayoutLiterals.upperPrimarySpacing), alignment: .fill, [
+        return VStackView(spacing: CGFloat(LayoutLiterals.upperPrimarySpacing), alignment: .fill, [
             dividerView,
             HStackView(spacing: 5, alignment: .fill, distribution: .fill, [
-                getTextLabel("목표시간", Pretendard.bold(size: 20), .darkGray),
-                getTextLabel(":", Pretendard.bold(size: 20), .darkGray),
-                getTextLabel("5분", Pretendard.medium(size: 20), .darkGray),
+                makeTextLabel("목표시간", Pretendard.bold(size: 20), .darkGray),
+                makeTextLabel(":", Pretendard.bold(size: 20), .darkGray),
+                makeTextLabel("5분", Pretendard.medium(size: 20), .darkGray),
                 UIView()
             ]),
-            getTextLabel("메모", Pretendard.bold(size: 24), .darkGray),
+            makeTextLabel("메모", Pretendard.bold(size: 24), .darkGray),
             textView,
             bottomButtonContainer
         ])
     }
-}
-
-// MARK: - Get Views
-
-extension ReportHabitEditView {
-    private func getTextLabel(_ text: String,_ font: UIFont?,_ color: UIColor) -> UILabel {
+    
+    private func makeTextLabel(_ text: String,_ font: UIFont?,_ color: UIColor) -> UILabel {
         let label = UILabel()
         label.text = text
         label.font = font

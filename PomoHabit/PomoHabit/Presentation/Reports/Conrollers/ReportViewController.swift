@@ -20,26 +20,20 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
         return calendar.component(.day, from: currentDate)
     }()
     
-    private var headerView: HStackView?
+    private lazy var headerView: HStackView = makeHeaderView()
     
-    private var calendarNaviView: VStackView?
+    private lazy var imageCollectionViewController: ReportImageCollectionViewController = makeImageCollectionViewController()
     
-    private var imageCollectionViewController: ReportImageCollectionViewController?
+    private lazy var calendarNaviView: VStackView = makeCalendarNaviView()
     
-    private var gridView: VStackView?
+    private lazy var gridView: VStackView = makeGridView(31) // 월마다 바뀌는 일 수 주입
     
-    private var messageBoxView: UILabel?
+    private lazy var messageBoxView: UILabel = makeMessageBoxView("모두 완료하면 토마토가 웃는 얼굴이 돼요")
     
     // MARK: - Life Cycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setUpHeaderView()
-        setUpImageCollectionViewController()
-        setUpCalendarNaviView()
-        setUpGridView(31) // 월마다 바뀌는 일 수 주입
-        setUpMessageBoxView("모두 완료하면 토마토가 웃는 얼굴이 돼요")
         
         setAddSubviews()
         setAutoLayout()
@@ -50,12 +44,6 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
 
 extension ReportViewController {
     private func setAddSubviews() {
-        guard let headerView = headerView else {return}
-        guard let imageCollectionViewController = imageCollectionViewController else {return}
-        guard let calendarNaviView = calendarNaviView else {return}
-        guard let gridView = gridView else {return}
-        guard let messageBoxView = messageBoxView else {return}
-        
         addChild(imageCollectionViewController)
         
         view.addSubViews([
@@ -68,12 +56,6 @@ extension ReportViewController {
     }
     
     private func setAutoLayout() {
-        guard let headerView = headerView else {return}
-        guard let imageCollectionViewController = imageCollectionViewController else {return}
-        guard let calendarNaviView = calendarNaviView else {return}
-        guard let gridView = gridView else {return}
-        guard let messageBoxView = messageBoxView else {return}
-        
         headerView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.left.equalTo(LayoutLiterals.minimumHorizontalSpacing)
@@ -109,10 +91,10 @@ extension ReportViewController {
     }
 }
 
-// MARK: - SetUpViews
+// MARK: - Factory Methods
 
 extension ReportViewController {
-    private func setUpHeaderView() {
+    private func makeHeaderView() -> HStackView {
         let titleLabel = {
             let label = UILabel()
             label.text = "독서"
@@ -129,11 +111,11 @@ extension ReportViewController {
             button.overrideUserInterfaceStyle = .dark
             
             let habitInfo = UIAction(title: "습관 정보", handler: { _ in
-                self.presentBottomSheet(rootView: ReportHabitInfoView(), detents: [.medium()], prefersGrabberVisible: true)
+                self.presentBottomSheet(rootView: ReportHabitInfoView(), detents: [.medium()])
             })
             
             let habitEdit = UIAction(title: "습관 변경", handler: { _ in
-                self.presentBottomSheet(rootView: ReportHabitEditView(), detents: [.large()], prefersGrabberVisible: true)
+                self.presentBottomSheet(rootView: ReportHabitEditView(), detents: [.large()])
             })
             
             let menus = UIMenu(children: [habitInfo, habitEdit])
@@ -152,20 +134,21 @@ extension ReportViewController {
             return blankView
         }()
         
-        headerView = HStackView([
+        return HStackView([
             blankView,
             titleLabel,
             rightMenuButton
         ])
     }
     
-    private func setUpImageCollectionViewController() {
-        let layout = UICollectionViewFlowLayout()
-        imageCollectionViewController = ReportImageCollectionViewController(collectionViewLayout: layout)
-        imageCollectionViewController?.didMove(toParent: self)
+    private func makeImageCollectionViewController() -> ReportImageCollectionViewController {
+        let imageCollectionViewController = ReportImageCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        imageCollectionViewController.didMove(toParent: self)
+        
+        return imageCollectionViewController
     }
     
-    private func setUpCalendarNaviView() {
+    private func makeCalendarNaviView() -> VStackView {
         let leftButton = {
             let button = UIButton(type: .system, primaryAction: .init(handler: { _ in
                 print("leftButton")
@@ -207,7 +190,7 @@ extension ReportViewController {
             return bottomLine
         }()
         
-        calendarNaviView = VStackView(spacing: CGFloat(LayoutLiterals.upperPrimarySpacing), alignment: .fill, [
+        return VStackView(spacing: CGFloat(LayoutLiterals.upperPrimarySpacing), alignment: .fill, [
             HStackView(alignment: .center, [
                 leftButton,
                 centerTitle,
@@ -217,7 +200,7 @@ extension ReportViewController {
         ])
     }
 
-    private func setUpGridView(_ days: Int) {
+    private func makeGridView(_ days: Int) -> VStackView {
         func getTheBoxView(_ day: Int,_ state: Check) -> UIButton {
             let boxView = {
                 let boxView = UIButton(type: .system, primaryAction: .init(handler: { _ in
@@ -249,7 +232,7 @@ extension ReportViewController {
             return boxView
         }
         
-        gridView = VStackView(spacing: 0, alignment: .center, [
+        let gridView = VStackView(spacing: 0, alignment: .center, [
             HStackView([
                 getTheBoxView(1, .complete),
                 getTheBoxView(2, .complete),
@@ -293,7 +276,7 @@ extension ReportViewController {
         ])
         
         // 월별 마다 이거 조정 필요
-        gridView?.addArrangedSubview(
+        gridView.addArrangedSubview(
             HStackView([
                 getTheBoxView(29, .complete),
                 getTheBoxView(30, .complete),
@@ -301,15 +284,19 @@ extension ReportViewController {
             ])
         )
         
-        gridView?.backgroundColor = UIColor(red: 253, green: 249, blue: 249, alpha: 1)
+        gridView.backgroundColor = UIColor(red: 253, green: 249, blue: 249, alpha: 1)
+        
+        return gridView
     }
     
-    private func setUpMessageBoxView(_ message: String) {
-        messageBoxView = UILabel()
-        messageBoxView?.font = Pretendard.regular(size: 16)
-        messageBoxView?.text = message
-        messageBoxView?.backgroundColor = UIColor(hex: "#FFDADA")
-        messageBoxView?.textAlignment = .center
+    private func makeMessageBoxView(_ message: String) -> UILabel {
+        let messageBoxView = UILabel()
+        messageBoxView.font = Pretendard.regular(size: 16)
+        messageBoxView.text = message
+        messageBoxView.backgroundColor = UIColor(hex: "#FFDADA")
+        messageBoxView.textAlignment = .center
+        
+        return messageBoxView
     }
 }
 

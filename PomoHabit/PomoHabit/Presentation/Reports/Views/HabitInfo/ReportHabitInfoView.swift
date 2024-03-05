@@ -13,7 +13,7 @@ final class ReportHabitInfoView: BaseView {
     
     // MARK: - Properties
     
-    private var tableView: UITableView?
+    private lazy var tableView: UITableView = makeTableView()
     
     private var dayButtonSelectionStates = [true, true, true, true, false, false, false] // 유저가 입력했던 월화수 데이터 (임시)
     
@@ -21,8 +21,6 @@ final class ReportHabitInfoView: BaseView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        setUpTableView()
         
         setAddSubviews()
         setAutoLayout()
@@ -36,29 +34,35 @@ final class ReportHabitInfoView: BaseView {
 // MARK: - Layout Helpers
 
 extension ReportHabitInfoView {
-    private func setUpTableView() {
-        tableView = UITableView(frame: .zero, style: .plain)
-        tableView?.dataSource = self
-        tableView?.delegate = self
-        tableView?.separatorStyle = .none
-        tableView?.register(ReportDayButtonTableViewCell.self, forCellReuseIdentifier: "\(ReportDayButtonTableViewCell.self)")
-        tableView?.register(ReportDayButtonTableViewCell.self, forCellReuseIdentifier: "StartTimeCell")
-    }
-    
     private func setAddSubviews() {
-        self.addSubview(tableView ?? UIView())
+        self.addSubview(tableView)
     }
     
     private func setAutoLayout() {
-        tableView?.snp.makeConstraints { make in
+        tableView.snp.makeConstraints { make in
             make.top.equalTo(self.snp.top)
             make.trailing.equalTo(self.snp.trailing).offset(-LayoutLiterals.minimumHorizontalSpacing)
             make.bottom.equalTo(self.snp.bottom)
             make.leading.equalTo(self.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
         }
     }
+}
+
+// MARK: - Factory Methods
+
+extension ReportHabitInfoView {
+    private func makeTableView() -> UITableView {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.separatorStyle = .none
+        tableView.register(ReportDayButtonTableViewCell.self, forCellReuseIdentifier: "\(ReportDayButtonTableViewCell.self)")
+        tableView.register(ReportDayButtonTableViewCell.self, forCellReuseIdentifier: "StartTimeCell")
+        
+        return tableView
+    }
     
-    private func getHeaderLabelView(_ title: String) -> UILabel {
+    private func makeHeaderLabelView(_ title: String) -> UILabel {
         let label = UILabel()
         label.backgroundColor = .white
         label.text = title
@@ -68,7 +72,7 @@ extension ReportHabitInfoView {
         return label
     }
     
-    private func getSeparatorView() -> UIView {
+    private func makeSeparatorView() -> UIView {
         let containerView = UIView()
         containerView.backgroundColor = .clear
         
@@ -137,9 +141,9 @@ extension ReportHabitInfoView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            return getHeaderLabelView("습관 실행 요일")
+            return makeHeaderLabelView("습관 실행 요일")
         } else if section == 1 {
-            return getHeaderLabelView("습관 실행 시간")
+            return makeHeaderLabelView("습관 실행 시간")
         }
         
         return nil
@@ -151,7 +155,7 @@ extension ReportHabitInfoView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section%2 == 0 && section != tableView.numberOfSections - 1 {
-            return getSeparatorView()
+            return makeSeparatorView()
         }
         
         return nil
