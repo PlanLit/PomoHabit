@@ -18,9 +18,9 @@ extension HabbitState {
     var backgroundColor : UIColor {
         switch self {
         case .done: 
-            return UIColor.pobitRed
+            return .pobitRed
         case .doNot:
-            return UIColor.pobitStone1
+            return .pobitStone1
         case .notStart:
             return .white
         }
