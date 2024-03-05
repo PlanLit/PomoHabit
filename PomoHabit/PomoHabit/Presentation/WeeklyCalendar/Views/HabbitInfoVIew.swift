@@ -59,22 +59,21 @@ extension HabbitInfoView {
     
     private func setAutoLayout() {
         titleInfoView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
-            make.leading.equalToSuperview().offset(12)
-            make.trailing.equalToSuperview().offset(-12)
+            make.top.equalToSuperview().offset(LayoutLiterals.upperSecondarySpacing)
+            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.upperSecondarySpacing)
         }
         
         timeInfoView.snp.makeConstraints { make in
-            make.top.equalTo(titleInfoView.snp.bottom).offset(12)
-            make.leading.equalToSuperview().offset(12)
-            make.bottom.equalToSuperview().offset(-12)
+            make.top.equalTo(titleInfoView.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
+            make.leading.equalToSuperview().offset(LayoutLiterals.upperSecondarySpacing)
+            make.bottom.equalToSuperview().offset(-LayoutLiterals.upperSecondarySpacing)
         }
         
         targetInfoView.snp.makeConstraints { make in
-            make.top.equalTo(titleInfoView.snp.bottom).offset(12)
-            make.leading.equalTo(timeInfoView.snp.trailing).offset(12)
-            make.trailing.equalToSuperview().offset(-12)
-            make.bottom.equalToSuperview().offset(-12)
+            make.top.equalTo(titleInfoView.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
+            make.leading.equalTo(timeInfoView.snp.trailing).offset(LayoutLiterals.upperSecondarySpacing)
+            make.trailing.equalToSuperview().offset(-LayoutLiterals.upperSecondarySpacing)
+            make.bottom.equalToSuperview().offset(-LayoutLiterals.upperSecondarySpacing)
         }
     }
     

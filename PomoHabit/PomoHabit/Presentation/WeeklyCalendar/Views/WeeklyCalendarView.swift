@@ -34,14 +34,7 @@ final class WeeklyCalendarView: BaseView {
         return scrollView
     }()
     
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "주간 캘린더"
-        label.textColor = UIColor.pobitBlack
-        label.font = Pretendard.bold(size: 26)
-        
-        return label
-    }()
+    private lazy var navigationBarView = PobitNavigationBarView(title: "주간 캘린더")
     
     // MARK: - 오늘 날짜 UI
     
@@ -51,7 +44,7 @@ final class WeeklyCalendarView: BaseView {
         let label = UILabel()
         label.text = Date().monthAndDaytoString()
         label.font = Pretendard.bold(size: 50)
-        label.textColor = UIColor.pobitBlack
+        label.textColor = .pobitBlack
         
         return label
     }()
@@ -77,7 +70,7 @@ final class WeeklyCalendarView: BaseView {
         let progressView = UIProgressView()
         progressView.layer.cornerRadius = 20
         progressView.layer.sublayers?[1].cornerRadius = 20
-        progressView.progressTintColor = UIColor.pobitRed
+        progressView.progressTintColor = .pobitRed
         progressView.trackTintColor = UIColor(hex: "D9D9D9")
         
         return progressView
@@ -107,7 +100,7 @@ final class WeeklyCalendarView: BaseView {
         let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         label.text = "메모글 입니다."
         label.font = Pretendard.medium(size: 15)
-        label.textColor = UIColor.pobitBlack
+        label.textColor = .pobitBlack
         label.numberOfLines = 0
         label.layer.cornerRadius = 10
         label.layer.masksToBounds = true
@@ -138,7 +131,7 @@ final class WeeklyCalendarView: BaseView {
 extension WeeklyCalendarView {
     private func setAddSubViews() {
         self.addSubview(scrollView)
-        scrollView.addSubViews([titleLabel,todayLabel,todayDateLabel,weeklyCollectionView,firstDivider,weeklyHabbitProgressLabel,weeklyHabbitProgressView,progressCircleImageView,secondDivider,habbitInfoLabel,habbitInfoView,thirdDivider,noteInfoLabel,noteContentLabel])
+        scrollView.addSubViews([navigationBarView,todayLabel,todayDateLabel,weeklyCollectionView,firstDivider,weeklyHabbitProgressLabel,weeklyHabbitProgressView,progressCircleImageView,secondDivider,habbitInfoLabel,habbitInfoView,thirdDivider,noteInfoLabel,noteContentLabel])
     }
     
     private func setAutoLayout() {
@@ -146,44 +139,44 @@ extension WeeklyCalendarView {
             make.edges.equalToSuperview()
         }
         
-        titleLabel.snp.makeConstraints { make in
+        navigationBarView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
         }
         
         // MARK: - 오늘 날짜 UI
         
         todayLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(24)
+            make.top.equalTo(navigationBarView.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
             make.centerX.equalToSuperview()
         }
         
         todayDateLabel.snp.makeConstraints { make in
-            make.top.equalTo(todayLabel.snp.bottom).offset(12)
+            make.top.equalTo(todayLabel.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
             make.centerX.equalToSuperview()
         }
         
         // MARK: - 주간 캘린더
         
         weeklyCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(todayDateLabel.snp.bottom).offset(12)
+            make.top.equalTo(todayDateLabel.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
             make.leading.trailing.width.equalToSuperview()
             make.height.equalTo(80)
         }
         
         firstDivider.snp.makeConstraints { make in
-            make.top.equalTo(weeklyCollectionView.snp.bottom).offset(12)
+            make.top.equalTo(weeklyCollectionView.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
             make.leading.trailing.equalToSuperview()
         }
         
         // MARK: - 진행 상태
         
         weeklyHabbitProgressLabel.snp.makeConstraints { make in
-            make.top.equalTo(firstDivider.snp.bottom).offset(24)
+            make.top.equalTo(firstDivider.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
             make.leading.trailing.equalToSuperview()
         }
         
         weeklyHabbitProgressView.snp.makeConstraints { make in
-            make.top.equalTo(weeklyHabbitProgressLabel.snp.bottom).offset(12)
+            make.top.equalTo(weeklyHabbitProgressLabel.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(10)
         }
@@ -194,35 +187,35 @@ extension WeeklyCalendarView {
         }
         
         secondDivider.snp.makeConstraints { make in
-            make.top.equalTo(weeklyHabbitProgressView.snp.bottom).offset(24)
+            make.top.equalTo(weeklyHabbitProgressView.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
             make.leading.trailing.equalToSuperview()
         }
         
         // MARK: - 습관 정보
         
         habbitInfoLabel.snp.makeConstraints { make in
-            make.top.equalTo(secondDivider.snp.bottom).offset(24)
+            make.top.equalTo(secondDivider.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
             make.leading.trailing.equalToSuperview()
         }
         
         habbitInfoView.snp.makeConstraints { make in
-            make.top.equalTo(habbitInfoLabel.snp.bottom).offset(12)
+            make.top.equalTo(habbitInfoLabel.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
             make.leading.trailing.equalToSuperview()
         }
         thirdDivider.snp.makeConstraints { make in
-            make.top.equalTo(habbitInfoView.snp.bottom).offset(24)
+            make.top.equalTo(habbitInfoView.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
             make.leading.trailing.equalToSuperview()
         }
         
         // MARK: - 메모
         
         noteInfoLabel.snp.makeConstraints { make in
-            make.top.equalTo(thirdDivider.snp.bottom).offset(24)
+            make.top.equalTo(thirdDivider.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
             make.leading.trailing.equalToSuperview()
         }
         
         noteContentLabel.snp.makeConstraints { make in
-            make.top.equalTo(noteInfoLabel.snp.bottom).offset(12)
+            make.top.equalTo(noteInfoLabel.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
             make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
         }

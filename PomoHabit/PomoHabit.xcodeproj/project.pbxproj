@@ -49,8 +49,6 @@
 		E061E1312B901AC400A9174F /* ReportImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12D2B901AC400A9174F /* ReportImageCollectionViewController.swift */; };
 		E061E1322B901AC400A9174F /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12E2B901AC400A9174F /* ReportViewController.swift */; };
 		E061E1332B901AC400A9174F /* ReportHabitInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12F2B901AC400A9174F /* ReportHabitInfoView.swift */; };
-		E0A029242B9592E900DE8CA0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115972B901D5E003E6459 /* SnapKit */; };
-		E0A029252B9592E900DE8CA0 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115992B901D5E003E6459 /* SnapKit-Dynamic */; };
 		E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */; };
 		E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5412B8D5D9900A77BAE /* HStackView.swift */; };
 		E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */; };
@@ -65,6 +63,8 @@
 		F88EB2D82B8DC0EB0073BDDA /* WeeklyCalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2D72B8DC0EB0073BDDA /* WeeklyCalendarModel.swift */; };
 		F88EB2DA2B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2D92B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift */; };
 		F88EB2DC2B8DC1120073BDDA /* WeeklyCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2DB2B8DC1120073BDDA /* WeeklyCalendarView.swift */; };
+		F89A9F2F2B96BDC40067C70A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115972B901D5E003E6459 /* SnapKit */; };
+		F89A9F302B96BDC40067C70A /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115992B901D5E003E6459 /* SnapKit-Dynamic */; };
 		F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD372B8C7FC900712CBF /* NoteView.swift */; };
 		F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD392B8C7FF200712CBF /* NoteTextView.swift */; };
 /* End PBXBuildFile section */
@@ -222,6 +222,7 @@
 		37144C7D2B8C3413008565C4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				F87351642B905E04004E89C5 /* TabBarController.swift */,
 				378034A62B8F9C610046E6B8 /* Modal */,
 				373D0DF02B8F7B45004CC2C7 /* NavigationBar */,
 				E0C5B53F2B8D5D8300A77BAE /* StackViews */,
@@ -277,7 +278,6 @@
 			children = (
 				37144C922B8C544D008565C4 /* BaseViewController.swift */,
 				37144C942B8C5472008565C4 /* BaseView.swift */,
-				F87351642B905E04004E89C5 /* TabBarController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -404,10 +404,10 @@
 		E061E12B2B901AA100A9174F /* Reports */ = {
 			isa = PBXGroup;
 			children = (
-				E061E1342B901AC900A9174F /* Conrollers */,
-				E0443C4F2B90244C004FC1F6 /* Views */,
+				73DFA25A2B90275600C381A7 /* OnboardingChattingViewController.swift */,
+				73DFA25C2B90276400C381A7 /* OnboardingFirstViewController.swift */,
 			);
-			path = Reports;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		E061E1342B901AC900A9174F /* Conrollers */ = {

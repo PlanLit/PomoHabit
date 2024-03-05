@@ -22,7 +22,6 @@ class WeeklyCalendarViewController: BaseViewController {
         
         setAddSubViews()
         setSetAutoLayout()
-        
     }
     
     override func viewDidLayoutSubviews() { // 해당 메소드 안에서만 오토레이 아웃으로 설정된 UI/View의 Frame 사이즈를 알 수 있음
@@ -41,10 +40,8 @@ extension WeeklyCalendarViewController {
     
     private func setSetAutoLayout() {
         weeklyCalendarView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.top.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
         }
     }
 }

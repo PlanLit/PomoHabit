@@ -101,14 +101,14 @@ extension WeeklyCollectionViewCell{
         
         if state == HabbitState.notStart{
             [dayLabel,dateLabel].forEach { label in
-                label.textColor = UIColor.pobitBlack
+                label.textColor = .pobitBlack
             }
             
             labelsContainer.layer.borderWidth = 1
             labelsContainer.layer.borderColor = UIColor.pobitStone4.cgColor
         } else {
             [dayLabel,dateLabel].forEach { label in
-                label.textColor = UIColor.white
+                label.textColor = .white
             }
         }
     }
