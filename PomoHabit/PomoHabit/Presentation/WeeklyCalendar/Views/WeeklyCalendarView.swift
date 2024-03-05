@@ -42,7 +42,7 @@ final class WeeklyCalendarView: BaseView {
     
     private lazy var todayDateLabel: UILabel = {
         let label = UILabel()
-        label.text = Date().monthAndDaytoString()
+        label.text = Date().dateToString()
         label.font = Pretendard.bold(size: 50)
         label.textColor = .pobitBlack
         
