@@ -53,13 +53,13 @@ extension PobitNavigationBarView {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
-            make.centerY.equalToSuperview()
         }
         
         dividerView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(LayoutLiterals.minimumVerticalSpacing)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(1)
+            make.bottom.equalToSuperview()
         }
     }
 }
