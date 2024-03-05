@@ -16,16 +16,15 @@ class WeeklyCalendarViewController: BaseViewController {
     // MARK: - Properties
     
     private lazy var weeklyCalendarView = WeeklyCalendarView()
-    var weeklyDates : [Int] = []
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setWeeklyData()
         setAddSubViews()
         setSetAutoLayout()
-        getWeeklyData()
     }
     
     override func viewDidLayoutSubviews() { // 해당 메소드 안에서만 오토레이 아웃으로 설정된 UI/View의 Frame 사이즈를 알 수 있음
@@ -74,8 +73,9 @@ extension WeeklyCalendarViewController {
 // MARK: - Get 주간 데이터
 
 extension WeeklyCalendarViewController {
-    private func getWeeklyData(){
-        var calendar = Calendar.current
+    private func setWeeklyData(){
+        var weeklyDates : [Int] = []
+        let calendar = Calendar.current
         
         // MARK: - 현재 주의 시작 날짜
         
@@ -91,7 +91,7 @@ extension WeeklyCalendarViewController {
         
         // MARK: - 주간 데이터 구하기
         
-        guard var weeklyStartDateInt = Int(weeklyStartDate) else {return}
+        guard let weeklyStartDateInt = Int(weeklyStartDate) else {return}
         guard let currentEndDateInt = Int(currentEndDate) else {return}
         
         for i in 0...6 {
@@ -103,6 +103,8 @@ extension WeeklyCalendarViewController {
                 weeklyDates.append(date-currentEndDateInt)
             }
         }
+        
+        weeklyCalendarView.setWeeklyDates(weeklyDates: weeklyDates)
     }
 }
 
