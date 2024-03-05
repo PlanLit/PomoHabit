@@ -18,6 +18,9 @@
 		37144C932B8C544D008565C4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C922B8C544D008565C4 /* BaseViewController.swift */; };
 		37144C952B8C5472008565C4 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C942B8C5472008565C4 /* BaseView.swift */; };
 		37144C972B8C5674008565C4 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C962B8C5674008565C4 /* UITextField+Extension.swift */; };
+		37396CA62B960FCE001E81F3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115972B901D5E003E6459 /* SnapKit */; };
+		37396CA72B960FCE001E81F3 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115992B901D5E003E6459 /* SnapKit-Dynamic */; };
+		37396CAA2B96103C001E81F3 /* PobitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37396CA82B96103C001E81F3 /* PobitModel.xcdatamodeld */; };
 		373D0DF22B8F7B45004CC2C7 /* PobitNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D0DF12B8F7B45004CC2C7 /* PobitNavigationBarView.swift */; };
 		373D0DF42B8F7B5B004CC2C7 /* LayoutLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D0DF32B8F7B5B004CC2C7 /* LayoutLiterals.swift */; };
 		375AC9D52B8F817B002F82FF /* CAShapeLayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AC9D42B8F817B002F82FF /* CAShapeLayer+Extension.swift */; };
@@ -38,23 +41,21 @@
 		378034AF2B8FACE50046E6B8 /* WhiteNoiseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378034AE2B8FACE50046E6B8 /* WhiteNoiseTableViewCell.swift */; };
 		37CC614C2B90C07900CBAB45 /* BottomSheetPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CC614B2B90C07900CBAB45 /* BottomSheetPresentable.swift */; };
 		73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */; };
-		E0443C512B90263A004FC1F6 /* ReportDayButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0443C502B90263A004FC1F6 /* ReportDayButtonTableViewCell.swift */; };
-		E061E1302B901AC400A9174F /* ReportHabitEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12C2B901AC400A9174F /* ReportHabitEditViewController.swift */; };
-		E061E1312B901AC400A9174F /* ReportImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12D2B901AC400A9174F /* ReportImageCollectionViewController.swift */; };
-		E061E1322B901AC400A9174F /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12E2B901AC400A9174F /* ReportViewController.swift */; };
-		E061E1332B901AC400A9174F /* ReportHabitInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12F2B901AC400A9174F /* ReportHabitInfoViewController.swift */; };
 		73DFA2592B90274700C381A7 /* OnboardingChattingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA2582B90274700C381A7 /* OnboardingChattingCell.swift */; };
 		73DFA25B2B90275600C381A7 /* OnboardingChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA25A2B90275600C381A7 /* OnboardingChattingViewController.swift */; };
 		73DFA25D2B90276400C381A7 /* OnboardingFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA25C2B90276400C381A7 /* OnboardingFirstViewController.swift */; };
 		73DFA2612B90280000C381A7 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA2602B90280000C381A7 /* Message.swift */; };
 		73DFA2632B903DB600C381A7 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA2622B903DB600C381A7 /* String+Extension.swift */; };
 		73DFA26F2B90AF6700C381A7 /* DaysCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA26E2B90AF6700C381A7 /* DaysCollectionViewCell.swift */; };
+		E0443C512B90263A004FC1F6 /* ReportDayButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0443C502B90263A004FC1F6 /* ReportDayButtonTableViewCell.swift */; };
+		E061E1302B901AC400A9174F /* ReportHabitEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12C2B901AC400A9174F /* ReportHabitEditViewController.swift */; };
+		E061E1312B901AC400A9174F /* ReportImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12D2B901AC400A9174F /* ReportImageCollectionViewController.swift */; };
+		E061E1322B901AC400A9174F /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12E2B901AC400A9174F /* ReportViewController.swift */; };
+		E061E1332B901AC400A9174F /* ReportHabitInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12F2B901AC400A9174F /* ReportHabitInfoViewController.swift */; };
 		E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */; };
 		E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5412B8D5D9900A77BAE /* HStackView.swift */; };
 		E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */; };
 		E0C5B5472B8D63B200A77BAE /* DayButtonsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5462B8D63B200A77BAE /* DayButtonsTableViewCell.swift */; };
-		E0C78EE82B955FE600CA686D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115972B901D5E003E6459 /* SnapKit */; };
-		E0F1159A2B901D5E003E6459 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115992B901D5E003E6459 /* SnapKit-Dynamic */; };
 		F85F8F572B8DE33C00E69922 /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F562B8DE33C00E69922 /* BasePaddingLabel.swift */; };
 		F85F8F592B8DE54F00E69922 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F582B8DE54F00E69922 /* Date+Extension.swift */; };
 		F85F8F5B2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F5A2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift */; };
@@ -83,6 +84,7 @@
 		37144C922B8C544D008565C4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		37144C942B8C5472008565C4 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		37144C962B8C5674008565C4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		37396CA92B96103C001E81F3 /* PobitModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PobitModel.xcdatamodel; sourceTree = "<group>"; };
 		373D0DF12B8F7B45004CC2C7 /* PobitNavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PobitNavigationBarView.swift; sourceTree = "<group>"; };
 		373D0DF32B8F7B5B004CC2C7 /* LayoutLiterals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutLiterals.swift; sourceTree = "<group>"; };
 		375AC9D42B8F817B002F82FF /* CAShapeLayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Extension.swift"; sourceTree = "<group>"; };
@@ -103,17 +105,17 @@
 		378034AE2B8FACE50046E6B8 /* WhiteNoiseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteNoiseTableViewCell.swift; sourceTree = "<group>"; };
 		37CC614B2B90C07900CBAB45 /* BottomSheetPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetPresentable.swift; sourceTree = "<group>"; };
 		73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
-		E0443C502B90263A004FC1F6 /* ReportDayButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDayButtonTableViewCell.swift; sourceTree = "<group>"; };
-		E061E12C2B901AC400A9174F /* ReportHabitEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHabitEditViewController.swift; sourceTree = "<group>"; };
-		E061E12D2B901AC400A9174F /* ReportImageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportImageCollectionViewController.swift; sourceTree = "<group>"; };
-		E061E12E2B901AC400A9174F /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
-		E061E12F2B901AC400A9174F /* ReportHabitInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHabitInfoViewController.swift; sourceTree = "<group>"; };
 		73DFA2582B90274700C381A7 /* OnboardingChattingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingChattingCell.swift; sourceTree = "<group>"; };
 		73DFA25A2B90275600C381A7 /* OnboardingChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingChattingViewController.swift; sourceTree = "<group>"; };
 		73DFA25C2B90276400C381A7 /* OnboardingFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFirstViewController.swift; sourceTree = "<group>"; };
 		73DFA2602B90280000C381A7 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		73DFA2622B903DB600C381A7 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		73DFA26E2B90AF6700C381A7 /* DaysCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysCollectionViewCell.swift; sourceTree = "<group>"; };
+		E0443C502B90263A004FC1F6 /* ReportDayButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDayButtonTableViewCell.swift; sourceTree = "<group>"; };
+		E061E12C2B901AC400A9174F /* ReportHabitEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHabitEditViewController.swift; sourceTree = "<group>"; };
+		E061E12D2B901AC400A9174F /* ReportImageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportImageCollectionViewController.swift; sourceTree = "<group>"; };
+		E061E12E2B901AC400A9174F /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		E061E12F2B901AC400A9174F /* ReportHabitInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHabitInfoViewController.swift; sourceTree = "<group>"; };
 		E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButton.swift; sourceTree = "<group>"; };
 		E0C5B5412B8D5D9900A77BAE /* HStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HStackView.swift; sourceTree = "<group>"; };
 		E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VStackView.swift; sourceTree = "<group>"; };
@@ -137,8 +139,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0F1159C2B901DFA003E6459 /* SnapKit in Frameworks */,
-				E0F1159E2B901DFA003E6459 /* SnapKit-Dynamic in Frameworks */,
+				37396CA72B960FCE001E81F3 /* SnapKit-Dynamic in Frameworks */,
+				37396CA62B960FCE001E81F3 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +176,7 @@
 		37144C792B8C3379008565C4 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				37396CA82B96103C001E81F3 /* PobitModel.xcdatamodeld */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -315,27 +318,6 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		376B91902B8C5B4C004CBB16 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		376B91912B8C5B4C004CBB16 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		376B91922B8C5B4C004CBB16 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		376B91AD2B8C69B6004CBB16 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,14 +359,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		E0443C4F2B90244C004FC1F6 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				E0443C502B90263A004FC1F6 /* ReportDayButtonTableViewCell.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};        
 		73DFA2542B9026C900C381A7 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -412,6 +386,23 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		73DFA2572B90270E00C381A7 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				73DFA25A2B90275600C381A7 /* OnboardingChattingViewController.swift */,
+				73DFA25C2B90276400C381A7 /* OnboardingFirstViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E0443C4F2B90244C004FC1F6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E0443C502B90263A004FC1F6 /* ReportDayButtonTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E061E12B2B901AA100A9174F /* Reports */ = {
 			isa = PBXGroup;
 			children = (
@@ -430,35 +421,6 @@
 				E061E12C2B901AC400A9174F /* ReportHabitEditViewController.swift */,
 			);
 			path = Conrollers;
-			sourceTree = "<group>";
-		};      
-		73DFA2572B90270E00C381A7 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				73DFA25A2B90275600C381A7 /* OnboardingChattingViewController.swift */,
-				73DFA25C2B90276400C381A7 /* OnboardingFirstViewController.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		378034A62B8F9C610046E6B8 /* Modal */ = {
-			isa = PBXGroup;
-			children = (
-				378034A92B8F9D360046E6B8 /* Views */,
-				378034A72B8F9C810046E6B8 /* BottomSheetViewController.swift */,
-				37CC614B2B90C07900CBAB45 /* BottomSheetPresentable.swift */,
-			);
-			path = Modal;
-			sourceTree = "<group>";
-		};
-		378034A92B8F9D360046E6B8 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				378034AA2B8F9D7A0046E6B8 /* MemoView.swift */,
-				378034AC2B8FAB5B0046E6B8 /* WhiteNoiseView.swift */,
-				378034AE2B8FACE50046E6B8 /* WhiteNoiseTableViewCell.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		E0C5B53C2B8D5AC000A77BAE /* DayButton */ = {
@@ -644,6 +606,7 @@
 				378034A32B8F8D8A0046E6B8 /* PomoProgressBar.swift in Sources */,
 				378034AF2B8FACE50046E6B8 /* WhiteNoiseTableViewCell.swift in Sources */,
 				F88EB2DA2B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift in Sources */,
+				37396CAA2B96103C001E81F3 /* PobitModel.xcdatamodeld in Sources */,
 				F85F8F572B8DE33C00E69922 /* BasePaddingLabel.swift in Sources */,
 				73DFA2612B90280000C381A7 /* Message.swift in Sources */,
 				37144C952B8C5472008565C4 /* BaseView.swift in Sources */,
@@ -895,6 +858,19 @@
 			productName = "SnapKit-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		37396CA82B96103C001E81F3 /* PobitModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				37396CA92B96103C001E81F3 /* PobitModel.xcdatamodel */,
+			);
+			currentVersion = 37396CA92B96103C001E81F3 /* PobitModel.xcdatamodel */;
+			path = PobitModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 37144C5A2B8C32D6008565C4 /* Project object */;
 }
