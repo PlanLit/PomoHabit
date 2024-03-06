@@ -7,76 +7,74 @@
 
 import UIKit
 
-import SnapKit
-
 // MARK: - OnboardingChattingCell
 
-final class OnboardingChattingCell: UICollectionViewCell {
-    var model: Model?
+final class OnboardingChattingCell: UITableViewCell {
     
     // MARK: - Properties
     
-    static let identifier = "onboardingChattingCell"
+    private var model: OnboardingModel?
     
-    var chattingLabel: BasePaddingLabel = {
+    private lazy var chattingLabel: BasePaddingLabel = makeChattingLabel()
+    
+    // MARK: - Life Cycles
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        setAddSubviews()
+        setAutoLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+}
+
+// MARK: - Layout Helpers
+
+extension OnboardingChattingCell {
+    private func setAddSubviews() {
+        contentView.addSubview(chattingLabel)
+    }
+    
+    private func setAutoLayout() {
+        chattingLabel.snp.makeConstraints { make in
+            make.height.equalTo(44)
+        }
+    }
+    
+    func configureCell(with model: OnboardingModel) {
+        self.backgroundColor = .clear
+        self.chattingLabel.text = model.message
+        self.model = model
+        
+        switch model.chatType {
+        case .receive:
+            chattingLabel.snp.makeConstraints { make in
+                make.leading.equalTo(contentView.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
+            }
+        case .send:
+            chattingLabel.snp.makeConstraints { make in
+                make.trailing.equalTo(contentView.snp.trailing).offset(-LayoutLiterals.minimumHorizontalSpacing)
+            }
+            chattingLabel.backgroundColor = .pobitGreen
+            chattingLabel.textColor = .pobitWhite
+        }
+    }
+}
+
+// MARK: - Factory Methods
+
+extension OnboardingChattingCell {
+    private func makeChattingLabel() -> BasePaddingLabel {
         let label = BasePaddingLabel(padding: UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15))
-        label.font = Pretendard.medium(size: 14)
+        label.font = Pretendard.medium(size: 16)
         label.backgroundColor = .pobitWhite
         label.layer.cornerRadius = 10
         label.layer.masksToBounds = true
         label.textColor = .pobitBlack
         
         return label
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        setupLabel()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}
-
-// MARK: - Layout Helpers
-
-extension OnboardingChattingCell {
-    private func setupLabel() {
-        contentView.addSubview(chattingLabel)
-    }
-}
-
-// MARK: - Methods
-
-extension OnboardingChattingCell {
-    func bind() {
-        guard let model = model else { return }
-        guard let chattingLabelWidth = chattingLabel.text?.getEstimatedFrame(with: Pretendard.medium(size: 14) ?? .systemFont(ofSize: 14)).width else { return }
-        
-        // receive와 send를 enum으로 만들어서 분기 나눠줌
-        if case .receive = model.chatType {
-            chattingLabel.snp.makeConstraints { make in
-                make.width.equalTo(chattingLabelWidth + 35)
-                make.leading.equalTo(contentView.snp.leading).offset(10)
-            }
-            
-        } else  {
-            chattingLabel.snp.makeConstraints { make in
-                make.trailing.equalTo(contentView.snp.trailing).offset(-10)
-                make.width.equalTo(chattingLabelWidth + 35)
-            }
-            chattingLabel.backgroundColor = .pobitGreen
-            chattingLabel.textColor = .pobitWhite
-        }
-    }
-    
-    func configureCell(with model: Model) {
-        self.backgroundColor = .pobitSkin
-        self.layer.cornerRadius = 20
-        self.chattingLabel.text = model.message
-        self.model = model
     }
 }

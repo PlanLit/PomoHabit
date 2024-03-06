@@ -397,8 +397,8 @@
 		73DFA2572B90270E00C381A7 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				73DFA25A2B90275600C381A7 /* OnboardingChattingViewController.swift */,
 				73DFA25C2B90276400C381A7 /* OnboardingFirstViewController.swift */,
+				73DFA25A2B90275600C381A7 /* OnboardingChattingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";

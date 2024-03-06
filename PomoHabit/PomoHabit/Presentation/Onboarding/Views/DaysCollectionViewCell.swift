@@ -7,22 +7,24 @@
 
 import UIKit
 
-import SnapKit
+// MARK: - DaysTableViewCell
 
-// MARK: - DaysViewCell
-
-final class DaysCollectionViewCell: UICollectionViewCell {
+final class DaysTableViewCell: UITableViewCell {
+    
     // MARK: - Properties
     
-    static let identifier = "DaysCollectionViewCell"
+    private lazy var buttonContainer: VStackView = makeContainer()
     
-    private var container: VStackView?
     var buttonSelectionStates: [Bool]?
+    
     var action: ((Int, Bool) -> Void)?
 
+    // MARK: - Life Cycles
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        setSelf()
         
         setAddSubviews()
         setAutoLayout()
@@ -35,42 +37,65 @@ final class DaysCollectionViewCell: UICollectionViewCell {
 
 // MARK: - Layout Helpers
 
-extension DaysCollectionViewCell {
+extension DaysTableViewCell {
+    private func setSelf() {
+        self.backgroundColor = .clear
+    }
+    
     private func setAddSubviews() {
-        container = VStackView(spacing: 5, alignment: .leading, [
-            HStackView(spacing: 5, [
-                DayButton(dayType: .mon, isSelected: buttonSelectionStates?[0] ?? false) { state in
-                    self.action?(0, state)
-                },
-                DayButton(dayType: .tue, isSelected: buttonSelectionStates?[1] ?? false) { state in
-                    self.action?(1, state)
-                },
-                DayButton(dayType: .wed, isSelected: buttonSelectionStates?[2] ?? false) { state in
-                    self.action?(2, state)
-                },
-                DayButton(dayType: .thu, isSelected: buttonSelectionStates?[3] ?? false) { state in
-                    self.action?(3, state)
-                },
-                DayButton(dayType: .fri, isSelected: buttonSelectionStates?[4] ?? false) { state in
-                    self.action?(4, state)
-                },
-            ]),
-            HStackView(spacing: 5, [
-                DayButton(dayType: .sat, isSelected: buttonSelectionStates?[5] ?? false) { state in
-                    self.action?(5, state)
-                },
-                DayButton(dayType: .sun, isSelected: buttonSelectionStates?[6] ?? false) { state in
-                    self.action?(6, state)
-                },
-            ])
-        ])
-        contentView.addSubview(container ?? UIView())
+        contentView.addSubview(buttonContainer)
     }
     
     private func setAutoLayout() {
-        container?.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-20)
-            make.height.equalTo(100)
+        buttonContainer.snp.makeConstraints { make in
+            make.trailing.equalTo(contentView.snp.trailing).offset(-20)
         }
+    }
+}
+
+// MARK: - Factory methods
+
+extension DaysTableViewCell {
+    private func makeContainer() -> VStackView {
+        return VStackView(spacing: 5, alignment: .leading, [
+            HStackView(spacing: 5, [
+                makeDayButtonView(dayType: .mon, isSelected: buttonSelectionStates?[0] ?? false, action: { state in
+                    self.action?(0, state)
+                }),
+                makeDayButtonView(dayType: .tue, isSelected: buttonSelectionStates?[1] ?? false, action: { state in
+                    self.action?(1, state)
+                }),
+                makeDayButtonView(dayType: .wed, isSelected: buttonSelectionStates?[2] ?? false, action: { state in
+                    self.action?(2, state)
+                }),
+                makeDayButtonView(dayType: .thu, isSelected: buttonSelectionStates?[3] ?? false, action: { state in
+                    self.action?(3, state)
+                }),
+                makeDayButtonView(dayType: .fri, isSelected: buttonSelectionStates?[4] ?? false, action: { state in
+                    self.action?(4, state)
+                }),
+            ]),
+            HStackView(spacing: 5, [
+                makeDayButtonView(dayType: .sat, isSelected: buttonSelectionStates?[5] ?? false, action: { state in
+                    self.action?(5, state)
+                }),
+                makeDayButtonView(dayType: .sun, isSelected: buttonSelectionStates?[6] ?? false, action: { state in
+                    self.action?(6, state)
+                }),
+            ])
+        ])
+    }
+    
+    private func makeDayButtonView(dayType: DayButton.Day, isSelected: Bool = false, action: @escaping ((Bool) -> Void)) -> DayButton {
+        let dayButton = DayButton(dayType: dayType, isSelected: isSelected) { state in
+            self.action?(0, state)
+        }
+        
+        dayButton.snp.makeConstraints { make in
+            make.width.equalTo(49)
+            make.height.equalTo(49)
+        }
+        
+        return dayButton
     }
 }

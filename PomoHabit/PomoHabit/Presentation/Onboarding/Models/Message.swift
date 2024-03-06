@@ -7,13 +7,12 @@
 
 import Foundation
 
-enum ChatType: CaseIterable {
-    case receive
-    case send
-}
-
-struct Model {
+struct OnboardingModel {
     var message: String
     var chatType: ChatType
+    
+    enum ChatType: CaseIterable {
+        case receive
+        case send
+    }
 }
-
