@@ -10,13 +10,10 @@ import UIKit
 // MARK: - OnboardingFirstViewController
 
 final class OnboardingFirstViewController: UIViewController {
+    
     // MARK: - Properties
     
-    private lazy var mainImage: UIImageView = makeMainImage()
-    
-    private lazy var nicknameTextField: UITextField = makeNicknameTextField()
-    
-    private lazy var saveButton: UIButton = makeSaveButton()
+    private lazy var container: VStackView = makeContainer()
     
     // MARK: - Life Cycle
     
@@ -38,24 +35,13 @@ extension OnboardingFirstViewController {
     }
     
     private func setAddSubviews() {
-        view.addSubViews([mainImage, nicknameTextField, saveButton])
+        view.addSubview(container)
     }
     
     private func setAutoLayout() {
-        mainImage.snp.makeConstraints { make in
-            make.centerX.equalTo(view)
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(136)
-        }
-        
-        nicknameTextField.snp.makeConstraints { make in
-            make.top.equalTo(mainImage.snp.bottom).offset(96)
-            make.leading.equalTo(view.snp.leading).inset(89)
-            make.height.equalTo(saveButton.snp.height)
-        }
-        
-        saveButton.snp.makeConstraints { make in
-            make.top.equalTo(mainImage.snp.bottom).offset(96)
-            make.leading.equalTo(nicknameTextField.snp.trailing).offset(8)
+        container.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-65)
         }
     }
 }
@@ -63,33 +49,53 @@ extension OnboardingFirstViewController {
 // MARK: - Factory Methods
 
 extension OnboardingFirstViewController {
-    private func makeNicknameTextField() -> UITextField {
-        let textField = UITextField()
-        textField.borderStyle = .none
-        textField.backgroundColor = .pobitWhite
-        textField.layer.cornerRadius = 22
-        textField.addLeftPadding()
-        textField.addRightPadding()
-        textField.attributedPlaceholder = NSAttributedString(string: "닉네임 입력", attributes: [NSAttributedString.Key.foregroundColor: UIColor.pobitStone4])
-        
-        return textField
+    private func makeContainer() -> VStackView {
+        return VStackView(spacing: 75, [
+            makeMainImage(),
+            HStackView(spacing: 8, alignment: .fill, [
+                makeNicknameTextField(),
+                makeNextButton()
+            ])
+        ])
     }
     
     private func makeMainImage() -> UIImageView {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "mainTomato")
-        imageView.frame.size = CGSize(width: 185, height: 185)
+        
+        imageView.snp.makeConstraints { make in
+            make.width.equalTo(185)
+            make.height.equalTo(185)
+        }
         
         return imageView
     }
     
-    private func makeSaveButton() -> UIButton {
+    private func makeNicknameTextField() -> UITextField {
+        let textField = UITextField()
+        textField.borderStyle = .none
+        textField.layer.cornerRadius = 22
+        textField.backgroundColor = .pobitWhite
+        textField.textColor = .pobitStone4
+        textField.font = Pretendard.medium(size: 20)
+        textField.attributedPlaceholder = NSAttributedString(string: "닉네임 입력", attributes: [NSAttributedString.Key.foregroundColor: UIColor.pobitStone4])
+        textField.addLeftPadding()
+        textField.addRightPadding()
+        
+        return textField
+    }
+    
+    private func makeNextButton() -> UIButton {
         let button = UIButton(type: .custom, primaryAction: .init(handler: { _ in
             let onboardingChattingViewController = OnboardingChattingViewController()
             self.navigationController?.pushViewController(onboardingChattingViewController, animated: true)
         }))
-        
         button.setImage(UIImage(named: "arrow"), for: .normal)
+        
+        button.snp.makeConstraints { make in
+            make.width.equalTo(44)
+            make.height.equalTo(44)
+        }
         
         return button
     }
