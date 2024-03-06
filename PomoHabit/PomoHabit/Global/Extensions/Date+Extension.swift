@@ -8,7 +8,7 @@
 import Foundation
 
 extension Date {
-    func monthAndDaytoString(format : String = "MM.dd") -> String {
+    func dateToString(format : String = "MM.dd") -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         
