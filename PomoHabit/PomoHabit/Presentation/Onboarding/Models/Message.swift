@@ -13,7 +13,7 @@ enum ChatType: CaseIterable {
 }
 
 struct Model {
-    let message: String
-    let chatType: ChatType
+    var message: String
+    var chatType: ChatType
 }
 

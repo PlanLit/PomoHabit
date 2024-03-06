@@ -25,7 +25,7 @@ final class OnboardingFirstViewController: UIViewController {
     private let nicknameTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .none
-        textField.backgroundColor = UIColor.pobitWhite
+        textField.backgroundColor = .pobitWhite
         textField.layer.cornerRadius = 22
         textField.addLeftPadding()
         textField.addRightPadding()
@@ -45,7 +45,7 @@ final class OnboardingFirstViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.pobitSkin
+        view.backgroundColor = .pobitSkin
 
         setAddSubviews()
         setAutoLayout()

@@ -56,6 +56,7 @@ extension OnboardingChattingCell {
         guard let model = model else { return }
         guard let chattingLabelWidth = chattingLabel.text?.getEstimatedFrame(with: Pretendard.medium(size: 14) ?? .systemFont(ofSize: 14)).width else { return }
         
+        // receive와 send를 enum으로 만들어서 분기 나눠줌
         if case .receive = model.chatType {
             chattingLabel.snp.makeConstraints { make in
                 make.width.equalTo(chattingLabelWidth + 35)
