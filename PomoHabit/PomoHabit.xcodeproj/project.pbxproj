@@ -18,6 +18,8 @@
 		37144C932B8C544D008565C4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C922B8C544D008565C4 /* BaseViewController.swift */; };
 		37144C952B8C5472008565C4 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C942B8C5472008565C4 /* BaseView.swift */; };
 		37144C972B8C5674008565C4 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C962B8C5674008565C4 /* UITextField+Extension.swift */; };
+		37396CAA2B96103C001E81F3 /* PobitModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37396CA82B96103C001E81F3 /* PobitModel.xcdatamodeld */; };
+		37396CBC2B97823D001E81F3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37396CBB2B97823D001E81F3 /* CoreDataManager.swift */; };
 		373D0DF22B8F7B45004CC2C7 /* PobitNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D0DF12B8F7B45004CC2C7 /* PobitNavigationBarView.swift */; };
 		373D0DF42B8F7B5B004CC2C7 /* LayoutLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D0DF32B8F7B5B004CC2C7 /* LayoutLiterals.swift */; };
 		375AC9D52B8F817B002F82FF /* CAShapeLayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AC9D42B8F817B002F82FF /* CAShapeLayer+Extension.swift */; };
@@ -88,6 +90,8 @@
 		37144C922B8C544D008565C4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		37144C942B8C5472008565C4 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		37144C962B8C5674008565C4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		37396CA92B96103C001E81F3 /* PobitModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PobitModel.xcdatamodel; sourceTree = "<group>"; };
+		37396CBB2B97823D001E81F3 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		373D0DF12B8F7B45004CC2C7 /* PobitNavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PobitNavigationBarView.swift; sourceTree = "<group>"; };
 		373D0DF32B8F7B5B004CC2C7 /* LayoutLiterals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutLiterals.swift; sourceTree = "<group>"; };
 		375AC9D42B8F817B002F82FF /* CAShapeLayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Extension.swift"; sourceTree = "<group>"; };
@@ -184,6 +188,8 @@
 		37144C792B8C3379008565C4 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				37396CA82B96103C001E81F3 /* PobitModel.xcdatamodeld */,
+				37396CBB2B97823D001E81F3 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -626,6 +632,7 @@
 				F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */,
 				F870D85C2B8EFF3900DA4659 /* UILabel+Extension.swift in Sources */,
 				F85F8F5B2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift in Sources */,
+				37396CBC2B97823D001E81F3 /* CoreDataManager.swift in Sources */,
 				375AC9D52B8F817B002F82FF /* CAShapeLayer+Extension.swift in Sources */,
 				37144C972B8C5674008565C4 /* UITextField+Extension.swift in Sources */,
 				37144C8C2B8C3582008565C4 /* UIViewController+Extension.swift in Sources */,
@@ -669,6 +676,7 @@
 				378034A32B8F8D8A0046E6B8 /* PomoProgressBar.swift in Sources */,
 				378034AF2B8FACE50046E6B8 /* WhiteNoiseTableViewCell.swift in Sources */,
 				F88EB2DA2B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift in Sources */,
+				37396CAA2B96103C001E81F3 /* PobitModel.xcdatamodeld in Sources */,
 				F85F8F572B8DE33C00E69922 /* BasePaddingLabel.swift in Sources */,
 				73DFA2612B90280000C381A7 /* Message.swift in Sources */,
 				BAFEE14C2B96F795009F0D25 /* MypageView.swift in Sources */,
@@ -922,6 +930,19 @@
 			productName = "SnapKit-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		37396CA82B96103C001E81F3 /* PobitModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				37396CA92B96103C001E81F3 /* PobitModel.xcdatamodel */,
+			);
+			currentVersion = 37396CA92B96103C001E81F3 /* PobitModel.xcdatamodel */;
+			path = PobitModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 37144C5A2B8C32D6008565C4 /* Project object */;
 }
