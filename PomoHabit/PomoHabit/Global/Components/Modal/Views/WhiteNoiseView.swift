@@ -109,8 +109,10 @@ extension WhiteNoiseView: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: WhiteNoiseTableViewCell.identifier, for: indexPath) as? WhiteNoiseTableViewCell else {
             return UITableViewCell()}
         
+        cell.selectionStyle = .none
         cell.bindCell(with: tempModel[indexPath.item])
         
         return cell
     }
 }
+

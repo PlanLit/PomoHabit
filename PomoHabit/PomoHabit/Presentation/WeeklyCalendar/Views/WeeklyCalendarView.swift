@@ -15,9 +15,9 @@ final class WeeklyCalendarView: BaseView {
     
     // MARK: - Properties
     
-    let days = ["월","화","수","목","금","토","일"]
+    let weeklyDays = ["월","화","수","목","금","토","일"]
     
-    let dates = ["26","27","28","29","1","2","3"] // 임시
+    var weeklyDatesData : [Int] = []
     
     let habbitStates = [HabbitState.done,HabbitState.doNot,HabbitState.done,HabbitState.notStart,HabbitState.notStart,HabbitState.notStart,HabbitState.notStart] // 임시 데이터
     
@@ -42,7 +42,7 @@ final class WeeklyCalendarView: BaseView {
     
     private lazy var todayDateLabel: UILabel = {
         let label = UILabel()
-        label.text = Date().monthAndDaytoString()
+        label.text = Date().dateToString()
         label.font = Pretendard.bold(size: 50)
         label.textColor = .pobitBlack
         
@@ -241,7 +241,9 @@ extension WeeklyCalendarView {
         }
     }
     
-    
+    func setWeeklyDates(weeklyDates : [Int]){
+        weeklyDatesData = weeklyDates
+    }
 }
 
 // MARK: - Delegate
@@ -264,7 +266,7 @@ extension WeeklyCalendarView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return days.count
+        return weeklyDatesData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -272,8 +274,8 @@ extension WeeklyCalendarView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        cell.setDayLabelText(text: days[indexPath.item])
-        cell.setDateLabelText(text: dates[indexPath.item])
+        cell.setDayLabelText(text: weeklyDays[indexPath.item])
+        cell.setDateLabelText(text: weeklyDatesData[indexPath.item])
         cell.setCellBackgroundColor(state: habbitStates[indexPath.item])
         
         return cell

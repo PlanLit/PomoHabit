@@ -13,10 +13,10 @@ final class TabBarController: UITabBarController {
     
     // MARK: - Properties
     
-    let firstVC = ReportViewController()
-    let secondVC = TimerViewController()
+    let firstVC = TimerViewController()
+    let secondVC = ReportViewController()
     let thirdVC = WeeklyCalendarViewController()
-    let fourthVC = ViewController()
+    let fourthVC = MyPageViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +32,8 @@ extension TabBarController {
         viewControllers = [firstVC,secondVC,thirdVC,fourthVC]
         tabBar.tintColor = UIColor.pobitRed
         
-        firstVC.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "HomeImage"), tag: 1)
-        secondVC.tabBarItem = UITabBarItem(title: "타이머", image: UIImage(named: "TimerImage"), tag: 2)
+        firstVC.tabBarItem = UITabBarItem(title: "타이머", image: UIImage(named: "TimerImage"), tag: 1)
+        secondVC.tabBarItem = UITabBarItem(title: "습관 달성률", image: UIImage(named: "TargetImageBlack"), tag: 2)
         thirdVC.tabBarItem = UITabBarItem(title: "주간 캘린더", image: UIImage(named: "WeeklyCalendarImage"), tag: 3)
         fourthVC.tabBarItem = UITabBarItem(title: "마이 페이지", image: UIImage(named: "MyPageImage"), tag: 4)
     }
