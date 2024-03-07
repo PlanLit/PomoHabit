@@ -81,17 +81,23 @@ extension CoreDataManager {
 // MARK: - Onboarding
 
 extension CoreDataManager {
-    func createUser(targetHabit: String, targetDate: Date, targetTime: Date) {
+    func createUser(nickname: String, targetHabit: String, targetDate: Date, targetTime: Date) {
         let context = persistentContainer.viewContext
         let user = User(context: context)
+        user.nickname = nickname
         user.targetHabit = targetHabit
         user.targetDate = targetDate
         user.targetTime = targetTime
         
         saveContext()
+        
+        // 테스트용
+        if let savedNickname = user.nickname {
+            print("Saved nickname: \(savedNickname)")
+        }
     }
     
-    // 습관 변경
+    // 습관 생성, 변경
     func createDailyHabitInfo(user: User, targetTime: Date, hasDone: Bool, note: String) {
         let context = persistentContainer.viewContext
         let dailyHabitInfo = DailyHabitInfo(context: context)
@@ -148,15 +154,15 @@ extension CoreDataManager {
 extension CoreDataManager {
     
     /// 이번달 레포트
-    func fetchCurrentMonthReportInfo() throws -> (habitName: String, hasDone: Bool)? {
+    func fetchCurrentMonthReportInfo() throws -> (habitName: String, hasDone: Bool, targetTime: Date, goalTime: Date)? {
         guard let dailyHabitInfo: DailyHabitInfo = try fetchObject(for: DailyHabitInfo.self),
-              let user: User = try fetchObject(for: User.self),
               let habitName = dailyHabitInfo.habitName,
-              let targetTime = dailyHabitInfo.targetTime else {
+              let targetTime = dailyHabitInfo.targetTime,
+              let goalTime = dailyHabitInfo.goalTime else {
             throw CoreDataError.fetchFailed(reason: "Failed to fetch User in \(#function)")
         }
         
-        return (habitName: habitName, hasDone: dailyHabitInfo.hasDone)
+        return (habitName: habitName, hasDone: dailyHabitInfo.hasDone, targetTime: targetTime, goalTime: goalTime)
     }
     
     /// 습관 정보 모달
@@ -214,19 +220,20 @@ extension CoreDataManager {
             throw CoreDataError.fetchFailed(reason: "Failed to fetch TotalHabitInfo in \(#function)")
         }
         
-        // 왜 얘만 Int로 감싸야하는지?
         let ongoingDays = Int(totalHabitInfo.onGoingDaysCount)
         let totalProgressedTime = Int(totalHabitInfo.totalProggressedTime)
         return (ongoingDays, totalProgressedTime)
     }
     
     /// 닉네임 변경
-    func updateNickname(with newNickname: String) throws {
-        guard let user: User = try fetchObject(for: User.self) else {
-            throw CoreDataError.fetchFailed(reason: "Failed to fetch User in \(#function)")
-        }
-        
+    func updateUserNickname(to newNickname: String) {
+        guard let user = try? fetchObject(for: User.self) else { return }
         user.nickname = newNickname
         saveContext()
+
+        // 테스트용
+        if let updatedNickname = user.nickname {
+            print("Updated nickname: \(updatedNickname)")
+        }
     }
 }
