@@ -15,7 +15,7 @@ final class NicknameResiveView: BaseView {
     
     // MARK: - Properties
     
-    private let pobitNavigationBarView = PobitNavigationBarView(title: "닉네임 수정")
+    private let pobitNavigationBarView = PobitNavigationBarView(title: "닉네임 수정", viewType: .withDismissButton)
     private lazy var reviseSubmitButton = PobitButton.makePlainButton(title: "수정하기/등록하기", backgroundColor: .pobitRed)
     
     // MARK: - UI
