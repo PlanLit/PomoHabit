@@ -31,6 +31,7 @@ class WeeklyCalendarViewController: BaseViewController {
         super.viewDidLayoutSubviews()
         
         setUpWeeklyHabbitProgressView(progress: 0.6)
+        setUPWeeklyHabbitInfoView(state: HabitState.doNot, targetHabit: "독서", duringTime: "09:00 ~ 09:10", targetTime: "5", note: "메모입니다.")
     }
 }
 
@@ -60,12 +61,17 @@ extension WeeklyCalendarViewController {
 // MARK: - Methods
 
 extension WeeklyCalendarViewController {
-    private func setUpWeeklyHabbitProgressView(progress : Float){
+    private func setUpWeeklyHabbitProgressView(progress : Float) {
         let weeklyCalendarViewWidth = weeklyCalendarView.frame.width
         let progressCircleOffset = Int(weeklyCalendarViewWidth * CGFloat(progress)) - 5
         
         weeklyCalendarView.setProgressCircleImg(offset: progressCircleOffset)
-        weeklyCalendarView.setWeeklyHabbitProgressView(progress: progress)
+        weeklyCalendarView.setWeeklyHabitProgressView(progress: progress)
+    }
+    
+    private func setUPWeeklyHabbitInfoView(state: HabitState, targetHabit: String, duringTime: String, targetTime: String, note: String) {
+        weeklyCalendarView.setHabitInfoView(state: state, targetHabit: targetHabit, duringTime: duringTime, targetTime: targetTime)
+        weeklyCalendarView.setNoteContentLabel(note: note)
     }
 }
 
