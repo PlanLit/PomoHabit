@@ -46,11 +46,11 @@
 		73DFA2612B90280000C381A7 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA2602B90280000C381A7 /* Message.swift */; };
 		73DFA2632B903DB600C381A7 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA2622B903DB600C381A7 /* String+Extension.swift */; };
 		73DFA26F2B90AF6700C381A7 /* DaysCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA26E2B90AF6700C381A7 /* DaysCollectionViewCell.swift */; };
-		E0443C512B90263A004FC1F6 /* ReportDayButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0443C502B90263A004FC1F6 /* ReportDayButtonTableViewCell.swift */; };
-		E061E1302B901AC400A9174F /* ReportHabitEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12C2B901AC400A9174F /* ReportHabitEditViewController.swift */; };
-		E061E1312B901AC400A9174F /* ReportImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12D2B901AC400A9174F /* ReportImageCollectionViewController.swift */; };
-		E061E1322B901AC400A9174F /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12E2B901AC400A9174F /* ReportViewController.swift */; };
-		E061E1332B901AC400A9174F /* ReportHabitInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E061E12F2B901AC400A9174F /* ReportHabitInfoViewController.swift */; };
+		BAFEE14C2B96F795009F0D25 /* MypageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFEE14B2B96F795009F0D25 /* MypageView.swift */; };
+		BAFEE14E2B96F7C3009F0D25 /* MypageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFEE14D2B96F7C3009F0D25 /* MypageModel.swift */; };
+		BAFEE1502B96F848009F0D25 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFEE14F2B96F848009F0D25 /* MypageViewController.swift */; };
+		BAFEE1522B96F8E4009F0D25 /* NicknameReviseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFEE1512B96F8E4009F0D25 /* NicknameReviseView.swift */; };
+		BAFEE1542B96F900009F0D25 /* MypageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFEE1532B96F900009F0D25 /* MypageTableViewCell.swift */; };
 		E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */; };
 		E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5412B8D5D9900A77BAE /* HStackView.swift */; };
 		E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */; };
@@ -65,8 +65,13 @@
 		F88EB2D82B8DC0EB0073BDDA /* WeeklyCalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2D72B8DC0EB0073BDDA /* WeeklyCalendarModel.swift */; };
 		F88EB2DA2B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2D92B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift */; };
 		F88EB2DC2B8DC1120073BDDA /* WeeklyCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2DB2B8DC1120073BDDA /* WeeklyCalendarView.swift */; };
-		F89A9F2F2B96BDC40067C70A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115972B901D5E003E6459 /* SnapKit */; };
-		F89A9F302B96BDC40067C70A /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115992B901D5E003E6459 /* SnapKit-Dynamic */; };
+		F8A4FB882B96F27B00E46EA1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115972B901D5E003E6459 /* SnapKit */; };
+		F8A4FB892B96F27B00E46EA1 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115992B901D5E003E6459 /* SnapKit-Dynamic */; };
+		F8A4FB952B96F2A300E46EA1 /* ReportImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB8D2B96F2A300E46EA1 /* ReportImageCollectionViewController.swift */; };
+		F8A4FB962B96F2A300E46EA1 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB8E2B96F2A300E46EA1 /* ReportViewController.swift */; };
+		F8A4FB972B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB912B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift */; };
+		F8A4FB982B96F2A300E46EA1 /* ReportHabitInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB922B96F2A300E46EA1 /* ReportHabitInfoView.swift */; };
+		F8A4FB992B96F2A300E46EA1 /* ReportHabitEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB942B96F2A300E46EA1 /* ReportHabitEditView.swift */; };
 		F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD372B8C7FC900712CBF /* NoteView.swift */; };
 		F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD392B8C7FF200712CBF /* NoteTextView.swift */; };
 /* End PBXBuildFile section */
@@ -113,11 +118,11 @@
 		73DFA2602B90280000C381A7 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		73DFA2622B903DB600C381A7 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		73DFA26E2B90AF6700C381A7 /* DaysCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysCollectionViewCell.swift; sourceTree = "<group>"; };
-		E0443C502B90263A004FC1F6 /* ReportDayButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDayButtonTableViewCell.swift; sourceTree = "<group>"; };
-		E061E12C2B901AC400A9174F /* ReportHabitEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHabitEditViewController.swift; sourceTree = "<group>"; };
-		E061E12D2B901AC400A9174F /* ReportImageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportImageCollectionViewController.swift; sourceTree = "<group>"; };
-		E061E12E2B901AC400A9174F /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
-		E061E12F2B901AC400A9174F /* ReportHabitInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHabitInfoViewController.swift; sourceTree = "<group>"; };
+		BAFEE14B2B96F795009F0D25 /* MypageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageView.swift; sourceTree = "<group>"; };
+		BAFEE14D2B96F7C3009F0D25 /* MypageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageModel.swift; sourceTree = "<group>"; };
+		BAFEE14F2B96F848009F0D25 /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
+		BAFEE1512B96F8E4009F0D25 /* NicknameReviseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameReviseView.swift; sourceTree = "<group>"; };
+		BAFEE1532B96F900009F0D25 /* MypageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageTableViewCell.swift; sourceTree = "<group>"; };
 		E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButton.swift; sourceTree = "<group>"; };
 		E0C5B5412B8D5D9900A77BAE /* HStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HStackView.swift; sourceTree = "<group>"; };
 		E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VStackView.swift; sourceTree = "<group>"; };
@@ -132,6 +137,11 @@
 		F88EB2D72B8DC0EB0073BDDA /* WeeklyCalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarModel.swift; sourceTree = "<group>"; };
 		F88EB2D92B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarViewController.swift; sourceTree = "<group>"; };
 		F88EB2DB2B8DC1120073BDDA /* WeeklyCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarView.swift; sourceTree = "<group>"; };
+		F8A4FB8D2B96F2A300E46EA1 /* ReportImageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportImageCollectionViewController.swift; sourceTree = "<group>"; };
+		F8A4FB8E2B96F2A300E46EA1 /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		F8A4FB912B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportDayButtonTableViewCell.swift; sourceTree = "<group>"; };
+		F8A4FB922B96F2A300E46EA1 /* ReportHabitInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHabitInfoView.swift; sourceTree = "<group>"; };
+		F8A4FB942B96F2A300E46EA1 /* ReportHabitEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHabitEditView.swift; sourceTree = "<group>"; };
 		F8E3CD372B8C7FC900712CBF /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		F8E3CD392B8C7FF200712CBF /* NoteTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,8 +151,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F89A9F302B96BDC40067C70A /* SnapKit-Dynamic in Frameworks */,
-				F89A9F2F2B96BDC40067C70A /* SnapKit in Frameworks */,
+				F8A4FB892B96F27B00E46EA1 /* SnapKit-Dynamic in Frameworks */,
+				F8A4FB882B96F27B00E46EA1 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +211,8 @@
 		37144C7B2B8C33AC008565C4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				E061E12B2B901AA100A9174F /* Reports */,
+				BAFEE1472B96F749009F0D25 /* Mypage */,
+				F8A4FB8B2B96F2A300E46EA1 /* Report */,
 				37144C822B8C3437008565C4 /* WeeklyCalendar */,
 				37144C812B8C3434008565C4 /* Timer */,
 				73DFA2542B9026C900C381A7 /* Onboarding */,
@@ -398,32 +409,40 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		E0443C4F2B90244C004FC1F6 /* Views */ = {
+		BAFEE1472B96F749009F0D25 /* Mypage */ = {
 			isa = PBXGroup;
 			children = (
-				E0443C502B90263A004FC1F6 /* ReportDayButtonTableViewCell.swift */,
+				BAFEE14A2B96F77D009F0D25 /* Views */,
+				BAFEE1492B96F763009F0D25 /* Models */,
+				BAFEE1482B96F754009F0D25 /* Controllers */,
+			);
+			path = Mypage;
+			sourceTree = "<group>";
+		};
+		BAFEE1482B96F754009F0D25 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BAFEE14F2B96F848009F0D25 /* MypageViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		BAFEE1492B96F763009F0D25 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BAFEE14D2B96F7C3009F0D25 /* MypageModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BAFEE14A2B96F77D009F0D25 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BAFEE14B2B96F795009F0D25 /* MypageView.swift */,
+				BAFEE1512B96F8E4009F0D25 /* NicknameReviseView.swift */,
+				BAFEE1532B96F900009F0D25 /* MypageTableViewCell.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		E061E12B2B901AA100A9174F /* Reports */ = {
-			isa = PBXGroup;
-			children = (
-				E061E1342B901AC900A9174F /* Conrollers */,
-				E0443C4F2B90244C004FC1F6 /* Views */,
-			);
-			path = Reports;
-			sourceTree = "<group>";
-		};
-		E061E1342B901AC900A9174F /* Conrollers */ = {
-			isa = PBXGroup;
-			children = (
-				E061E12E2B901AC400A9174F /* ReportViewController.swift */,
-				E061E12D2B901AC400A9174F /* ReportImageCollectionViewController.swift */,
-				E061E12F2B901AC400A9174F /* ReportHabitInfoViewController.swift */,
-				E061E12C2B901AC400A9174F /* ReportHabitEditViewController.swift */,
-			);
-			path = Conrollers;
 			sourceTree = "<group>";
 		};
 		E0C5B53C2B8D5AC000A77BAE /* DayButton */ = {
@@ -470,6 +489,50 @@
 				F88EB2D72B8DC0EB0073BDDA /* WeeklyCalendarModel.swift */,
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		F8A4FB8B2B96F2A300E46EA1 /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				F8A4FB8C2B96F2A300E46EA1 /* Conrollers */,
+				F8A4FB8F2B96F2A300E46EA1 /* Views */,
+			);
+			path = Report;
+			sourceTree = "<group>";
+		};
+		F8A4FB8C2B96F2A300E46EA1 /* Conrollers */ = {
+			isa = PBXGroup;
+			children = (
+				F8A4FB8E2B96F2A300E46EA1 /* ReportViewController.swift */,
+				F8A4FB8D2B96F2A300E46EA1 /* ReportImageCollectionViewController.swift */,
+			);
+			path = Conrollers;
+			sourceTree = "<group>";
+		};
+		F8A4FB8F2B96F2A300E46EA1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F8A4FB902B96F2A300E46EA1 /* HabitInfo */,
+				F8A4FB932B96F2A300E46EA1 /* HabitEdit */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F8A4FB902B96F2A300E46EA1 /* HabitInfo */ = {
+			isa = PBXGroup;
+			children = (
+				F8A4FB912B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift */,
+				F8A4FB922B96F2A300E46EA1 /* ReportHabitInfoView.swift */,
+			);
+			path = HabitInfo;
+			sourceTree = "<group>";
+		};
+		F8A4FB932B96F2A300E46EA1 /* HabitEdit */ = {
+			isa = PBXGroup;
+			children = (
+				F8A4FB942B96F2A300E46EA1 /* ReportHabitEditView.swift */,
+			);
+			path = HabitEdit;
 			sourceTree = "<group>";
 		};
 		F8E3CD362B8C7FB600712CBF /* Note */ = {
@@ -563,9 +626,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F88EB2D82B8DC0EB0073BDDA /* WeeklyCalendarModel.swift in Sources */,
+				F8A4FB992B96F2A300E46EA1 /* ReportHabitEditView.swift in Sources */,
+				BAFEE1542B96F900009F0D25 /* MypageTableViewCell.swift in Sources */,
 				378034AD2B8FAB5B0046E6B8 /* WhiteNoiseView.swift in Sources */,
 				F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */,
-				E061E1322B901AC400A9174F /* ReportViewController.swift in Sources */,
 				F870D85C2B8EFF3900DA4659 /* UILabel+Extension.swift in Sources */,
 				F85F8F5B2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift in Sources */,
 				37396CBC2B97823D001E81F3 /* CoreDataManager.swift in Sources */,
@@ -573,10 +637,13 @@
 				37144C972B8C5674008565C4 /* UITextField+Extension.swift in Sources */,
 				37144C8C2B8C3582008565C4 /* UIViewController+Extension.swift in Sources */,
 				376B91BA2B8CE6B6004CBB16 /* PobitButton.swift in Sources */,
+				BAFEE1502B96F848009F0D25 /* MypageViewController.swift in Sources */,
 				73DFA25B2B90275600C381A7 /* OnboardingChattingViewController.swift in Sources */,
 				F85F8F592B8DE54F00E69922 /* Date+Extension.swift in Sources */,
 				E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */,
 				F85F8F612B8E25EE00E69922 /* HabbitInfoVIew.swift in Sources */,
+				BAFEE14E2B96F7C3009F0D25 /* MypageModel.swift in Sources */,
+				F8A4FB962B96F2A300E46EA1 /* ReportViewController.swift in Sources */,
 				37144C6A2B8C32D6008565C4 /* ViewController.swift in Sources */,
 				378034AB2B8F9D7A0046E6B8 /* MemoView.swift in Sources */,
 				E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */,
@@ -587,7 +654,6 @@
 				37144C8E2B8C5339008565C4 /* UIView+Extension.swift in Sources */,
 				F88EB2DC2B8DC1120073BDDA /* WeeklyCalendarView.swift in Sources */,
 				378034A22B8F8D860046E6B8 /* PomoView.swift in Sources */,
-				E061E1302B901AC400A9174F /* ReportHabitEditViewController.swift in Sources */,
 				E0C5B5472B8D63B200A77BAE /* DayButtonsTableViewCell.swift in Sources */,
 				378034A42B8F8D8D0046E6B8 /* PomoModel.swift in Sources */,
 				73DFA25D2B90276400C381A7 /* OnboardingFirstViewController.swift in Sources */,
@@ -596,14 +662,14 @@
 				F85F8F632B8E26E100E69922 /* ImageViewAndLabelView.swift in Sources */,
 				37CC614C2B90C07900CBAB45 /* BottomSheetPresentable.swift in Sources */,
 				73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */,
+				F8A4FB972B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift in Sources */,
 				373D0DF22B8F7B45004CC2C7 /* PobitNavigationBarView.swift in Sources */,
 				E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */,
-				E0443C512B90263A004FC1F6 /* ReportDayButtonTableViewCell.swift in Sources */,
-				E061E1312B901AC400A9174F /* ReportImageCollectionViewController.swift in Sources */,
-				E061E1332B901AC400A9174F /* ReportHabitInfoViewController.swift in Sources */,
+				F8A4FB982B96F2A300E46EA1 /* ReportHabitInfoView.swift in Sources */,
 				F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */,
 				37144C682B8C32D6008565C4 /* SceneDelegate.swift in Sources */,
 				73DFA2592B90274700C381A7 /* OnboardingChattingCell.swift in Sources */,
+				BAFEE1522B96F8E4009F0D25 /* NicknameReviseView.swift in Sources */,
 				37144C902B8C53B0008565C4 /* UIStackView+Extension.swift in Sources */,
 				373D0DF42B8F7B5B004CC2C7 /* LayoutLiterals.swift in Sources */,
 				73DFA26F2B90AF6700C381A7 /* DaysCollectionViewCell.swift in Sources */,
@@ -613,6 +679,8 @@
 				37396CAA2B96103C001E81F3 /* PobitModel.xcdatamodeld in Sources */,
 				F85F8F572B8DE33C00E69922 /* BasePaddingLabel.swift in Sources */,
 				73DFA2612B90280000C381A7 /* Message.swift in Sources */,
+				BAFEE14C2B96F795009F0D25 /* MypageView.swift in Sources */,
+				F8A4FB952B96F2A300E46EA1 /* ReportImageCollectionViewController.swift in Sources */,
 				37144C952B8C5472008565C4 /* BaseView.swift in Sources */,
 				376B91AC2B8C6835004CBB16 /* ColorLiterals.swift in Sources */,
 				73DFA2632B903DB600C381A7 /* String+Extension.swift in Sources */,

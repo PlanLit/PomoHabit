@@ -15,8 +15,8 @@ extension UILabel {
     }
     
     func setPrimaryColorLabel(text: String) -> BasePaddingLabel {
-        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-        label.text = "Today"
+        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+        label.text = text
         label.textColor = .white
         label.font = Pretendard.bold(size: 12)
         label.backgroundColor = UIColor.pobitRed2
@@ -25,4 +25,13 @@ extension UILabel {
         
         return label
     }
+    
+    func makeMyPageLabel(text: String) -> UILabel {
+           let label = UILabel()
+           label.text = text
+           label.textColor = .pobitStone2
+           label.font = Pretendard.regular(size: 12)
+
+           return label
+       }
 }

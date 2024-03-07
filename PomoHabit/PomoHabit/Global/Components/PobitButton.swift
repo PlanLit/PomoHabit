@@ -87,7 +87,7 @@ extension PobitButton {
 
 extension PobitButton {
     static func makeSquareButton(title: String) -> PobitButton {
-        let button = PobitButton()
+        let button = PobitButton(type: .system)
         let style = WithBorderButtonStyle(borderColor: .pobitStone4)
         
         button.setStyle(style)
@@ -99,7 +99,7 @@ extension PobitButton {
     }
     
     static func makePlainButton(title: String, backgroundColor: UIColor) -> PobitButton {
-        let button = PobitButton()
+        let button = PobitButton(type: .system)
         let style = PlainButtonStyle(backgroundColor: backgroundColor)
         
         button.style = style
