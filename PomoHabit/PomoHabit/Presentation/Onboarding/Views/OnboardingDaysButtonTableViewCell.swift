@@ -60,36 +60,22 @@ extension OnboardingDaysButtonTableViewCell {
     private func makeContainer() -> VStackView {
         return VStackView(spacing: 5, alignment: .leading, [
             HStackView(spacing: 5, [
-                makeDayButtonView(dayType: .mon, isSelected: buttonSelectionStates?[0] ?? false, action: { state in
-                    self.action?(0, state)
-                }),
-                makeDayButtonView(dayType: .tue, isSelected: buttonSelectionStates?[1] ?? false, action: { state in
-                    self.action?(1, state)
-                }),
-                makeDayButtonView(dayType: .wed, isSelected: buttonSelectionStates?[2] ?? false, action: { state in
-                    self.action?(2, state)
-                }),
-                makeDayButtonView(dayType: .thu, isSelected: buttonSelectionStates?[3] ?? false, action: { state in
-                    self.action?(3, state)
-                }),
-                makeDayButtonView(dayType: .fri, isSelected: buttonSelectionStates?[4] ?? false, action: { state in
-                    self.action?(4, state)
-                }),
+                makeDayButtonView(dayType: .mon, index: 0, isSelected: buttonSelectionStates?[0] ?? false),
+                makeDayButtonView(dayType: .tue, index: 1, isSelected: buttonSelectionStates?[1] ?? false),
+                makeDayButtonView(dayType: .wed, index: 2, isSelected: buttonSelectionStates?[2] ?? false),
+                makeDayButtonView(dayType: .thu, index: 3, isSelected: buttonSelectionStates?[3] ?? false),
+                makeDayButtonView(dayType: .fri, index: 4, isSelected: buttonSelectionStates?[4] ?? false),
             ]),
             HStackView(spacing: 5, [
-                makeDayButtonView(dayType: .sat, isSelected: buttonSelectionStates?[5] ?? false, action: { state in
-                    self.action?(5, state)
-                }),
-                makeDayButtonView(dayType: .sun, isSelected: buttonSelectionStates?[6] ?? false, action: { state in
-                    self.action?(6, state)
-                }),
+                makeDayButtonView(dayType: .sat, index: 5, isSelected: buttonSelectionStates?[5] ?? false),
+                makeDayButtonView(dayType: .sun, index: 6, isSelected: buttonSelectionStates?[6] ?? false),
             ])
         ])
     }
     
-    private func makeDayButtonView(dayType: DayButton.Day, isSelected: Bool = false, action: @escaping ((Bool) -> Void)) -> DayButton {
+    private func makeDayButtonView(dayType: DayButton.Day, index: Int, isSelected: Bool = false) -> DayButton {
         let dayButton = DayButton(dayType: dayType, isSelected: isSelected) { state in
-            self.action?(0, state)
+            self.action?(index, state)
         }
         
         dayButton.snp.makeConstraints { make in
