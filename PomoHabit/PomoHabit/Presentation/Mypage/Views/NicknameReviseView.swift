@@ -16,7 +16,7 @@ final class NicknameResiveView: BaseView {
     // MARK: - Properties
     
     private let pobitNavigationBarView = PobitNavigationBarView(title: "닉네임 수정")
-    private lazy var reviseSubmitButton = PobitButton.makePlainButton(title: "수정하기/등록하기", backgroundColor: .pobitRed)
+    private lazy var reviseSubmitButton = PobitButton.makePlainButton(title: "수정하기", backgroundColor: .pobitRed)
     
     // MARK: - UI
     
@@ -39,7 +39,7 @@ final class NicknameResiveView: BaseView {
         let label = UILabel()
         label.text = "대문자만 입력해주세요"
         label.textColor = .pobitStone2
-        label.font = Pretendard.regular(size: 20)
+        label.font = Pretendard.regular(size: 14)
         
         return label
     }()
@@ -68,13 +68,13 @@ extension NicknameResiveView {
     
     private func setAutoLayout() {
         pobitNavigationBarView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide)
+            make.top.equalTo(safeAreaLayoutGuide).offset(LayoutLiterals.upperPrimarySpacing)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(58)
         }
         
         nicknameReviseTextField.snp.makeConstraints { make in
-            make.top.equalTo(pobitNavigationBarView.snp.bottom).offset(35)
+            make.top.equalTo(pobitNavigationBarView.snp.bottom).offset(27)
             make.leading.equalTo(safeAreaLayoutGuide).offset(LayoutLiterals.minimumHorizontalSpacing)
             make.trailing.equalTo(safeAreaLayoutGuide).inset(LayoutLiterals.minimumHorizontalSpacing)
             make.height.equalTo(64)
@@ -85,12 +85,12 @@ extension NicknameResiveView {
             make.leading.equalTo(safeAreaLayoutGuide).offset(LayoutLiterals.minimumHorizontalSpacing)
             
         }
+        
         reviseSubmitButton.snp.makeConstraints { make in
             make.top.equalTo(nicknameReviseLabel.snp.bottom).offset(139)
             make.centerX.equalToSuperview()
             make.height.equalTo(62)
-            make.leading.equalTo(safeAreaLayoutGuide).offset(61)
-            make.trailing.equalTo(safeAreaLayoutGuide).inset(61)
+            make.width.equalTo(324)
         }
     }
 }

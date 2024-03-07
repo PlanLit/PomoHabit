@@ -145,7 +145,8 @@ final class MyPageView: BaseView {
         let topMargin: CGFloat = 360
         let tableViewFrame = CGRect(x: 0, y: topMargin, width: self.bounds.width, height: self.bounds.height - topMargin)
         let myPageTableView = UITableView(frame: tableViewFrame, style: .plain)
-        myPageTableView.separatorStyle = .none
+        myPageTableView.separatorStyle = .singleLine
+        myPageTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         myPageTableView.dataSource = self
         myPageTableView.delegate = self
         myPageTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: MyPageTableViewCell.reuseIdentifier)
@@ -252,7 +253,7 @@ extension MyPageView: UITableViewDataSource {
         }
         let model = myPageCellModels[indexPath.row]
         cell.textLabel?.text = model.title
-        cell.textLabel?.font = Pretendard.bold(size: 20)
+        cell.textLabel?.font = Pretendard.regular(size: 20)
         cell.textLabel?.textColor = .pobitStone2
         
         return cell

@@ -29,4 +29,9 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
         super.viewDidLoad()
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        presentBottomSheet(rootView: NicknameResiveView(), detents: [.medium()])
+    }
 }
