@@ -37,6 +37,8 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
         
         setAddSubviews()
         setAutoLayout()
+//        getMonthHabitCompletedInfo()
+        getSelectedDayHabitInfo(selectedDay: "2024-03-07")
     }
 }
 
@@ -305,5 +307,47 @@ extension ReportViewController {
 extension ReportViewController {
     enum Check {
         case complete, fail, rest
+    }
+}
+
+extension ReportViewController {
+    func getMonthHabitCompletedInfo() {
+        do {
+            let monthHabitCompletedInfo = try CoreDataManager.shared.fetchDailyHabitInfos().map{$0.hasDone} // 한달 동안의 습관 완료 기록, 습관을 시작하는날이 아닌경우에는 표시안됨
+            print(monthHabitCompletedInfo)
+        }catch {
+            print(error)
+        }
+    }
+    
+    func getSelectedDayHabitInfo(selectedDay : String) {
+        do {
+            let habitInfos = try CoreDataManager.shared.fetchDailyHabitInfos()
+            let habitInfoDays = habitInfos.map{$0.day!}
+            if let index = habitInfoDays.firstIndex(where: {$0 == selectedDay}) {
+                let selectedHabitInfo = habitInfos[index]
+                guard let day = selectedHabitInfo.day else { return }
+                let goalTime = selectedHabitInfo.goalTime
+                let hasDone = selectedHabitInfo.hasDone
+                guard let note = selectedHabitInfo.note else { return }
+                
+            }
+            
+        }catch {
+            print(error)
+        }
+    }
+    func getUserData() {
+        do {
+            let userData = try CoreDataManager.shared.fetchUser()
+            guard let nickName = userData?.nickName else { return } // 닉네임
+            guard let targetHabit = userData?.targetHabit else { return } // 할 습관
+            guard let targetDate = userData?.targetDate else { return } // 습관을 진행할 요일
+            guard let startTime = userData?.startTime else { return } // 습관 진행 시간
+            guard let whiteNoiseType = userData?.whiteNoiseType else { return } // 사운드
+            
+        } catch {
+            print(error)
+        }
     }
 }

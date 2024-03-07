@@ -85,18 +85,6 @@ extension OnboardingFirstViewController {
 
 extension OnboardingFirstViewController {
     @objc private func didTapSubmitButton() {
-        guard let nickname = nicknameTextField.text else { return }
-
-              // 임시값
-              let targetHabit = "Running"
-              let targetDate = Date()
-              let targetTime = Date()
-
-              CoreDataManager.shared.createUser(nickname: nickname, targetHabit: targetHabit, targetDate: targetDate, targetTime: targetTime)
-        
-        // 닉네임 변경 테스트
-        CoreDataManager.shared.updateUserNickname(to: "변경된 닉네임")
-        
         let onboardingChattingViewController = OnboardingChattingViewController()
         self.navigationController?.pushViewController(onboardingChattingViewController, animated: true)
     }
