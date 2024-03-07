@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - OnboardingChattingCellData
+
 struct OnboardingChattingCellData {
     var chatDirection: ChatDirection
     var message: String?

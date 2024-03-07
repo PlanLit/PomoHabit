@@ -1,15 +1,15 @@
 //
-//  OnboardingFirstViewController.swift
+//  OnboardingLoginViewController.swift
 //  PomoHabit
 //
-//  Created by 최유리 on 2/29/24.
+//  Created by JiHoon K on 3/8/24.
 //
 
 import UIKit
 
 // MARK: - OnboardingFirstViewController
 
-final class OnboardingFirstViewController: UIViewController {
+final class OnboardingLoginViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -29,7 +29,7 @@ final class OnboardingFirstViewController: UIViewController {
 
 // MARK: - Layout Helpers
 
-extension OnboardingFirstViewController {
+extension OnboardingLoginViewController {
     private func setUpSelf() {
         view.backgroundColor = .pobitSkin
     }
@@ -48,7 +48,7 @@ extension OnboardingFirstViewController {
 
 // MARK: - Factory Methods
 
-extension OnboardingFirstViewController {
+extension OnboardingLoginViewController {
     private func makeContainer() -> VStackView {
         return VStackView(spacing: 75, [
             makeMainImage(),
@@ -87,7 +87,7 @@ extension OnboardingFirstViewController {
     
     private func makeNextButton() -> UIButton {
         let button = UIButton(type: .custom, primaryAction: .init(handler: { _ in
-            let onboardingChattingViewController = OnboardingChattingViewController()
+            let onboardingChattingViewController = OnboardingHabitRegistViewController()
             self.navigationController?.pushViewController(onboardingChattingViewController, animated: true)
         }))
         button.setImage(UIImage(named: "arrow"), for: .normal)
