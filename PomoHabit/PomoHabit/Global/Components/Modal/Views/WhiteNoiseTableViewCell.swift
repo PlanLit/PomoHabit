@@ -25,12 +25,14 @@ final class WhiteNoiseTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var playButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("재생", for: .normal)
-        return button
+    private lazy var checkImaegView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "CheckImage")
+        imageView.isHidden = true
+        
+        return imageView
     }()
-
+    
     // MARK: - Life Cycle
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -46,7 +48,12 @@ final class WhiteNoiseTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
+        if isSelected {
+            checkImaegView.isHidden = false
+        } else {
+            checkImaegView.isHidden = true
+        }
     }
 }
 
@@ -54,7 +61,7 @@ final class WhiteNoiseTableViewCell: UITableViewCell {
 
 extension WhiteNoiseTableViewCell {
     private func setAddSubViews() {
-        addSubViews([titleLabel, playButton])
+        addSubViews([titleLabel, checkImaegView])
     }
     
     private func setAutoLayout() {
@@ -62,7 +69,7 @@ extension WhiteNoiseTableViewCell {
             make.centerY.leading.equalToSuperview()
         }
         
-        playButton.snp.makeConstraints { make in
+        checkImaegView.snp.makeConstraints { make in
             make.centerY.equalTo(titleLabel)
             make.trailing.equalToSuperview()
         }
@@ -74,6 +81,10 @@ extension WhiteNoiseTableViewCell {
 extension WhiteNoiseTableViewCell {
     func bindCell(with title: String) {
         titleLabel.text = title
+    }
+    
+    func selectedCell() {
+        checkImaegView.isHidden = false
     }
 }
 
