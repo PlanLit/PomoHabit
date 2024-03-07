@@ -46,9 +46,8 @@ extension CoreDataManager {
     }
     
     private func fetchObject<T: NSManagedObject>(for type: T.Type) throws -> T? {
-        guard let request = T.fetchRequest() as? NSFetchRequest<T> else {
-            fatalError("Could not cast fetchRequest to NSFetchRequest<T>")
-        }
+        let entityName = String(describing: T.self)
+        let request = NSFetchRequest<T>(entityName: entityName)
         
         let context = persistentContainer.viewContext
         
@@ -71,6 +70,21 @@ extension CoreDataManager {
         return fetchedObject
     }
     
+    
+    func fetchUser() throws -> User? {
+        do {
+            if let user: User = try fetchObject(for: User.self) {
+                print(user)
+                return user
+            } else {
+                throw CoreDataError.fetchFailed(reason: "Failed to fetch User")
+            }
+        } catch let error {
+            print("Fetching user failed with error: \(error)")
+            throw CoreDataError.fetchFailed(reason: error.localizedDescription)
+        }
+    }
+    
     private func updateGoalTime(for habitInfo: DailyHabitInfo) {
         let currentGoalTimeInSeconds = habitInfo.goalTime?.timeIntervalSinceReferenceDate ?? 5 * 60
         let updatedGoalTimeInSeconds = min(currentGoalTimeInSeconds + 60, 25 * 60)
@@ -82,12 +96,24 @@ extension CoreDataManager {
 
 extension CoreDataManager {
     func createUser(nickname: String, targetHabit: String, targetDate: Date, targetTime: Date) {
+        
+        // db에 이미 존재하는 유저가 있는지 확인
+        do {
+            if let _ = try fetchUser() {
+                print("유저가 이미 존재합니다")
+                return
+            }
+        } catch {
+            print(error)
+        }
+        
         let context = persistentContainer.viewContext
         let user = User(context: context)
         user.nickname = nickname
         user.targetHabit = targetHabit
         user.targetDate = targetDate
         user.targetTime = targetTime
+        user.whiteNoiseType = nil
         
         saveContext()
         
@@ -230,10 +256,31 @@ extension CoreDataManager {
         guard let user = try? fetchObject(for: User.self) else { return }
         user.nickname = newNickname
         saveContext()
-
+        
         // 테스트용
         if let updatedNickname = user.nickname {
             print("Updated nickname: \(updatedNickname)")
+        }
+    }
+}
+
+// MARK: - Delete
+
+extension CoreDataManager {
+    func deleteAllData() {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "User")
+        let context = persistentContainer.viewContext
+        
+        do {
+            let objects = try context.fetch(fetchRequest)
+            for object in objects {
+                if let managedObject = object as? NSManagedObject {
+                    context.delete(managedObject)
+                }
+            }
+            try context.save()
+        } catch let error {
+            print("Error deleting all data: \(error.localizedDescription)")
         }
     }
 }
