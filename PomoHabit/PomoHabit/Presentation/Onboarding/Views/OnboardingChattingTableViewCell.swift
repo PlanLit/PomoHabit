@@ -9,11 +9,11 @@ import UIKit
 
 // MARK: - OnboardingChattingCell
 
-final class OnboardingChattingCell: UITableViewCell {
+final class OnboardingChattingTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    private var model: OnboardingModel?
+    private var data: OnboardingChattingCellData?
     
     private lazy var chattingLabel: BasePaddingLabel = makeChattingLabel()
     
@@ -33,7 +33,7 @@ final class OnboardingChattingCell: UITableViewCell {
 
 // MARK: - Layout Helpers
 
-extension OnboardingChattingCell {
+extension OnboardingChattingTableViewCell {
     private func setAddSubviews() {
         contentView.addSubview(chattingLabel)
     }
@@ -41,23 +41,25 @@ extension OnboardingChattingCell {
     private func setAutoLayout() {
         chattingLabel.snp.makeConstraints { make in
             make.height.equalTo(44)
+            make.centerY.equalToSuperview()
         }
     }
     
-    func configureCell(with model: OnboardingModel) {
+    func configureCell(with model: OnboardingChattingCellData) {
         self.backgroundColor = .clear
         self.chattingLabel.text = model.message
-        self.model = model
+        self.data = model
         
-        switch model.chatType {
-        case .receive:
+        switch model.chatDirection {
+        case .incoming:
             chattingLabel.snp.makeConstraints { make in
-                make.leading.equalTo(contentView.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
+                make.leading.equalToSuperview().offset(LayoutLiterals.minimumHorizontalSpacing)
             }
-        case .send:
+        case .outgoing:
             chattingLabel.snp.makeConstraints { make in
-                make.trailing.equalTo(contentView.snp.trailing).offset(-LayoutLiterals.minimumHorizontalSpacing)
+                make.trailing.equalToSuperview().offset(-LayoutLiterals.minimumHorizontalSpacing)
             }
+            
             chattingLabel.backgroundColor = .pobitGreen
             chattingLabel.textColor = .pobitWhite
         }
@@ -66,7 +68,7 @@ extension OnboardingChattingCell {
 
 // MARK: - Factory Methods
 
-extension OnboardingChattingCell {
+extension OnboardingChattingTableViewCell {
     private func makeChattingLabel() -> BasePaddingLabel {
         let label = BasePaddingLabel(padding: UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15))
         label.font = Pretendard.medium(size: 16)

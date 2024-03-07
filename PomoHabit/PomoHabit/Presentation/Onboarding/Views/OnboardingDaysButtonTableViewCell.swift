@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - DaysTableViewCell
 
-final class DaysTableViewCell: UITableViewCell {
+final class OnboardingDaysButtonTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
@@ -37,7 +37,7 @@ final class DaysTableViewCell: UITableViewCell {
 
 // MARK: - Layout Helpers
 
-extension DaysTableViewCell {
+extension OnboardingDaysButtonTableViewCell {
     private func setSelf() {
         self.backgroundColor = .clear
     }
@@ -48,14 +48,15 @@ extension DaysTableViewCell {
     
     private func setAutoLayout() {
         buttonContainer.snp.makeConstraints { make in
-            make.trailing.equalTo(contentView.snp.trailing).offset(-20)
+            make.trailing.equalToSuperview().offset(-LayoutLiterals.minimumHorizontalSpacing)
+            make.centerY.equalToSuperview()
         }
     }
 }
 
 // MARK: - Factory methods
 
-extension DaysTableViewCell {
+extension OnboardingDaysButtonTableViewCell {
     private func makeContainer() -> VStackView {
         return VStackView(spacing: 5, alignment: .leading, [
             HStackView(spacing: 5, [
