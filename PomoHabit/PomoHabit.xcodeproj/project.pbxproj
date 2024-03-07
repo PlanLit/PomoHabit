@@ -49,7 +49,7 @@
 		BAFEE14C2B96F795009F0D25 /* MypageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFEE14B2B96F795009F0D25 /* MypageView.swift */; };
 		BAFEE14E2B96F7C3009F0D25 /* MypageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFEE14D2B96F7C3009F0D25 /* MypageModel.swift */; };
 		BAFEE1502B96F848009F0D25 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFEE14F2B96F848009F0D25 /* MypageViewController.swift */; };
-		BAFEE1522B96F8E4009F0D25 /* NicknameReviseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFEE1512B96F8E4009F0D25 /* NicknameReviseView.swift */; };
+		BAFEE1522B96F8E4009F0D25 /* NicknameEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFEE1512B96F8E4009F0D25 /* NicknameEditView.swift */; };
 		BAFEE1542B96F900009F0D25 /* MypageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFEE1532B96F900009F0D25 /* MypageTableViewCell.swift */; };
 		E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */; };
 		E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5412B8D5D9900A77BAE /* HStackView.swift */; };
@@ -121,7 +121,7 @@
 		BAFEE14B2B96F795009F0D25 /* MypageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageView.swift; sourceTree = "<group>"; };
 		BAFEE14D2B96F7C3009F0D25 /* MypageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageModel.swift; sourceTree = "<group>"; };
 		BAFEE14F2B96F848009F0D25 /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
-		BAFEE1512B96F8E4009F0D25 /* NicknameReviseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameReviseView.swift; sourceTree = "<group>"; };
+		BAFEE1512B96F8E4009F0D25 /* NicknameEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameEditView.swift; sourceTree = "<group>"; };
 		BAFEE1532B96F900009F0D25 /* MypageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageTableViewCell.swift; sourceTree = "<group>"; };
 		E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButton.swift; sourceTree = "<group>"; };
 		E0C5B5412B8D5D9900A77BAE /* HStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HStackView.swift; sourceTree = "<group>"; };
@@ -439,7 +439,7 @@
 			isa = PBXGroup;
 			children = (
 				BAFEE14B2B96F795009F0D25 /* MypageView.swift */,
-				BAFEE1512B96F8E4009F0D25 /* NicknameReviseView.swift */,
+				BAFEE1512B96F8E4009F0D25 /* NicknameEditView.swift */,
 				BAFEE1532B96F900009F0D25 /* MypageTableViewCell.swift */,
 			);
 			path = Views;
@@ -669,7 +669,7 @@
 				F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */,
 				37144C682B8C32D6008565C4 /* SceneDelegate.swift in Sources */,
 				73DFA2592B90274700C381A7 /* OnboardingChattingCell.swift in Sources */,
-				BAFEE1522B96F8E4009F0D25 /* NicknameReviseView.swift in Sources */,
+				BAFEE1522B96F8E4009F0D25 /* NicknameEditView.swift in Sources */,
 				37144C902B8C53B0008565C4 /* UIStackView+Extension.swift in Sources */,
 				373D0DF42B8F7B5B004CC2C7 /* LayoutLiterals.swift in Sources */,
 				73DFA26F2B90AF6700C381A7 /* DaysCollectionViewCell.swift in Sources */,

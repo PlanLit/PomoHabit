@@ -146,7 +146,6 @@ final class MyPageView: BaseView {
         let tableViewFrame = CGRect(x: 0, y: topMargin, width: self.bounds.width, height: self.bounds.height - topMargin)
         let myPageTableView = UITableView(frame: tableViewFrame, style: .plain)
         myPageTableView.separatorStyle = .singleLine
-        myPageTableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         myPageTableView.dataSource = self
         myPageTableView.delegate = self
         myPageTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: MyPageTableViewCell.reuseIdentifier)
@@ -235,6 +234,8 @@ extension MyPageView {
         tableView.snp.makeConstraints { make in
             make.top.equalTo(grayBar2.snp.top).offset(LayoutLiterals.upperPrimarySpacing)
             make.left.right.bottom.equalToSuperview()
+            make.left.equalToSuperview().offset(LayoutLiterals.minimumHorizontalSpacing)
+            make.right.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
         }
     }
 }

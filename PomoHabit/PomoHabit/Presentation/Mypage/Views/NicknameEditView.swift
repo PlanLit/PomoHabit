@@ -1,5 +1,5 @@
 //
-//  NicknameReviseView.swift
+//  NicknameEditView.swift
 //  PomoHabit
 //
 //  Created by 洪立妍 on 3/5/24.
@@ -9,18 +9,18 @@ import UIKit
 
 import SnapKit
 
-// MARK: - NicknameResiveView
+// MARK: - NicknameEditView
 
-final class NicknameResiveView: BaseView {
+final class NicknameEditView: BaseView {
     
     // MARK: - Properties
     
     private let pobitNavigationBarView = PobitNavigationBarView(title: "닉네임 수정")
-    private lazy var reviseSubmitButton = PobitButton.makePlainButton(title: "수정하기", backgroundColor: .pobitRed)
+    private lazy var editSubmitButton = PobitButton.makePlainButton(title: "수정하기", backgroundColor: .pobitRed)
     
     // MARK: - UI
     
-    private let nicknameReviseTextField: UITextField = {
+    private let nicknameEditTextField: UITextField = {
         let textField = UITextField()
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: textField.frame.height))
         textField.leftView = paddingView
@@ -35,7 +35,7 @@ final class NicknameResiveView: BaseView {
         return textField
     }()
     
-    private let nicknameReviseLabel: UILabel = {
+    private let nicknameEditLabel: UILabel = {
         let label = UILabel()
         label.text = "대문자만 입력해주세요"
         label.textColor = .pobitStone2
@@ -61,9 +61,9 @@ final class NicknameResiveView: BaseView {
 
 // MARK: - Layout Helpers
 
-extension NicknameResiveView {
+extension NicknameEditView {
     private func setAddSubViews() {
-        addSubViews([pobitNavigationBarView, nicknameReviseTextField, nicknameReviseLabel,reviseSubmitButton])
+        addSubViews([pobitNavigationBarView, nicknameEditTextField, nicknameEditLabel,editSubmitButton])
     }
     
     private func setAutoLayout() {
@@ -73,21 +73,21 @@ extension NicknameResiveView {
             make.height.equalTo(58)
         }
         
-        nicknameReviseTextField.snp.makeConstraints { make in
+        nicknameEditTextField.snp.makeConstraints { make in
             make.top.equalTo(pobitNavigationBarView.snp.bottom).offset(27)
             make.leading.equalTo(safeAreaLayoutGuide).offset(LayoutLiterals.minimumHorizontalSpacing)
             make.trailing.equalTo(safeAreaLayoutGuide).inset(LayoutLiterals.minimumHorizontalSpacing)
             make.height.equalTo(64)
         }
         
-        nicknameReviseLabel.snp.makeConstraints { make in
-            make.top.equalTo(nicknameReviseTextField.snp.bottom).offset(10)
+        nicknameEditLabel.snp.makeConstraints { make in
+            make.top.equalTo(nicknameEditTextField.snp.bottom).offset(10)
             make.leading.equalTo(safeAreaLayoutGuide).offset(LayoutLiterals.minimumHorizontalSpacing)
             
         }
         
-        reviseSubmitButton.snp.makeConstraints { make in
-            make.top.equalTo(nicknameReviseLabel.snp.bottom).offset(139)
+        editSubmitButton.snp.makeConstraints { make in
+            make.top.equalTo(nicknameEditLabel.snp.bottom).offset(139)
             make.centerX.equalToSuperview()
             make.height.equalTo(62)
             make.width.equalTo(324)
