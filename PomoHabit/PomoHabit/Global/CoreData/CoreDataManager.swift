@@ -38,6 +38,7 @@ extension CoreDataManager {
         if context.hasChanges {
             do {
                 try context.save()
+                print("성공적으로 데이터가 저장되었습니다.")
             } catch {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
@@ -45,12 +46,10 @@ extension CoreDataManager {
         }
     }
     
-    private func fetchObject<T: NSManagedObject>(for type: T.Type) throws -> T? {
+    private func fetchObject<T: NSManagedObject>(for type: T.Type) throws -> T? { // User & TotalHabitInfo fetch (User와 TotalHabitInfo은 하나의 객체만 사용)
         let entityName = String(describing: T.self)
         let request = NSFetchRequest<T>(entityName: entityName)
-        
         let context = persistentContainer.viewContext
-        
         var fetchedObject: T?
         var fetchError: Error?
         
@@ -70,11 +69,32 @@ extension CoreDataManager {
         return fetchedObject
     }
     
+    private func fetchObjects<T: NSManagedObject>(for type: T.Type) throws -> [T] { // DailyHabiInfo fetch (DailyHabiInfo는 여러개의 객체 사용)
+        let entityName = String(describing: T.self)
+        let request = NSFetchRequest<T>(entityName: entityName)
+        let context = persistentContainer.viewContext
+        var fetchedObject : [T] = []
+        var fetchError: Error?
+        
+        context.performAndWait {
+            do {
+                let objects = try context.fetch(request)
+                fetchedObject = objects
+            } catch {
+                fetchError = error
+            }
+        }
+        
+        if let error = fetchError {
+            throw error
+        }
+        
+        return fetchedObject
+    }
     
-    func fetchUser() throws -> User? {
+    func fetchUser() throws -> User? { // CordData에서 User데이터 Read
         do {
             if let user: User = try fetchObject(for: User.self) {
-                print(user)
                 return user
             } else {
                 throw CoreDataError.fetchFailed(reason: "Failed to fetch User")
@@ -85,18 +105,22 @@ extension CoreDataManager {
         }
     }
     
-    private func updateGoalTime(for habitInfo: DailyHabitInfo) {
-        let currentGoalTimeInSeconds = habitInfo.goalTime?.timeIntervalSinceReferenceDate ?? 5 * 60
-        let updatedGoalTimeInSeconds = min(currentGoalTimeInSeconds + 60, 25 * 60)
-        habitInfo.goalTime = Date(timeIntervalSinceReferenceDate: updatedGoalTimeInSeconds)
+    func fetchDailyHabitInfos() throws -> [DailyHabitInfo] {
+        do {
+            let dailyHabitInfos: [DailyHabitInfo] = try fetchObjects(for: DailyHabitInfo.self)
+            
+            return dailyHabitInfos
+        } catch let error {
+            print("Fetching user failed with error: \(error)")
+            throw CoreDataError.fetchFailed(reason: error.localizedDescription)
+        }
     }
 }
 
 // MARK: - Onboarding
 
 extension CoreDataManager {
-    func createUser(nickname: String, targetHabit: String, targetDate: Date, targetTime: Date) {
-        
+    func createUser(nickname: String, targetHabit: String, targetDate: String, startTime: String, whiteNoiseType: String?) { // User 엔티티 저장
         // db에 이미 존재하는 유저가 있는지 확인
         do {
             if let _ = try fetchUser() {
@@ -109,166 +133,39 @@ extension CoreDataManager {
         
         let context = persistentContainer.viewContext
         let user = User(context: context)
-        user.nickname = nickname
-        user.targetHabit = targetHabit
-        user.targetDate = targetDate
-        user.targetTime = targetTime
-        user.whiteNoiseType = nil
         
-        saveContext()
-        
-        // 테스트용
-        if let savedNickname = user.nickname {
-            print("Saved nickname: \(savedNickname)")
-        }
-    }
-    
-    // 습관 생성, 변경
-    func createDailyHabitInfo(user: User, targetTime: Date, hasDone: Bool, note: String) {
-        let context = persistentContainer.viewContext
-        let dailyHabitInfo = DailyHabitInfo(context: context)
-        let initialGoalTime = 5 * 60
-        
-        dailyHabitInfo.targetTime = targetTime
-        dailyHabitInfo.hasDone = hasDone
-        dailyHabitInfo.note = note
-        dailyHabitInfo.goalTime = Date(timeIntervalSinceReferenceDate: TimeInterval(initialGoalTime))
+        user.nickname = nickname // 닉네임
+        user.targetHabit = targetHabit // 습관정보
+        user.targetDate = targetDate // 습관 진행요일
+        user.startTime = startTime // 습관 진행 시간
+        user.whiteNoiseType = nil // 사운드
         
         saveContext()
     }
 }
+
 
 // MARK: - Timer
 
 extension CoreDataManager {
-    func fetchReportInfo() throws -> (habitName: String, hasDone: Bool, goalTime: Date, whiteNoiseType: String)? {
-        guard let dailyHabitInfo: DailyHabitInfo = try fetchObject(for: DailyHabitInfo.self),
-              let user: User = try fetchObject(for: User.self),
-              let habitName = user.targetHabit,
-              let whiteNoiseType = user.whiteNoiseType,
-              let goalTime = dailyHabitInfo.targetTime else {
-            throw CoreDataError.fetchFailed(reason: "Failed to fetch User in \(#function)")
-        }
-        return (habitName: habitName, hasDone: dailyHabitInfo.hasDone, goalTime: goalTime, whiteNoiseType: whiteNoiseType)
-    }
-    
-    /// 완료버튼
-    func updateDailyHabitInfo(with hasDone: Bool, note: String) throws {
-        if let dailyHabitInfo: DailyHabitInfo = try fetchObject(for: DailyHabitInfo.self) {
-            dailyHabitInfo.hasDone = hasDone
-            dailyHabitInfo.note = note
-            if hasDone {
-                updateGoalTime(for: dailyHabitInfo)
-            }
-        }
+    func createDailyHabitInfo(day: String, goalTime: Int16, hasDone: Bool, note: String) { // DailyHabitInfo 엔티티 저장
+        let context = persistentContainer.viewContext
+        let dailyHabitInfo = DailyHabitInfo(context: context)
         
-        saveContext()
-    }
-    
-    /// 화이트노이즈 변경
-    func updateWhiteNoise(with whiteNoiseType: String) throws {
-        if let user: User = try fetchObject(for: User.self) {
-            user.whiteNoiseType = whiteNoiseType
-        }
+        dailyHabitInfo.day = day // 날짜
+        dailyHabitInfo.goalTime = goalTime // 목표 시간
+        dailyHabitInfo.hasDone = hasDone // 완료여부
+        dailyHabitInfo.note = note // 메모
         
         saveContext()
     }
 }
 
-// MARK: - Reports
+// MARK: - 해당 엔티티 All Delete
 
 extension CoreDataManager {
-    
-    /// 이번달 레포트
-    func fetchCurrentMonthReportInfo() throws -> (habitName: String, hasDone: Bool, targetTime: Date, goalTime: Date)? {
-        guard let dailyHabitInfo: DailyHabitInfo = try fetchObject(for: DailyHabitInfo.self),
-              let habitName = dailyHabitInfo.habitName,
-              let targetTime = dailyHabitInfo.targetTime,
-              let goalTime = dailyHabitInfo.goalTime else {
-            throw CoreDataError.fetchFailed(reason: "Failed to fetch User in \(#function)")
-        }
-        
-        return (habitName: habitName, hasDone: dailyHabitInfo.hasDone, targetTime: targetTime, goalTime: goalTime)
-    }
-    
-    /// 습관 정보 모달
-    func fetchHabitInfo() throws -> (goalTime: Date, note: String)? {
-        guard let dailyHabitInfo: DailyHabitInfo = try fetchObject(for: DailyHabitInfo.self),
-              let goalTime = dailyHabitInfo.goalTime,
-              let note = dailyHabitInfo.note else {
-            throw CoreDataError.fetchFailed(reason: "Failed to fetch User in \(#function)")
-        }
-        return (goalTime: goalTime, note: note)
-    }
-    
-    /// 메모텍스트 변경
-    func updateMemoText(with newText: String) throws {
-        guard let dailyHabitInfo: DailyHabitInfo = try fetchObject(for: DailyHabitInfo.self) else {
-            throw CoreDataError.fetchFailed(reason: "Failed to fetch DailyHabitInfo in \(#function)")
-        }
-        
-        dailyHabitInfo.note = newText
-        saveContext()
-    }
-    
-    /// 습관 변경
-    func updateHabitTargets(habitID: UUID, targetDate: Date, targetTime: Date) throws {
-        guard let user: User = try fetchObject(for: User.self) else {
-            throw CoreDataError.fetchFailed(reason: "Failed to fetch User in \(#function)")
-        }
-        
-        user.targetDate = targetDate
-        user.targetTime = targetTime
-        saveContext()
-    }
-}
-
-// MARK: - Calendar
-
-extension CoreDataManager {
-    func fetchCalendarViewInfo() throws -> (habitName: String, hasDone: Bool, goalTime: Date, targetTime: Date)? {
-        guard let dailyHabitInfo: DailyHabitInfo = try fetchObject(for: DailyHabitInfo.self),
-              let habitName = dailyHabitInfo.habitName,
-              let goalTime = dailyHabitInfo.goalTime,
-              let targetTime = dailyHabitInfo.targetTime else {
-            throw CoreDataError.fetchFailed(reason: "Failed to fetch DailyHabitInfo in \(#function)")
-        }
-        
-        return (habitName: habitName, hasDone: dailyHabitInfo.hasDone, goalTime: goalTime, targetTime: targetTime)
-    }
-}
-
-// MARK: - Mypage
-
-extension CoreDataManager {
-    func fetchMypageViewInfo() throws -> (ongoingDays: Int, totalProgressedTime: Int)? {
-        guard let totalHabitInfo: TotalHabitInfo = try fetchObject(for: TotalHabitInfo.self) else {
-            throw CoreDataError.fetchFailed(reason: "Failed to fetch TotalHabitInfo in \(#function)")
-        }
-        
-        let ongoingDays = Int(totalHabitInfo.onGoingDaysCount)
-        let totalProgressedTime = Int(totalHabitInfo.totalProggressedTime)
-        return (ongoingDays, totalProgressedTime)
-    }
-    
-    /// 닉네임 변경
-    func updateUserNickname(to newNickname: String) {
-        guard let user = try? fetchObject(for: User.self) else { return }
-        user.nickname = newNickname
-        saveContext()
-        
-        // 테스트용
-        if let updatedNickname = user.nickname {
-            print("Updated nickname: \(updatedNickname)")
-        }
-    }
-}
-
-// MARK: - Delete
-
-extension CoreDataManager {
-    func deleteAllData() {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "User")
+    func deleteAllData(entityName: String) {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entityName)
         let context = persistentContainer.viewContext
         
         do {
@@ -281,6 +178,16 @@ extension CoreDataManager {
             try context.save()
         } catch let error {
             print("Error deleting all data: \(error.localizedDescription)")
+        }
+    }
+}
+
+// MARK: - CoreData 파일 저장 경로 얻는 함수
+
+extension CoreDataManager {
+    func getSaveCoredataPath(){
+        if let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last {
+            print("Documents Directory: \(documentsDirectoryURL)")
         }
     }
 }
