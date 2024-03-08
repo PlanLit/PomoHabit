@@ -23,9 +23,9 @@ final class WeeklyCalendarView: BaseView {
     
     // MARK: - DividerView
     
-    private lazy var firstDivider = UIView().makeDividerView(width: 1)
-    private lazy var secondDivider = UIView().makeDividerView(width: 1)
-    private lazy var thirdDivider = UIView().makeDividerView(width: 1)
+    private lazy var firstDivider = UIView().makeDividerView(height: 1)
+    private lazy var secondDivider = UIView().makeDividerView(height: 1)
+    private lazy var thirdDivider = UIView().makeDividerView(height: 1)
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -34,7 +34,7 @@ final class WeeklyCalendarView: BaseView {
         return scrollView
     }()
     
-    private lazy var navigationBarView = PobitNavigationBarView(title: "주간 캘린더")
+    private lazy var navigationBarView = PobitNavigationBarView(title: "주간 캘린더", viewType: .plain)
     
     // MARK: - 오늘 날짜 UI
     

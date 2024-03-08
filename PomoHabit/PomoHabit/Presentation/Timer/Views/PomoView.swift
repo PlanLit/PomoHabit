@@ -15,7 +15,7 @@ final class TimerView: BaseView {
     
     // MARK: - UI Properties
     
-    private let navigationBar = PobitNavigationBarView(title: "타이머")
+    private let navigationBar = PobitNavigationBarView(title: "타이머", viewType: .plain)
     
     private lazy var container: HStackView = {
         return HStackView(spacing: 16, [
