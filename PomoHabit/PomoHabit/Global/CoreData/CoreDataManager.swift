@@ -50,7 +50,6 @@ extension CoreDataManager {
         let entityName = String(describing: T.self)
         let request = NSFetchRequest<T>(entityName: entityName)
         let context = persistentContainer.viewContext
-        
         var fetchedObject: T?
         var fetchError: Error?
         
@@ -73,7 +72,6 @@ extension CoreDataManager {
     private func fetchObjects<T: NSManagedObject>(for type: T.Type) throws -> [T] { // DailyHabiInfo fetch (DailyHabiInfo는 여러개의 객체 사용)
         let entityName = String(describing: T.self)
         let request = NSFetchRequest<T>(entityName: entityName)
-        
         let context = persistentContainer.viewContext
         var fetchedObject : [T] = []
         var fetchError: Error?
