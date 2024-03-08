@@ -1,6 +1,16 @@
+//
+//  CircleProgressBar.swift
+//  PomoHabit
+//
+//  Created by Joon Baek on 2024/03/05.
+//
+
+import Combine
 import UIKit
 
 import SnapKit
+
+// MARK: - CircleProgressBar
 
 final class CircleProgressBar: BaseView {
     
