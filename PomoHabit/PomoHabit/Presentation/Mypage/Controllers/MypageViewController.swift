@@ -16,6 +16,7 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
     // MARK: - Properties
     
     private let myPageRootView = MyPageView()
+    private let nicknameEditView = NicknameEditView()
     
     // MARK: - View Lifecycle
     
@@ -27,12 +28,12 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        presentBottomSheet(rootView: NicknameEditView(), detents: [.medium()])
+        presentBottomSheet(rootView: nicknameEditView, detents: [.large()])
     }
 }

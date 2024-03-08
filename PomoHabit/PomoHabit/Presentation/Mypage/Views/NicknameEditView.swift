@@ -44,7 +44,6 @@ final class NicknameEditView: BaseView {
         return label
     }()
     
-    
     // MARK: - Life Cycle
     
     override init(frame: CGRect) {
@@ -52,6 +51,8 @@ final class NicknameEditView: BaseView {
         
         setAddSubViews()
         setAutoLayout()
+        setupTextFieldDelegate()
+        nicknameEditTextField.becomeFirstResponder()
     }
     
     required init?(coder: NSCoder) {
@@ -87,10 +88,31 @@ extension NicknameEditView {
         }
         
         editSubmitButton.snp.makeConstraints { make in
-            make.top.equalTo(nicknameEditLabel.snp.bottom).offset(139)
+            make.bottom.equalToSuperview().offset(-34)
             make.centerX.equalToSuperview()
             make.height.equalTo(62)
             make.width.equalTo(324)
         }
+    }
+}
+
+extension NicknameEditView: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        return true
+    }
+    
+    private func setupTextFieldDelegate() {
+        nicknameEditTextField.delegate = self
     }
 }
