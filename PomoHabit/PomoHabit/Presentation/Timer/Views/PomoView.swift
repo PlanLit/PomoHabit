@@ -15,7 +15,7 @@ final class TimerView: BaseView {
     
     // MARK: - UI Properties
     
-    private let navigationBar = PobitNavigationBarView(title: "타이머")
+    private let navigationBar = PobitNavigationBarView(title: "타이머", viewType: .plain)
     
     private lazy var timerHeaderView = makeTimerHeaderView()
     private lazy var goalDaysCountLabel = makeGoalDaysCountLabel(text: "주5일", backgroundColor: .pobitStone0)

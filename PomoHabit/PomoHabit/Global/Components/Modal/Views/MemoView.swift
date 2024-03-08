@@ -15,7 +15,7 @@ final class MemoView: BaseView {
 
     // MARK: - UI Properties
     
-    private lazy var navigationBar = PobitNavigationBarView(title: "메모")
+    private lazy var navigationBar = PobitNavigationBarView(title: "메모", viewType: .withDismissButton)
     private lazy var textView = NoteTextView()
     private lazy var submitButton = PobitButton.makePlainButton(title: "등록하기", backgroundColor: .pobitRed)
     
@@ -57,5 +57,4 @@ extension MemoView {
             make.height.equalTo(62)
         }
     }
-    
 }

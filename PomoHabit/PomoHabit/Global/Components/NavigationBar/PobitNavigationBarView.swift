@@ -9,31 +9,45 @@ import UIKit
 
 import SnapKit
 
+enum navigationViewType {
+    case plain
+    case withDismissButton
+}
+
 // MARK: - PobitNavigationBarView
 
 final class PobitNavigationBarView: UIView {
     
     // MARK: - Properties
     
-    private var titleLabel: UILabel = {
+    private var viewType: navigationViewType
+    
+    // MARK: - UI Properties
+    
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = Pretendard.bold(size: 25)
         
         return label
     }()
     
-    private var dividerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .pobitStone3
-        
-        return view
+    private lazy var dividerView = makeDividerView(height: 1)
+    
+    private lazy var dismissButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .lightGray
+        return button
     }()
     
-    init(title: String) {
+    // MARK: - Life Cycle
+    
+    init(title: String, viewType: navigationViewType) {
+        self.viewType = viewType
         super.init(frame: .zero)
         
         setAddSubViews()
         setAutoLayout()
+        setupDismissButton()
         setTitle(title)
     }
     
@@ -59,6 +73,18 @@ extension PobitNavigationBarView {
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(1)
             make.bottom.equalToSuperview()
+        }
+    }
+    
+    private func setupDismissButton() {
+        if viewType == .withDismissButton {
+            addSubview(dismissButton)
+            
+            dismissButton.snp.makeConstraints { make in
+                make.top.equalToSuperview()
+                make.trailing.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
+                make.size.equalTo(30)
+            }
         }
     }
 }
