@@ -89,13 +89,12 @@ extension OnboardingLoginViewController {
     
     private func makeNextButton() -> UIButton {
         let button = UIButton(type: .custom, primaryAction: .init(handler: { _ in
-            let onboardingChattingViewController = OnboardingHabitRegistViewController()
+            let onboardingChattingViewController = OnboardingHabitRegisterViewController()
             self.navigationController?.pushViewController(onboardingChattingViewController, animated: true)
         }))
         button.setImage(UIImage(named: "arrow"), for: .normal)
         button.layer.opacity = 0.3
         button.isUserInteractionEnabled = false
-        
         button.snp.makeConstraints { make in
             make.width.equalTo(44)
             make.height.equalTo(44)
@@ -123,6 +122,7 @@ extension OnboardingLoginViewController {
 
 extension OnboardingLoginViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
+        print("textFieldDidChangeSelection")
         if textField.text != "" {
             nextButton.layer.opacity = 1
             nextButton.isUserInteractionEnabled = true

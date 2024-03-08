@@ -50,7 +50,7 @@
 		BAFEE1542B96F900009F0D25 /* MypageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFEE1532B96F900009F0D25 /* MypageTableViewCell.swift */; };
 		E09640092B9A63730075C2D0 /* OnboardingDatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09640082B9A63730075C2D0 /* OnboardingDatePickerTableViewCell.swift */; };
 		E096400D2B9A85BA0075C2D0 /* OnboardingLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E096400C2B9A85BA0075C2D0 /* OnboardingLoginViewController.swift */; };
-		E096400F2B9A87760075C2D0 /* OnboardingHabitRegistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E096400E2B9A87760075C2D0 /* OnboardingHabitRegistViewController.swift */; };
+		E096400F2B9A87760075C2D0 /* OnboardingHabitRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E096400E2B9A87760075C2D0 /* OnboardingHabitRegisterViewController.swift */; };
 		E0BEE1492B99284300A2C4C4 /* OnboardingProfilePictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BEE1482B99284300A2C4C4 /* OnboardingProfilePictureTableViewCell.swift */; };
 		E0BEE14B2B99366600A2C4C4 /* OnboardingChattingCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BEE14A2B99366600A2C4C4 /* OnboardingChattingCellData.swift */; };
 		E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */; };
@@ -124,7 +124,7 @@
 		BAFEE1532B96F900009F0D25 /* MypageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageTableViewCell.swift; sourceTree = "<group>"; };
 		E09640082B9A63730075C2D0 /* OnboardingDatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		E096400C2B9A85BA0075C2D0 /* OnboardingLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLoginViewController.swift; sourceTree = "<group>"; };
-		E096400E2B9A87760075C2D0 /* OnboardingHabitRegistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingHabitRegistViewController.swift; sourceTree = "<group>"; };
+		E096400E2B9A87760075C2D0 /* OnboardingHabitRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingHabitRegisterViewController.swift; sourceTree = "<group>"; };
 		E0BEE1482B99284300A2C4C4 /* OnboardingProfilePictureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingProfilePictureTableViewCell.swift; sourceTree = "<group>"; };
 		E0BEE14A2B99366600A2C4C4 /* OnboardingChattingCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingChattingCellData.swift; sourceTree = "<group>"; };
 		E0C5B53D2B8D5B2700A77BAE /* DayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButton.swift; sourceTree = "<group>"; };
@@ -410,7 +410,7 @@
 			isa = PBXGroup;
 			children = (
 				E096400C2B9A85BA0075C2D0 /* OnboardingLoginViewController.swift */,
-				E096400E2B9A87760075C2D0 /* OnboardingHabitRegistViewController.swift */,
+				E096400E2B9A87760075C2D0 /* OnboardingHabitRegisterViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -684,7 +684,7 @@
 				378034A32B8F8D8A0046E6B8 /* PomoProgressBar.swift in Sources */,
 				378034AF2B8FACE50046E6B8 /* WhiteNoiseTableViewCell.swift in Sources */,
 				F88EB2DA2B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift in Sources */,
-				E096400F2B9A87760075C2D0 /* OnboardingHabitRegistViewController.swift in Sources */,
+				E096400F2B9A87760075C2D0 /* OnboardingHabitRegisterViewController.swift in Sources */,
 				37396CAA2B96103C001E81F3 /* PobitModel.xcdatamodeld in Sources */,
 				F85F8F572B8DE33C00E69922 /* BasePaddingLabel.swift in Sources */,
 				BAFEE14C2B96F795009F0D25 /* MypageView.swift in Sources */,

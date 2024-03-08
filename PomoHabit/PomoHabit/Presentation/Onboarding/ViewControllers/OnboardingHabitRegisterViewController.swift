@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - OnboardingHabitRegistViewController
 
-final class OnboardingHabitRegistViewController: BaseViewController {
+final class OnboardingHabitRegisterViewController: BaseViewController {
     
     // MARK: - Data Properties
     
@@ -28,7 +28,7 @@ final class OnboardingHabitRegistViewController: BaseViewController {
     private lazy var chattingTableView: UITableView = makeChattingTableView()
     private lazy var habitTextFieldView: HStackView = makeHabitTextFieldView()
     private lazy var textFieldDoneButton: UIButton = makeTextFieldDoneButton()
-    private lazy var registButton: UIButton = makeRegistButton()
+    private lazy var registerButton: UIButton = makeRegisterButton()
     
     // MARK: - Life Cycle
     
@@ -50,35 +50,30 @@ final class OnboardingHabitRegistViewController: BaseViewController {
 
 // MARK: - Layout Helpers
 
-extension OnboardingHabitRegistViewController {
+extension OnboardingHabitRegisterViewController {
     private func setUpSelf() {
         view.backgroundColor = UIColor.pobitSkin
     }
     
     private func setAddSubviews() {
-        view.addSubViews([chattingTableView, habitTextFieldView, registButton])
+        view.addSubViews([chattingTableView, habitTextFieldView, registerButton])
     }
     
     private func setAutoLayout() {
         chattingTableView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.bottom.equalTo(registButton.snp.top)
+            make.top.trailing.leading.equalToSuperview()
+            make.bottom.equalTo(registerButton.snp.top)
         }
         
         habitTextFieldView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview()
+            make.trailing.leading.equalToSuperview()
             make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
-            make.leading.equalToSuperview()
             make.height.equalTo(58)
         }
         
-        registButton.snp.makeConstraints { make in
+        registerButton.snp.makeConstraints { make in
             make.top.equalTo(chattingTableView.snp.bottom)
-            make.bottom.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.leading.equalToSuperview()
+            make.trailing.bottom.leading.equalToSuperview()
             make.height.equalTo(0)
         }
     }
@@ -86,7 +81,7 @@ extension OnboardingHabitRegistViewController {
 
 // MARK: - Factory Methods
 
-extension OnboardingHabitRegistViewController {
+extension OnboardingHabitRegisterViewController {
     private func makeChattingTableView() -> UITableView {
         let tableView = UITableView()
         tableView.dataSource = self
@@ -123,11 +118,9 @@ extension OnboardingHabitRegistViewController {
         let button = UIButton(type: .system, primaryAction: .init(handler: { _ in
             self.habitTextFieldView.isHidden = true
             self.view.endEditing(true)
-                
             self.addTableViewCellDataAndUpdate(.init(chatDirection: .outgoing, message: self.habitName, cellType: .title))
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "무슨 요일에 할거야? 5일 이상을 정해줘!"))
-                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self.addTableViewCellDataAndUpdate(.init(chatDirection: .outgoing, cellType: .days))
                 }
@@ -137,8 +130,6 @@ extension OnboardingHabitRegistViewController {
         button.setTitleColor(.pobitWhite, for: .normal)
         button.backgroundColor = .gray
         button.isUserInteractionEnabled = false
-        
-        
         button.snp.makeConstraints { make in
             make.width.equalTo(96)
         }
@@ -146,7 +137,7 @@ extension OnboardingHabitRegistViewController {
         return button
     }
     
-    private func makeRegistButton() -> UIButton {
+    private func makeRegisterButton() -> UIButton {
         let button = UIButton(type: .system, primaryAction: .init(handler: { _ in
             if self.isUserInputComplete() {
                 self.navigationController?.setViewControllers([TabBarController()], animated: true)
@@ -165,7 +156,6 @@ extension OnboardingHabitRegistViewController {
         let timer = Timer.scheduledTimer(withTimeInterval: withTimeInterval, repeats: true) { timer in
             runCount += 1
             action()
-            
             if runCount == executionTargetNumber {
                 timer.invalidate()
                 ended()
@@ -191,13 +181,12 @@ extension OnboardingHabitRegistViewController {
                         self.addTableViewCellDataAndUpdate(.init(chatDirection: .outgoing, cellType: .time))
                     }
                 }
-                
                 self.hasShownDaysCell = true
             }
             if trueCount >= 5 {
-                self.registButton.backgroundColor = .pobitRed
+                self.registerButton.backgroundColor = .pobitRed
             } else {
-                self.registButton.backgroundColor = .gray
+                self.registerButton.backgroundColor = .gray
             }
         }
         
@@ -211,7 +200,7 @@ extension OnboardingHabitRegistViewController {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self?.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "좋아 다 됬어! 우리 꼭 습관을 만들어보자!"))
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        self?.registButton.snp.updateConstraints({ make in
+                        self?.registerButton.snp.updateConstraints({ make in
                             make.height.equalTo(82)
                         })
                         UIView.animate(withDuration: 0.6,
@@ -241,7 +230,7 @@ extension OnboardingHabitRegistViewController {
 
 // MARK: - Helpers
 
-extension OnboardingHabitRegistViewController {
+extension OnboardingHabitRegisterViewController {
     // 처음 채팅뷰에 진입했을때 한번만 실행시켜야함.
     private func sayHello() {
         let messages: [OnboardingChattingCellData] = [.init(chatDirection: .incoming, cellType: .profilePicture),
@@ -270,17 +259,14 @@ extension OnboardingHabitRegistViewController {
         self.chattingTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
     }
     
-    
     // 유저가 모든 데이터를 제대로 입력했는지 확인하는 함수
     private func isUserInputComplete() -> Bool {
         if habitName == nil { return false }
         if habitStartTime == nil { return false }
-        
         var daysOnCount = 0
         _ = daysButtonSelectionState.map { state in
             if state { daysOnCount += 1 }
         }
-        
         if daysOnCount < 5 { return false }
         
         return true
@@ -289,7 +275,7 @@ extension OnboardingHabitRegistViewController {
 
 // MARK: - UITableViewDataSource
 
-extension OnboardingHabitRegistViewController: UITableViewDataSource {
+extension OnboardingHabitRegisterViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return currentMessages.count
     }
@@ -310,7 +296,7 @@ extension OnboardingHabitRegistViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 
-extension OnboardingHabitRegistViewController: UITableViewDelegate {
+extension OnboardingHabitRegisterViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if currentMessages[indexPath.row].cellType == .days {
             return 102 + 25
@@ -322,7 +308,7 @@ extension OnboardingHabitRegistViewController: UITableViewDelegate {
 
 // MARK: - UITextFieldDelegate
 
-extension OnboardingHabitRegistViewController: UITextFieldDelegate {
+extension OnboardingHabitRegisterViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         habitName = textField.text
         
@@ -343,7 +329,7 @@ extension OnboardingHabitRegistViewController: UITextFieldDelegate {
 
 // MARK: - Types
 
-extension OnboardingHabitRegistViewController {
+extension OnboardingHabitRegisterViewController {
     /// 매번 호출 되기 전 마다 1씩 증가함 + 초기에 정한 unsentMessagesCount 값 보다는 안커짐 (Index out of range Error 방지)
     private struct UnsentMessagesIndex {
         private let unsentMessagesCount: Int
