@@ -26,7 +26,7 @@ final class TimerView: BaseView {
     private lazy var whiteNoiseInfoLabel = makeBlackBodyLabel(text: "🎧 배경음을 선택해보세요!", fontSize: 16)
     private lazy var whiteNoiseEditButton = makeWhiteNoiseEditButton()
     
-    private lazy var starView = makeStarImageView()
+    private lazy var starView = UIImageView(image: UIImage(named: "Star"))
     private let circleProgressBar = CircleProgressBar()
     
     private lazy var timerButton: PobitButton = {
@@ -155,12 +155,6 @@ extension TimerView {
         }
     }
     
-    private func makeStarImageView() -> UIImageView {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Star")
-        return imageView
-    }
-    
     private func makeTimerHeaderView() -> UIView {
         let view = UIView()
         view.layer.cornerRadius = 8
@@ -214,9 +208,4 @@ extension TimerView {
         
         return button
     }
-}
-
-@available(iOS 17, *)
-#Preview {
-    TimerViewController()
 }
