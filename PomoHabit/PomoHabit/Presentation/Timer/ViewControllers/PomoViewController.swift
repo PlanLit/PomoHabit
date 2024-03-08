@@ -37,15 +37,15 @@ extension TimerViewController {
             guard let targetDate = userData?.targetDate else { return } // 습관을 진행할 요일
             guard let startTime = userData?.startTime else { return } // 습관 진행 시간
             guard let whiteNoiseType = userData?.whiteNoiseType else { return } // 사운드
-            
         } catch {
             print(error)
         }
     }
     
-    func completedTodayHabit() {
+    func completedTodayHabit() { // 타이머 완료시 실행되는 함수입니다. 아래에 코드를 활용하시면 됩니다.
         let date = Date().dateToString(format: "yyyy-MM-dd")
-
+        let chnageDate = Calendar.current.date(byAdding: .day,value: 1,to: date)?.dateToString(format: "yyyy-MM-dd") // 오늘 날짜 기준으로 +,- 할수 있 습니다 .테스트할때 사용하시고 지워 주시면 됩니다.
+        
         CoreDataManager.shared.createDailyHabitInfo(day: date, goalTime: 7, hasDone: true, note: "3번째 날입니다.")
     }
 }

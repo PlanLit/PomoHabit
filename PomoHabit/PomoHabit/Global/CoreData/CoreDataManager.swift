@@ -46,7 +46,7 @@ extension CoreDataManager {
         }
     }
     
-    private func fetchObject<T: NSManagedObject>(for type: T.Type) throws -> T? {
+    private func fetchObject<T: NSManagedObject>(for type: T.Type) throws -> T? { // User & TotalHabitInfo fetch (User와 TotalHabitInfo은 하나의 객체만 사용)
         let entityName = String(describing: T.self)
         let request = NSFetchRequest<T>(entityName: entityName)
         
@@ -71,7 +71,7 @@ extension CoreDataManager {
         return fetchedObject
     }
     
-    private func fetchObjects<T: NSManagedObject>(for type: T.Type) throws -> [T] {
+    private func fetchObjects<T: NSManagedObject>(for type: T.Type) throws -> [T] { // DailyHabiInfo fetch (DailyHabiInfo는 여러개의 객체 사용)
         let entityName = String(describing: T.self)
         let request = NSFetchRequest<T>(entityName: entityName)
         
@@ -96,7 +96,7 @@ extension CoreDataManager {
         return fetchedObject
     }
     
-    func fetchUser() throws -> User? {
+    func fetchUser() throws -> User? { // CordData에서 User데이터 Read
         do {
             if let user: User = try fetchObject(for: User.self) {
                 return user
@@ -112,6 +112,7 @@ extension CoreDataManager {
     func fetchDailyHabitInfos() throws -> [DailyHabitInfo] {
         do {
             let dailyHabitInfos : [DailyHabitInfo] = try fetchObjects(for: DailyHabitInfo.self)
+            
             return dailyHabitInfos
         } catch let error {
             print("Fetching user failed with error: \(error)")
@@ -123,8 +124,7 @@ extension CoreDataManager {
 // MARK: - Onboarding
 
 extension CoreDataManager {
-    func createUser(nickname: String,targetHabit: String, targetDate: String,startTime: String,whiteNoiseType: String?) {
-        
+    func createUser(nickname: String,targetHabit: String, targetDate: String,startTime: String,whiteNoiseType: String?) { // User 엔티티 저장
         // db에 이미 존재하는 유저가 있는지 확인
         do {
             if let _ = try fetchUser() {
@@ -152,20 +152,20 @@ extension CoreDataManager {
 // MARK: - Timer
 
 extension CoreDataManager {
-    func createDailyHabitInfo(day: String, goalTime: Int16, hasDone: Bool, note: String) {
+    func createDailyHabitInfo(day: String, goalTime: Int16, hasDone: Bool, note: String) { // DailyHabitInfo 엔티티 저장
         let context = persistentContainer.viewContext
         let dailyHabitInfo = DailyHabitInfo(context: context)
         
-        dailyHabitInfo.day = day
-        dailyHabitInfo.goalTime = goalTime
-        dailyHabitInfo.hasDone = hasDone
-        dailyHabitInfo.note = note
+        dailyHabitInfo.day = day // 날짜
+        dailyHabitInfo.goalTime = goalTime // 목표 시간
+        dailyHabitInfo.hasDone = hasDone // 완료여부
+        dailyHabitInfo.note = note // 메모
         
         saveContext()
     }
 }
 
-// MARK: - Delete
+// MARK: - 해당 엔티티 All Delete
 
 extension CoreDataManager {
     func deleteAllData(entityName: String) {
@@ -186,7 +186,7 @@ extension CoreDataManager {
     }
 }
 
-// MARK: - 파일 저장 경로
+// MARK: - CoreData 파일 저장 경로 얻는 함수
 
 extension CoreDataManager {
     func getSaveCoredataPath(){

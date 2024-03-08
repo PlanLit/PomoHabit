@@ -106,17 +106,19 @@ extension WeeklyCalendarViewController {
         weeklyCalendarView.setWeeklyDates(weeklyDates: weeklyDates)
     }
     
-    func getSelectedDayHabitInfo(selectedDay : String) {
+    func getSelectedDayHabitInfo(selectedDay: String) {
         do {
             let habitInfos = try CoreDataManager.shared.fetchDailyHabitInfos()
-            let habitInfoDays = habitInfos.map{$0.day!}
+            let habitInfoDays = habitInfos.map{$0.day!} // 마찬가지로 매핑할떄 강제 옵셔널해제 말고 옵셔널 해제 하는 방법 아시는분 피드백 부탁드립니다!
+            
             if let index = habitInfoDays.firstIndex(where: {$0 == selectedDay}) {
                 let selectedHabitInfo = habitInfos[index]
                 guard let day = selectedHabitInfo.day else { return }
                 let goalTime = selectedHabitInfo.goalTime
                 let hasDone = selectedHabitInfo.hasDone
                 guard let note = selectedHabitInfo.note else { return }
-                print("day :\(day),goalTime:\(goalTime),hasDone:\(hasDone),note:\(note)")
+                
+                print("day :\(day),goalTime:\(goalTime),hasDone:\(hasDone),note:\(note)") // 데이터 확인을 위하여 임시로 적어 두었습니다.
             }
         }catch {
             print(error)
