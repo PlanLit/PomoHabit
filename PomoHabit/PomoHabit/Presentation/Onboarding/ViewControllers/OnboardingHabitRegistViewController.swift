@@ -27,6 +27,7 @@ final class OnboardingHabitRegistViewController: BaseViewController {
     
     private lazy var chattingTableView: UITableView = makeChattingTableView()
     private lazy var habitTextFieldView: HStackView = makeHabitTextFieldView()
+    private lazy var textFieldDoneButton: UIButton = makeTextFieldDoneButton()
     private lazy var registButton: UIButton = makeRegistButton()
     
     // MARK: - Life Cycle
@@ -107,30 +108,42 @@ extension OnboardingHabitRegistViewController {
             
             return textField
         }()
-    
-        let submitButton = {
-            let button = UIButton(type: .system, primaryAction: .init(handler: { _ in
-                self.habitTextFieldView.isHidden = true
-                self.view.endEditing(true)
-            }))
-            button.setTitle("확인", for: .normal)
-            button.setTitleColor(.pobitWhite, for: .normal)
-            button.backgroundColor = .pobitBlack
-            button.snp.makeConstraints { make in
-                make.width.equalTo(96)
-            }
-            
-            return button
-        }()
         
         let container = HStackView(spacing: 0, alignment: .fill, distribution: .fill, [
             textField,
-            submitButton
+            textFieldDoneButton
         ])
         
         container.isHidden = true
         
         return container
+    }
+    
+    private func makeTextFieldDoneButton() -> UIButton {
+        let button = UIButton(type: .system, primaryAction: .init(handler: { _ in
+            self.habitTextFieldView.isHidden = true
+            self.view.endEditing(true)
+                
+            self.addTableViewCellDataAndUpdate(.init(chatDirection: .outgoing, message: self.habitName, cellType: .title))
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "무슨 요일에 할거야? 5일 이상을 정해줘!"))
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.addTableViewCellDataAndUpdate(.init(chatDirection: .outgoing, cellType: .days))
+                }
+            }
+        }))
+        button.setTitle("확인", for: .normal)
+        button.setTitleColor(.pobitWhite, for: .normal)
+        button.backgroundColor = .gray
+        button.isUserInteractionEnabled = false
+        
+        
+        button.snp.makeConstraints { make in
+            make.width.equalTo(96)
+        }
+        
+        return button
     }
     
     private func makeRegistButton() -> UIButton {
@@ -235,9 +248,7 @@ extension OnboardingHabitRegistViewController {
                                                       .init(chatDirection: .incoming, message: "안녕! 앱을 실행해줘서 고마워!"),
                                                       .init(chatDirection: .incoming, message: "나는 새로운 습관 형성을 도와줄 가이드야."),
                                                       .init(chatDirection: .incoming, message: "어떤 습관을 만들고 싶어?")]
-        
         var index = UnsentMessagesIndex(unsentMessagesCount: messages.count)
-        
         DispatchQueue.main.async {
             self.addTableViewCellDataAndUpdate(messages[index.value])
             self.makeCountTimer(executionTargetNumber: messages.count - 1,
@@ -312,18 +323,21 @@ extension OnboardingHabitRegistViewController: UITableViewDelegate {
 // MARK: - UITextFieldDelegate
 
 extension OnboardingHabitRegistViewController: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
         habitName = textField.text
         
-        addTableViewCellDataAndUpdate(.init(chatDirection: .outgoing, message: habitName, cellType: .title))
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "무슨 요일에 할거야? 5일 이상을 정해줘!"))
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.addTableViewCellDataAndUpdate(.init(chatDirection: .outgoing, cellType: .days))
-            }
+        if textField.text != "" {
+            textFieldDoneButton.backgroundColor = .pobitRed
+            textFieldDoneButton.isUserInteractionEnabled = true
+        } else {
+            textFieldDoneButton.backgroundColor = .gray
+            textFieldDoneButton.isUserInteractionEnabled = false
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 

@@ -14,6 +14,7 @@ final class OnboardingLoginViewController: UIViewController {
     // MARK: - Properties
     
     private lazy var container: VStackView = makeContainer()
+    private lazy var nextButton: UIButton = makeNextButton()
     
     // MARK: - Life Cycle
     
@@ -54,7 +55,7 @@ extension OnboardingLoginViewController {
             makeMainImage(),
             HStackView(spacing: 8, alignment: .fill, [
                 makeNicknameTextField(),
-                makeNextButton()
+                nextButton
             ])
         ])
     }
@@ -81,6 +82,7 @@ extension OnboardingLoginViewController {
         textField.attributedPlaceholder = NSAttributedString(string: "닉네임 입력", attributes: [NSAttributedString.Key.foregroundColor: UIColor.pobitStone4])
         textField.addLeftPadding()
         textField.addRightPadding()
+        textField.delegate = self
         
         return textField
     }
@@ -91,6 +93,8 @@ extension OnboardingLoginViewController {
             self.navigationController?.pushViewController(onboardingChattingViewController, animated: true)
         }))
         button.setImage(UIImage(named: "arrow"), for: .normal)
+        button.layer.opacity = 0.3
+        button.isUserInteractionEnabled = false
         
         button.snp.makeConstraints { make in
             make.width.equalTo(44)
@@ -112,5 +116,24 @@ extension OnboardingLoginViewController {
         
         // 닉네임 변경 테스트
         CoreDataManager.shared.updateUserNickname(to: "변경된 닉네임")
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension OnboardingLoginViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if textField.text != "" {
+            nextButton.layer.opacity = 1
+            nextButton.isUserInteractionEnabled = true
+        } else {
+            nextButton.layer.opacity = 0.5
+            nextButton.isUserInteractionEnabled = false
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
