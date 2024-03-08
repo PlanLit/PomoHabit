@@ -15,7 +15,7 @@ final class OnboardingDaysButtonTableViewCell: UITableViewCell {
     
     private lazy var buttonContainer: VStackView = makeContainer()
     
-    var buttonSelectionStates: [Bool]?
+    var daysButtonSelectionState: [Bool]?
     
     var action: ((Int, Bool) -> Void)?
 
@@ -60,15 +60,15 @@ extension OnboardingDaysButtonTableViewCell {
     private func makeContainer() -> VStackView {
         return VStackView(spacing: 5, alignment: .leading, [
             HStackView(spacing: 5, [
-                makeDayButtonView(dayType: .mon, index: 0, isSelected: buttonSelectionStates?[0] ?? false),
-                makeDayButtonView(dayType: .tue, index: 1, isSelected: buttonSelectionStates?[1] ?? false),
-                makeDayButtonView(dayType: .wed, index: 2, isSelected: buttonSelectionStates?[2] ?? false),
-                makeDayButtonView(dayType: .thu, index: 3, isSelected: buttonSelectionStates?[3] ?? false),
-                makeDayButtonView(dayType: .fri, index: 4, isSelected: buttonSelectionStates?[4] ?? false),
+                makeDayButtonView(dayType: .mon, index: 0, isSelected: daysButtonSelectionState?[0] ?? false),
+                makeDayButtonView(dayType: .tue, index: 1, isSelected: daysButtonSelectionState?[1] ?? false),
+                makeDayButtonView(dayType: .wed, index: 2, isSelected: daysButtonSelectionState?[2] ?? false),
+                makeDayButtonView(dayType: .thu, index: 3, isSelected: daysButtonSelectionState?[3] ?? false),
+                makeDayButtonView(dayType: .fri, index: 4, isSelected: daysButtonSelectionState?[4] ?? false),
             ]),
             HStackView(spacing: 5, [
-                makeDayButtonView(dayType: .sat, index: 5, isSelected: buttonSelectionStates?[5] ?? false),
-                makeDayButtonView(dayType: .sun, index: 6, isSelected: buttonSelectionStates?[6] ?? false),
+                makeDayButtonView(dayType: .sat, index: 5, isSelected: daysButtonSelectionState?[5] ?? false),
+                makeDayButtonView(dayType: .sun, index: 6, isSelected: daysButtonSelectionState?[6] ?? false),
             ])
         ])
     }

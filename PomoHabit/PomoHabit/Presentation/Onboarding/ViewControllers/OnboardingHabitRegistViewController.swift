@@ -13,8 +13,8 @@ final class OnboardingHabitRegistViewController: BaseViewController {
     
     // MARK: - Data Properties
     
-    private var habitName = ""
-    private var buttonSelectionStates: [Bool] = [false, false, false, false, false, false, false]
+    private var habitName: String?
+    private var daysButtonSelectionState: [Bool] = [false, false, false, false, false, false, false]
     private var habitStartTime: Date?
     
     // MARK: - Logic Properties
@@ -74,6 +74,7 @@ extension OnboardingHabitRegistViewController {
         }
         
         registButton.snp.makeConstraints { make in
+            make.top.equalTo(chattingTableView.snp.bottom)
             make.bottom.equalToSuperview()
             make.trailing.equalToSuperview()
             make.leading.equalToSuperview()
@@ -99,7 +100,7 @@ extension OnboardingHabitRegistViewController {
     private func makeHabitTextFieldView() -> HStackView {
         let textField = {
             let textField = UITextField()
-            textField.attributedPlaceholder = NSAttributedString(string: "내용을 입력해주세요", attributes: [NSAttributedString.Key.foregroundColor: UIColor.pobitStone3])
+            textField.attributedPlaceholder = NSAttributedString(string: "습관 제목", attributes: [NSAttributedString.Key.foregroundColor: UIColor.pobitStone3])
             textField.addLeftPadding()
             textField.backgroundColor = .white
             textField.delegate = self
@@ -134,7 +135,9 @@ extension OnboardingHabitRegistViewController {
     
     private func makeRegistButton() -> UIButton {
         let button = UIButton(type: .system, primaryAction: .init(handler: { _ in
-            self.navigationController?.setViewControllers([TabBarController()], animated: true)
+            if self.isUserInputComplete() {
+                self.navigationController?.setViewControllers([TabBarController()], animated: true)
+            }
         }))
         button.setTitle("등록하기", for: .normal)
         button.backgroundColor = .pobitRed
@@ -144,13 +147,13 @@ extension OnboardingHabitRegistViewController {
         return button
     }
     
-    private func makeCountTimer(_ number: Int,_ action: @escaping () -> (),_ ended: @escaping () -> ()) -> Timer {
+    private func makeCountTimer(executionTargetNumber: Int = 1, withTimeInterval: TimeInterval = 0, action: @escaping () -> (), ended: @escaping () -> ()) -> Timer {
         var runCount = 0
-        let timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
+        let timer = Timer.scheduledTimer(withTimeInterval: withTimeInterval, repeats: true) { timer in
             runCount += 1
             action()
             
-            if runCount == number {
+            if runCount == executionTargetNumber {
                 timer.invalidate()
                 ended()
             }
@@ -161,46 +164,52 @@ extension OnboardingHabitRegistViewController {
     
     private func makeOnboardingDaysButtonTableViewCell() -> OnboardingDaysButtonTableViewCell {
         let cell = OnboardingDaysButtonTableViewCell()
-        cell.buttonSelectionStates = buttonSelectionStates
+        cell.daysButtonSelectionState = daysButtonSelectionState
         cell.action = { inx, state in
-            self.buttonSelectionStates[inx] = state
-            
+            self.daysButtonSelectionState[inx] = state
             var trueCount = 0
-            for state in self.buttonSelectionStates {
+            for state in self.daysButtonSelectionState {
                 if state { trueCount += 1 }
             }
             if self.hasShownDaysCell == false && trueCount >= 5 {
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "몇시에 할거야?"))
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         self.addTableViewCellDataAndUpdate(.init(chatDirection: .outgoing, cellType: .time))
                     }
                 }
                 
                 self.hasShownDaysCell = true
             }
+            if trueCount >= 5 {
+                self.registButton.backgroundColor = .pobitRed
+            } else {
+                self.registButton.backgroundColor = .gray
+            }
         }
         
         return cell
     }
     
-    private func makeOnboardingDatePickerTableViewCell() -> OnboardingDatePickerTableViewCell {
+    private func makeOnboardingDatePickerTableViewCell(_ indexPath: IndexPath) -> OnboardingDatePickerTableViewCell {
         let cell = OnboardingDatePickerTableViewCell()
         cell.dateChangeEnded = { [weak self] date in
             if self?.habitStartTime == nil {
-                DispatchQueue.main.async {
-                    self?.registButton.snp.updateConstraints({ make in
-                        make.height.equalTo(82)
-                    })
-                    UIView.animate(withDuration: 0.6,
-                                   delay: 0,
-                                   usingSpringWithDamping: 0.6,
-                                   initialSpringVelocity: 0.2,
-                                   options: .curveEaseInOut) {
-                        self?.view.layoutIfNeeded()
-                    }
-                    
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self?.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "좋아 다 됬어! 우리 꼭 습관을 만들어보자!"))
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        self?.registButton.snp.updateConstraints({ make in
+                            make.height.equalTo(82)
+                        })
+                        UIView.animate(withDuration: 0.6,
+                                       delay: 0,
+                                       usingSpringWithDamping: 0.6,
+                                       initialSpringVelocity: 0.2,
+                                       options: .curveEaseInOut) {
+                            self?.view.layoutIfNeeded()
+                        }
+                        self?.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "화이팅!!!"))
+                    }
                 }
             }
             self?.habitStartTime = date
@@ -230,9 +239,12 @@ extension OnboardingHabitRegistViewController {
         var index = UnsentMessagesIndex(unsentMessagesCount: messages.count)
         
         DispatchQueue.main.async {
-            self.makeCountTimer(messages.count, {
+            self.addTableViewCellDataAndUpdate(messages[index.value])
+            self.makeCountTimer(executionTargetNumber: messages.count - 1,
+                                withTimeInterval: 2,
+                                action: {
                 self.addTableViewCellDataAndUpdate(messages[index.value])
-            }, {
+            }, ended: {
                 self.habitTextFieldView.isHidden = false
                 self.habitTextFieldView.subviews.first?.becomeFirstResponder()
             }).fire()
@@ -245,6 +257,22 @@ extension OnboardingHabitRegistViewController {
         let indexPath = IndexPath(row: self.currentMessages.count - 1, section: 0)
         self.chattingTableView.insertRows(at: [indexPath], with: .fade)
         self.chattingTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+    }
+    
+    
+    // 유저가 모든 데이터를 제대로 입력했는지 확인하는 함수
+    private func isUserInputComplete() -> Bool {
+        if habitName == nil { return false }
+        if habitStartTime == nil { return false }
+        
+        var daysOnCount = 0
+        _ = daysButtonSelectionState.map { state in
+            if state { daysOnCount += 1 }
+        }
+        
+        if daysOnCount < 5 { return false }
+        
+        return true
     }
 }
 
@@ -262,7 +290,7 @@ extension OnboardingHabitRegistViewController: UITableViewDataSource {
         case .days:
             return makeOnboardingDaysButtonTableViewCell()
         case .time:
-            return makeOnboardingDatePickerTableViewCell()
+            return makeOnboardingDatePickerTableViewCell(indexPath)
         default:
             return makeOnboardingChattingTableViewCell(indexPath)
         }
@@ -274,10 +302,10 @@ extension OnboardingHabitRegistViewController: UITableViewDataSource {
 extension OnboardingHabitRegistViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if currentMessages[indexPath.row].cellType == .days {
-            return 102 + 30
+            return 102 + 25
         }
         
-        return 44 + 30
+        return 44 + 25
     }
 }
 
@@ -285,7 +313,7 @@ extension OnboardingHabitRegistViewController: UITableViewDelegate {
 
 extension OnboardingHabitRegistViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        habitName = textField.text ?? ""
+        habitName = textField.text
         
         addTableViewCellDataAndUpdate(.init(chatDirection: .outgoing, message: habitName, cellType: .title))
         
