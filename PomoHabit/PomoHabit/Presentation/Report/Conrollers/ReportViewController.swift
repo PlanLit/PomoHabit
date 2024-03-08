@@ -323,7 +323,7 @@ extension ReportViewController {
     func getSelectedDayHabitInfo(selectedDay: String) { // selectedDay 매개변수를 통해 해당하는 날짜의 습관정보를 불러옴, 날짜 형식 2024-03-08
         do {
             let habitInfos = try CoreDataManager.shared.fetchDailyHabitInfos()
-            let habitInfoDays = habitInfos.map{$0.day!} // map할때 옵셔널 푸는방법 아시는 분 있으시면 피드백 부탁드립니다. 임시로 강제 해제로 했습니다.
+            let habitInfoDays = habitInfos.compactMap{$0.day}
             
             if let index = habitInfoDays.firstIndex(where: {$0 == selectedDay}) {
                 let selectedHabitInfo = habitInfos[index]
@@ -340,7 +340,7 @@ extension ReportViewController {
     func getUserData() {
         do {
             let userData = try CoreDataManager.shared.fetchUser()
-            guard let nickName = userData?.nickName else { return } // 닉네임
+            guard let nickname = userData?.nickname else { return } // 닉네임
             guard let targetHabit = userData?.targetHabit else { return } // 할 습관
             guard let targetDate = userData?.targetDate else { return } // 습관을 진행할 요일
             guard let startTime = userData?.startTime else { return } // 습관 진행 시간

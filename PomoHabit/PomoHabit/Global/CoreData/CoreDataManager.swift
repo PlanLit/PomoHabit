@@ -49,7 +49,6 @@ extension CoreDataManager {
     private func fetchObject<T: NSManagedObject>(for type: T.Type) throws -> T? { // User & TotalHabitInfo fetch (User와 TotalHabitInfo은 하나의 객체만 사용)
         let entityName = String(describing: T.self)
         let request = NSFetchRequest<T>(entityName: entityName)
-        
         let context = persistentContainer.viewContext
         
         var fetchedObject: T?
@@ -76,7 +75,6 @@ extension CoreDataManager {
         let request = NSFetchRequest<T>(entityName: entityName)
         
         let context = persistentContainer.viewContext
-        
         var fetchedObject : [T] = []
         var fetchError: Error?
         
@@ -111,7 +109,7 @@ extension CoreDataManager {
     
     func fetchDailyHabitInfos() throws -> [DailyHabitInfo] {
         do {
-            let dailyHabitInfos : [DailyHabitInfo] = try fetchObjects(for: DailyHabitInfo.self)
+            let dailyHabitInfos: [DailyHabitInfo] = try fetchObjects(for: DailyHabitInfo.self)
             
             return dailyHabitInfos
         } catch let error {
@@ -124,7 +122,7 @@ extension CoreDataManager {
 // MARK: - Onboarding
 
 extension CoreDataManager {
-    func createUser(nickname: String,targetHabit: String, targetDate: String,startTime: String,whiteNoiseType: String?) { // User 엔티티 저장
+    func createUser(nickname: String, targetHabit: String, targetDate: String, startTime: String, whiteNoiseType: String?) { // User 엔티티 저장
         // db에 이미 존재하는 유저가 있는지 확인
         do {
             if let _ = try fetchUser() {
@@ -138,7 +136,7 @@ extension CoreDataManager {
         let context = persistentContainer.viewContext
         let user = User(context: context)
         
-        user.nickName = nickname // 닉네임
+        user.nickname = nickname // 닉네임
         user.targetHabit = targetHabit // 습관정보
         user.targetDate = targetDate // 습관 진행요일
         user.startTime = startTime // 습관 진행 시간
