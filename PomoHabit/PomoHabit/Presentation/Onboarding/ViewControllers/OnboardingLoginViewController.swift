@@ -63,7 +63,6 @@ extension OnboardingLoginViewController {
     private func makeMainImage() -> UIImageView {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "mainTomato")
-        
         imageView.snp.makeConstraints { make in
             make.width.equalTo(185)
             make.height.equalTo(185)
@@ -77,7 +76,6 @@ extension OnboardingLoginViewController {
         textField.borderStyle = .none
         textField.layer.cornerRadius = 22
         textField.backgroundColor = .pobitWhite
-        textField.textColor = .pobitStone4
         textField.font = Pretendard.medium(size: 20)
         textField.attributedPlaceholder = NSAttributedString(string: "닉네임 입력", attributes: [NSAttributedString.Key.foregroundColor: UIColor.pobitStone4])
         textField.addLeftPadding()
@@ -93,7 +91,7 @@ extension OnboardingLoginViewController {
             self.navigationController?.pushViewController(onboardingChattingViewController, animated: true)
         }))
         button.setImage(UIImage(named: "arrow"), for: .normal)
-        button.layer.opacity = 0.3
+        button.layer.opacity = 0.5
         button.isUserInteractionEnabled = false
         button.snp.makeConstraints { make in
             make.width.equalTo(44)

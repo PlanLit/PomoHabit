@@ -139,9 +139,7 @@ extension OnboardingHabitRegisterViewController {
     
     private func makeRegisterButton() -> UIButton {
         let button = UIButton(type: .system, primaryAction: .init(handler: { _ in
-            if self.isUserInputComplete() {
-                self.navigationController?.setViewControllers([TabBarController()], animated: true)
-            }
+            self.navigationController?.setViewControllers([TabBarController()], animated: true)
         }))
         button.setTitle("등록하기", for: .normal)
         button.backgroundColor = .pobitRed
@@ -183,11 +181,7 @@ extension OnboardingHabitRegisterViewController {
                 }
                 self.hasShownDaysCell = true
             }
-            if trueCount >= 5 {
-                self.registerButton.backgroundColor = .pobitRed
-            } else {
-                self.registerButton.backgroundColor = .gray
-            }
+            self.fetchRegisterButtonState()
         }
         
         return cell
@@ -211,6 +205,7 @@ extension OnboardingHabitRegisterViewController {
                             self?.view.layoutIfNeeded()
                         }
                         self?.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "화이팅!!!"))
+                        self?.fetchRegisterButtonState()
                     }
                 }
             }
@@ -259,17 +254,29 @@ extension OnboardingHabitRegisterViewController {
         self.chattingTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
     }
     
-    // 유저가 모든 데이터를 제대로 입력했는지 확인하는 함수
-    private func isUserInputComplete() -> Bool {
-        if habitName == nil { return false }
-        if habitStartTime == nil { return false }
-        var daysOnCount = 0
-        _ = daysButtonSelectionState.map { state in
-            if state { daysOnCount += 1 }
+    // 이 함수가 호출 됬을때의 데이터 상태에따라 등록하기 버튼 뷰 패치
+    private func fetchRegisterButtonState() {
+        func isUserInputComplete() -> Bool { // 유저가 모든 데이터를 제대로 입력했는지 확인하는 함수
+            if habitName == nil { return false }
+            if habitStartTime == nil { return false }
+            var daysOnCount = 0
+            for state in self.daysButtonSelectionState {
+                if state { daysOnCount += 1 }
+            }
+            if daysOnCount < 5 { return false }
+            
+            return true
         }
-        if daysOnCount < 5 { return false }
         
-        return true
+        DispatchQueue.main.async {
+            if isUserInputComplete() {
+                self.registerButton.backgroundColor = .pobitRed
+                self.registerButton.isUserInteractionEnabled = true
+            } else {
+                self.registerButton.backgroundColor = .gray
+                self.registerButton.isUserInteractionEnabled = false
+            }
+        }
     }
 }
 
