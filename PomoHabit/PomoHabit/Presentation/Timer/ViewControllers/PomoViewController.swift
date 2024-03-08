@@ -10,11 +10,14 @@ import UIKit
 
 // MARK: - TimerViewController
 
-final class TimerViewController: BaseViewController {
+final class TimerViewController: BaseViewController, BottomSheetPresentable {
     
     // MARK: - Properties
     
+    private var model = TimerModel()
     private var rootView = TimerView()
+    
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Life Cycle
     
@@ -26,6 +29,38 @@ final class TimerViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bind()
+    }
+}
+
+extension TimerViewController {
+    private func bind() {
+        let input = TimerModel.Input(memoButtonTapped: rootView.memoButtonTapped,
+                                     whiteNoiseButtonTapped: rootView.whiteNoiseButtonTapped,
+                                     timerButtonTapped: rootView.timerButtonTapped)
+        let output = model.transform(input: input)
+        
+        output.memoButtonAction
+            .sink { _ in
+                DispatchQueue.main.async {
+                    self.presentBottomSheet(rootView: MemoView())
+                }
+            }
+            .store(in: &cancellables)
+        
+        output.whiteNoiseButtonAction
+            .sink { _ in
+                DispatchQueue.main.async {
+                    self.presentBottomSheet(rootView: WhiteNoiseView(), detents: [.medium()])
+                }
+            }
+            .store(in: &cancellables)
+        
+        output.timerButtonAction
+            .sink { _ in
+                print("타이머뷰 액션")
+            }
+            .store(in: &cancellables)
     }
 }
 

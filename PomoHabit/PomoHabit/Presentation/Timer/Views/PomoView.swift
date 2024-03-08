@@ -14,6 +14,14 @@ import SnapKit
 
 final class TimerView: BaseView {
     
+    // MARK: - Properties
+    
+    private (set) var memoButtonTapped = PassthroughSubject<Void, Never>()
+    private (set) var whiteNoiseButtonTapped = PassthroughSubject<Void, Never>()
+    private (set) var timerButtonTapped = PassthroughSubject<Void, Never>()
+    
+    private var cancellables = Set<AnyCancellable>()
+    
     // MARK: - UI Properties
     
     private let navigationBar = PobitNavigationBarView(title: "타이머", viewType: .plain)
@@ -25,9 +33,10 @@ final class TimerView: BaseView {
     private lazy var memoButton = makeMemoButton()
     private lazy var dividerView = makeDividerView(height: 1)
     private lazy var whiteNoiseInfoLabel = makeBlackBodyLabel(text: "🎧 배경음을 선택해보세요!", fontSize: 16)
-    private lazy var whiteNoiseEditButton = makeWhiteNoiseEditButton()
+    private lazy var whiteNoiseButton = makeWhiteNoiseEditButton()
     
     private lazy var starView = UIImageView(image: UIImage(named: "Star"))
+    // let? lazy var?
     private let circleProgressBar = CircleProgressBar()
     
     private lazy var timerButton: PobitButton = {
@@ -48,6 +57,7 @@ final class TimerView: BaseView {
         
         setAddSubViews()
         setAutoLayout()
+        subscribeButtonEvents()
     }
     
     required init?(coder: NSCoder) {
@@ -61,7 +71,7 @@ final class TimerView: BaseView {
     }
 }
 
-// MARK: - LayoutHelpers
+// MARK: - Layout Helpers
 
 extension TimerView {
     private func setAddSubViews() {
@@ -105,6 +115,39 @@ extension TimerView {
     }
 }
 
+// MARK: - Action Helpers
+
+extension TimerView {
+    private func subscribeButtonEvents() {
+        memoButton.tapPublisher.sink { [weak self] in
+            self?.memoButtonAction()
+        }
+        .store(in: &cancellables)
+        
+        whiteNoiseButton.tapPublisher.sink { [weak self] in
+            self?.whiteNoiseButtonAction()
+        }
+        .store(in: &cancellables)
+        
+        timerButton.tapPublisher.sink { [weak self] in
+            self?.timerButtonAction()
+        }
+        .store(in: &cancellables)
+    }
+    
+    private func memoButtonAction() {
+        memoButtonTapped.send()
+    }
+    
+    private func whiteNoiseButtonAction() {
+        whiteNoiseButtonTapped.send()
+    }
+    
+    private func timerButtonAction() {
+        timerButtonTapped.send()
+    }
+}
+
 // MARK: - TimerHeaderView
 
 extension TimerView {
@@ -116,7 +159,7 @@ extension TimerView {
              memoButton,
              dividerView,
              whiteNoiseInfoLabel,
-             whiteNoiseEditButton
+             whiteNoiseButton
             ])
         
         goalDaysCountLabel.snp.makeConstraints { make in
@@ -149,7 +192,7 @@ extension TimerView {
             make.leading.bottom.equalToSuperview().inset(LayoutLiterals.minimumVerticalSpacing)
         }
         
-        whiteNoiseEditButton.snp.makeConstraints { make in
+        whiteNoiseButton.snp.makeConstraints { make in
             make.centerY.equalTo(whiteNoiseInfoLabel)
             make.trailing.equalTo(startTimeLabel)
             make.size.equalTo(20)
