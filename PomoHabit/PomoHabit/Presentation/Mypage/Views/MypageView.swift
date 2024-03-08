@@ -15,7 +15,7 @@ final class MyPageView: BaseView {
     
     // MARK: - Properties
     
-    private let pobitNavigationBarView = PobitNavigationBarView(title: "마이페이지")
+    private let pobitNavigationBarView = PobitNavigationBarView(title: "마이페이지", viewType: .plain)
     
     private lazy var myPageTableView: UITableView = {
     

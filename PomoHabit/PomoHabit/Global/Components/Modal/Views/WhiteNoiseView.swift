@@ -14,13 +14,8 @@ import SnapKit
 final class WhiteNoiseView: BaseView {
 
     // MARK: - UI Properties
-    
-    private lazy var dismissButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .pobitStone2
-        
-        return button
-    }()
+  
+    private lazy var navigationBar = PobitNavigationBarView(title: "백색소음", viewType: .withDismissButton)
     
     private let whiteNoiseLabel = UILabel().setPrimaryColorLabel(text: "White Noise")
     
@@ -62,19 +57,19 @@ final class WhiteNoiseView: BaseView {
 
 extension WhiteNoiseView {
     private func setAddSubViews() {
-        addSubViews([dismissButton, whiteNoiseLabel, editButton, tableView])
+        addSubViews([navigationBar, whiteNoiseLabel, editButton, tableView])
     }
     
     private func setAutoLayout() {
-        dismissButton.snp.makeConstraints { make in
-            make.top.equalTo(LayoutLiterals.upperPrimarySpacing)
-            make.leading.equalToSuperview().offset(LayoutLiterals.minimumHorizontalSpacing)
-            make.size.equalTo(24)
+        navigationBar.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(LayoutLiterals.upperPrimarySpacing)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(58)
         }
         
         whiteNoiseLabel.snp.makeConstraints { make in
-            make.top.equalTo(dismissButton.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
-            make.leading.equalTo(dismissButton)
+            make.top.equalTo(navigationBar.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
+            make.leading.equalToSuperview().offset(LayoutLiterals.minimumHorizontalSpacing)
         }
         
         editButton.snp.makeConstraints { make in
@@ -85,7 +80,7 @@ extension WhiteNoiseView {
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(whiteNoiseLabel.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
-            make.leading.equalTo(dismissButton)
+            make.leading.equalTo(whiteNoiseLabel)
             make.trailing.equalTo(editButton)
             make.bottom.equalToSuperview()
         }
