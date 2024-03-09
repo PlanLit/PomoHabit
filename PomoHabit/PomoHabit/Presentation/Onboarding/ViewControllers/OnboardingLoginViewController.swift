@@ -25,6 +25,7 @@ final class OnboardingLoginViewController: UIViewController {
 
         setAddSubviews()
         setAutoLayout()
+//        didtapNextButton() // 임시로 만들어 놓은 함수입니다. 다음버튼 action연결해서 해당 함수 안에 있는 코드 사용하시면 됩니다.
     }
 }
 
@@ -100,20 +101,6 @@ extension OnboardingLoginViewController {
         
         return button
     }
-        
-    private func didTapSubmitButton() {
-        let nickname = ""
-
-        // 임시값
-        let targetHabit = "Running"
-        let targetDate = Date()
-        let targetTime = Date()
-
-        CoreDataManager.shared.createUser(nickname: nickname, targetHabit: targetHabit, targetDate: targetDate, targetTime: targetTime)
-        
-        // 닉네임 변경 테스트
-        CoreDataManager.shared.updateUserNickname(to: "변경된 닉네임")
-    }
 }
 
 // MARK: - UITextFieldDelegate
@@ -133,5 +120,14 @@ extension OnboardingLoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+// MARK: - CoreData
+
+extension OnboardingLoginViewController {
+    func didtapNextButton() {
+        // user 데이터 설정
+        CoreDataManager.shared.createUser(nickname: "동진", targetHabit: "독서", targetDate: "월,화,수,목,금", startTime: "09 : 00 AM", whiteNoiseType: nil)
     }
 }
