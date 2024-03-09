@@ -28,6 +28,10 @@ extension UIColor {
         return UIColor(hex: "#251A1B")
     }
     
+    static var pobitStone0: UIColor {
+        return UIColor(hex: "#4E4E4E")
+    }
+    
     static var pobitStone1: UIColor {
         return UIColor(hex: "#5B5B5B", alpha: 0.55)
     }

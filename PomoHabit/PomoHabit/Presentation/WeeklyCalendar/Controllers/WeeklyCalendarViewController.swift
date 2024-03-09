@@ -105,6 +105,25 @@ extension WeeklyCalendarViewController {
         
         weeklyCalendarView.setWeeklyDates(weeklyDates: weeklyDates)
     }
+    
+    func getSelectedDayHabitInfo(selectedDay: String) {
+        do {
+            let habitInfos = try CoreDataManager.shared.fetchDailyHabitInfos()
+            let habitInfoDays = habitInfos.compactMap{$0.day}
+            
+            if let index = habitInfoDays.firstIndex(where: {$0 == selectedDay}) {
+                let selectedHabitInfo = habitInfos[index]
+                guard let day = selectedHabitInfo.day else { return }
+                let goalTime = selectedHabitInfo.goalTime
+                let hasDone = selectedHabitInfo.hasDone
+                guard let note = selectedHabitInfo.note else { return }
+                
+                print("day :\(day),goalTime:\(goalTime),hasDone:\(hasDone),note:\(note)") // 데이터 확인을 위하여 임시로 적어 두었습니다.
+            }
+        }catch {
+            print(error)
+        }
+    }
 }
 
 

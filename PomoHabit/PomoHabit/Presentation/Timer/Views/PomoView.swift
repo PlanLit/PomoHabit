@@ -15,26 +15,18 @@ final class TimerView: BaseView {
     
     // MARK: - UI Properties
     
-    private let navigationBar = PobitNavigationBarView(title: "타이머")
+    private let navigationBar = PobitNavigationBarView(title: "타이머", viewType: .plain)
     
-    private lazy var container: HStackView = {
-        return HStackView(spacing: 16, [
-            whiteNoiseButton,
-            memoButton
-        ])
-    }()
+    private lazy var timerHeaderView = makeTimerHeaderView()
+    private lazy var goalDaysCountLabel = makeGoalDaysCountLabel(text: "주5일", backgroundColor: .pobitStone0)
+    private lazy var startTimeLabel = makeBlackBodyLabel(text: "09:40AM", fontSize: 16)
+    private lazy var habitLabel = makeHabitLabel()
+    private lazy var memoButton = makeMemoButton()
+    private lazy var dividerView = makeDividerView(height: 1)
+    private lazy var whiteNoiseInfoLabel = makeBlackBodyLabel(text: "🎧 배경음을 선택해보세요!", fontSize: 16)
+    private lazy var whiteNoiseEditButton = makeWhiteNoiseEditButton()
     
-    private lazy var whiteNoiseButton = PobitButton.makeSquareButton(title: "🎶")
-    private lazy var memoButton = PobitButton.makeSquareButton(title: "메모")
-    
-    private let habitLabel: UILabel = {
-        let label = UILabel()
-        label.text = "블라블라블라"
-        label.font = Pretendard.regular(size: 36)
-        
-        return label
-    }()
-    
+    private lazy var starView = UIImageView(image: UIImage(named: "Star"))
     private let circleProgressBar = CircleProgressBar()
     
     private lazy var timerButton: PobitButton = {
@@ -72,7 +64,7 @@ final class TimerView: BaseView {
 
 extension TimerView {
     private func setAddSubViews() {
-        addSubViews([navigationBar, container, habitLabel, circleProgressBar, timerButton])
+        addSubViews([navigationBar, timerHeaderView, starView, circleProgressBar, timerButton])
     }
     
     private func setAutoLayout() {
@@ -82,35 +74,138 @@ extension TimerView {
             make.height.equalTo(58)
         }
         
-        container.snp.makeConstraints { make in
-            make.top.equalTo(navigationBar.snp.bottom).offset(25)
-            make.trailing.equalToSuperview().offset(-20)
+        timerHeaderView.snp.makeConstraints { make in
+            make.top.equalTo(navigationBar.snp.bottom).offset(28)
+            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
+            make.height.equalTo(152)
         }
         
-        whiteNoiseButton.snp.makeConstraints { make in
-            make.size.equalTo(58)
-        }
+        setupTimerHeaderView()
         
-        memoButton.snp.makeConstraints { make in
-            make.size.equalTo(58)
-        }
-        
-        habitLabel.snp.makeConstraints { make in
-            make.top.equalTo(container.snp.bottom).offset(42)
+        starView.snp.makeConstraints { make in
+            make.top.equalTo(timerHeaderView.snp.bottom).offset(48)
             make.centerX.equalToSuperview()
+            make.width.equalTo(120)
+            make.height.equalTo(72)
         }
         
         circleProgressBar.snp.makeConstraints { make in
-            make.top.equalTo(habitLabel.snp.bottom).offset(82)
+            make.top.equalTo(timerHeaderView.snp.bottom).offset(80)
             make.centerX.equalToSuperview()
             make.size.equalTo(280)
         }
         
         timerButton.snp.makeConstraints { make in
-            make.top.equalTo(circleProgressBar.snp.bottom).offset(60)
+            make.top.equalTo(circleProgressBar.snp.bottom).offset(42)
             make.centerX.equalToSuperview()
             make.width.equalTo(134)
             make.height.equalTo(58)
         }
+    }
+}
+
+// MARK: - TimerHeaderView
+
+extension TimerView {
+    private func setupTimerHeaderView() {
+        timerHeaderView.addSubViews(
+            [goalDaysCountLabel,
+             startTimeLabel,
+             habitLabel,
+             memoButton,
+             dividerView,
+             whiteNoiseInfoLabel,
+             whiteNoiseEditButton
+            ])
+        
+        goalDaysCountLabel.snp.makeConstraints { make in
+            make.top.leading.equalToSuperview().inset(LayoutLiterals.minimumVerticalSpacing)
+        }
+        
+        startTimeLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(goalDaysCountLabel)
+            make.trailing.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
+        }
+        
+        habitLabel.snp.makeConstraints { make in
+            make.top.equalTo(goalDaysCountLabel.snp.bottom).offset(8)
+            make.leading.equalTo(goalDaysCountLabel)
+        }
+        
+        memoButton.snp.makeConstraints { make in
+            make.centerY.equalTo(habitLabel)
+            make.trailing.equalTo(startTimeLabel)
+            make.size.equalTo(24)
+        }
+        
+        dividerView.snp.makeConstraints { make in
+            make.top.equalTo(habitLabel.snp.bottom).offset(8)
+            make.leading.equalTo(goalDaysCountLabel)
+            make.trailing.equalTo(startTimeLabel)
+        }
+        
+        whiteNoiseInfoLabel.snp.makeConstraints { make in
+            make.leading.bottom.equalToSuperview().inset(LayoutLiterals.minimumVerticalSpacing)
+        }
+        
+        whiteNoiseEditButton.snp.makeConstraints { make in
+            make.centerY.equalTo(whiteNoiseInfoLabel)
+            make.trailing.equalTo(startTimeLabel)
+            make.size.equalTo(20)
+        }
+    }
+    
+    private func makeTimerHeaderView() -> UIView {
+        let view = UIView()
+        view.layer.cornerRadius = 8
+        view.layer.borderColor = UIColor.pobitStone4.cgColor
+        view.layer.borderWidth = 1
+        view.backgroundColor = .clear
+        
+        return view
+    }
+    
+    private func makeHabitLabel() -> UILabel {
+        let label = UILabel()
+        label.text = "독서하기"
+        label.font = Pretendard.medium(size: 36)
+        
+        return label
+    }
+    
+    // TODO: 중간 발표 전 Extension에 있는 메서드 이걸로 바꿉시다
+    private func makeGoalDaysCountLabel(text: String, backgroundColor: UIColor) -> BasePaddingLabel {
+        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8))
+        label.text = text
+        label.textColor = .white
+        label.font = Pretendard.bold(size: 12)
+        label.backgroundColor = backgroundColor
+        label.layer.cornerRadius = 8
+        label.layer.masksToBounds = true
+        
+        return label
+    }
+    
+    private func makeBlackBodyLabel(text: String, fontSize: CGFloat) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.font = Pretendard.regular(size: fontSize)
+        label.textColor = .pobitBlack
+        
+        return label
+    }
+    
+    private func makeMemoButton() -> UIButton {
+        let button = UIButton()
+        button.backgroundColor = .gray
+        
+        return button
+    }
+    
+    private func makeWhiteNoiseEditButton() -> UIButton {
+        let button = UIButton()
+        button.backgroundColor = .gray
+        
+        return button
     }
 }
