@@ -105,6 +105,7 @@ final class WeeklyCalendarView: BaseView {
         label.layer.masksToBounds = true
         label.layer.borderColor = UIColor.pobitStone4.cgColor
         label.layer.borderWidth = 1
+        label.text = "주간 캘린더를 클릭하여 습관 정보를 확인하세요."
         
         return label
     }()
@@ -130,7 +131,7 @@ final class WeeklyCalendarView: BaseView {
 extension WeeklyCalendarView {
     private func setAddSubViews() {
         self.addSubview(scrollView)
-        scrollView.addSubViews([navigationBarView,todayLabel,todayDateLabel,weeklyCollectionView,firstDivider,weeklyHabbitProgressLabel,weeklyHabbitProgressView,progressCircleImageView,secondDivider,habitInfoLabel,habitInfoView,thirdDivider,noteInfoLabel,noteContentLabel])
+        scrollView.addSubViews([navigationBarView,todayLabel,todayDateLabel,weeklyCollectionView,firstDivider,weeklyHabitProgressLabel,weeklyHabitProgressView,progressCircleImageView,secondDivider,habitInfoLabel,habitInfoView,thirdDivider,noteInfoLabel,noteContentLabel])
     }
     
     private func setAutoLayout() {
@@ -221,7 +222,7 @@ extension WeeklyCalendarView {
     }
     
     private func setSubTitleLabel() {
-        weeklyHabbitProgressLabel.setSubTitleLabel(text: "진행 상태")
+        weeklyHabitProgressLabel.setSubTitleLabel(text: "진행 상태")
         habitInfoLabel.setSubTitleLabel(text: "습관 정보")
         noteInfoLabel.setSubTitleLabel(text: "메모")
     }

@@ -136,7 +136,6 @@ extension WeeklyCalendarViewController {
             let habitInfos = try CoreDataManager.shared.fetchDailyHabitInfos() // Daily 습관 정보 배열
             let userInfo = try CoreDataManager.shared.fetchUser() // 유저 정보
             let habitInfoDays = habitInfos.compactMap{$0.day} // Daily 습관 날짜 정보 배열
-            let habiHasDoneCount = habitInfos.filter{$0.hasDone == true}.count
             guard let targetHabit = userInfo?.targetHabit else { return } // 설정한 습관
             var dateStr = Date().dateToString(format: "yyyy-MM-dd") // 앞에 년도를 붙여주기 위함
             
