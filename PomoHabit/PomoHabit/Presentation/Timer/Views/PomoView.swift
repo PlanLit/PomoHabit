@@ -36,15 +36,13 @@ final class TimerView: BaseView {
     private lazy var whiteNoiseButton = makeWhiteNoiseEditButton()
     
     private lazy var starView = UIImageView(image: UIImage(named: "Star"))
-    // let? lazy var?
-    private let circleProgressBar = CircleProgressBar()
+    private (set) var circleProgressBar = CircleProgressBar()
     
     private lazy var timerButton: PobitButton = {
         let style = PlainButtonStyle(backgroundColor: .pobitStone1)
         
         let button = PobitButton()
         button.setStyle(style)
-        button.setTitle("시작", for: .normal)
         button.titleLabel?.font = Pretendard.bold(size: 20)
         
         return button
@@ -59,11 +57,44 @@ final class TimerView: BaseView {
         setAutoLayout()
         subscribeButtonEvents()
         
-        circleProgressBar.startTimer()
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: - Subscriptions
+
+extension TimerView {
+    private func subscribeButtonEvents() {
+        memoButton.tapPublisher.sink { [weak self] in
+            self?.memoButtonAction()
+        }
+        .store(in: &cancellables)
+        
+        whiteNoiseButton.tapPublisher.sink { [weak self] in
+            self?.whiteNoiseButtonAction()
+        }
+        .store(in: &cancellables)
+        
+        timerButton.tapPublisher.sink { [weak self] in
+            self?.timerButtonAction()
+        }
+        .store(in: &cancellables)
+    }
+    
+    private func memoButtonAction() {
+        memoButtonTapped.send()
+    }
+    
+    private func whiteNoiseButtonAction() {
+        whiteNoiseButtonTapped.send()
+    }
+    
+    private func timerButtonAction() {
+        timerButtonTapped.send()
     }
 }
 
@@ -114,33 +145,21 @@ extension TimerView {
 // MARK: - Action Helpers
 
 extension TimerView {
-    private func subscribeButtonEvents() {
-        memoButton.tapPublisher.sink { [weak self] in
-            self?.memoButtonAction()
+    func updateTimerButtonState(_ state: TimerState) {
+        switch state {
+        case .stopped:
+            timerButton.setTitle("시작", for: .normal)
+            timerButton.backgroundColor = .pobitBlack
+            timerButton.isEnabled = true
+        case .running:
+            timerButton.setTitle("완료", for: .normal)
+            timerButton.backgroundColor = .pobitStone1
+            timerButton.isEnabled = false
+        case .finished:
+            timerButton.setTitle("완료", for: .normal)
+            timerButton.backgroundColor = .pobitBlack
+            timerButton.isEnabled = true
         }
-        .store(in: &cancellables)
-        
-        whiteNoiseButton.tapPublisher.sink { [weak self] in
-            self?.whiteNoiseButtonAction()
-        }
-        .store(in: &cancellables)
-        
-        timerButton.tapPublisher.sink { [weak self] in
-            self?.timerButtonAction()
-        }
-        .store(in: &cancellables)
-    }
-    
-    private func memoButtonAction() {
-        memoButtonTapped.send()
-    }
-    
-    private func whiteNoiseButtonAction() {
-        whiteNoiseButtonTapped.send()
-    }
-    
-    private func timerButtonAction() {
-        timerButtonTapped.send()
     }
 }
 

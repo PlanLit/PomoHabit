@@ -58,7 +58,19 @@ extension TimerViewController {
         
         output.timerButtonAction
             .sink { _ in
-                print("타이머뷰 액션")
+                
+            }
+            .store(in: &cancellables)
+        
+        output.timerStateDidChange
+            .receive(on: RunLoop.main)
+            .sink { [weak self] state in
+                self?.rootView.updateTimerButtonState(state)
+                if state == .running {
+                    self?.rootView.circleProgressBar.setProgressWithAnimation(duration: self?.model.timerDuration ?? 5)
+                } else {
+                    self?.rootView.circleProgressBar.resetProgressAnimation()
+                }
             }
             .store(in: &cancellables)
     }
