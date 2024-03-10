@@ -17,11 +17,6 @@ final class MyPageView: BaseView {
     
     private let pobitNavigationBarView = PobitNavigationBarView(title: "마이페이지", viewType: .plain)
     
-    private lazy var myPageTableView: UITableView = {
-    
-        return tableView
-    }()
-    
     // MARK: - 닉네임 UI
     
     private let nickNameLabel: UILabel = {
@@ -132,7 +127,6 @@ final class MyPageView: BaseView {
         let vStackView1 = VStackView(spacing: 6, alignment: .center, distribution: .equalSpacing, [totalDaysLabel, didDaysLabel])
         let vStackView2 = VStackView(spacing: 6, alignment: .center, distribution: .equalSpacing, [totalMinutesLabel, didMinutesLabel])
         let vStackView3 = VStackView(spacing: 6, alignment: .center, distribution: .equalSpacing, [totalHabbitsLabel, didHabbitsLabel])
-        
         let hStackView = HStackView(spacing: 20, alignment: .center, distribution: .equalSpacing, [vStackView1, vStackView2, vStackView3])
         addSubview(hStackView)
         
@@ -142,9 +136,7 @@ final class MyPageView: BaseView {
     // MARK: - TableView
     
     private lazy var tableView: UITableView = {
-        let topMargin: CGFloat = 360
-        let tableViewFrame = CGRect(x: 0, y: topMargin, width: self.bounds.width, height: self.bounds.height - topMargin)
-        let myPageTableView = UITableView(frame: tableViewFrame, style: .plain)
+        let myPageTableView = UITableView(frame: .zero, style: .plain)
         myPageTableView.separatorStyle = .singleLine
         myPageTableView.dataSource = self
         myPageTableView.delegate = self

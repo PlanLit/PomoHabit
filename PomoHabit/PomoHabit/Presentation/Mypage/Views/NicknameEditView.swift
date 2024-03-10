@@ -88,7 +88,8 @@ extension NicknameEditView {
         }
         
         editSubmitButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-34)
+            make.bottom.equalTo(self.keyboardLayoutGuide.snp.top).offset(-34)
+//            make.bottom.equalToSuperview().offset(-34)
             make.centerX.equalToSuperview()
             make.height.equalTo(62)
             make.width.equalTo(324)
@@ -98,7 +99,6 @@ extension NicknameEditView {
 
 extension NicknameEditView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
