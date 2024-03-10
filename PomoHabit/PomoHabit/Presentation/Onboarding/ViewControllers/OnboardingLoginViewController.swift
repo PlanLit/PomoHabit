@@ -11,6 +11,10 @@ import UIKit
 
 final class OnboardingLoginViewController: UIViewController {
     
+    // MARK: - Data Properties
+    
+    var nickName: String?
+    
     // MARK: - Properties
     
     private lazy var container: VStackView = makeContainer()
@@ -25,7 +29,6 @@ final class OnboardingLoginViewController: UIViewController {
 
         setAddSubviews()
         setAutoLayout()
-//        didtapNextButton() // 임시로 만들어 놓은 함수입니다. 다음버튼 action연결해서 해당 함수 안에 있는 코드 사용하시면 됩니다.
     }
 }
 
@@ -88,8 +91,9 @@ extension OnboardingLoginViewController {
     
     private func makeNextButton() -> UIButton {
         let button = UIButton(type: .custom, primaryAction: .init(handler: { _ in
-            let onboardingChattingViewController = OnboardingHabitRegisterViewController()
-            self.navigationController?.pushViewController(onboardingChattingViewController, animated: true)
+            let onboardingHabitRegisterViewController = OnboardingHabitRegisterViewController()
+            onboardingHabitRegisterViewController.nickName = self.nickName
+            self.navigationController?.pushViewController(onboardingHabitRegisterViewController, animated: true)
         }))
         button.setImage(UIImage(named: "arrow"), for: .normal)
         button.layer.opacity = 0.5
@@ -107,7 +111,7 @@ extension OnboardingLoginViewController {
 
 extension OnboardingLoginViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        print("textFieldDidChangeSelection")
+        nickName = textField.text
         if textField.text != "" {
             nextButton.layer.opacity = 1
             nextButton.isUserInteractionEnabled = true
@@ -120,14 +124,5 @@ extension OnboardingLoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-}
-
-// MARK: - CoreData
-
-extension OnboardingLoginViewController {
-    func didtapNextButton() {
-        // user 데이터 설정
-        CoreDataManager.shared.createUser(nickname: "동진", targetHabit: "독서", targetDate: "월,화,수,목,금", startTime: "09 : 00 AM", whiteNoiseType: nil)
     }
 }
