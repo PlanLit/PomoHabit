@@ -15,4 +15,12 @@ extension String {
         
         return estimatedFrame
     }
+    
+    func getStringToDate(format: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        dateFormatter.timeZone = NSTimeZone(name: "ko_KR") as TimeZone?
+        
+        return dateFormatter.date(from: self)
+    }
 }

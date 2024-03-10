@@ -35,6 +35,7 @@ final class WeeklyCalendarHabitInfoView: UIView {
         setAddSubViews()
         setAutoLayout()
         setUpView()
+        defaultValueSetHabitInfoView()
     }
     
     required init?(coder: NSCoder) {
@@ -75,6 +76,13 @@ extension WeeklyCalendarHabitInfoView {
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.pobitStone4.cgColor
     }
+    
+    private func defaultValueSetHabitInfoView() {
+        titleInfoView.setUIImageViewImage(image: UIImage(named: "NotStartImage"))
+        titleInfoView.setUplabel(text: "설정한 습관", font: Pretendard.bold(size: 20))
+        timeInfoView.setUplabel(text: "00:00 ~ 00:00", font: Pretendard.medium(size: 15))
+        targetInfoView.setUplabel(text: "목표시간 : 0m", font: Pretendard.medium(size: 15))
+    }
 }
 
 // MARK: - Methods
@@ -89,8 +97,8 @@ extension WeeklyCalendarHabitInfoView {
         timeInfoView.setUplabel(text: duringTime, font: Pretendard.medium(size: 15))
     }
     
-    func setTargetInfoView(tagetTime: String) {
-        targetInfoView.setUplabel(text: "목표시간 : \(tagetTime)", font: Pretendard.medium(size: 15))
+    func setTargetInfoView(goalTime: String) {
+        targetInfoView.setUplabel(text: "목표시간 : \(goalTime)m", font: Pretendard.medium(size: 15))
     }
     
 }
