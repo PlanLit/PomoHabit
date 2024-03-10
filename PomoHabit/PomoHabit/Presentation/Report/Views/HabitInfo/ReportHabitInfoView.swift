@@ -62,6 +62,7 @@ extension ReportHabitInfoView {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         
         return tableView
     }

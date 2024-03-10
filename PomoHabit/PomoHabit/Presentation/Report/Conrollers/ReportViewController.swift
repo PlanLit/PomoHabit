@@ -14,15 +14,16 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
     // MARK: - Data Properties
     
     private lazy var user: User? = getUserData()
-    
-    // MARK: - UI Properties
-    
     private let todayDate = { // 오늘 날짜 정수
         let currentDate = Date()
         let calendar = Calendar.current
         
         return calendar.component(.day, from: currentDate)
     }()
+    
+    // MARK: - UI Properties
+    
+    private let navigationBar = PobitNavigationBarView(title: "이번달 습관 달성률", viewType: .plain)
     private lazy var headerView: HStackView = makeHeaderView()
     private lazy var imageCollectionViewController: ReportImageCollectionViewController = makeImageCollectionViewController()
     private lazy var calendarNaviView: VStackView = makeCalendarNaviView()
@@ -46,6 +47,7 @@ extension ReportViewController {
         addChild(imageCollectionViewController)
         
         view.addSubViews([
+            navigationBar,
             headerView,
             calendarNaviView,
             imageCollectionViewController.view,
@@ -55,24 +57,30 @@ extension ReportViewController {
     }
     
     private func setAutoLayout() {
+        navigationBar.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(58)
+        }
+        
         headerView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.top.equalTo(navigationBar.snp.bottom)
             make.left.equalTo(LayoutLiterals.minimumHorizontalSpacing)
             make.right.equalTo(-LayoutLiterals.minimumHorizontalSpacing)
-            make.height.equalTo(55)
+            make.height.equalTo(50)
         }
         
         imageCollectionViewController.view.snp.makeConstraints { make in
             make.top.equalTo(headerView.snp.bottom)
             make.left.right.equalToSuperview()
-            make.height.equalTo(100)
+            make.height.equalTo(74)
         }
         
         calendarNaviView.snp.makeConstraints { make in
             make.top.equalTo(imageCollectionViewController.view.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
             make.left.equalToSuperview().offset(35)
             make.right.equalToSuperview().offset(-35)
-            make.height.equalTo(55)
+            make.height.equalTo(44)
         }
         
         gridView.snp.makeConstraints { make in
@@ -81,10 +89,10 @@ extension ReportViewController {
         }
         
         messageBoxView.snp.makeConstraints { make in
-            make.height.equalTo(35)
-            make.top.equalTo(gridView.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
             make.right.equalTo(view.snp.right).offset(-LayoutLiterals.minimumHorizontalSpacing)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-LayoutLiterals.upperSecondarySpacing)
             make.left.equalTo(view.snp.left).offset(LayoutLiterals.minimumHorizontalSpacing)
+            make.height.equalTo(35)
         }
     }
 }
