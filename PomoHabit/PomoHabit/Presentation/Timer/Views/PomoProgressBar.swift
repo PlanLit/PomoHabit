@@ -16,9 +16,6 @@ final class CircleProgressBar: BaseView {
     
     private var timerStateSubscription: AnyCancellable?
     
-    private var timer: Timer?
-    private var remainingTime: TimeInterval = 5
-    
     // MARK: - UI Properties
     
     private lazy var progressLayer = makeLayer(strokeColor: .pobitRed, strokeEnd: 1)
@@ -99,6 +96,14 @@ extension CircleProgressBar {
     
     func resetProgressAnimation() {
         progressLayer.removeAnimation(forKey: "progressAnimation")
+    }
+    
+    func updateTimeLabel(_ remainingTime: TimeInterval) {
+        let minutes = Int(remainingTime) / 60
+        let seconds = Int(remainingTime) % 60
+        DispatchQueue.main.async {
+            self.timeLabel.text = String(format: "%02d:%02d", minutes, seconds)
+        }
     }
 }
 

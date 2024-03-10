@@ -31,12 +31,14 @@ final class TimerModel: InputOutputProtocol {
         let whiteNoiseButtonAction: AnyPublisher<Void, Never>
         let timerButtonAction: AnyPublisher<Void, Never>
         let timerStateDidChange: AnyPublisher<TimerState, Never>
+        let remainingTime: AnyPublisher<TimeInterval, Never>
     }
     
     private let timerStatePublisher = CurrentValueSubject<TimerState, Never>(.stopped)
-    private var remainingTimePublisher = CurrentValueSubject<TimeInterval, Never>(25 * 60)
+    private var remainingTimePublisher = CurrentValueSubject<TimeInterval, Never>(0)
     private var cancellables = Set<AnyCancellable>()
     private var timer: AnyCancellable?
+    
     private (set) var timerDuration: TimeInterval = 60
     
     
@@ -57,11 +59,13 @@ final class TimerModel: InputOutputProtocol {
 
         
         let timerStateDidChange = timerStatePublisher.eraseToAnyPublisher()
+        let remainingTime = remainingTimePublisher.eraseToAnyPublisher()
         
         return Output(memoButtonAction: memoAction,
                       whiteNoiseButtonAction: whiteNoiseButtonAction,
                       timerButtonAction: timerButtonAction,
-                      timerStateDidChange: timerStateDidChange)
+                      timerStateDidChange: timerStateDidChange,
+                      remainingTime: remainingTime)
     }
 }
 
@@ -77,16 +81,27 @@ extension TimerModel {
     
     private func startTimer() {
         timerStatePublisher.send(.running)
-        
-        timer = Timer.publish(every: timerDuration, on: .main, in: .common)
+        remainingTimePublisher.send(timerDuration) // 타이머 시작 시 남은 시간 설정
+
+        timer = Timer.publish(every: 1, on: .main, in: .common) // 1초마다 트리거
             .autoconnect()
             .sink { [weak self] _ in
-                self?.timerStatePublisher.send(.finished)
+                guard let self = self else { return }
+                
+                // 남은 시간 감소
+                let newTime = self.remainingTimePublisher.value - 1
+                self.remainingTimePublisher.send(newTime)
+                
+                // 남은 시간이 0이하가 되면 타이머 종료
+                if newTime <= 0 {
+                    self.timerStatePublisher.send(.finished)
+                    self.timer?.cancel() // 타이머 중지
+                }
             }
     }
     
     private func stopTimer() {
-        timer?.cancel()
-        timerStatePublisher.send(.stopped)
+//        timer?.cancel()
+//        timerStatePublisher.send(.stopped)
     }
 }

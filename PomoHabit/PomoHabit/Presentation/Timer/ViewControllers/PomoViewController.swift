@@ -73,6 +73,13 @@ extension TimerViewController {
                 }
             }
             .store(in: &cancellables)
+        
+        output.remainingTime
+            .receive(on: RunLoop.main)
+            .sink { [weak self] remainingTime in
+                self?.rootView.circleProgressBar.updateTimeLabel(remainingTime)
+            }
+            .store(in: &cancellables)
     }
 }
 
