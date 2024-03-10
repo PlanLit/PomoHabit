@@ -14,8 +14,7 @@ final class ReportHabitInfoView: BaseView {
     // MARK: - Properties
     
     private lazy var tableView: UITableView = makeTableView()
-    
-    private var dayButtonSelectionStates = [true, true, true, true, false, false, false] // 유저가 입력했던 월화수 데이터 (임시)
+    private var daysButtonSelectionState: [Bool]? // 유저가 입력했던 월화수 데이터 (임시)
     
     // MARK: - Life Cycles
     
@@ -107,7 +106,7 @@ extension ReportHabitInfoView: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = ReportDayButtonTableViewCell()
-            cell.dayButtonSelectionStates = dayButtonSelectionStates
+            cell.daysButtonSelectionState = daysButtonSelectionState
             
             return cell
         case 1:

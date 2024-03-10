@@ -14,9 +14,7 @@ final class ReportImageCollectionViewController: UICollectionViewController {
     // MARK: - Properties
     
     private let cellID = "reportImageCell"
-    
     private let itemSize: Int = 80
-    
     private var centeredItemIndex: IndexPath = [0, 0]
     
     // MARK: - Life Cycles

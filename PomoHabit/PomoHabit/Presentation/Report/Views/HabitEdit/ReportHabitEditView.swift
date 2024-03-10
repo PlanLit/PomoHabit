@@ -14,7 +14,6 @@ final class ReportHabitEditView: BaseView { // 구현 중
     // MARK: - Properties
 
     private lazy var headerView: VStackView = makeHeaderView()
-    
     private lazy var mainContainerView: VStackView = makeMainContainerView()
     
     // MARK: - Life Cycles

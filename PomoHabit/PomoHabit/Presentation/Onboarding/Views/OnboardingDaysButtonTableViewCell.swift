@@ -14,9 +14,7 @@ final class OnboardingDaysButtonTableViewCell: UITableViewCell {
     // MARK: - Properties
     
     private lazy var buttonContainer: VStackView = makeContainer()
-    
     var daysButtonSelectionState: [Bool]?
-    
     var action: ((Int, Bool) -> Void)?
 
     // MARK: - Life Cycles

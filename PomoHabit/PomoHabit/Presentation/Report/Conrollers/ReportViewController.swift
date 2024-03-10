@@ -19,15 +19,10 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
         
         return calendar.component(.day, from: currentDate)
     }()
-    
     private lazy var headerView: HStackView = makeHeaderView()
-    
     private lazy var imageCollectionViewController: ReportImageCollectionViewController = makeImageCollectionViewController()
-    
     private lazy var calendarNaviView: VStackView = makeCalendarNaviView()
-    
     private lazy var gridView: VStackView = makeGridView(31) // 월마다 바뀌는 일 수 주입
-    
     private lazy var messageBoxView: UILabel = makeMessageBoxView("모두 완료하면 토마토가 웃는 얼굴이 돼요")
     
     // MARK: - Life Cycles
@@ -37,8 +32,10 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
         
         setAddSubviews()
         setAutoLayout()
-//        getMonthHabitCompletedInfo() // 한달 동안의 습관 완료 여부 마찬가지로 임시로 만들어 둔것입니다. 안에 있는 로직 활용하시면 됩니다.
-//        getSelectedDayHabitInfo(selectedDay: "2024-03-07")
+        
+        getMonthHabitCompletedInfo() // 한달 동안의 습관 완료 여부 마찬가지로 임시로 만들어 둔것입니다. 안에 있는 로직 활용하시면 됩니다.
+        getSelectedDayHabitInfo(selectedDay: "2024-03-07")
+        getUserData()
     }
 }
 
@@ -313,7 +310,7 @@ extension ReportViewController {
     func getMonthHabitCompletedInfo() {
         do {
             let monthHabitCompletedInfo = try CoreDataManager.shared.fetchDailyHabitInfos().map{$0.hasDone} // 한달 동안의 습관 완료 기록, 습관을 시작하는날이 아닌경우에는 표시안됨
-            print(monthHabitCompletedInfo) // 테스트후 지우셔도 됩니다.
+            print("monthHabitCompletedInfo: ", monthHabitCompletedInfo) // 테스트후 지우셔도 됩니다.
         } catch {
             print(error)
         }
@@ -322,8 +319,9 @@ extension ReportViewController {
     func getSelectedDayHabitInfo(selectedDay: String) { // selectedDay 매개변수를 통해 해당하는 날짜의 습관정보를 불러옴, 날짜 형식 2024-03-08
         do {
             let habitInfos = try CoreDataManager.shared.fetchDailyHabitInfos()
+            print("habitInfos:", habitInfos)
             let habitInfoDays = habitInfos.compactMap{$0.day}
-            
+            print("habitInfoDays:", habitInfoDays)
             if let index = habitInfoDays.firstIndex(where: {$0 == selectedDay}) {
                 let selectedHabitInfo = habitInfos[index]
                 guard let day = selectedHabitInfo.day else { return }
@@ -339,11 +337,11 @@ extension ReportViewController {
     func getUserData() {
         do {
             let userData = try CoreDataManager.shared.fetchUser()
-            guard let nickname = userData?.nickname else { return } // 닉네임
-            guard let targetHabit = userData?.targetHabit else { return } // 할 습관
-            guard let targetDate = userData?.targetDate else { return } // 습관을 진행할 요일
-            guard let startTime = userData?.startTime else { return } // 습관 진행 시간
-            guard let whiteNoiseType = userData?.whiteNoiseType else { return } // 사운드
+            print("nickname: ", userData?.nickname)
+            print("targetHabit: ", userData?.targetHabit)
+            print("targetDate: ", userData?.targetDate)
+            print("startTime: ", userData?.startTime)
+            print("whiteNoiseType: ", userData?.whiteNoiseType)
         } catch {
             print(error)
         }
