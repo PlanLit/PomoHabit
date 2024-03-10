@@ -58,16 +58,12 @@ final class TimerView: BaseView {
         setAddSubViews()
         setAutoLayout()
         subscribeButtonEvents()
+        
+        circleProgressBar.startTimer()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        circleProgressBar.setProgressWithAnimation(duration: 1.0, value: 0.7)
     }
 }
 

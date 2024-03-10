@@ -14,6 +14,9 @@ import SnapKit
 
 final class CircleProgressBar: BaseView {
     
+    private var timer: Timer?
+    private var remainingTime: TimeInterval = 5
+    
     // MARK: - UI Properties
     
     private lazy var progressLayer = makeLayer(strokeColor: .pobitRed, strokeEnd: 0)
@@ -24,7 +27,6 @@ final class CircleProgressBar: BaseView {
     
     private let timeLabel: UILabel = {
         let label = UILabel()
-        label.text = "22:01"
         label.textColor = .pobitBlack
         label.font = Pretendard.bold(size: 44)
         
@@ -79,15 +81,47 @@ extension CircleProgressBar {
         [ trackLayer, progressLayer, dashedCircleLayer ].forEach { layer.addSublayer($0) }
     }
     
-    func setProgressWithAnimation(duration: TimeInterval, value: Float) {
+    func setProgressWithAnimation(duration: TimeInterval, fromValue: Float, toValue: Float) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.duration = duration
-        animation.fromValue = 0
-        animation.toValue = value
-        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        animation.fromValue = fromValue
+        animation.toValue = toValue
+        animation.timingFunction = CAMediaTimingFunction(name: .linear)
         
-        progressLayer.strokeEnd = CGFloat(value)
+        progressLayer.strokeEnd = CGFloat(toValue)
         progressLayer.add(animation, forKey: "animateprogress")
+    }
+
+}
+
+// MARK: - Action Helpers
+
+extension CircleProgressBar {
+    func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func updateTimer() {
+        if remainingTime > 0 {
+            // 새로운 원형 진행 바의 비율
+            let newTimeFraction = remainingTime / 60
+            // 이전 원형 진행 바의 비율
+            let previousTimeFraction = (remainingTime + 1) / 60
+            remainingTime -= 1
+            
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.timeLabel.text = String(format: "%02d:%02d", Int(self.remainingTime) / 60, Int(self.remainingTime) % 60)
+                self.setProgressWithAnimation(duration: 1, fromValue: Float(previousTimeFraction), toValue: Float(newTimeFraction))
+            }
+        } else {
+            timer?.invalidate()
+            timer = nil
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.progressLayer.isHidden = true
+            }
+        }
     }
 }
 
