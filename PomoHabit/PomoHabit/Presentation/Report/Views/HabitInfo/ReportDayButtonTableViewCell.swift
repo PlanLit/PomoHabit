@@ -1,5 +1,5 @@
 //
-//  ReportDayButtonCell.swift
+//  ReportDayButtonTableViewCell.swift
 //  PomoHabit
 //
 //  Created by JiHoon K on 2/29/24.
@@ -11,12 +11,15 @@ import UIKit
 
 final class ReportDayButtonTableViewCell: UITableViewCell {
     
-    // MARK: - Properties
+    // MARK: - Data Properties
+    
+    private let dayStates: [DayButton.Day] = [.mon, .tue, .wed, .thu, .fri, .sat, .sun]
+    var daysButtonSelectionState: [Bool]?
+    
+    // MARK: - UI Properties
     
     private var collectionViewCellID = "\(ReportDayButtonTableViewCell.self)CollectionViewCell"
     private lazy var dayButtonCollectionView: UICollectionView = makeCollectionView()
-    private let dayStates: [DayButton.Day] = [.mon, .tue, .wed, .thu, .fri, .sat, .sun]
-    var daysButtonSelectionState: [Bool]?
     
     // MARK: - Life Cycles
 

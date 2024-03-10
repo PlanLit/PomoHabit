@@ -15,7 +15,7 @@ final class OnboardingLoginViewController: UIViewController {
     
     var nickName: String?
     
-    // MARK: - Properties
+    // MARK: - UI Properties
     
     private lazy var container: VStackView = makeContainer()
     private lazy var nextButton: UIButton = makeNextButton()

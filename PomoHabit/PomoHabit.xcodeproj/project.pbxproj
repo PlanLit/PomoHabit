@@ -527,8 +527,8 @@
 		F8A4FB902B96F2A300E46EA1 /* HabitInfo */ = {
 			isa = PBXGroup;
 			children = (
-				F8A4FB912B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift */,
 				F8A4FB922B96F2A300E46EA1 /* ReportHabitInfoView.swift */,
+				F8A4FB912B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift */,
 			);
 			path = HabitInfo;
 			sourceTree = "<group>";
