@@ -68,9 +68,9 @@ final class WeeklyCalendarView: BaseView {
     
     // MARK: - 진행 상태
     
-    private lazy var weeklyHabbitProgressLabel = UILabel()
+    private lazy var weeklyHabitProgressLabel = UILabel()
     
-    private lazy var weeklyHabbitProgressView: UIProgressView = {
+    private lazy var weeklyHabitProgressView: UIProgressView = {
         let progressView = UIProgressView()
         progressView.layer.cornerRadius = 20
         progressView.layer.sublayers?[1].cornerRadius = 20
@@ -98,7 +98,6 @@ final class WeeklyCalendarView: BaseView {
     
     private lazy var noteContentLabel: BasePaddingLabel = {
         let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-        label.text = "메모글 입니다."
         label.font = Pretendard.medium(size: 15)
         label.textColor = .pobitBlack
         label.numberOfLines = 0
@@ -170,24 +169,24 @@ extension WeeklyCalendarView {
         
         // MARK: - 진행 상태
         
-        weeklyHabbitProgressLabel.snp.makeConstraints { make in
+        weeklyHabitProgressLabel.snp.makeConstraints { make in
             make.top.equalTo(firstDivider.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
             make.leading.trailing.equalToSuperview()
         }
         
-        weeklyHabbitProgressView.snp.makeConstraints { make in
-            make.top.equalTo(weeklyHabbitProgressLabel.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
+        weeklyHabitProgressView.snp.makeConstraints { make in
+            make.top.equalTo(weeklyHabitProgressLabel.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(10)
         }
         
         progressCircleImageView.snp.makeConstraints { make in
-            make.top.equalTo(weeklyHabbitProgressLabel.snp.bottom).offset(9)
+            make.top.equalTo(weeklyHabitProgressLabel.snp.bottom).offset(9)
             make.leading.equalToSuperview()
         }
         
         secondDivider.snp.makeConstraints { make in
-            make.top.equalTo(weeklyHabbitProgressView.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
+            make.top.equalTo(weeklyHabitProgressView.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
             make.leading.trailing.equalToSuperview()
         }
         
@@ -231,8 +230,8 @@ extension WeeklyCalendarView {
 // MARK: - Methods
 
 extension WeeklyCalendarView {
-    func setWeeklyHabbitProgressView(progress: Float) {
-        weeklyHabbitProgressView.progress = progress
+    func setWeeklyHabitProgressView(progress: Float) {
+        weeklyHabitProgressView.progress = progress
     }
     
     func setProgressCircleImg(offset: Int) {
@@ -241,7 +240,7 @@ extension WeeklyCalendarView {
         }
     }
     
-    func setWeeklyDates(weeklyDates : [Int]){
+    func setWeeklyDates(weeklyDates : [Int]) {
         weeklyDatesData = weeklyDates
     }
     

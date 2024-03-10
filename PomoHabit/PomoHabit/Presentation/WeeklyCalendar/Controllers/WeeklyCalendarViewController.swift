@@ -74,12 +74,12 @@ extension WeeklyCalendarViewController {
 // MARK: - Methods
 
 extension WeeklyCalendarViewController {
-    private func setUpWeeklyHabbitProgressView(progress : Float){
+    private func setUpWeeklyHabbitProgressView(progress : Float) {
         let weeklyCalendarViewWidth = weeklyCalendarView.frame.width
         let progressCircleOffset = Int(weeklyCalendarViewWidth * CGFloat(progress)) - 5
         
         weeklyCalendarView.setProgressCircleImg(offset: progressCircleOffset)
-        weeklyCalendarView.setWeeklyHabbitProgressView(progress: progress)
+        weeklyCalendarView.setWeeklyHabitProgressView(progress: progress)
     }
     
     private func setUPWeeklyHabbitInfoView(state: HabitState, targetHabit: String, duringTime: String, goalTime: String, note: String) {
