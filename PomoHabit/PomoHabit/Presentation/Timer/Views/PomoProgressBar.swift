@@ -2,7 +2,7 @@ import UIKit
 
 import SnapKit
 
-final class CircleProgressBar: UIView {
+final class CircleProgressBar: BaseView {
     
     // MARK: - UI Properties
     
@@ -10,7 +10,7 @@ final class CircleProgressBar: UIView {
     private lazy var trackLayer = makeLayer(strokeColor: .pobitSkin, strokeEnd: 1.0)
     private lazy var dashedCircleLayer = makeDashedCircleLayer()
     
-    private let tempRedLabel = UILabel()
+    private var todayLabel = UILabel().setPrimaryColorLabel(text: "오늘")
     
     private let timeLabel: UILabel = {
         let label = UILabel()
@@ -45,14 +45,18 @@ final class CircleProgressBar: UIView {
 
 extension CircleProgressBar {
     private func setAddSubViews() {
-        addSubViews([tempRedLabel, timeLabel])
+        addSubViews([todayLabel, timeLabel])
     }
     
     private func setAutoLayout() {
-        // TODO: redLabelLayout
+        todayLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(96)
+            make.centerX.equalToSuperview()
+        }
         
         timeLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+            make.top.equalTo(todayLabel.snp.bottom).offset(2)
+            make.centerX.equalToSuperview()
         }
     }
     
