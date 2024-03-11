@@ -163,7 +163,7 @@ extension WeeklyCalendarViewController {
 
 // MARK: - Delegate
 
-extension WeeklyCalendarViewController : SendSelectedData{
+extension WeeklyCalendarViewController: SendSelectedData{
     func sendDate(date: Int) {
         var dateStr = String(year)
         
