@@ -56,8 +56,6 @@ final class TimerView: BaseView {
         setAddSubViews()
         setAutoLayout()
         subscribeButtonEvents()
-        
-        
     }
     
     required init?(coder: NSCoder) {
@@ -160,6 +158,12 @@ extension TimerView {
             timerButton.backgroundColor = .pobitBlack
             timerButton.isEnabled = true
         }
+    }
+    
+    func updateViewWithUserData(_ userData: UserData) {
+        habitLabel.text = userData.targetHabit
+        startTimeLabel.text = userData.startTime
+        goalDaysCountLabel.text = "주\(userData.targetDate.count)일"
     }
 }
 

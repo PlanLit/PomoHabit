@@ -17,6 +17,13 @@ enum TimerState {
     case finished
 }
 
+struct UserData {
+    var targetHabit: String
+    var targetDate: String
+    var startTime: String
+    var whiteNoiseType: String
+}
+
 // MARK: - TimerModel
 
 final class TimerModel: InputOutputProtocol {
@@ -32,6 +39,7 @@ final class TimerModel: InputOutputProtocol {
         let timerButtonAction: AnyPublisher<Void, Never>
         let timerStateDidChange: AnyPublisher<TimerState, Never>
         let remainingTime: AnyPublisher<TimeInterval, Never>
+        let userData: AnyPublisher<UserData, Never>
     }
     
     private let timerStatePublisher = CurrentValueSubject<TimerState, Never>(.stopped)
@@ -41,6 +49,10 @@ final class TimerModel: InputOutputProtocol {
     
     private (set) var timerDuration: TimeInterval = 60
     
+    private var targetHabit = String()
+    private var targetDate = String()
+    private var startTime = String()
+    private var whiteNoiseType = String()
     
     func transform(input: Input) -> Output {
         let memoAction = input.memoButtonTapped
@@ -60,14 +72,19 @@ final class TimerModel: InputOutputProtocol {
         
         let timerStateDidChange = timerStatePublisher.eraseToAnyPublisher()
         let remainingTime = remainingTimePublisher.eraseToAnyPublisher()
+        let userDataPublisher = getUserDataPublisher()
         
         return Output(memoButtonAction: memoAction,
                       whiteNoiseButtonAction: whiteNoiseButtonAction,
                       timerButtonAction: timerButtonAction,
                       timerStateDidChange: timerStateDidChange,
-                      remainingTime: remainingTime)
+                      remainingTime: remainingTime,
+                      userData: userDataPublisher
+        )
     }
 }
+
+// MARK: - HandleTimer
 
 extension TimerModel {
     private func handleTimerButtonTapped() {
@@ -103,5 +120,39 @@ extension TimerModel {
     private func stopTimer() {
 //        timer?.cancel()
 //        timerStatePublisher.send(.stopped)
+    }
+}
+
+// MARK: - CoreData
+
+extension TimerModel {
+    func getUserData() {
+        do {
+            let userData = try CoreDataManager.shared.fetchUser()
+            guard let targetHabit = userData?.targetHabit,
+                  let targetDate = userData?.targetDate,
+                  let startTime = userData?.startTime,
+                  let whiteNoiseType = userData?.whiteNoiseType else { return }
+            
+            self.targetHabit = targetHabit
+            self.targetDate = targetDate
+            self.startTime = startTime
+            self.whiteNoiseType = whiteNoiseType
+        } catch {
+            print(error)
+        }
+    }
+    
+    private func getUserDataPublisher() -> AnyPublisher<UserData, Never> {
+        return Just(UserData(targetHabit: targetHabit, targetDate: targetDate, startTime: startTime, whiteNoiseType: whiteNoiseType))
+            .eraseToAnyPublisher()
+    }
+    
+    func completedDailyHabit() { // 타이머 완료시 실행되는 메서드
+        let currentDate = Date() // 테스트할때 사용하시고 지워주시면 됩니다.
+        let date = Date().dateToString(format: "yyyy-MM-dd")
+        let changeDate = Calendar.current.date(byAdding: .day,value: 1, to: currentDate)?.dateToString(format: "yyyy-MM-dd") // 오늘 날짜 기준으로 +,- 할수 있 습니다 .테스트할때 사용하시고 지워 주시면 됩니다.
+        
+        CoreDataManager.shared.createDailyHabitInfo(day: date, goalTime: 7, hasDone: true, note: "3번째 날입니다.")
     }
 }
