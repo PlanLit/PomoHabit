@@ -15,8 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         
         if let windowScene = scene as? UIWindowScene {
-            
-            let rootVC = MyPageViewController()
+            let rootVC = UINavigationController(rootViewController: OnboardingLoginViewController())
+            rootVC.isNavigationBarHidden = true
             
             let window = UIWindow(windowScene: windowScene)
             window.overrideUserInterfaceStyle = UIUserInterfaceStyle.light

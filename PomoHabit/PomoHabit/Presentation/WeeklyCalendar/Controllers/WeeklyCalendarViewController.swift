@@ -11,11 +11,19 @@ import SnapKit
 
 // MARK: - WeeklyCalendarViewController
 
-class WeeklyCalendarViewController: BaseViewController {
+final class WeeklyCalendarViewController: BaseViewController {
     
     // MARK: - Properties
     
-    private lazy var weeklyCalendarView = WeeklyCalendarView()
+    var year : Int = 0
+    var month : Int = 0
+    
+    private lazy var weeklyCalendarView : WeeklyCalendarView = {
+        let view = WeeklyCalendarView()
+        view.dateDelegate = self
+        
+        return view
+    }()
     
     // MARK: - Life Cycle
     
@@ -29,8 +37,14 @@ class WeeklyCalendarViewController: BaseViewController {
     
     override func viewDidLayoutSubviews() { // 해당 메소드 안에서만 오토레이 아웃으로 설정된 UI/View의 Frame 사이즈를 알 수 있음
         super.viewDidLayoutSubviews()
+        do {
+            let weeklyHasDoneCount = try CoreDataManager.shared.fetchDailyHabitInfos().filter{ $0.hasDone == true }.count
+            
+            setUpWeeklyHabbitProgressView(progress: Float(weeklyHasDoneCount) / 7.0)
+        } catch {
+            print(error)
+        }
         
-        setUpWeeklyHabbitProgressView(progress: 0.6)
     }
 }
 
@@ -60,12 +74,17 @@ extension WeeklyCalendarViewController {
 // MARK: - Methods
 
 extension WeeklyCalendarViewController {
-    private func setUpWeeklyHabbitProgressView(progress : Float){
+    private func setUpWeeklyHabbitProgressView(progress : Float) {
         let weeklyCalendarViewWidth = weeklyCalendarView.frame.width
         let progressCircleOffset = Int(weeklyCalendarViewWidth * CGFloat(progress)) - 5
         
         weeklyCalendarView.setProgressCircleImg(offset: progressCircleOffset)
-        weeklyCalendarView.setWeeklyHabbitProgressView(progress: progress)
+        weeklyCalendarView.setWeeklyHabitProgressView(progress: progress)
+    }
+    
+    private func setUPWeeklyHabbitInfoView(state: HabitState, targetHabit: String, duringTime: String, goalTime: String, note: String) {
+        weeklyCalendarView.setHabitInfoView(state: state, targetHabit: targetHabit, duringTime: duringTime, goalTime: goalTime)
+        weeklyCalendarView.setNoteContentLabel(note: note)
     }
 }
 
@@ -84,6 +103,12 @@ extension WeeklyCalendarViewController {
         // MARK: - 현재 주의 마지막 날짜
         
         let components = calendar.dateComponents([.year, .month], from: Date()) // 현재 날짜의 년도와 월
+        guard let thisYer = components.year else { return }
+        guard let thisMonth = components.month else { return }
+        
+        year = thisYer
+        month = thisMonth
+        
         guard let currentStartDate = calendar.date(from: components) else { return } // 날짜와 년도를 가지고 가장 첫번째 날짜 Get
         guard let nextStartDate = calendar.date(byAdding: .month, value: 1, to: currentStartDate) else {return} // 다음 달의 가장 첫번쨰날
         guard let currentEndDate = calendar.date(byAdding: .day, value: -1, to: nextStartDate)?.dateToString(format: "dd") else {return} // 다음달의 가장 첫번째날 이전날 = 이번달의 마지막날
@@ -102,28 +127,50 @@ extension WeeklyCalendarViewController {
                 weeklyDates.append(date - currentEndDateInt)
             }
         }
-        
+
         weeklyCalendarView.setWeeklyDates(weeklyDates: weeklyDates)
     }
     
-    func getSelectedDayHabitInfo(selectedDay: String) {
+    func getSelectedDayHabitInfo(selectedDay : String) {
         do {
-            let habitInfos = try CoreDataManager.shared.fetchDailyHabitInfos()
-            let habitInfoDays = habitInfos.compactMap{$0.day}
+            let habitInfos = try CoreDataManager.shared.fetchDailyHabitInfos() // Daily 습관 정보 배열
+            let userInfo = try CoreDataManager.shared.fetchUser() // 유저 정보
+            let habitInfoDays = habitInfos.compactMap{$0.day} // Daily 습관 날짜 정보 배열
+            guard let targetHabit = userInfo?.targetHabit else { return } // 설정한 습관
+            var dateStr = Date().dateToString(format: "yyyy-MM-dd") // 앞에 년도를 붙여주기 위함
             
-            if let index = habitInfoDays.firstIndex(where: {$0 == selectedDay}) {
+            guard let startTime = userInfo?.startTime else { return } // 습관 시작 시간
+            dateStr += " " + startTime
+            guard let startTimeTypeDate = dateStr.getStringToDate(format: "yyyy-MM-dd HH:mm") else { return }
+            
+            if let index = habitInfoDays.firstIndex(where: { $0 == selectedDay }) { // 선택한 날짜에 대한 습관 정보
                 let selectedHabitInfo = habitInfos[index]
-                guard let day = selectedHabitInfo.day else { return }
                 let goalTime = selectedHabitInfo.goalTime
-                let hasDone = selectedHabitInfo.hasDone
+                let hasDone = selectedHabitInfo.hasDone ? HabitState.done : HabitState.doNot
                 guard let note = selectedHabitInfo.note else { return }
+                guard let endTime = Calendar.current.date(byAdding: .minute, value: Int(goalTime), to: startTimeTypeDate) else { return }
+                let duringTime = startTimeTypeDate.dateToString(format: "HH:mm") + "~" + endTime.dateToString(format: "HH:mm")
                 
-                print("day :\(day),goalTime:\(goalTime),hasDone:\(hasDone),note:\(note)") // 데이터 확인을 위하여 임시로 적어 두었습니다.
+                setUPWeeklyHabbitInfoView(state: hasDone, targetHabit: targetHabit, duringTime: duringTime, goalTime: "\(goalTime)", note: note)
+            } else {
+                setUPWeeklyHabbitInfoView(state: .doNot, targetHabit: "습관 이름", duringTime: "00:00~00:00", goalTime: "0", note: "시작하지 않은 습관입니다.")
             }
-        }catch {
+        } catch {
             print(error)
         }
     }
 }
 
+// MARK: - Delegate
 
+extension WeeklyCalendarViewController: SendSelectedData{
+    func sendDate(date: Int) {
+        var dateStr = String(year)
+        
+        dateStr += month < 10 ? "-0\(month)" : "-\(month)"
+        dateStr += date < 10 ? "-0\(date)" : "-\(date)"
+        
+        getSelectedDayHabitInfo(selectedDay: dateStr)
+    }
+    
+}

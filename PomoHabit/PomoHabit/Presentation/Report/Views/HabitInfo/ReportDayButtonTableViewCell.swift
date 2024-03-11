@@ -1,5 +1,5 @@
 //
-//  ReportDayButtonCell.swift
+//  ReportDayButtonTableViewCell.swift
 //  PomoHabit
 //
 //  Created by JiHoon K on 2/29/24.
@@ -11,15 +11,15 @@ import UIKit
 
 final class ReportDayButtonTableViewCell: UITableViewCell {
     
-    // MARK: - Properties
-    
-    private var collectionViewCellID = "\(ReportDayButtonTableViewCell.self)CollectionViewCell"
-    
-    private lazy var dayButtonCollectionView: UICollectionView = makeCollectionView()
+    // MARK: - Data Properties
     
     private let dayStates: [DayButton.Day] = [.mon, .tue, .wed, .thu, .fri, .sat, .sun]
+    var daysButtonSelectionState: [Bool]?
     
-    var dayButtonSelectionStates: [Bool]?
+    // MARK: - UI Properties
+    
+    private var collectionViewCellID = "\(ReportDayButtonTableViewCell.self)CollectionViewCell"
+    private lazy var dayButtonCollectionView: UICollectionView = makeCollectionView()
     
     // MARK: - Life Cycles
 
@@ -83,7 +83,7 @@ extension ReportDayButtonTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionViewCellID, for: indexPath)
         
-        let dayButton = DayButton(dayType: dayStates[indexPath.row], isSelected: dayButtonSelectionStates?[indexPath.row] ?? false) { _ in }
+        let dayButton = DayButton(dayType: dayStates[indexPath.row], isSelected: daysButtonSelectionState?[indexPath.row] ?? false) { _ in }
         dayButton.isUserInteractionEnabled = false
         dayButton.snp.makeConstraints { make in
             make.width.equalTo(65)

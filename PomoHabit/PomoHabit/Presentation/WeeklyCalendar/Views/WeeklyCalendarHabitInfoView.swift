@@ -1,5 +1,5 @@
 //
-//  HabbitInfoVIew.swift
+//  HabitInfoVIew.swift
 //  PomoHabit
 //
 //  Created by 원동진 on 2/27/24.
@@ -7,22 +7,16 @@
 
 import UIKit
 
-// MARK: - HabbitInfoView
+// MARK: - HabitInfoView
 
-final class HabbitInfoView: UIView {
+final class WeeklyCalendarHabitInfoView: UIView {
     
     // MARK: - Properties
     
-    private lazy var titleInfoView: ImageViewAndLabelView = {
-        let stackView = ImageViewAndLabelView()
-        stackView.setUplabel(text: "독서", font: Pretendard.bold(size: 20))
-        
-        return stackView
-    }()
+    private lazy var titleInfoView = ImageViewAndLabelView()
     
     private lazy var timeInfoView: ImageViewAndLabelView = {
         let stackView = ImageViewAndLabelView()
-        stackView.setUplabel(text: "09:00 ~ 09:05", font: Pretendard.medium(size: 15))
         stackView.setUIImageViewImage(image: UIImage(named: "TimeImage"))
         
         return stackView
@@ -30,7 +24,6 @@ final class HabbitInfoView: UIView {
     
     private lazy var targetInfoView: ImageViewAndLabelView = {
         let stackView = ImageViewAndLabelView()
-        stackView.setUplabel(text: "목표시간 : 5m", font: Pretendard.medium(size: 15))
         stackView.setUIImageViewImage(image: UIImage(named: "TargetImage"))
         
         return stackView
@@ -42,6 +35,7 @@ final class HabbitInfoView: UIView {
         setAddSubViews()
         setAutoLayout()
         setUpView()
+        defaultValueSetHabitInfoView()
     }
     
     required init?(coder: NSCoder) {
@@ -51,7 +45,7 @@ final class HabbitInfoView: UIView {
 
 // MARK: - Layout Helpers
 
-extension HabbitInfoView {
+extension WeeklyCalendarHabitInfoView {
     private func setAddSubViews() {
         self.addSubViews([titleInfoView,timeInfoView,targetInfoView])
         
@@ -82,12 +76,29 @@ extension HabbitInfoView {
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.pobitStone4.cgColor
     }
+    
+    private func defaultValueSetHabitInfoView() {
+        titleInfoView.setUIImageViewImage(image: UIImage(named: "NotStartImage"))
+        titleInfoView.setUplabel(text: "설정한 습관", font: Pretendard.bold(size: 20))
+        timeInfoView.setUplabel(text: "00:00 ~ 00:00", font: Pretendard.medium(size: 15))
+        targetInfoView.setUplabel(text: "목표시간 : 0m", font: Pretendard.medium(size: 15))
+    }
 }
 
 // MARK: - Methods
 
-extension HabbitInfoView {
-    func setTitleInfoViewImage(state: HabbitState) {
+extension WeeklyCalendarHabitInfoView {
+    func setTitleInfoView(state: HabitState, targetHabit: String) {
         titleInfoView.setUIImageViewImage(image: state.image)
+        titleInfoView.setUplabel(text: targetHabit, font: Pretendard.bold(size: 20))
     }
+    
+    func setTimeInfoView(duringTime : String) {
+        timeInfoView.setUplabel(text: duringTime, font: Pretendard.medium(size: 15))
+    }
+    
+    func setTargetInfoView(goalTime: String) {
+        targetInfoView.setUplabel(text: "목표시간 : \(goalTime)m", font: Pretendard.medium(size: 15))
+    }
+    
 }

@@ -1,5 +1,5 @@
 //
-//  ReportHabitInfoViewController.swift
+//  ReportHabitInfoView.swift
 //  PomoHabit
 //
 //  Created by JiHoon K on 2/29/24.
@@ -11,17 +11,23 @@ import UIKit
 
 final class ReportHabitInfoView: BaseView {
     
-    // MARK: - Properties
+    // MARK: - Data Properties
+    
+    private var daysButtonSelectionState: [Bool]? // 유저가 입력했던 월화수 데이터 (임시)
+    private var startTime: String?
+    
+    // MARK: - UI Properties
     
     private lazy var tableView: UITableView = makeTableView()
     
-    private var dayButtonSelectionStates = [true, true, true, true, false, false, false] // 유저가 입력했던 월화수 데이터 (임시)
-    
     // MARK: - Life Cycles
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, daysButtonSelectionState: [Bool]?, startTime: String?) {
         super.init(frame: frame)
         
+        self.daysButtonSelectionState = daysButtonSelectionState
+        self.startTime = startTime
+
         setAddSubviews()
         setAutoLayout()
     }
@@ -56,8 +62,7 @@ extension ReportHabitInfoView {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
-        tableView.register(ReportDayButtonTableViewCell.self, forCellReuseIdentifier: "\(ReportDayButtonTableViewCell.self)")
-        tableView.register(ReportDayButtonTableViewCell.self, forCellReuseIdentifier: "StartTimeCell")
+        tableView.showsVerticalScrollIndicator = false
         
         return tableView
     }
@@ -107,7 +112,7 @@ extension ReportHabitInfoView: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = ReportDayButtonTableViewCell()
-            cell.dayButtonSelectionStates = dayButtonSelectionStates
+            cell.daysButtonSelectionState = daysButtonSelectionState
             
             return cell
         case 1:
@@ -115,7 +120,7 @@ extension ReportHabitInfoView: UITableViewDataSource {
             cell.isUserInteractionEnabled = false
 
             let label = UILabel()
-            label.text = "8 : 40 AM"
+            label.text = self.startTime
             label.font = Pretendard.bold(size: 20)
             label.textColor = .secondaryLabel
             
