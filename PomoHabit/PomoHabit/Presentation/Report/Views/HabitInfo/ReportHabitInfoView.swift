@@ -27,7 +27,7 @@ final class ReportHabitInfoView: BaseView {
         
         self.daysButtonSelectionState = daysButtonSelectionState
         self.startTime = startTime
-        
+
         setAddSubviews()
         setAutoLayout()
     }

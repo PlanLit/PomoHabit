@@ -35,6 +35,9 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getMonthHabitCompletedInfo()
+        getSelectedDayHabitInfo(selectedDay: "2024-03-08")
+        
         setAddSubviews()
         setAutoLayout()
     }
@@ -124,7 +127,7 @@ extension ReportViewController {
             })
             
             let habitEdit = UIAction(title: "습관 변경", handler: { _ in
-                self.presentBottomSheet(rootView: ReportHabitEditView(), detents: [.large()])
+                
             })
             
             let menus = UIMenu(children: [habitInfo, habitEdit])
@@ -214,12 +217,11 @@ extension ReportViewController {
             let boxView = {
                 let boxView = UIButton(type: .system, primaryAction: .init(handler: { _ in
                     print("day: \(day)")
+                    self.presentBottomSheet(rootView: ReportHabitDetailView(), detents: [.large()])
                 }))
-                
                 boxView.backgroundColor = .pobitRed
                 boxView.layer.cornerRadius = 10
                 boxView.alpha = day <= todayDate ? 1 : 0.1
-                
                 boxView.snp.makeConstraints { make in
                     make.width.equalTo(56)
                     make.height.equalTo(45)
@@ -313,8 +315,8 @@ extension ReportViewController {
 extension ReportViewController {
     private func getMonthHabitCompletedInfo() {
         do {
+            print("CoreDataManager.shared.fetchDailyHabitInfos: ", try CoreDataManager.shared.fetchDailyHabitInfos())
             let monthHabitCompletedInfo = try CoreDataManager.shared.fetchDailyHabitInfos().map{$0.hasDone} // 한달 동안의 습관 완료 기록, 습관을 시작하는날이 아닌경우에는 표시안됨
-            print("monthHabitCompletedInfo: ", monthHabitCompletedInfo) // 테스트후 지우셔도 됩니다.
         } catch {
             print(error)
         }
@@ -325,7 +327,6 @@ extension ReportViewController {
             let habitInfos = try CoreDataManager.shared.fetchDailyHabitInfos()
             print("habitInfos:", habitInfos)
             let habitInfoDays = habitInfos.compactMap{$0.day}
-            print("habitInfoDays:", habitInfoDays)
             if let index = habitInfoDays.firstIndex(where: {$0 == selectedDay}) {
                 let selectedHabitInfo = habitInfos[index]
                 guard let day = selectedHabitInfo.day else { return }

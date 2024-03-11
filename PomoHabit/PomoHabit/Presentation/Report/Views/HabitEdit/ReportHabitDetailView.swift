@@ -1,5 +1,5 @@
 //
-//  ReportHabitEditView.swift
+//  ReportHabitDetailView.swift
 //  PomoHabit
 //
 //  Created by JiHoon K on 2/29/24.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-// MARK: - ReportHabitEditViewController
+// MARK: - ReportHabitDetailView
 
-final class ReportHabitEditView: BaseView { // 구현 중
+final class ReportHabitDetailView: BaseView {
     
     // MARK: - UI Properties
 
@@ -30,7 +30,7 @@ final class ReportHabitEditView: BaseView { // 구현 중
     }
 }
 
-extension ReportHabitEditView {
+extension ReportHabitDetailView {
     private func setAddSubviews() {
         addSubViews([
             headerView,
@@ -55,13 +55,13 @@ extension ReportHabitEditView {
 
 // MARK: - Factory Methods
 
-extension ReportHabitEditView {
+extension ReportHabitDetailView {
     private func makeHeaderView() -> VStackView {
         let dateLabel = {
             let label = UILabel()
-            label.text = "02.21 수요일"
-            label.font = Pretendard.bold(size: 20)
-            label.textColor = .darkGray
+            label.text = Date().dateToString()
+            label.font = Pretendard.bold(size: 50)
+            label.textColor = .pobitBlack
             
             return label
         }()
