@@ -13,8 +13,7 @@ final class OnboardingDatePickerTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    private lazy var datePicker: UIDatePicker = makeDatePicker()
-    
+    lazy var datePicker: UIDatePicker = makeDatePicker()
     var dateChangeEnded: ((Date) -> ())?
     
     // MARK: - Life Cycles

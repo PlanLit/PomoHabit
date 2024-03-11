@@ -13,7 +13,8 @@ final class OnboardingHabitRegisterViewController: BaseViewController {
     
     // MARK: - Data Properties
     
-    private var habitName: String?
+    var nickName: String?
+    private var habitTitle: String?
     private var daysButtonSelectionState: [Bool] = [false, false, false, false, false, false, false]
     private var habitStartTime: Date?
     
@@ -118,7 +119,7 @@ extension OnboardingHabitRegisterViewController {
         let button = UIButton(type: .system, primaryAction: .init(handler: { _ in
             self.habitTextFieldView.isHidden = true
             self.view.endEditing(true)
-            self.addTableViewCellDataAndUpdate(.init(chatDirection: .outgoing, message: self.habitName, cellType: .title))
+            self.addTableViewCellDataAndUpdate(.init(chatDirection: .outgoing, message: self.habitTitle, cellType: .title))
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "무슨 요일에 할거야? 5일 이상을 정해줘!"))
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -139,6 +140,7 @@ extension OnboardingHabitRegisterViewController {
     
     private func makeRegisterButton() -> UIButton {
         let button = UIButton(type: .system, primaryAction: .init(handler: { _ in
+            self.saveData()
             self.navigationController?.setViewControllers([TabBarController()], animated: true)
         }))
         button.setTitle("등록하기", for: .normal)
@@ -189,6 +191,7 @@ extension OnboardingHabitRegisterViewController {
     
     private func makeOnboardingDatePickerTableViewCell(_ indexPath: IndexPath) -> OnboardingDatePickerTableViewCell {
         let cell = OnboardingDatePickerTableViewCell()
+        cell.datePicker.date = habitStartTime ?? Date()
         cell.dateChangeEnded = { [weak self] date in
             if self?.habitStartTime == nil {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -257,7 +260,7 @@ extension OnboardingHabitRegisterViewController {
     // 이 함수가 호출 됬을때의 데이터 상태에따라 등록하기 버튼 뷰 패치
     private func fetchRegisterButtonState() {
         func isUserInputComplete() -> Bool { // 유저가 모든 데이터를 제대로 입력했는지 확인하는 함수
-            if habitName == nil { return false }
+            if habitTitle == nil { return false }
             if habitStartTime == nil { return false }
             var daysOnCount = 0
             for state in self.daysButtonSelectionState {
@@ -317,7 +320,7 @@ extension OnboardingHabitRegisterViewController: UITableViewDelegate {
 
 extension OnboardingHabitRegisterViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        habitName = textField.text
+        habitTitle = textField.text
         
         if textField.text != "" {
             textFieldDoneButton.backgroundColor = .pobitRed
@@ -356,5 +359,37 @@ extension OnboardingHabitRegisterViewController {
             self.unsentMessagesCount = unsentMessagesCount
             self._value = _value
         }
+    }
+}
+
+// MARK: - Data Helpers
+
+extension OnboardingHabitRegisterViewController {
+    private func convertDataForCoreData() -> (nickName: String, targetHabit: String, targetDate: String, startTime: String, whiteNoiseType: String?) {
+        // 무슨 요일
+        var targetDate = ""
+        let daysAll = ["월", "화", "수", "목", "금", "토", "일"]
+        for i in 0..<daysButtonSelectionState.count {
+            if daysButtonSelectionState[i] {
+                targetDate += daysAll[i] + ","
+            }
+        }
+        if targetDate.last == "," { targetDate.removeLast() }
+        
+        // 습관 시작 시간
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh : mm a"
+        let formattedStartTime = dateFormatter.string(from: habitStartTime ?? Date())
+        
+        return (nickName: nickName ?? "",
+                targetHabit: habitTitle ?? "",
+                targetDate: targetDate,
+                startTime: formattedStartTime,
+                whiteNoiseType: nil)
+    }
+    
+    private func saveData() {
+        let data = convertDataForCoreData()
+        CoreDataManager.shared.createUser(nickname: data.nickName, targetHabit: data.targetHabit, targetDate: data.targetDate, startTime: data.startTime, whiteNoiseType: data.whiteNoiseType)
     }
 }

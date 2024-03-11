@@ -11,8 +11,9 @@ import UIKit
 
 final class ReportViewController: BaseViewController, BottomSheetPresentable {
     
-    // MARK: - Properties
+    // MARK: - Data Properties
     
+    private lazy var user: User? = getUserData()
     private let todayDate = { // 오늘 날짜 정수
         let currentDate = Date()
         let calendar = Calendar.current
@@ -20,14 +21,13 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
         return calendar.component(.day, from: currentDate)
     }()
     
+    // MARK: - UI Properties
+    
+    private let navigationBar = PobitNavigationBarView(title: "이번달 습관 달성률", viewType: .plain)
     private lazy var headerView: HStackView = makeHeaderView()
-    
     private lazy var imageCollectionViewController: ReportImageCollectionViewController = makeImageCollectionViewController()
-    
     private lazy var calendarNaviView: VStackView = makeCalendarNaviView()
-    
     private lazy var gridView: VStackView = makeGridView(31) // 월마다 바뀌는 일 수 주입
-    
     private lazy var messageBoxView: UILabel = makeMessageBoxView("모두 완료하면 토마토가 웃는 얼굴이 돼요")
     
     // MARK: - Life Cycles
@@ -35,10 +35,11 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getMonthHabitCompletedInfo()
+        getSelectedDayHabitInfo(selectedDay: "2024-03-08")
+        
         setAddSubviews()
         setAutoLayout()
-//        getMonthHabitCompletedInfo() // 한달 동안의 습관 완료 여부 마찬가지로 임시로 만들어 둔것입니다. 안에 있는 로직 활용하시면 됩니다.
-//        getSelectedDayHabitInfo(selectedDay: "2024-03-07")
     }
 }
 
@@ -49,6 +50,7 @@ extension ReportViewController {
         addChild(imageCollectionViewController)
         
         view.addSubViews([
+            navigationBar,
             headerView,
             calendarNaviView,
             imageCollectionViewController.view,
@@ -58,24 +60,30 @@ extension ReportViewController {
     }
     
     private func setAutoLayout() {
+        navigationBar.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(58)
+        }
+        
         headerView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.top.equalTo(navigationBar.snp.bottom)
             make.left.equalTo(LayoutLiterals.minimumHorizontalSpacing)
             make.right.equalTo(-LayoutLiterals.minimumHorizontalSpacing)
-            make.height.equalTo(55)
+            make.height.equalTo(50)
         }
         
         imageCollectionViewController.view.snp.makeConstraints { make in
             make.top.equalTo(headerView.snp.bottom)
             make.left.right.equalToSuperview()
-            make.height.equalTo(100)
+            make.height.equalTo(74)
         }
         
         calendarNaviView.snp.makeConstraints { make in
             make.top.equalTo(imageCollectionViewController.view.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
             make.left.equalToSuperview().offset(35)
             make.right.equalToSuperview().offset(-35)
-            make.height.equalTo(55)
+            make.height.equalTo(44)
         }
         
         gridView.snp.makeConstraints { make in
@@ -84,10 +92,10 @@ extension ReportViewController {
         }
         
         messageBoxView.snp.makeConstraints { make in
-            make.height.equalTo(35)
-            make.top.equalTo(gridView.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
             make.right.equalTo(view.snp.right).offset(-LayoutLiterals.minimumHorizontalSpacing)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-LayoutLiterals.upperSecondarySpacing)
             make.left.equalTo(view.snp.left).offset(LayoutLiterals.minimumHorizontalSpacing)
+            make.height.equalTo(35)
         }
     }
 }
@@ -112,11 +120,14 @@ extension ReportViewController {
             button.overrideUserInterfaceStyle = .dark
             
             let habitInfo = UIAction(title: "습관 정보", handler: { _ in
-                self.presentBottomSheet(rootView: ReportHabitInfoView(), detents: [.medium()])
+                self.presentBottomSheet(rootView: ReportHabitInfoView(frame: .null, 
+                                                                      daysButtonSelectionState: self.getMonthData(),
+                                                                      startTime: self.user?.startTime),
+                                        detents: [.medium()])
             })
             
             let habitEdit = UIAction(title: "습관 변경", handler: { _ in
-                self.presentBottomSheet(rootView: ReportHabitEditView(), detents: [.large()])
+                
             })
             
             let menus = UIMenu(children: [habitInfo, habitEdit])
@@ -206,13 +217,11 @@ extension ReportViewController {
             let boxView = {
                 let boxView = UIButton(type: .system, primaryAction: .init(handler: { _ in
                     print("day: \(day)")
-                    print()
+                    self.presentBottomSheet(rootView: ReportHabitDetailView(), detents: [.large()])
                 }))
-                
                 boxView.backgroundColor = .pobitRed
                 boxView.layer.cornerRadius = 10
                 boxView.alpha = day <= todayDate ? 1 : 0.1
-                
                 boxView.snp.makeConstraints { make in
                     make.width.equalTo(56)
                     make.height.equalTo(45)
@@ -301,29 +310,23 @@ extension ReportViewController {
     }
 }
 
-// MARK: - Types
+// MARK: - Data Helpers
 
 extension ReportViewController {
-    enum Check {
-        case complete, fail, rest
-    }
-}
-
-extension ReportViewController {
-    func getMonthHabitCompletedInfo() {
+    private func getMonthHabitCompletedInfo() {
         do {
+            print("CoreDataManager.shared.fetchDailyHabitInfos: ", try CoreDataManager.shared.fetchDailyHabitInfos())
             let monthHabitCompletedInfo = try CoreDataManager.shared.fetchDailyHabitInfos().map{$0.hasDone} // 한달 동안의 습관 완료 기록, 습관을 시작하는날이 아닌경우에는 표시안됨
-            print(monthHabitCompletedInfo) // 테스트후 지우셔도 됩니다.
         } catch {
             print(error)
         }
     }
     
-    func getSelectedDayHabitInfo(selectedDay: String) { // selectedDay 매개변수를 통해 해당하는 날짜의 습관정보를 불러옴, 날짜 형식 2024-03-08
+    private func getSelectedDayHabitInfo(selectedDay: String) { // selectedDay 매개변수를 통해 해당하는 날짜의 습관정보를 불러옴, 날짜 형식 2024-03-08
         do {
             let habitInfos = try CoreDataManager.shared.fetchDailyHabitInfos()
+            print("habitInfos:", habitInfos)
             let habitInfoDays = habitInfos.compactMap{$0.day}
-            
             if let index = habitInfoDays.firstIndex(where: {$0 == selectedDay}) {
                 let selectedHabitInfo = habitInfos[index]
                 guard let day = selectedHabitInfo.day else { return }
@@ -336,16 +339,48 @@ extension ReportViewController {
         }
     }
     
-    func getUserData() {
+    private func getUserData() -> User? {
         do {
             let userData = try CoreDataManager.shared.fetchUser()
-            guard let nickname = userData?.nickname else { return } // 닉네임
-            guard let targetHabit = userData?.targetHabit else { return } // 할 습관
-            guard let targetDate = userData?.targetDate else { return } // 습관을 진행할 요일
-            guard let startTime = userData?.startTime else { return } // 습관 진행 시간
-            guard let whiteNoiseType = userData?.whiteNoiseType else { return } // 사운드
+            return userData
         } catch {
             print(error)
         }
+        
+        return nil
+    }
+    
+    // CoreData의 데이터를 뷰에 뿌려주기 위한 데이터로 변환해서 반환
+    private func getMonthData() -> [Bool] {
+        var days = [false, false, false, false, false, false, false]
+        for day in user?.targetDate ?? "" {
+            switch day {
+            case "월":
+                days[0] = true
+            case "화":
+                days[1] = true
+            case "수":
+                days[2] = true
+            case "목":
+                days[3] = true
+            case "금":
+                days[4] = true
+            case "토":
+                days[5] = true
+            case "일":
+                days[6] = true
+            default: break
+            }
+        }
+        
+        return days
+    }
+}
+
+// MARK: - Types
+
+extension ReportViewController {
+    enum Check {
+        case complete, fail, rest
     }
 }
