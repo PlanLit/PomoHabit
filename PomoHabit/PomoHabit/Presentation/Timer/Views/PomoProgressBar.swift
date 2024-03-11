@@ -1,22 +1,34 @@
+//
+//  CircleProgressBar.swift
+//  PomoHabit
+//
+//  Created by Joon Baek on 2024/03/05.
+//
+
+import Combine
 import UIKit
 
 import SnapKit
 
+// MARK: - CircleProgressBar
+
 final class CircleProgressBar: BaseView {
+    
+    private var timerStateSubscription: AnyCancellable?
     
     // MARK: - UI Properties
     
-    private lazy var progressLayer = makeLayer(strokeColor: .pobitRed, strokeEnd: 0)
-    private lazy var trackLayer = makeLayer(strokeColor: .pobitSkin, strokeEnd: 1.0)
+    private lazy var progressLayer = makeLayer(strokeColor: .pobitRed, strokeEnd: 1)
+    private lazy var trackLayer = makeLayer(strokeColor: .pobitSkin, strokeEnd: 1)
     private lazy var dashedCircleLayer = makeDashedCircleLayer()
     
     private var todayLabel = UILabel().setPrimaryColorLabel(text: "오늘")
     
     private let timeLabel: UILabel = {
         let label = UILabel()
-        label.text = "22:01"
         label.textColor = .pobitBlack
         label.font = Pretendard.bold(size: 44)
+        label.text = "05:00"
         
         return label
     }()
@@ -68,16 +80,33 @@ extension CircleProgressBar {
         
         [ trackLayer, progressLayer, dashedCircleLayer ].forEach { layer.addSublayer($0) }
     }
-    
-    func setProgressWithAnimation(duration: TimeInterval, value: Float) {
+}
+
+// MARK: - Action Helpers
+
+extension CircleProgressBar {
+    func setProgressWithAnimation(duration: TimeInterval) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.fromValue = 1
+        animation.toValue = 0
         animation.duration = duration
-        animation.fromValue = 0
-        animation.toValue = value
-        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
-        
-        progressLayer.strokeEnd = CGFloat(value)
-        progressLayer.add(animation, forKey: "animateprogress")
+        animation.fillMode = .forwards
+        animation.isRemovedOnCompletion = false
+        progressLayer.add(animation, forKey: "progressAnimation")
+    }
+    
+    func resetProgressAnimation() {
+        progressLayer.removeAnimation(forKey: "progressAnimation")
+    }
+    
+    func updateTimeLabel(_ remainingTime: TimeInterval) {
+        let minutes = Int(remainingTime) / 60
+        let seconds = Int(remainingTime) % 60
+        let timeString = String(format: "%02d:%02d", minutes, seconds)
+        timeLabel.text = timeString
+        DispatchQueue.main.async {
+            self.timeLabel.text = String(format: "%02d:%02d", minutes, seconds)
+        }
     }
 }
 
