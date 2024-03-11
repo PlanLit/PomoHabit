@@ -138,7 +138,7 @@ extension CoreDataManager {
         user.targetHabit = targetHabit // 습관정보
         user.targetDate = targetDate // 습관 진행요일
         user.startTime = startTime // 습관 진행 시간
-        user.whiteNoiseType = nil // 사운드
+        user.whiteNoiseType = whiteNoiseType // 사운드
         
         saveContext()
     }

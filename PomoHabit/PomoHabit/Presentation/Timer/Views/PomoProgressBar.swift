@@ -28,6 +28,7 @@ final class CircleProgressBar: BaseView {
         let label = UILabel()
         label.textColor = .pobitBlack
         label.font = Pretendard.bold(size: 44)
+        label.text = "05:00"
         
         return label
     }()
@@ -101,6 +102,8 @@ extension CircleProgressBar {
     func updateTimeLabel(_ remainingTime: TimeInterval) {
         let minutes = Int(remainingTime) / 60
         let seconds = Int(remainingTime) % 60
+        let timeString = String(format: "%02d:%02d", minutes, seconds)
+        timeLabel.text = timeString
         DispatchQueue.main.async {
             self.timeLabel.text = String(format: "%02d:%02d", minutes, seconds)
         }
