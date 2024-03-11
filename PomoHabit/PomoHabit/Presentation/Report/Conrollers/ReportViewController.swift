@@ -81,12 +81,11 @@ extension ReportViewController {
         gridView.snp.makeConstraints { make in
             make.top.equalTo(calendarNaviView.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
             make.left.right.equalToSuperview()
-            make.height.equalTo(400)
         }
         
         messageBoxView.snp.makeConstraints { make in
             make.height.equalTo(35)
-            make.top.equalTo(gridView.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
+            make.top.equalTo(gridView.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
             make.right.equalTo(view.snp.right).offset(-LayoutLiterals.minimumHorizontalSpacing)
             make.left.equalTo(view.snp.left).offset(LayoutLiterals.minimumHorizontalSpacing)
         }
@@ -215,8 +214,8 @@ extension ReportViewController {
                 boxView.alpha = day <= todayDate ? 1 : 0.1
                 
                 boxView.snp.makeConstraints { make in
-                    make.width.equalTo(62)
-                    make.height.equalTo(50)
+                    make.width.equalTo(56)
+                    make.height.equalTo(45)
                 }
                 
                 return boxView
@@ -234,7 +233,7 @@ extension ReportViewController {
             return boxView
         }
         
-        let gridView = VStackView(spacing: 0, alignment: .center, [
+        let gridView = VStackView(alignment: .center, [
             HStackView([
                 getTheBoxView(1, .complete),
                 getTheBoxView(2, .complete),
