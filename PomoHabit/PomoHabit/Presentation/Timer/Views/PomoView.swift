@@ -111,7 +111,7 @@ extension TimerView {
         }
         
         timerHeaderView.snp.makeConstraints { make in
-            make.top.equalTo(navigationBar.snp.bottom).offset(28)
+            make.top.equalTo(navigationBar.snp.bottom).offset(24)
             make.leading.trailing.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
             make.height.equalTo(152)
         }
@@ -119,20 +119,20 @@ extension TimerView {
         setupTimerHeaderView()
         
         starView.snp.makeConstraints { make in
-            make.top.equalTo(timerHeaderView.snp.bottom).offset(48)
+            make.top.equalTo(timerHeaderView.snp.bottom).offset(36)
             make.centerX.equalToSuperview()
             make.width.equalTo(120)
             make.height.equalTo(72)
         }
         
         circleProgressBar.snp.makeConstraints { make in
-            make.top.equalTo(timerHeaderView.snp.bottom).offset(80)
+            make.top.equalTo(timerHeaderView.snp.bottom).offset(68)
             make.centerX.equalToSuperview()
             make.size.equalTo(280)
         }
         
         timerButton.snp.makeConstraints { make in
-            make.top.equalTo(circleProgressBar.snp.bottom).offset(42)
+            make.top.equalTo(circleProgressBar.snp.bottom).offset(LayoutLiterals.lowerPrimarySpacing)
             make.centerX.equalToSuperview()
             make.width.equalTo(134)
             make.height.equalTo(58)
@@ -163,7 +163,8 @@ extension TimerView {
     func updateViewWithUserData(_ userData: UserData) {
         habitLabel.text = userData.targetHabit
         startTimeLabel.text = userData.startTime
-        goalDaysCountLabel.text = "주\(userData.targetDate.count)일"
+        let targetDatesArray = userData.targetDate.split(separator: ",").map(String.init)
+        goalDaysCountLabel.text = "주\(targetDatesArray.count)일"
     }
 }
 
