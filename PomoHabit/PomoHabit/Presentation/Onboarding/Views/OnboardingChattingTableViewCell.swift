@@ -14,7 +14,6 @@ final class OnboardingChattingTableViewCell: UITableViewCell {
     // MARK: - Properties
     
     private var data: OnboardingChattingCellData?
-    
     private lazy var chattingLabel: BasePaddingLabel = makeChattingLabel()
     
     // MARK: - Life Cycles
