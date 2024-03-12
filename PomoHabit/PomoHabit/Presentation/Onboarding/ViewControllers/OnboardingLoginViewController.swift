@@ -30,6 +30,10 @@ final class OnboardingLoginViewController: UIViewController {
         setAddSubviews()
         setAutoLayout()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
 
 // MARK: - Layout Helpers
@@ -46,7 +50,8 @@ extension OnboardingLoginViewController {
     private func setAutoLayout() {
         container.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(-65)
+            make.centerY.equalToSuperview().offset(-65).priority(.low)
+            make.bottom.lessThanOrEqualTo(self.view.keyboardLayoutGuide.snp.top).offset(-LayoutLiterals.minimumVerticalSpacing).priority(.medium)
         }
     }
 }
