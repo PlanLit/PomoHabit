@@ -1,5 +1,5 @@
 //
-//  NicknameReviseView.swift
+//  NicknameEditView.swift
 //  PomoHabit
 //
 //  Created by 洪立妍 on 3/5/24.
@@ -9,18 +9,18 @@ import UIKit
 
 import SnapKit
 
-// MARK: - NicknameResiveView
+// MARK: - NicknameEditView
 
-final class NicknameResiveView: BaseView {
+final class NicknameEditView: BaseView {
     
     // MARK: - Properties
     
     private let pobitNavigationBarView = PobitNavigationBarView(title: "닉네임 수정", viewType: .withDismissButton)
-    private lazy var reviseSubmitButton = PobitButton.makePlainButton(title: "수정하기/등록하기", backgroundColor: .pobitRed)
+    private lazy var editSubmitButton = PobitButton.makePlainButton(title: "수정하기", backgroundColor: .pobitRed)
     
     // MARK: - UI
     
-    private let nicknameReviseTextField: UITextField = {
+    private let nicknameEditTextField: UITextField = {
         let textField = UITextField()
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: textField.frame.height))
         textField.leftView = paddingView
@@ -35,15 +35,14 @@ final class NicknameResiveView: BaseView {
         return textField
     }()
     
-    private let nicknameReviseLabel: UILabel = {
+    private let nicknameEditLabel: UILabel = {
         let label = UILabel()
         label.text = "대문자만 입력해주세요"
         label.textColor = .pobitStone2
-        label.font = Pretendard.regular(size: 20)
+        label.font = Pretendard.regular(size: 14)
         
         return label
     }()
-    
     
     // MARK: - Life Cycle
     
@@ -52,6 +51,8 @@ final class NicknameResiveView: BaseView {
         
         setAddSubViews()
         setAutoLayout()
+        setupTextFieldDelegate()
+        nicknameEditTextField.becomeFirstResponder()
     }
     
     required init?(coder: NSCoder) {
@@ -61,36 +62,57 @@ final class NicknameResiveView: BaseView {
 
 // MARK: - Layout Helpers
 
-extension NicknameResiveView {
+extension NicknameEditView {
     private func setAddSubViews() {
-        addSubViews([pobitNavigationBarView, nicknameReviseTextField, nicknameReviseLabel,reviseSubmitButton])
+        addSubViews([pobitNavigationBarView, nicknameEditTextField, nicknameEditLabel,editSubmitButton])
     }
     
     private func setAutoLayout() {
         pobitNavigationBarView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide)
+            make.top.equalTo(safeAreaLayoutGuide).offset(LayoutLiterals.upperPrimarySpacing)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(58)
         }
         
-        nicknameReviseTextField.snp.makeConstraints { make in
-            make.top.equalTo(pobitNavigationBarView.snp.bottom).offset(35)
+        nicknameEditTextField.snp.makeConstraints { make in
+            make.top.equalTo(pobitNavigationBarView.snp.bottom).offset(27)
             make.leading.equalTo(safeAreaLayoutGuide).offset(LayoutLiterals.minimumHorizontalSpacing)
             make.trailing.equalTo(safeAreaLayoutGuide).inset(LayoutLiterals.minimumHorizontalSpacing)
             make.height.equalTo(64)
         }
         
-        nicknameReviseLabel.snp.makeConstraints { make in
-            make.top.equalTo(nicknameReviseTextField.snp.bottom).offset(10)
+        nicknameEditLabel.snp.makeConstraints { make in
+            make.top.equalTo(nicknameEditTextField.snp.bottom).offset(10)
             make.leading.equalTo(safeAreaLayoutGuide).offset(LayoutLiterals.minimumHorizontalSpacing)
             
         }
-        reviseSubmitButton.snp.makeConstraints { make in
-            make.top.equalTo(nicknameReviseLabel.snp.bottom).offset(139)
+        
+        editSubmitButton.snp.makeConstraints { make in
+            make.bottom.equalTo(self.keyboardLayoutGuide.snp.top).offset(-34)
+//            make.bottom.equalToSuperview().offset(-34)
             make.centerX.equalToSuperview()
             make.height.equalTo(62)
-            make.leading.equalTo(safeAreaLayoutGuide).offset(61)
-            make.trailing.equalTo(safeAreaLayoutGuide).inset(61)
+            make.width.equalTo(324)
         }
+    }
+}
+
+extension NicknameEditView: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        return true
+    }
+    
+    private func setupTextFieldDelegate() {
+        nicknameEditTextField.delegate = self
     }
 }

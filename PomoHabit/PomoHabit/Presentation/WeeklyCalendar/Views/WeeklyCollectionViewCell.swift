@@ -96,10 +96,10 @@ extension WeeklyCollectionViewCell{
         dateLabel.text = "\(text)"
     }
     
-    func setCellBackgroundColor(state: HabbitState) { //습관 정보에 따라 달라지는 cell배경및 border 함수
+    func setCellBackgroundColor(state: HabitState) { //습관 정보에 따라 달라지는 cell배경및 border 함수
         labelsContainer.backgroundColor = state.backgroundColor
         
-        if state == HabbitState.notStart{
+        if state == HabitState.notStart{
             [dayLabel,dateLabel].forEach { label in
                 label.textColor = .pobitBlack
             }

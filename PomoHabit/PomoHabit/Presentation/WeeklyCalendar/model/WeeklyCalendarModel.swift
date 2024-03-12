@@ -8,13 +8,13 @@ import UIKit
 
 import SnapKit
 
-enum HabbitState : Int{
+enum HabitState : Int{
     case done = 0
     case doNot = 1
     case notStart = 2
 }
 
-extension HabbitState {
+extension HabitState {
     var backgroundColor : UIColor {
         switch self {
         case .done: 

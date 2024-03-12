@@ -5,6 +5,7 @@
 //  Created by Joon Baek on 2024/02/27.
 //
 
+import Combine
 import UIKit
 
 import SnapKit
@@ -12,6 +13,14 @@ import SnapKit
 // MARK: - TimerView
 
 final class TimerView: BaseView {
+    
+    // MARK: - Properties
+    
+    private (set) var memoButtonTapped = PassthroughSubject<Void, Never>()
+    private (set) var whiteNoiseButtonTapped = PassthroughSubject<Void, Never>()
+    private (set) var timerButtonTapped = PassthroughSubject<Void, Never>()
+    
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - UI Properties
     
@@ -24,17 +33,16 @@ final class TimerView: BaseView {
     private lazy var memoButton = makeMemoButton()
     private lazy var dividerView = makeDividerView(height: 1)
     private lazy var whiteNoiseInfoLabel = makeBlackBodyLabel(text: "🎧 배경음을 선택해보세요!", fontSize: 16)
-    private lazy var whiteNoiseEditButton = makeWhiteNoiseEditButton()
+    private lazy var whiteNoiseButton = makeWhiteNoiseEditButton()
     
     private lazy var starView = UIImageView(image: UIImage(named: "Star"))
-    private let circleProgressBar = CircleProgressBar()
+    private (set) var circleProgressBar = CircleProgressBar()
     
     private lazy var timerButton: PobitButton = {
         let style = PlainButtonStyle(backgroundColor: .pobitStone1)
         
         let button = PobitButton()
         button.setStyle(style)
-        button.setTitle("시작", for: .normal)
         button.titleLabel?.font = Pretendard.bold(size: 20)
         
         return button
@@ -47,20 +55,48 @@ final class TimerView: BaseView {
         
         setAddSubViews()
         setAutoLayout()
+        subscribeButtonEvents()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
+}
+
+// MARK: - Subscriptions
+
+extension TimerView {
+    private func subscribeButtonEvents() {
+        memoButton.tapPublisher.sink { [weak self] in
+            self?.memoButtonAction()
+        }
+        .store(in: &cancellables)
         
-        circleProgressBar.setProgressWithAnimation(duration: 1.0, value: 0.7)
+        whiteNoiseButton.tapPublisher.sink { [weak self] in
+            self?.whiteNoiseButtonAction()
+        }
+        .store(in: &cancellables)
+        
+        timerButton.tapPublisher.sink { [weak self] in
+            self?.timerButtonAction()
+        }
+        .store(in: &cancellables)
+    }
+    
+    private func memoButtonAction() {
+        memoButtonTapped.send()
+    }
+    
+    private func whiteNoiseButtonAction() {
+        whiteNoiseButtonTapped.send()
+    }
+    
+    private func timerButtonAction() {
+        timerButtonTapped.send()
     }
 }
 
-// MARK: - LayoutHelpers
+// MARK: - Layout Helpers
 
 extension TimerView {
     private func setAddSubViews() {
@@ -75,7 +111,7 @@ extension TimerView {
         }
         
         timerHeaderView.snp.makeConstraints { make in
-            make.top.equalTo(navigationBar.snp.bottom).offset(28)
+            make.top.equalTo(navigationBar.snp.bottom).offset(24)
             make.leading.trailing.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
             make.height.equalTo(152)
         }
@@ -83,24 +119,52 @@ extension TimerView {
         setupTimerHeaderView()
         
         starView.snp.makeConstraints { make in
-            make.top.equalTo(timerHeaderView.snp.bottom).offset(48)
+            make.top.equalTo(timerHeaderView.snp.bottom).offset(36)
             make.centerX.equalToSuperview()
             make.width.equalTo(120)
             make.height.equalTo(72)
         }
         
         circleProgressBar.snp.makeConstraints { make in
-            make.top.equalTo(timerHeaderView.snp.bottom).offset(80)
+            make.top.equalTo(timerHeaderView.snp.bottom).offset(68)
             make.centerX.equalToSuperview()
             make.size.equalTo(280)
         }
         
         timerButton.snp.makeConstraints { make in
-            make.top.equalTo(circleProgressBar.snp.bottom).offset(42)
+            make.top.equalTo(circleProgressBar.snp.bottom).offset(LayoutLiterals.lowerPrimarySpacing)
             make.centerX.equalToSuperview()
             make.width.equalTo(134)
             make.height.equalTo(58)
         }
+    }
+}
+
+// MARK: - Action Helpers
+
+extension TimerView {
+    func updateTimerButtonState(_ state: TimerState) {
+        switch state {
+        case .stopped:
+            timerButton.setTitle("시작", for: .normal)
+            timerButton.backgroundColor = .pobitBlack
+            timerButton.isEnabled = true
+        case .running:
+            timerButton.setTitle("완료", for: .normal)
+            timerButton.backgroundColor = .pobitStone1
+            timerButton.isEnabled = false
+        case .finished:
+            timerButton.setTitle("완료", for: .normal)
+            timerButton.backgroundColor = .pobitBlack
+            timerButton.isEnabled = true
+        }
+    }
+    
+    func updateViewWithUserData(_ userData: UserData) {
+        habitLabel.text = userData.targetHabit
+        startTimeLabel.text = userData.startTime
+        let targetDatesArray = userData.targetDate.split(separator: ",").map(String.init)
+        goalDaysCountLabel.text = "주\(targetDatesArray.count)일"
     }
 }
 
@@ -115,7 +179,7 @@ extension TimerView {
              memoButton,
              dividerView,
              whiteNoiseInfoLabel,
-             whiteNoiseEditButton
+             whiteNoiseButton
             ])
         
         goalDaysCountLabel.snp.makeConstraints { make in
@@ -148,7 +212,7 @@ extension TimerView {
             make.leading.bottom.equalToSuperview().inset(LayoutLiterals.minimumVerticalSpacing)
         }
         
-        whiteNoiseEditButton.snp.makeConstraints { make in
+        whiteNoiseButton.snp.makeConstraints { make in
             make.centerY.equalTo(whiteNoiseInfoLabel)
             make.trailing.equalTo(startTimeLabel)
             make.size.equalTo(20)

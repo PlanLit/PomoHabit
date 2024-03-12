@@ -22,6 +22,7 @@ final class TabBarController: UITabBarController {
         super.viewDidLoad()
         
         setTabBar()
+        adjustTabBarItemPosition(yOffset: 8)
     }
 }
 
@@ -37,4 +38,15 @@ extension TabBarController {
         thirdVC.tabBarItem = UITabBarItem(title: "주간 캘린더", image: UIImage(named: "WeeklyCalendarImage"), tag: 3)
         fourthVC.tabBarItem = UITabBarItem(title: "마이 페이지", image: UIImage(named: "MyPageImage"), tag: 4)
     }
+    
+    private func adjustTabBarItemPosition(yOffset: CGFloat) {
+            guard let items = self.tabBar.items else { return }
+
+            for item in items {
+                // 이미지 인셋 조정으로 아이템의 위치 변경
+                item.imageInsets = UIEdgeInsets(top: yOffset, left: 0, bottom: -yOffset, right: 0)
+                // 타이틀 위치 조정
+                item.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: yOffset)
+            }
+        }
 }
