@@ -14,8 +14,8 @@ final class OnboardingDaysButtonTableViewCell: UITableViewCell {
     // MARK: - Properties
     
     private lazy var buttonContainer: VStackView = makeContainer()
-    var daysButtonSelectionState: [Bool]?
-    var action: ((Int, Bool) -> Void)?
+    private var daysButtonSelectionState: [Bool]?
+    private var action: ((Int, Bool) -> Void)?
 
     // MARK: - Life Cycles
     
@@ -49,6 +49,11 @@ extension OnboardingDaysButtonTableViewCell {
             make.trailing.equalToSuperview().offset(-LayoutLiterals.minimumHorizontalSpacing)
             make.centerY.equalToSuperview()
         }
+    }
+    
+    func setData(_ daysButtonSelectionState: [Bool]?,_ action:((Int, Bool) -> Void)?) {
+        self.daysButtonSelectionState = daysButtonSelectionState
+        self.action = action
     }
 }
 

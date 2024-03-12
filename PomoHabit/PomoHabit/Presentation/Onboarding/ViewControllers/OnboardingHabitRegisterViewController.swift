@@ -13,7 +13,7 @@ final class OnboardingHabitRegisterViewController: BaseViewController {
     
     // MARK: - Data Properties
     
-    var nickName: String?
+    private var nickName: String?
     private var habitTitle: String?
     private var daysButtonSelectionState: [Bool] = [false, false, false, false, false, false, false]
     private var habitStartTime: Date?
@@ -167,8 +167,7 @@ extension OnboardingHabitRegisterViewController {
     
     private func makeOnboardingDaysButtonTableViewCell() -> OnboardingDaysButtonTableViewCell {
         let cell = OnboardingDaysButtonTableViewCell()
-        cell.daysButtonSelectionState = daysButtonSelectionState
-        cell.action = { inx, state in
+        cell.setData(daysButtonSelectionState) { inx, state in
             self.daysButtonSelectionState[inx] = state
             var trueCount = 0
             for state in self.daysButtonSelectionState {
@@ -191,8 +190,7 @@ extension OnboardingHabitRegisterViewController {
     
     private func makeOnboardingDatePickerTableViewCell(_ indexPath: IndexPath) -> OnboardingDatePickerTableViewCell {
         let cell = OnboardingDatePickerTableViewCell()
-        cell.datePicker.date = habitStartTime ?? Date()
-        cell.dateChangeEnded = { [weak self] date in
+        cell.setData(habitStartTime ?? Date()) { [weak self] date in
             if self?.habitStartTime == nil {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self?.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "좋아 다 됬어! 우리 꼭 습관을 만들어보자!"))
@@ -365,6 +363,10 @@ extension OnboardingHabitRegisterViewController {
 // MARK: - Data Helpers
 
 extension OnboardingHabitRegisterViewController {
+    func setData(_ nickname: String?) {
+        self.nickName = nickname
+    }
+    
     private func convertDataForCoreData() -> (nickName: String, targetHabit: String, targetDate: String, startTime: String, whiteNoiseType: String?) {
         // 무슨 요일
         var targetDate = ""

@@ -13,7 +13,7 @@ final class OnboardingLoginViewController: UIViewController {
     
     // MARK: - Data Properties
     
-    var nickName: String?
+    private var nickname: String?
     
     // MARK: - UI Properties
     
@@ -92,7 +92,7 @@ extension OnboardingLoginViewController {
     private func makeNextButton() -> UIButton {
         let button = UIButton(type: .custom, primaryAction: .init(handler: { _ in
             let onboardingHabitRegisterViewController = OnboardingHabitRegisterViewController()
-            onboardingHabitRegisterViewController.nickName = self.nickName
+            onboardingHabitRegisterViewController.setData(self.nickname)
             self.navigationController?.pushViewController(onboardingHabitRegisterViewController, animated: true)
         }))
         button.setImage(UIImage(named: "arrow"), for: .normal)
@@ -111,7 +111,7 @@ extension OnboardingLoginViewController {
 
 extension OnboardingLoginViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        nickName = textField.text
+        nickname = textField.text
         if textField.text != "" {
             nextButton.layer.opacity = 1
             nextButton.isUserInteractionEnabled = true
