@@ -13,8 +13,8 @@ final class OnboardingDatePickerTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    lazy var datePicker: UIDatePicker = makeDatePicker()
-    var dateChangeEnded: ((Date) -> ())?
+    private lazy var datePicker: UIDatePicker = makeDatePicker()
+    private var dateChangeEnded: ((Date) -> ())?
     
     // MARK: - Life Cycles
     
@@ -48,6 +48,11 @@ extension OnboardingDatePickerTableViewCell {
             make.trailing.equalToSuperview().offset(-LayoutLiterals.minimumHorizontalSpacing)
             make.centerY.equalToSuperview()
         }
+    }
+    
+    func setData(_ date: Date,_ dateChangeEnded: ((Date) -> ())?) {
+        self.datePicker.date = date
+        self.dateChangeEnded = dateChangeEnded
     }
 }
 

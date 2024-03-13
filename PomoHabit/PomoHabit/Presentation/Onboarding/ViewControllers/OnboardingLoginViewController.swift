@@ -13,7 +13,7 @@ final class OnboardingLoginViewController: UIViewController {
     
     // MARK: - Data Properties
     
-    var nickName: String?
+    private var nickname: String?
     
     // MARK: - UI Properties
     
@@ -29,6 +29,10 @@ final class OnboardingLoginViewController: UIViewController {
 
         setAddSubviews()
         setAutoLayout()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
 
@@ -46,7 +50,8 @@ extension OnboardingLoginViewController {
     private func setAutoLayout() {
         container.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(-65)
+            make.centerY.equalToSuperview().offset(-65).priority(.low)
+            make.bottom.lessThanOrEqualTo(self.view.keyboardLayoutGuide.snp.top).offset(-LayoutLiterals.minimumVerticalSpacing).priority(.medium)
         }
     }
 }
@@ -92,7 +97,7 @@ extension OnboardingLoginViewController {
     private func makeNextButton() -> UIButton {
         let button = UIButton(type: .custom, primaryAction: .init(handler: { _ in
             let onboardingHabitRegisterViewController = OnboardingHabitRegisterViewController()
-            onboardingHabitRegisterViewController.nickName = self.nickName
+            onboardingHabitRegisterViewController.setData(self.nickname)
             self.navigationController?.pushViewController(onboardingHabitRegisterViewController, animated: true)
         }))
         button.setImage(UIImage(named: "arrow"), for: .normal)
@@ -111,7 +116,7 @@ extension OnboardingLoginViewController {
 
 extension OnboardingLoginViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        nickName = textField.text
+        nickname = textField.text
         if textField.text != "" {
             nextButton.layer.opacity = 1
             nextButton.isUserInteractionEnabled = true
