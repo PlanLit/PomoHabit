@@ -9,6 +9,10 @@ import UIKit
 
 import SnapKit
 
+protocol EditButtonDelegate: AnyObject {
+    func editButtonTapped()
+}
+
 // MARK: - MyPageView
 
 final class MyPageView: BaseView {
@@ -16,6 +20,7 @@ final class MyPageView: BaseView {
     // MARK: - Properties
     
     private let pobitNavigationBarView = PobitNavigationBarView(title: "마이페이지", viewType: .plain)
+    weak var editButtonDelegate: EditButtonDelegate?
     
     // MARK: - 닉네임 UI
     
@@ -152,6 +157,7 @@ final class MyPageView: BaseView {
         
         setAddSubviews()
         setupConstraints()
+        setupEditButton()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -229,6 +235,14 @@ extension MyPageView {
             make.left.equalToSuperview().offset(LayoutLiterals.minimumHorizontalSpacing)
             make.right.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
         }
+    }
+    
+    // MARK: - Setup Methods
+    
+    private func setupEditButton() {
+        editButton.addAction(UIAction(handler: { [weak self] _ in
+            self?.editButtonDelegate?.editButtonTapped()
+        }), for: .touchUpInside)
     }
 }
 

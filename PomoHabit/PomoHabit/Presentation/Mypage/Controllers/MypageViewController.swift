@@ -11,7 +11,7 @@ import SnapKit
 
 // MARK: - MyPageViewController
 
-final class MyPageViewController: UIViewController, BottomSheetPresentable {
+final class MyPageViewController: UIViewController, BottomSheetPresentable{
     
     // MARK: - Properties
     
@@ -28,12 +28,14 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
+        myPageRootView.editButtonDelegate = self
+    }
+}
+
+extension MyPageViewController: EditButtonDelegate {
+    func editButtonTapped() {
+        nicknameEditView.isHidden = false
         presentBottomSheet(rootView: nicknameEditView, detents: [.large()])
     }
 }
