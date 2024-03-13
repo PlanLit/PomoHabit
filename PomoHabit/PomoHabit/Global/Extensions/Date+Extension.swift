@@ -21,9 +21,9 @@ extension Date {
         formatter.dateFormat = "EEEEEE"
         formatter.locale = Locale(identifier: "ko_KR")
         
-        let convertStr = formatter.string(from: self)
+        let convertString = formatter.string(from: self)
         
-        return convertStr
+        return convertString
     }
     
     func comparisonDate(targetDate: Date) -> Bool { // 년도 월 일
