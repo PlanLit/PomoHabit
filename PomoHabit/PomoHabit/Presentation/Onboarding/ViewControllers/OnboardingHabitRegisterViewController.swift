@@ -192,7 +192,7 @@ extension OnboardingHabitRegisterViewController {
     
     private func makeOnboardingDatePickerTableViewCell(_ indexPath: IndexPath) -> OnboardingDatePickerTableViewCell {
         let cell = OnboardingDatePickerTableViewCell()
-        cell.setData(habitAlarmTime ?? Date()) { [weak self] date in
+        cell.setData(habitAlarmTime ?? Date(timeIntervalSinceReferenceDate: .zero)) { [weak self] date in
             if self?.habitAlarmTime == nil {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self?.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "좋아 다 됬어! 우리 꼭 습관을 만들어보자!"))
@@ -232,7 +232,7 @@ extension OnboardingHabitRegisterViewController {
     // 처음 채팅뷰에 진입했을때 한번만 실행시켜야함.
     private func sayHello() {
         let messages: [OnboardingChattingCellData] = [.init(chatDirection: .incoming, cellType: .profilePicture),
-                                                      .init(chatDirection: .incoming, message: "안녕! 앱을 실행해줘서 고마워!"),
+                                                      .init(chatDirection: .incoming, message: "안녕 \(nickname ?? "")! 앱을 실행해줘서 고마워!"),
                                                       .init(chatDirection: .incoming, message: "나는 새로운 습관 형성을 도와줄 가이드야."),
                                                       .init(chatDirection: .incoming, message: "어떤 습관을 만들고 싶어?")]
         var index = UnsentMessagesIndex(unsentMessagesCount: messages.count)
