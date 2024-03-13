@@ -29,6 +29,7 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setTotalHabitInfo()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,11 +46,12 @@ extension MyPageViewController {
         do {
             let dailyHabitInfos = try CoreDataManager.shared.fetchDailyHabitInfos() // 전체 DailyHabit 데이터
             let totalHabitDoneCount = dailyHabitInfos.filter{ $0.hasDone == true }.count // 습관 진행 일수
-            let totlaHabitDuringTime = dailyHabitInfos.filter{ $0.hasDone == true }.map{$0.goalTime}.reduce(0, +) // 진행 총 시간 , 분단위
+            myPageRootView.updateTotalDaysLabel("\(totalHabitDoneCount) 일")
+            let totalHabitDuringTime = dailyHabitInfos.filter{ $0.hasDone == true }.map{$0.goalTime}.reduce(0, +) // 진행 총 시간 , 분단위
             // 완료한 습관 수를 어떻게 할것인지 상의 필요할것 같습니다.
-            
+            myPageRootView.updateTotalMinutesLabel("\(totalHabitDuringTime) 분")
         } catch {
-            
+            print(error)
         }
     }
 }

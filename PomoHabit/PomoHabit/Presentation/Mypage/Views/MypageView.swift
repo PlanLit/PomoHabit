@@ -260,3 +260,15 @@ extension MyPageView: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
+
+// MARK: - Method
+
+extension MyPageView {
+    func updateTotalMinutesLabel(_ text: String) {
+        totalMinutesLabel.text = text
+    }
+    
+    func updateTotalDaysLabel(_ text: String) {
+        totalDaysLabel.text = text
+    }
+}
