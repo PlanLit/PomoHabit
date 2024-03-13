@@ -23,12 +23,11 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
     
     // MARK: - UI Properties
     
-    private let navigationBar = PobitNavigationBarView(title: "이번달 습관 달성률", viewType: .plain)
+    private let navigationBar = PobitNavigationBarView(title: "습관 달성률", viewType: .plain)
     private lazy var headerView: HStackView = makeHeaderView()
     private lazy var imageCollectionViewController: ReportImageCollectionViewController = makeImageCollectionViewController()
-    private lazy var calendarNaviView: VStackView = makeCalendarNaviView()
     private lazy var gridView: VStackView = makeGridView(31) // 월마다 바뀌는 일 수 주입
-    private lazy var messageBoxView: UILabel = makeMessageBoxView("모두 완료하면 토마토가 웃는 얼굴이 돼요")
+    private lazy var habitIndicatorView = HabitIndicatorView()
     
     // MARK: - Life Cycles
     
@@ -52,50 +51,43 @@ extension ReportViewController {
         view.addSubViews([
             navigationBar,
             headerView,
-            calendarNaviView,
             imageCollectionViewController.view,
             gridView,
-            messageBoxView
+            habitIndicatorView,
         ])
     }
     
     private func setAutoLayout() {
         navigationBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
-            make.leading.trailing.equalToSuperview()
+            make.left.right.equalToSuperview()
             make.height.equalTo(58)
         }
         
         headerView.snp.makeConstraints { make in
-            make.top.equalTo(navigationBar.snp.bottom)
+            make.top.equalTo(navigationBar.snp.bottom).offset(LayoutLiterals.minimumVerticalSpacing)
             make.left.equalTo(LayoutLiterals.minimumHorizontalSpacing)
             make.right.equalTo(-LayoutLiterals.minimumHorizontalSpacing)
-            make.height.equalTo(50)
+            make.height.equalTo(55)
         }
         
         imageCollectionViewController.view.snp.makeConstraints { make in
-            make.top.equalTo(headerView.snp.bottom)
+            make.top.equalTo(headerView.snp.bottom).offset(LayoutLiterals.minimumVerticalSpacing)
             make.left.right.equalToSuperview()
             make.height.equalTo(74)
         }
         
-        calendarNaviView.snp.makeConstraints { make in
-            make.top.equalTo(imageCollectionViewController.view.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
-            make.left.equalToSuperview().offset(35)
-            make.right.equalToSuperview().offset(-35)
-            make.height.equalTo(44)
-        }
-        
         gridView.snp.makeConstraints { make in
-            make.top.equalTo(calendarNaviView.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
-            make.left.right.equalToSuperview()
+            make.top.equalTo(imageCollectionViewController.view.snp.bottom).offset(LayoutLiterals.minimumVerticalSpacing)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(45*5+(10*4))
         }
         
-        messageBoxView.snp.makeConstraints { make in
-            make.right.equalTo(view.snp.right).offset(-LayoutLiterals.minimumHorizontalSpacing)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-LayoutLiterals.upperSecondarySpacing)
-            make.left.equalTo(view.snp.left).offset(LayoutLiterals.minimumHorizontalSpacing)
-            make.height.equalTo(35)
+        habitIndicatorView.snp.makeConstraints { make in
+            make.top.equalTo(gridView.snp.bottom).offset(LayoutLiterals.minimumVerticalSpacing)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-LayoutLiterals.minimumVerticalSpacing)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(250)
         }
     }
 }
@@ -113,30 +105,30 @@ extension ReportViewController {
             return label
         }()
         
-//        let rightMenuButton = {
-//            let button = UIButton(type: .system)
-//            button.tintColor = .black
-//            button.setImage(.verticalMenu, for: .normal)
-//            button.overrideUserInterfaceStyle = .dark
-//            
-//            let habitInfo = UIAction(title: "습관 정보", handler: { _ in
-//                self.presentBottomSheet(rootView: ReportHabitInfoView(frame: .null, 
-//                                                                      daysButtonSelectionState: self.getMonthData(),
-//                                                                      startTime: self.user?.startTime),
-//                                        detents: [.medium()])
-//            })
-//            
-//            let habitEdit = UIAction(title: "습관 변경", handler: { _ in
-//                
-//            })
-//            
-//            let menus = UIMenu(children: [habitInfo, habitEdit])
-//            
-//            button.menu = menus
-//            button.showsMenuAsPrimaryAction = true
-//            
-//            return button
-//        }()
+        let rightMenuButton = {
+            let button = UIButton(type: .system)
+            button.tintColor = .black
+            button.setImage(.verticalMenu, for: .normal)
+            button.overrideUserInterfaceStyle = .dark
+            
+            let habitInfo = UIAction(title: "습관 정보", handler: { _ in
+                self.presentBottomSheet(rootView: ReportHabitInfoView(frame: .null, 
+                                                                      daysButtonSelectionState: self.getMonthData(),
+                                                                      startTime: self.user?.alarmTime?.description),
+                                        detents: [.medium()])
+            })
+            
+            let habitEdit = UIAction(title: "습관 변경", attributes: .destructive, handler: { _ in
+                
+            })
+            
+            let menus = UIMenu(children: [habitInfo, habitEdit])
+            
+            button.menu = menus
+            button.showsMenuAsPrimaryAction = true
+            
+            return button
+        }()
         
         let blankView = {
             let blankView = UIButton(type: .system)
@@ -148,8 +140,8 @@ extension ReportViewController {
         
         return HStackView([
             blankView,
-            titleLabel
-//            rightMenuButton
+            titleLabel,
+            rightMenuButton
         ])
     }
     
@@ -159,61 +151,9 @@ extension ReportViewController {
         
         return imageCollectionViewController
     }
-    
-    private func makeCalendarNaviView() -> VStackView {
-        let leftButton = {
-            let button = UIButton(type: .system, primaryAction: .init(handler: { _ in
-                print("leftButton")
-            }))
-            
-            button.setImage(.arrowLeft, for: .normal)
-            button.tintColor = .black
-            
-            return button
-        }()
-        
-        let centerTitle = {
-            let label = UILabel()
-            label.font = Pretendard.bold(size: 20)
-            label.textColor = .darkGray
-            label.text = "1월"
-            
-            return label
-        }()
-        
-        let rightButton = {
-            let button = UIButton(type: .system, primaryAction: .init(handler: { _ in
-                print("rightButton")
-            }))
-            
-            button.setImage(.arrowRight, for: .normal)
-            button.tintColor = .black
-            
-            return button
-        }()
-        
-        let bottomLine = {
-            let bottomLine = UIView()
-            bottomLine.backgroundColor = .lightGray
-            bottomLine.snp.makeConstraints { make in
-                make.height.equalTo(0.5)
-            }
-            
-            return bottomLine
-        }()
-        
-        return VStackView(spacing: CGFloat(LayoutLiterals.upperPrimarySpacing), alignment: .fill, [
-            HStackView(alignment: .center, [
-                leftButton,
-                centerTitle,
-                rightButton,
-            ]),
-            bottomLine
-        ])
-    }
 
     private func makeGridView(_ days: Int) -> VStackView {
-        func getTheBoxView(_ day: Int,_ state: Check) -> UIButton {
+        func getTheBoxView(_ day: Int,_ state: Check,_ width: UInt = 56,_ height: UInt = 45) -> UIButton {
             let boxView = {
                 let boxView = UIButton(type: .system, primaryAction: .init(handler: { _ in
                     print("day: \(day)")
@@ -222,21 +162,20 @@ extension ReportViewController {
                 boxView.backgroundColor = .pobitRed
                 boxView.layer.cornerRadius = 10
                 boxView.alpha = day <= todayDate ? 1 : 0.1
+                boxView.clipsToBounds = true
                 boxView.snp.makeConstraints { make in
-                    make.width.equalTo(56)
-                    make.height.equalTo(45)
+                    make.width.equalTo(width)
+                    make.height.equalTo(height)
                 }
                 
                 return boxView
             }()
             
             switch state {
-            case .complete:
-                boxView.backgroundColor = day <= 3 ? .pobitGreen : .pobitRed
+            case .complete, .rest:
+                boxView.backgroundColor = day <= 1 ? .pobitGreen : .pobitRed
             case .fail:
                 boxView.backgroundColor = .pobitStone2
-            case .rest:
-                boxView.backgroundColor = .white
             }
              
             return boxView
@@ -244,57 +183,37 @@ extension ReportViewController {
         
         let gridView = VStackView(alignment: .center, [
             HStackView([
-                getTheBoxView(1, .complete),
-                getTheBoxView(2, .complete),
-                getTheBoxView(3, .complete),
+                getTheBoxView(1, .complete, 56*3, 45),
             ]),
             HStackView([
+                getTheBoxView(2, .complete),
+                getTheBoxView(3, .complete),
                 getTheBoxView(4, .fail),
                 getTheBoxView(5, .fail),
                 getTheBoxView(6, .complete),
-                getTheBoxView(7, .complete),
-                getTheBoxView(8, .complete),
             ]),
             HStackView([
+                getTheBoxView(7, .complete),
+                getTheBoxView(8, .complete),
                 getTheBoxView(9, .complete),
                 getTheBoxView(10, .complete),
                 getTheBoxView(11, .complete),
-                getTheBoxView(12, .complete),
-                getTheBoxView(13, .complete),
             ]),
             HStackView([
+                getTheBoxView(12, .complete),
+                getTheBoxView(13, .complete),
                 getTheBoxView(14, .complete),
                 getTheBoxView(15, .complete),
                 getTheBoxView(16, .complete),
-                getTheBoxView(17, .rest),
-                getTheBoxView(18, .rest),
             ]),
             HStackView([
+                getTheBoxView(17, .rest),
+                getTheBoxView(18, .rest),
                 getTheBoxView(19, .rest),
                 getTheBoxView(20, .complete),
                 getTheBoxView(21, .complete),
-                getTheBoxView(22, .complete),
-                getTheBoxView(23, .complete),
-            ]),
-            HStackView([
-                getTheBoxView(24, .complete),
-                getTheBoxView(25, .complete),
-                getTheBoxView(26, .complete),
-                getTheBoxView(27, .complete),
-                getTheBoxView(28, .complete),
             ]),
         ])
-        
-        // 월별 마다 이거 조정 필요
-        gridView.addArrangedSubview(
-            HStackView([
-                getTheBoxView(29, .complete),
-                getTheBoxView(30, .complete),
-                getTheBoxView(31, .complete),
-            ])
-        )
-        
-        gridView.backgroundColor = UIColor(red: 253/255, green: 249/255, blue: 249/255, alpha: 0.1)
         
         return gridView
     }
