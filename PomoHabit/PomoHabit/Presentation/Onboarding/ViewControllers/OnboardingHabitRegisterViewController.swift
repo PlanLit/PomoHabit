@@ -402,6 +402,6 @@ extension OnboardingHabitRegisterViewController {
     
     private func saveData() {
         let data = convertDataForCoreData()
-        CoreDataManager.shared.createUser(nickname: data.nickName, targetHabit: data.targetHabit, targetDate: data.targetDate, startTime: data.startTime, whiteNoiseType: data.whiteNoiseType)
+//        CoreDataManager.shared.createUser(nickname: data.nickName, targetHabit: data.targetHabit, targetDate: data.targetDate, startTime: data.startTime, whiteNoiseType: data.whiteNoiseType)
     }
 }

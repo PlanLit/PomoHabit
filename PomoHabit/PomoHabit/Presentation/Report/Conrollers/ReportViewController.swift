@@ -113,30 +113,30 @@ extension ReportViewController {
             return label
         }()
         
-        let rightMenuButton = {
-            let button = UIButton(type: .system)
-            button.tintColor = .black
-            button.setImage(.verticalMenu, for: .normal)
-            button.overrideUserInterfaceStyle = .dark
-            
-            let habitInfo = UIAction(title: "습관 정보", handler: { _ in
-                self.presentBottomSheet(rootView: ReportHabitInfoView(frame: .null, 
-                                                                      daysButtonSelectionState: self.getMonthData(),
-                                                                      startTime: self.user?.startTime),
-                                        detents: [.medium()])
-            })
-            
-            let habitEdit = UIAction(title: "습관 변경", handler: { _ in
-                
-            })
-            
-            let menus = UIMenu(children: [habitInfo, habitEdit])
-            
-            button.menu = menus
-            button.showsMenuAsPrimaryAction = true
-            
-            return button
-        }()
+//        let rightMenuButton = {
+//            let button = UIButton(type: .system)
+//            button.tintColor = .black
+//            button.setImage(.verticalMenu, for: .normal)
+//            button.overrideUserInterfaceStyle = .dark
+//            
+//            let habitInfo = UIAction(title: "습관 정보", handler: { _ in
+//                self.presentBottomSheet(rootView: ReportHabitInfoView(frame: .null, 
+//                                                                      daysButtonSelectionState: self.getMonthData(),
+//                                                                      startTime: self.user?.startTime),
+//                                        detents: [.medium()])
+//            })
+//            
+//            let habitEdit = UIAction(title: "습관 변경", handler: { _ in
+//                
+//            })
+//            
+//            let menus = UIMenu(children: [habitInfo, habitEdit])
+//            
+//            button.menu = menus
+//            button.showsMenuAsPrimaryAction = true
+//            
+//            return button
+//        }()
         
         let blankView = {
             let blankView = UIButton(type: .system)
@@ -148,8 +148,8 @@ extension ReportViewController {
         
         return HStackView([
             blankView,
-            titleLabel,
-            rightMenuButton
+            titleLabel
+//            rightMenuButton
         ])
     }
     
@@ -315,28 +315,28 @@ extension ReportViewController {
 extension ReportViewController {
     private func getMonthHabitCompletedInfo() {
         do {
-            print("CoreDataManager.shared.fetchDailyHabitInfos: ", try CoreDataManager.shared.fetchDailyHabitInfos())
-            let monthHabitCompletedInfo = try CoreDataManager.shared.fetchDailyHabitInfos().map{$0.hasDone} // 한달 동안의 습관 완료 기록, 습관을 시작하는날이 아닌경우에는 표시안됨
+//            print("CoreDataManager.shared.fetchDailyHabitInfos: ", try CoreDataManager.shared.fetchDailyHabitInfos())
+//            let monthHabitCompletedInfo = try CoreDataManager.shared.fetchDailyHabitInfos().map{$0.hasDone} // 한달 동안의 습관 완료 기록, 습관을 시작하는날이 아닌경우에는 표시안됨
         } catch {
             print(error)
         }
     }
     
     private func getSelectedDayHabitInfo(selectedDay: String) { // selectedDay 매개변수를 통해 해당하는 날짜의 습관정보를 불러옴, 날짜 형식 2024-03-08
-        do {
-            let habitInfos = try CoreDataManager.shared.fetchDailyHabitInfos()
-            print("habitInfos:", habitInfos)
-            let habitInfoDays = habitInfos.compactMap{$0.day}
-            if let index = habitInfoDays.firstIndex(where: {$0 == selectedDay}) {
-                let selectedHabitInfo = habitInfos[index]
-                guard let day = selectedHabitInfo.day else { return }
-                let goalTime = selectedHabitInfo.goalTime
-                let hasDone = selectedHabitInfo.hasDone
-                guard let note = selectedHabitInfo.note else { return }
-            }
-        } catch {
-            print(error)
-        }
+//        do {
+//            let habitInfos = try CoreDataManager.shared.fetchDailyHabitInfos()
+//            print("habitInfos:", habitInfos)
+//            let habitInfoDays = habitInfos.compactMap{$0.day}
+//            if let index = habitInfoDays.firstIndex(where: {$0 == selectedDay}) {
+//                let selectedHabitInfo = habitInfos[index]
+//                guard let day = selectedHabitInfo.day else { return }
+//                let goalTime = selectedHabitInfo.goalTime
+//                let hasDone = selectedHabitInfo.hasDone
+//                guard let note = selectedHabitInfo.note else { return }
+//            }
+//        } catch {
+//            print(error)
+//        }
     }
     
     private func getUserData() -> User? {
