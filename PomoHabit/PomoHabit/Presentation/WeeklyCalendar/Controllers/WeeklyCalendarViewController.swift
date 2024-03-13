@@ -37,13 +37,13 @@ final class WeeklyCalendarViewController: BaseViewController {
     
     override func viewDidLayoutSubviews() { // 해당 메소드 안에서만 오토레이 아웃으로 설정된 UI/View의 Frame 사이즈를 알 수 있음
         super.viewDidLayoutSubviews()
-        do {
-            let weeklyHasDoneCount = try CoreDataManager.shared.fetchDailyHabitInfos().filter{ $0.hasDone == true }.count
-            
-            setUpWeeklyHabbitProgressView(progress: Float(weeklyHasDoneCount) / 7.0)
-        } catch {
-            print(error)
-        }
+//        do {
+//            let weeklyHasDoneCount = try CoreDataManager.shared.fetchDailyHabitInfos().filter{ $0.hasDone == true }.count
+//            
+//            setUpWeeklyHabbitProgressView(progress: Float(weeklyHasDoneCount) / 7.0)
+//        } catch {
+//            print(error)
+//        }
         
     }
 }
@@ -132,32 +132,32 @@ extension WeeklyCalendarViewController {
     }
     
     func getSelectedDayHabitInfo(selectedDay : String) {
-        do {
-            let habitInfos = try CoreDataManager.shared.fetchDailyHabitInfos() // Daily 습관 정보 배열
-            let userInfo = try CoreDataManager.shared.fetchUser() // 유저 정보
-            let habitInfoDays = habitInfos.compactMap{$0.day} // Daily 습관 날짜 정보 배열
-            guard let targetHabit = userInfo?.targetHabit else { return } // 설정한 습관
-            var dateStr = Date().dateToString(format: "yyyy-MM-dd") // 앞에 년도를 붙여주기 위함
-            
-            guard let startTime = userInfo?.startTime else { return } // 습관 시작 시간
-            dateStr += " " + startTime
-            guard let startTimeTypeDate = dateStr.getStringToDate(format: "yyyy-MM-dd HH:mm") else { return }
-            
-            if let index = habitInfoDays.firstIndex(where: { $0 == selectedDay }) { // 선택한 날짜에 대한 습관 정보
-                let selectedHabitInfo = habitInfos[index]
-                let goalTime = selectedHabitInfo.goalTime
-                let hasDone = selectedHabitInfo.hasDone ? HabitState.done : HabitState.doNot
-                guard let note = selectedHabitInfo.note else { return }
-                guard let endTime = Calendar.current.date(byAdding: .minute, value: Int(goalTime), to: startTimeTypeDate) else { return }
-                let duringTime = startTimeTypeDate.dateToString(format: "HH:mm") + "~" + endTime.dateToString(format: "HH:mm")
-                
-                setUPWeeklyHabbitInfoView(state: hasDone, targetHabit: targetHabit, duringTime: duringTime, goalTime: "\(goalTime)", note: note)
-            } else {
-                setUPWeeklyHabbitInfoView(state: .doNot, targetHabit: "습관 이름", duringTime: "00:00~00:00", goalTime: "0", note: "시작하지 않은 습관입니다.")
-            }
-        } catch {
-            print(error)
-        }
+//        do {
+//            let habitInfos = try CoreDataManager.shared.fetchDailyHabitInfos() // Daily 습관 정보 배열
+//            let userInfo = try CoreDataManager.shared.fetchUser() // 유저 정보
+//            let habitInfoDays = habitInfos.compactMap{$0.day} // Daily 습관 날짜 정보 배열
+//            guard let targetHabit = userInfo?.targetHabit else { return } // 설정한 습관
+//            var dateStr = Date().dateToString(format: "yyyy-MM-dd") // 앞에 년도를 붙여주기 위함
+//            
+//            guard let startTime = userInfo?.startTime else { return } // 습관 시작 시간
+//            dateStr += " " + startTime
+//            guard let startTimeTypeDate = dateStr.getStringToDate(format: "yyyy-MM-dd HH:mm") else { return }
+//            
+//            if let index = habitInfoDays.firstIndex(where: { $0 == selectedDay }) { // 선택한 날짜에 대한 습관 정보
+//                let selectedHabitInfo = habitInfos[index]
+//                let goalTime = selectedHabitInfo.goalTime
+//                let hasDone = selectedHabitInfo.hasDone ? HabitState.done : HabitState.doNot
+//                guard let note = selectedHabitInfo.note else { return }
+//                guard let endTime = Calendar.current.date(byAdding: .minute, value: Int(goalTime), to: startTimeTypeDate) else { return }
+//                let duringTime = startTimeTypeDate.dateToString(format: "HH:mm") + "~" + endTime.dateToString(format: "HH:mm")
+//                
+//                setUPWeeklyHabbitInfoView(state: hasDone, targetHabit: targetHabit, duringTime: duringTime, goalTime: "\(goalTime)", note: note)
+//            } else {
+//                setUPWeeklyHabbitInfoView(state: .doNot, targetHabit: "습관 이름", duringTime: "00:00~00:00", goalTime: "0", note: "시작하지 않은 습관입니다.")
+//            }
+//        } catch {
+//            print(error)
+//        }
     }
 }
 
