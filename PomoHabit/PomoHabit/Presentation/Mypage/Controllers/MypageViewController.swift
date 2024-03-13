@@ -11,7 +11,7 @@ import SnapKit
 
 // MARK: - MyPageViewController
 
-final class MyPageViewController: UIViewController, BottomSheetPresentable{
+final class MyPageViewController: UIViewController, BottomSheetPresentable {
     
     // MARK: - Properties
     
