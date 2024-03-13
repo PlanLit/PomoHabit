@@ -90,6 +90,8 @@ extension OnboardingHabitRegisterViewController {
         tableView.separatorStyle = .none
         tableView.backgroundColor = .pobitSkin
         tableView.allowsSelection = false
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tableView.addGestureRecognizer(tapGesture)
         
         return tableView
     }
@@ -332,6 +334,14 @@ extension OnboardingHabitRegisterViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+// MARK: - Action Helpers
+
+extension OnboardingHabitRegisterViewController {
+    @objc func hideKeyboard() {
+        view.endEditing(true)
     }
 }
 
