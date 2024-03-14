@@ -152,17 +152,26 @@ extension WeeklyCalendarViewController: SendSelectedData{
     func sendDate(date: Date) { // 선택한 셀의 날짜
         do {
             let selectedHabiInfo = try CoreDataManager.shared.getSelectedHabitInfo(selectedDate: date) // 선택한 습관 정보
+            
+            if selectedHabiInfo == nil { // 쉬는날 or 습관 시작하기 전날
+                weeklyCalendarView.setHabitInfoView(state: .notStart, targetHabit: targetHabit ?? "설정한 습관", duringTime: "00:00 ~ 00:00", goalTime: 0)
+                weeklyCalendarView.setNoteContentLabel(note: "쉬는날 또는 습관 시작 하기 전날입니다.")
+            }
+            
             guard let selectedHabitState = selectedHabiInfo?.hasDone else { return } // 선택한 습관 상태
             let habitstate = selectedHabitState ? HabitState.done : HabitState.notStart // treu : false 처리
+            
             guard let goalTime = selectedHabiInfo?.goalTime else { return } // 목표 시간
             var duringTime = getDuringTime(completedDate: selectedHabiInfo?.date ?? Date(), goalTime: goalTime) // 습관 진행 기간
             
             if !selectedHabitState {
                 duringTime = "00:00 ~ 00:00"
             }
-                
+            
             weeklyCalendarView.setHabitInfoView(state: habitstate, targetHabit: targetHabit ?? "설정한 습관", duringTime: duringTime, goalTime: goalTime)
+            weeklyCalendarView.setNoteContentLabel(note: selectedHabiInfo?.note ?? "")
         } catch {
+            
             print(error)
         }
     }

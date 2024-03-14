@@ -254,7 +254,11 @@ extension WeeklyCalendarView {
     }
     
     func setNoteContentLabel(note: String) {
-        noteContentLabel.text = note
+        if note == "" {
+            noteContentLabel.text = "메모를 입력하지 않았습니다."
+        } else {
+            noteContentLabel.text = note
+        }
     }
 }
 
