@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 protocol SendSelectedData{
-    func sendDate(date: Int)
+    func sendDate(date: Date)
 }
 
 // MARK: - WeeklyCalendarView
@@ -18,12 +18,10 @@ protocol SendSelectedData{
 final class WeeklyCalendarView: BaseView {
     
     // MARK: - Properties
-    
+    var weeklyHabitState: [HabitState] = []
     let weeklyDays = ["월","화","수","목","금","토","일"]
-    var weeklyDatesData : [Int] = []
+    var weeklyDatesData : [Date] = []
     var dateDelegate: SendSelectedData?
-    let habitStates = [HabitState.done,HabitState.doNot,HabitState.done,HabitState.notStart,HabitState.notStart,HabitState.notStart,HabitState.notStart] // 임시 데이터
-    
     
     // MARK: - DividerView
     
@@ -222,7 +220,7 @@ extension WeeklyCalendarView {
     }
     
     private func setSubTitleLabel() {
-        weeklyHabitProgressLabel.setSubTitleLabel(text: "진행 상태")
+        weeklyHabitProgressLabel.setSubTitleLabel(text: "주간 달성율")
         habitInfoLabel.setSubTitleLabel(text: "습관 정보")
         noteInfoLabel.setSubTitleLabel(text: "메모")
     }
@@ -241,18 +239,26 @@ extension WeeklyCalendarView {
         }
     }
     
-    func setWeeklyDates(weeklyDates : [Int]) {
+    func setWeeklyDates(weeklyDates : [Date]) {
         weeklyDatesData = weeklyDates
     }
     
-    func setHabitInfoView(state: HabitState, targetHabit: String,duringTime: String,goalTime: String) {
+    func setWeeklyHabitState(setData: [HabitState]) {
+        weeklyHabitState = setData
+    }
+    
+    func setHabitInfoView(state: HabitState, targetHabit: String,duringTime: String,goalTime: Int16) {
         habitInfoView.setTitleInfoView(state: state, targetHabit: targetHabit)
         habitInfoView.setTimeInfoView(duringTime: duringTime)
         habitInfoView.setTargetInfoView(goalTime: goalTime)
     }
     
     func setNoteContentLabel(note: String) {
-        noteContentLabel.text = note
+        if note == "" {
+            noteContentLabel.text = "메모를 입력하지 않았습니다."
+        } else {
+            noteContentLabel.text = note
+        }
     }
 }
 
@@ -289,9 +295,12 @@ extension WeeklyCalendarView: UICollectionViewDataSource {
         
         cell.setDayLabelText(text: weeklyDays[indexPath.item])
         cell.setDateLabelText(text: weeklyDatesData[indexPath.item])
-        cell.setCellBackgroundColor(state: habitStates[indexPath.item])
+        cell.setCellBackgroundColor(state: weeklyHabitState[indexPath.item])
         
         return cell
     }
 }
+
+// MARK: - GetData
+
 
