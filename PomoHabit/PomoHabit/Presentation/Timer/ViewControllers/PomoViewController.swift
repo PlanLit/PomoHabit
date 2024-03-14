@@ -14,7 +14,7 @@ final class TimerViewController: BaseViewController, BottomSheetPresentable {
     
     // MARK: - Properties
     
-    private var model = TimerModel()
+    private var model = TimerViewModel()
     private var rootView = TimerView()
     
     private var cancellables = Set<AnyCancellable>()
@@ -37,7 +37,7 @@ final class TimerViewController: BaseViewController, BottomSheetPresentable {
 
 extension TimerViewController {
     private func bind() {
-        let input = TimerModel.Input(memoButtonTapped: rootView.memoButtonTapped,
+        let input = TimerViewModel.Input(memoButtonTapped: rootView.memoButtonTapped,
                                      whiteNoiseButtonTapped: rootView.whiteNoiseButtonTapped,
                                      timerButtonTapped: rootView.timerButtonTapped)
         let output = model.transform(input: input)

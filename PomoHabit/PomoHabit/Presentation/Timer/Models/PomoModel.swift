@@ -20,13 +20,13 @@ enum TimerState {
 struct UserData {
     var targetHabit: String
     var targetDate: String
-    var startTime: String
+    var alarmTime: Date
     var whiteNoiseType: String
 }
 
 // MARK: - TimerModel
 
-final class TimerModel: InputOutputProtocol {
+final class TimerViewModel: InputOutputProtocol {
     struct Input {
         let memoButtonTapped: PassthroughSubject<Void, Never>
         let whiteNoiseButtonTapped: PassthroughSubject<Void, Never>
@@ -47,20 +47,17 @@ final class TimerModel: InputOutputProtocol {
     private var cancellables = Set<AnyCancellable>()
     private var timer: AnyCancellable?
     
-    private (set) var timerDuration: TimeInterval = 300
+    private (set) var timerDuration = TimeInterval()
     
     private var targetHabit = String()
     private var targetDate = String()
-    private var startTime = String()
+    private var alarmTime = Date()
     private var whiteNoiseType = String()
-    
-    let currentDate = Date() // 테스트할때 사용하시고 지워주시면 됩니다.
-    let date = Date().dateToString(format: "yyyy-MM-dd")
-
+    private let currentDate = Date()
     
     init() {
         getUserData()
-        getSelectedDayHabitInfo(selectedDay: date)
+        getSelectedDayHabitInfo(selectedDay: currentDate)
     }
     
     func transform(input: Input) -> Output {
@@ -77,7 +74,7 @@ final class TimerModel: InputOutputProtocol {
                 self.handleTimerButtonTapped()
             }
             .eraseToAnyPublisher()
-
+        
         
         let timerStateDidChange = timerStatePublisher.eraseToAnyPublisher()
         let remainingTime = remainingTimePublisher.eraseToAnyPublisher()
@@ -95,7 +92,7 @@ final class TimerModel: InputOutputProtocol {
 
 // MARK: - HandleTimer
 
-extension TimerModel {
+extension TimerViewModel {
     private func handleTimerButtonTapped() {
         switch timerStatePublisher.value {
         case .stopped, .finished:
@@ -108,7 +105,7 @@ extension TimerModel {
     private func startTimer() {
         timerStatePublisher.send(.running)
         remainingTimePublisher.send(timerDuration) // 타이머 시작 시 남은 시간 설정
-
+        
         timer = Timer.publish(every: 1, on: .main, in: .common) // 1초마다 트리거
             .autoconnect()
             .sink { [weak self] _ in
@@ -127,57 +124,50 @@ extension TimerModel {
     }
     
     private func stopTimer() {
-//        timer?.cancel()
-//        timerStatePublisher.send(.stopped)
+        //        timer?.cancel()
+        //        timerStatePublisher.send(.stopped)
     }
 }
 
 // MARK: - CoreData
 
-extension TimerModel {
+extension TimerViewModel {
     func getUserData() {
-//        do {
-//            let userData = try CoreDataManager.shared.fetchUser()
-//            guard let targetHabit = userData?.targetHabit,
-//                  let targetDate = userData?.targetDate,
-//                  let startTime = userData?.startTime,
-//                  let whiteNoiseType = userData?.whiteNoiseType else { return }
-//            
-//            self.targetHabit = targetHabit
-//            self.targetDate = targetDate
-//            self.startTime = startTime
-//            self.whiteNoiseType = whiteNoiseType
-//        } catch {
-//            print(error)
-//        }
+        do {
+            let userData = try CoreDataManager.shared.fetchUser()
+            guard let targetHabit = userData?.targetHabit,
+                  let targetDate = userData?.targetDate,
+                  let alarmTime = userData?.alarmTime,
+                  let whiteNoiseType = userData?.whiteNoiseType else { return }
+            
+            self.targetHabit = targetHabit
+            self.targetDate = targetDate
+            self.alarmTime = alarmTime
+            self.whiteNoiseType = whiteNoiseType
+        } catch {
+            print(error)
+        }
     }
     
-    private func getSelectedDayHabitInfo(selectedDay: String) {
-//        do {
-//            let habitInfos = try CoreDataManager.shared.fetchDailyHabitInfos()
-//            let habitInfoDays = habitInfos.compactMap{ $0.day }
-//            
-//            if let index = habitInfoDays.firstIndex(where: { $0 == selectedDay }) {
-//                let selectedHabitInfo = habitInfos[index]
-//                guard let day = selectedHabitInfo.day else { return }
-//                let goalTime = selectedHabitInfo.goalTime
-//                let hasDone = selectedHabitInfo.hasDone
-//                guard let note = selectedHabitInfo.note else { return }
-//                
-//                print("day :\(day),goalTime:\(goalTime),hasDone:\(hasDone),note:\(note)") // 데이터 확인을 위하여 임시로 적어 두었습니다.
-//            }
-//        } catch {
-//            print(error)
-//        }
+    private func getSelectedDayHabitInfo(selectedDay: Date) {
+        do {
+            let selectedHabitInfo = try CoreDataManager.shared.getSelectedHabitInfo(selectedDate: currentDate)
+            
+            guard let goalTime = selectedHabitInfo?.goalTime else { return } // 목표 시간
+
+            self.timerDuration = TimeInterval(goalTime * 60)
+        } catch {
+            print(error)
+        }
     }
     
     private func getUserDataPublisher() -> AnyPublisher<UserData, Never> {
-        return Just(UserData(targetHabit: targetHabit, targetDate: targetDate, startTime: startTime, whiteNoiseType: whiteNoiseType))
+        return Just(UserData(targetHabit: targetHabit, targetDate: targetDate, alarmTime: alarmTime, whiteNoiseType: whiteNoiseType))
             .eraseToAnyPublisher()
     }
     
     func completedDailyHabit() { // 타이머 완료시 실행되는 메서드
         
-//        CoreDataManager.shared.createDailyHabitInfo(day: date, goalTime: 7, hasDone: true, note: "3번째 날입니다.")
+        //        CoreDataManager.shared.createDailyHabitInfo(day: date, goalTime: 7, hasDone: true, note: "3번째 날입니다.")
     }
 }
