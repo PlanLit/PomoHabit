@@ -15,25 +15,26 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
     
     private lazy var user: User? = getUserData()
     private lazy var totalHabitInfItems: [TotalHabitInfo]? = try? CoreDataManager.shared.fetchTotalHabitInfo()
-    private let todayDate = { // 오늘 날짜 정수
-        let currentDate = Date()
-        let calendar = Calendar.current
-        
-        return calendar.component(.day, from: currentDate)
-    }()
     
     // MARK: - UI Properties
     
     private let navigationBar = PobitNavigationBarView(title: "습관 달성률", viewType: .plain)
     private lazy var headerView: HStackView = makeHeaderView()
     private lazy var imageCollectionViewController: ReportImageCollectionViewController = makeImageCollectionViewController()
-    private lazy var gridView: VStackView = makeGridView(31) // 월마다 바뀌는 일 수 주입
+    private lazy var gridView: VStackView = makeGridView()
     private lazy var habitIndicatorView = HabitIndicatorView()
     
     // MARK: - Life Cycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        for item in totalHabitInfItems! {
+            print()
+            print(item.date?.dateToString(format: "MMdd"))
+            print(item.hasDone)
+        }
+        print(Date().dateToString(format: "MMdd"))
         
         setAddSubviews()
         setAutoLayout()
@@ -111,18 +112,24 @@ extension ReportViewController {
             let habitInfo = UIAction(title: "습관 정보", handler: { _ in
                 self.presentBottomSheet(rootView: ReportHabitInfoView(frame: .null,
                                                                       daysButtonSelectionState: self.getMonthData(),
-                                                                      startTime: self.user?.alarmTime?.timeToString()),
+                                                                      startTime: self.user?.alarmTime?.dateToString(format: "hh : mm a")),
                                         detents: [.medium()])
             })
             
             let habitEdit = UIAction(title: "습관 변경", attributes: .destructive, handler: { _ in
                 let alertController = UIAlertController(title: "", message: "진행 중인 습관을 초기화하시겠습니까?", preferredStyle: .alert)
-                
                 alertController.addAction(UIAlertAction(title: "네", style: .destructive, handler: { action in
+                    let nickname = self.user?.nickname
                     
+                    CoreDataManager.shared.deleteAllData(entityName: "User")
+                    CoreDataManager.shared.deleteAllData(entityName: "TotalHabitInfo")
+                    
+                    let onboardingHabitRegisterViewController = OnboardingHabitRegisterViewController()
+                    onboardingHabitRegisterViewController.setData(nickname)
+                    
+                    self.navigationController?.setViewControllers([onboardingHabitRegisterViewController], animated: true)
                 }))
                 alertController.addAction(UIAlertAction(title: "아니요", style: .cancel, handler: nil))
-                
                 self.present(alertController, animated: true, completion: nil)
             })
             
@@ -156,31 +163,27 @@ extension ReportViewController {
         return imageCollectionViewController
     }
 
-    private func makeGridView(_ days: Int) -> VStackView {
-        func getTheBoxView(_ day: Int,_ state: Check,_ width: UInt = 56,_ height: UInt = 45) -> UIButton {
-            let boxView = {
-                let boxView = UIButton(type: .system, primaryAction: .init(handler: { _ in
-                    let reportHabitDetailView = ReportHabitDetailView(frame: .zero, self.totalHabitInfItems?[day])
-                    reportHabitDetailView.reportViewController = self
-                    self.presentBottomSheet(rootView: reportHabitDetailView, detents: [.large()])
-                }))
+    private func makeGridView() -> VStackView {
+        func getTheBoxView(_ day: Int,_ width: UInt = 56,_ height: UInt = 45) -> UIButton {
+            let boxView = UIButton(type: .system, primaryAction: .init(handler: { _ in
+                let reportHabitDetailView = ReportHabitDetailView(frame: .zero, self.totalHabitInfItems?[day])
+                reportHabitDetailView.reportViewController = self
+                self.presentBottomSheet(rootView: reportHabitDetailView, detents: [.large()])
+            }))
+            boxView.layer.cornerRadius = 10
+            boxView.clipsToBounds = true
+            boxView.alpha = totalHabitInfItems![day].date?.dateToString(format: "MMdd") ?? "" < Date().dateToString(format: "MMdd") ? 1 : 0.1
+            if totalHabitInfItems![day].date?.dateToString(format: "MMdd") ?? "" >= Date().dateToString(format: "MMdd") {
                 boxView.backgroundColor = .pobitRed
-                boxView.layer.cornerRadius = 10
-                boxView.alpha = day <= todayDate ? 1 : 0.1
-                boxView.clipsToBounds = true
-                boxView.snp.makeConstraints { make in
-                    make.width.equalTo(width)
-                    make.height.equalTo(height)
-                }
-                
-                return boxView
-            }()
-            
-            switch state {
-            case .complete, .rest:
-                boxView.backgroundColor = day <= 1 ? .pobitGreen : .pobitRed
-            case .fail:
+            } else if totalHabitInfItems![day].hasDone {
+                boxView.backgroundColor = day == 0 ? .pobitGreen : .pobitRed
+            } else {
                 boxView.backgroundColor = .pobitStone2
+            }
+            
+            boxView.snp.makeConstraints { make in
+                make.width.equalTo(width)
+                make.height.equalTo(height)
             }
              
             return boxView
@@ -188,35 +191,35 @@ extension ReportViewController {
         
         let gridView = VStackView(alignment: .center, [
             HStackView([
-                getTheBoxView(0, .complete, 56*3, 45),
+                getTheBoxView(0, 56*3, 45),
             ]),
             HStackView([
-                getTheBoxView(1, .complete),
-                getTheBoxView(2, .complete),
-                getTheBoxView(3, .fail),
-                getTheBoxView(4, .fail),
-                getTheBoxView(5, .complete),
+                getTheBoxView(1),
+                getTheBoxView(2),
+                getTheBoxView(3),
+                getTheBoxView(4),
+                getTheBoxView(5),
             ]),
             HStackView([
-                getTheBoxView(6, .complete),
-                getTheBoxView(7, .complete),
-                getTheBoxView(8, .complete),
-                getTheBoxView(9, .complete),
-                getTheBoxView(10, .complete),
+                getTheBoxView(6),
+                getTheBoxView(7),
+                getTheBoxView(8),
+                getTheBoxView(9),
+                getTheBoxView(10),
             ]),
             HStackView([
-                getTheBoxView(11, .complete),
-                getTheBoxView(12, .complete),
-                getTheBoxView(13, .complete),
-                getTheBoxView(14, .complete),
-                getTheBoxView(15, .complete),
+                getTheBoxView(11),
+                getTheBoxView(12),
+                getTheBoxView(13),
+                getTheBoxView(14),
+                getTheBoxView(15),
             ]),
             HStackView([
-                getTheBoxView(16, .rest),
-                getTheBoxView(17, .rest),
-                getTheBoxView(18, .rest),
-                getTheBoxView(19, .complete),
-                getTheBoxView(20, .complete),
+                getTheBoxView(16),
+                getTheBoxView(17),
+                getTheBoxView(18),
+                getTheBoxView(19),
+                getTheBoxView(20),
             ]),
         ])
         
@@ -237,31 +240,6 @@ extension ReportViewController {
 // MARK: - Data Helpers
 
 extension ReportViewController {
-    private func getMonthHabitCompletedInfo() {
-        do {
-//            try CoreDataManager.shared.habit
-//            print("CoreDataManager.shared.fetchDailyHabitInfos: ", try CoreDataManager.shared.fetchDailyHabitInfos())
-//            let monthHabitCompletedInfo = try CoreDataManager.shared.fetchDailyHabitInfos().map{$0.hasDone} // 한달 동안의 습관 완료 기록, 습관을 시작하는날이 아닌경우에는 표시안됨
-        } catch {
-            print(error)
-        }
-    }
-    
-    private func getSelectedDayHabitInfo(selectedDay: String) { // selectedDay 매개변수를 통해 해당하는 날짜의 습관정보를 불러옴, 날짜 형식 2024-03-08
-        do {
-//            let habitInfoDays = habitInfos.compactMap{$0.day}
-//            if let index = habitInfoDays.firstIndex(where: {$0 == selectedDay}) {
-//                let selectedHabitInfo = habitInfos[index]
-//                guard let day = selectedHabitInfo.day else { return }
-//                let goalTime = selectedHabitInfo.goalTime
-//                let hasDone = selectedHabitInfo.hasDone
-//                guard let note = selectedHabitInfo.note else { return }
-//            }
-        } catch {
-            print(error)
-        }
-    }
-    
     private func getUserData() -> User? {
         do {
             let userData = try CoreDataManager.shared.fetchUser()

@@ -71,7 +71,7 @@ extension ReportHabitDetailView {
     private func makeHeaderView() -> VStackView {
         let dateLabel = {
             let label = UILabel()
-            label.text = Date().dateToString()
+            label.text = totalHabitInfo?.date?.dateToString()
             label.font = Pretendard.bold(size: 50)
             label.textColor = .pobitBlack
             
@@ -79,7 +79,7 @@ extension ReportHabitDetailView {
         }()
         
         return VStackView([
-            UILabel().setPrimaryColorLabel(text: "Date"),
+            UILabel().setPrimaryColorLabel(text: totalHabitInfo?.date?.dateToString() ?? ""),
             dateLabel,
         ])
     }
