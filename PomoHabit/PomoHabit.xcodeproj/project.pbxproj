@@ -51,6 +51,7 @@
 		BAFEE1502B96F848009F0D25 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFEE14F2B96F848009F0D25 /* MypageViewController.swift */; };
 		BAFEE1522B96F8E4009F0D25 /* NicknameEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFEE1512B96F8E4009F0D25 /* NicknameEditView.swift */; };
 		BAFEE1542B96F900009F0D25 /* MypageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFEE1532B96F900009F0D25 /* MypageTableViewCell.swift */; };
+		E004EA612BA2497A000AD37C /* HabitIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E004EA602BA2497A000AD37C /* HabitIndicatorView.swift */; };
 		E09640092B9A63730075C2D0 /* OnboardingDatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09640082B9A63730075C2D0 /* OnboardingDatePickerTableViewCell.swift */; };
 		E096400D2B9A85BA0075C2D0 /* OnboardingLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E096400C2B9A85BA0075C2D0 /* OnboardingLoginViewController.swift */; };
 		E096400F2B9A87760075C2D0 /* OnboardingHabitRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E096400E2B9A87760075C2D0 /* OnboardingHabitRegisterViewController.swift */; };
@@ -128,6 +129,7 @@
 		BAFEE14F2B96F848009F0D25 /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
 		BAFEE1512B96F8E4009F0D25 /* NicknameEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameEditView.swift; sourceTree = "<group>"; };
 		BAFEE1532B96F900009F0D25 /* MypageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageTableViewCell.swift; sourceTree = "<group>"; };
+		E004EA602BA2497A000AD37C /* HabitIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitIndicatorView.swift; sourceTree = "<group>"; };
 		E09640082B9A63730075C2D0 /* OnboardingDatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		E096400C2B9A85BA0075C2D0 /* OnboardingLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLoginViewController.swift; sourceTree = "<group>"; };
 		E096400E2B9A87760075C2D0 /* OnboardingHabitRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingHabitRegisterViewController.swift; sourceTree = "<group>"; };
@@ -537,6 +539,7 @@
 			children = (
 				F8A4FB902B96F2A300E46EA1 /* HabitInfo */,
 				F8A4FB932B96F2A300E46EA1 /* HabitEdit */,
+				E004EA602BA2497A000AD37C /* HabitIndicatorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -698,6 +701,7 @@
 				BAFEE1522B96F8E4009F0D25 /* NicknameEditView.swift in Sources */,
 				37144C902B8C53B0008565C4 /* UIStackView+Extension.swift in Sources */,
 				373D0DF42B8F7B5B004CC2C7 /* LayoutLiterals.swift in Sources */,
+				E004EA612BA2497A000AD37C /* HabitIndicatorView.swift in Sources */,
 				73DFA26F2B90AF6700C381A7 /* OnboardingDaysButtonTableViewCell.swift in Sources */,
 				E0BEE1492B99284300A2C4C4 /* OnboardingProfilePictureTableViewCell.swift in Sources */,
 				378034A32B8F8D8A0046E6B8 /* PomoProgressBar.swift in Sources */,
