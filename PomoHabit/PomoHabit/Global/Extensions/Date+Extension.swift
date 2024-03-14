@@ -8,13 +8,6 @@
 import Foundation
 
 extension Date {
-    func timeToString() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh : mm a"
-
-        return dateFormatter.string(from: self)
-    }
-    
     func dateToString(format : String = "MM.dd") -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
