@@ -20,7 +20,7 @@ extension ViewController { // CoreData 활용 예시, 뷰 바인딩 끝난후 �
         do{
             let userInfo = try CoreDataManager.shared.fetchUser()
             guard let dayInfos = userInfo?.targetDate else { return }
-            CoreDataManager.shared.setMockupTotalHabitInfo(today: Date(), targetDate: dayInfos)
+            CoreDataManager.shared.setMockupTotalHabitInfo(targetDate: dayInfos)
         } catch {
             print(error)
         }

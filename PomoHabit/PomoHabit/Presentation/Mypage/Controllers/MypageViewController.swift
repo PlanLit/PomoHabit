@@ -28,7 +28,8 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setTotalHabitInfo()
     }
     
     override func viewDidAppear(_ animated: Bool) {
