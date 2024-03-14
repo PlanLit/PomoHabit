@@ -12,10 +12,13 @@ import SnapKit
 // MARK: - WeeklyCalendarViewController
 
 final class WeeklyCalendarViewController: BaseViewController {
-    var weeklyDates: [Date] = []
-    var weeklyHabitState: [HabitState] = []
+    private var weeklyDates: [Date] = []
+    private var weeklyHabitState: [HabitState] = []
+    
     // MARK: - Properties
+    
     var targetHabit: String?
+    
     private lazy var weeklyCalendarView: WeeklyCalendarView = {
         let view = WeeklyCalendarView()
         view.dateDelegate = self
