@@ -21,7 +21,7 @@ final class MyPageView: BaseView {
     
     private let nickNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "닉네임"
+        label.text = "Mary"
         label.textColor = .pobitStone2
         label.font = Pretendard.bold(size: 20)
         
@@ -229,6 +229,22 @@ extension MyPageView {
             make.left.equalToSuperview().offset(LayoutLiterals.minimumHorizontalSpacing)
             make.right.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
         }
+    }
+}
+
+// MARK: - Method
+
+extension MyPageView {
+    func updateTotalMinutesLabel(_ text: String) {
+        totalMinutesLabel.text = text
+    }
+    
+    func updateTotalDaysLabel(_ text: String) {
+        totalDaysLabel.text = text
+    }
+    
+    func getNicknameLabel() -> UILabel {
+        return nickNameLabel
     }
 }
 

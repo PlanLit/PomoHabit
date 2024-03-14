@@ -17,6 +17,7 @@ final class NicknameEditView: BaseView {
     
     private let pobitNavigationBarView = PobitNavigationBarView(title: "닉네임 수정", viewType: .withDismissButton)
     private lazy var editSubmitButton = PobitButton.makePlainButton(title: "수정하기", backgroundColor: .pobitRed)
+    private let mypageView = MyPageView()
     
     // MARK: - UI
     
@@ -25,7 +26,6 @@ final class NicknameEditView: BaseView {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: textField.frame.height))
         textField.leftView = paddingView
         textField.leftViewMode = .always
-        textField.placeholder = "닉네임 입력"
         textField.textColor = .pobitStone1
         textField.font = Pretendard.bold(size: 20)
         textField.layer.borderColor = UIColor.pobitStone4.cgColor
@@ -52,7 +52,8 @@ final class NicknameEditView: BaseView {
         setAddSubViews()
         setAutoLayout()
         setupTextFieldDelegate()
-        nicknameEditTextField.becomeFirstResponder()
+        setFirstResponderForTextField()
+        setPlaceholderForTextField()
     }
     
     required init?(coder: NSCoder) {
@@ -89,13 +90,14 @@ extension NicknameEditView {
         
         editSubmitButton.snp.makeConstraints { make in
             make.bottom.equalTo(self.keyboardLayoutGuide.snp.top).offset(-34)
-//            make.bottom.equalToSuperview().offset(-34)
             make.centerX.equalToSuperview()
             make.height.equalTo(62)
             make.width.equalTo(324)
         }
     }
 }
+
+// MARK: - Method
 
 extension NicknameEditView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -114,5 +116,13 @@ extension NicknameEditView: UITextFieldDelegate {
     
     private func setupTextFieldDelegate() {
         nicknameEditTextField.delegate = self
+    }
+    
+    private func setFirstResponderForTextField() {
+        nicknameEditTextField.becomeFirstResponder()
+    }
+    
+    private func setPlaceholderForTextField() {
+        nicknameEditTextField.placeholder = mypageView.getNicknameLabel().text
     }
 }
