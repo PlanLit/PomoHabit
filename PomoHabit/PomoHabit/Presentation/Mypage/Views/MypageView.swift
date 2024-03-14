@@ -19,7 +19,7 @@ final class MyPageView: BaseView {
     
     // MARK: - 닉네임 UI
     
-     private let nickNameLabel: UILabel = {
+    private let nickNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Mary"
         label.textColor = .pobitStone2
@@ -243,7 +243,7 @@ extension MyPageView {
         totalDaysLabel.text = text
     }
     
-    func openNicknameLabel() -> UILabel {
+    func getNicknameLabel() -> UILabel {
         return nickNameLabel
     }
 }

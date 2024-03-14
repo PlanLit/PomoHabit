@@ -21,7 +21,7 @@ final class NicknameEditView: BaseView {
     
     // MARK: - UI
     
-    private var nicknameEditTextField: UITextField = {
+    private let nicknameEditTextField: UITextField = {
         let textField = UITextField()
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: textField.frame.height))
         textField.leftView = paddingView
@@ -123,6 +123,6 @@ extension NicknameEditView: UITextFieldDelegate {
     }
     
     private func setPlaceholderForTextField() {
-        nicknameEditTextField.placeholder = mypageView.openNicknameLabel().text
+        nicknameEditTextField.placeholder = mypageView.getNicknameLabel().text
     }
 }
