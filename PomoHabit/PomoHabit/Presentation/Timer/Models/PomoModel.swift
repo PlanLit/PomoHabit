@@ -43,7 +43,7 @@ final class TimerViewModel: InputOutputProtocol {
     }
     
     private let timerStatePublisher = CurrentValueSubject<TimerState, Never>(.stopped)
-    private var remainingTimePublisher = CurrentValueSubject<TimeInterval, Never>(0)
+    private lazy var remainingTimePublisher = CurrentValueSubject<TimeInterval, Never>(self.timerDuration)
     private var cancellables = Set<AnyCancellable>()
     private var timer: AnyCancellable?
     
@@ -95,37 +95,34 @@ final class TimerViewModel: InputOutputProtocol {
 extension TimerViewModel {
     private func handleTimerButtonTapped() {
         switch timerStatePublisher.value {
-        case .stopped, .finished:
+        case .stopped:
             startTimer()
         case .running:
-            stopTimer()
+            break
+        case .finished:
+            completedDailyHabit()
         }
     }
     
     private func startTimer() {
         timerStatePublisher.send(.running)
-        remainingTimePublisher.send(timerDuration) // 타이머 시작 시 남은 시간 설정
+        remainingTimePublisher.value = 0
         
         timer = Timer.publish(every: 1, on: .main, in: .common) // 1초마다 트리거
+        // autoConnect?
             .autoconnect()
             .sink { [weak self] _ in
                 guard let self = self else { return }
                 
-                // 남은 시간 감소
-                let newTime = self.remainingTimePublisher.value - 1
+                let newTime = self.remainingTimePublisher.value + 1
                 self.remainingTimePublisher.send(newTime)
                 
-                // 남은 시간이 0이하가 되면 타이머 종료
-                if newTime <= 0 {
+                // 목표시간에 도달하면 타이머 종료
+                if newTime >= self.timerDuration {
                     self.timerStatePublisher.send(.finished)
-                    self.timer?.cancel() // 타이머 중지
+                    self.timer?.cancel()
                 }
             }
-    }
-    
-    private func stopTimer() {
-        //        timer?.cancel()
-        //        timerStatePublisher.send(.stopped)
     }
 }
 
@@ -154,8 +151,9 @@ extension TimerViewModel {
             let selectedHabitInfo = try CoreDataManager.shared.getSelectedHabitInfo(selectedDate: currentDate)
             
             guard let goalTime = selectedHabitInfo?.goalTime else { return } // 목표 시간
-
-            self.timerDuration = TimeInterval(goalTime * 60)
+            
+            //            self.timerDuration = TimeInterval(goalTime * 60)
+            self.timerDuration = TimeInterval(goalTime)
         } catch {
             print(error)
         }
@@ -168,6 +166,7 @@ extension TimerViewModel {
     
     func completedDailyHabit() { // 타이머 완료시 실행되는 메서드
         
-        //        CoreDataManager.shared.createDailyHabitInfo(day: date, goalTime: 7, hasDone: true, note: "3번째 날입니다.")
+//        CoreDataManager.shared.createTotalHabitInfo(date: currentDate, goalTime: Int16(timerDuration) / 60, hasDone: true, note: "3번째 날입니다.")
+        print("습관 달성")
     }
 }
