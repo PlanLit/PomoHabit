@@ -11,15 +11,23 @@ import UIKit
 
 final class ReportHabitDetailView: BaseView {
     
+    // MARK: - Data Properties
+    
+    private var totalHabitInfo: TotalHabitInfo?
+    
     // MARK: - UI Properties
 
+    var reportViewController: ReportViewController?
     private lazy var headerView: VStackView = makeHeaderView()
     private lazy var mainContainerView: VStackView = makeMainContainerView()
+    private lazy var noteFieldView: UITextView = NoteTextView()
     
     // MARK: - Life Cycles
     
-    override init(frame: CGRect) {
+    init(frame: CGRect,_ totalHabitInfo: TotalHabitInfo?) {
         super.init(frame: frame)
+        
+        self.totalHabitInfo = totalHabitInfo
         
         setAddSubviews()
         setAutoLayout()
@@ -27,6 +35,10 @@ final class ReportHabitDetailView: BaseView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.endEditing(true)
     }
 }
 
@@ -83,40 +95,28 @@ extension ReportHabitDetailView {
             return view
         }()
         
-        let trashButton = {
-            let button = PobitButton(primaryAction: .init(handler: { _ in
-                
-            }))
-            button.setImage(UIImage(systemName: "trash"), for: .normal)
-            button.tintColor = .pobitStone1
-            button.layer.borderColor = UIColor.pobitRed.cgColor
-            button.layer.cornerRadius = 10
-            button.snp.makeConstraints { make in
-                make.width.equalTo(62)
-            }
-            
-            return button
-        }()
-        
         let registButton = {
-            let button = PobitButton.makePlainButton(title: "수정하기", backgroundColor: .pobitRed)
+            let button = PobitButton(type: .system, primaryAction: .init(handler: { _ in
+                CoreDataManager.shared.completedTodyHabit(completedDate: self.totalHabitInfo?.date ?? Date(), note: self.noteFieldView.text)
+                self.reportViewController?.dismiss(animated: true)
+            }))
+            button.setTitle("수정하기", for: .normal)
+            button.backgroundColor = .pobitRed
+            button.tintColor = .white
+            button.updateFont(font: Pretendard.medium(size: 24))
+            button.layer.borderWidth = 0
             button.layer.cornerRadius = 10
             
             return button
         }()
         
-        let textView = NoteTextView()
+        noteFieldView.text = totalHabitInfo?.note
         
-        let bottomButtonContainer = HStackView(alignment: .fill, distribution: .fill, [
-            trashButton,
-            registButton
-        ])
-        
-        bottomButtonContainer.snp.makeConstraints { make in
+        registButton.snp.makeConstraints { make in
             make.height.equalTo(62)
         }
         
-        textView.snp.makeConstraints { make in
+        noteFieldView.snp.makeConstraints { make in
             make.height.equalTo(300)
         }
         
@@ -125,12 +125,12 @@ extension ReportHabitDetailView {
             HStackView(spacing: 5, alignment: .fill, distribution: .fill, [
                 makeTextLabel("목표시간", Pretendard.bold(size: 20), .darkGray),
                 makeTextLabel(":", Pretendard.bold(size: 20), .darkGray),
-                makeTextLabel("5분", Pretendard.medium(size: 20), .darkGray),
+                makeTextLabel("\(totalHabitInfo?.goalTime ?? 5)분", Pretendard.medium(size: 20), .darkGray),
                 UIView()
             ]),
             makeTextLabel("메모", Pretendard.bold(size: 24), .darkGray),
-            textView,
-            bottomButtonContainer
+            noteFieldView,
+            registButton
         ])
     }
     
