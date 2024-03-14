@@ -13,7 +13,7 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
     
     // MARK: - Data Properties
     
-    private lazy var user: User? = getUserData()
+    private lazy var user: User? = try? CoreDataManager.shared.fetchUser()
     private lazy var totalHabitInfItems: [TotalHabitInfo]? = try? CoreDataManager.shared.fetchTotalHabitInfo()
     
     // MARK: - UI Properties
@@ -29,15 +29,14 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for item in totalHabitInfItems! {
-            print()
-            print(item.date?.dateToString(format: "MMdd"))
-            print(item.hasDone)
-        }
-        print(Date().dateToString(format: "MMdd"))
-        
         setAddSubviews()
         setAutoLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchData()
     }
 }
 
@@ -97,7 +96,7 @@ extension ReportViewController {
     private func makeHeaderView() -> HStackView {
         let titleLabel = {
             let label = UILabel()
-            label.text = "독서"
+            label.text = user?.targetHabit
             label.font = Pretendard.bold(size: 30)
             label.textAlignment = .center
             
@@ -164,20 +163,25 @@ extension ReportViewController {
     }
 
     private func makeGridView() -> VStackView {
-        func getTheBoxView(_ day: Int,_ width: UInt = 56,_ height: UInt = 45) -> UIButton {
+        func getTheBoxView(_ index: Int,_ width: UInt = 56,_ height: UInt = 45) -> UIButton {
             let boxView = UIButton(type: .system, primaryAction: .init(handler: { _ in
-                let reportHabitDetailView = ReportHabitDetailView(frame: .zero, self.totalHabitInfItems?[day])
+                let reportHabitDetailView = ReportHabitDetailView(frame: .zero, self.totalHabitInfItems?[index])
                 reportHabitDetailView.reportViewController = self
                 self.presentBottomSheet(rootView: reportHabitDetailView, detents: [.large()])
             }))
             boxView.layer.cornerRadius = 10
             boxView.clipsToBounds = true
-            boxView.alpha = totalHabitInfItems![day].date?.dateToString(format: "MMdd") ?? "" < Date().dateToString(format: "MMdd") ? 1 : 0.1
-            if totalHabitInfItems![day].date?.dateToString(format: "MMdd") ?? "" >= Date().dateToString(format: "MMdd") {
-                boxView.backgroundColor = .pobitRed
-            } else if totalHabitInfItems![day].hasDone {
-                boxView.backgroundColor = day == 0 ? .pobitGreen : .pobitRed
-            } else {
+            
+            boxView.alpha = totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" <= Date().dateToString(format: "MMdd") ? 1 : 0.1
+            if totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" == Date().dateToString(format: "MMdd") &&
+                !totalHabitInfItems![index].hasDone { // item의 날자가 오늘이고 습관 완료 안했을때 알파 값 낮춤
+                boxView.alpha = 0.1
+            }
+            
+            if totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" > Date().dateToString(format: "MMdd") ||
+                totalHabitInfItems![index].hasDone { // item의 날자가 오늘보다 미래이거나 완료 했으면 했다는 색 표시
+                boxView.backgroundColor = index == 0 ? .pobitGreen : .pobitRed
+            } else { // 그 외에는 안했다는거
                 boxView.backgroundColor = .pobitStone2
             }
             
@@ -240,6 +244,18 @@ extension ReportViewController {
 // MARK: - Data Helpers
 
 extension ReportViewController {
+    
+    // 데이터 fetch 해주는데, lazy로 선언된 프로퍼티가 사용이 안되있으면 리로드가 불필요하다고 판단하여 조건문 처리.
+    private func fetchData() {
+        if user != nil {
+            user = try? CoreDataManager.shared.fetchUser()
+        }
+        
+        if totalHabitInfItems != nil {
+            totalHabitInfItems = try? CoreDataManager.shared.fetchTotalHabitInfo()
+        }
+    }
+    
     private func getUserData() -> User? {
         do {
             let userData = try CoreDataManager.shared.fetchUser()
