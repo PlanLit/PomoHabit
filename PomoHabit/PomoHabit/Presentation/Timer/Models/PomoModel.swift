@@ -136,39 +136,39 @@ extension TimerModel {
 
 extension TimerModel {
     func getUserData() {
-        do {
-            let userData = try CoreDataManager.shared.fetchUser()
-            guard let targetHabit = userData?.targetHabit,
-                  let targetDate = userData?.targetDate,
-                  let startTime = userData?.startTime,
-                  let whiteNoiseType = userData?.whiteNoiseType else { return }
-            
-            self.targetHabit = targetHabit
-            self.targetDate = targetDate
-            self.startTime = startTime
-            self.whiteNoiseType = whiteNoiseType
-        } catch {
-            print(error)
-        }
+//        do {
+//            let userData = try CoreDataManager.shared.fetchUser()
+//            guard let targetHabit = userData?.targetHabit,
+//                  let targetDate = userData?.targetDate,
+//                  let startTime = userData?.startTime,
+//                  let whiteNoiseType = userData?.whiteNoiseType else { return }
+//            
+//            self.targetHabit = targetHabit
+//            self.targetDate = targetDate
+//            self.startTime = startTime
+//            self.whiteNoiseType = whiteNoiseType
+//        } catch {
+//            print(error)
+//        }
     }
     
     private func getSelectedDayHabitInfo(selectedDay: String) {
-        do {
-            let habitInfos = try CoreDataManager.shared.fetchDailyHabitInfos()
-            let habitInfoDays = habitInfos.compactMap{ $0.day }
-            
-            if let index = habitInfoDays.firstIndex(where: { $0 == selectedDay }) {
-                let selectedHabitInfo = habitInfos[index]
-                guard let day = selectedHabitInfo.day else { return }
-                let goalTime = selectedHabitInfo.goalTime
-                let hasDone = selectedHabitInfo.hasDone
-                guard let note = selectedHabitInfo.note else { return }
-                
-                print("day :\(day),goalTime:\(goalTime),hasDone:\(hasDone),note:\(note)") // 데이터 확인을 위하여 임시로 적어 두었습니다.
-            }
-        } catch {
-            print(error)
-        }
+//        do {
+//            let habitInfos = try CoreDataManager.shared.fetchDailyHabitInfos()
+//            let habitInfoDays = habitInfos.compactMap{ $0.day }
+//            
+//            if let index = habitInfoDays.firstIndex(where: { $0 == selectedDay }) {
+//                let selectedHabitInfo = habitInfos[index]
+//                guard let day = selectedHabitInfo.day else { return }
+//                let goalTime = selectedHabitInfo.goalTime
+//                let hasDone = selectedHabitInfo.hasDone
+//                guard let note = selectedHabitInfo.note else { return }
+//                
+//                print("day :\(day),goalTime:\(goalTime),hasDone:\(hasDone),note:\(note)") // 데이터 확인을 위하여 임시로 적어 두었습니다.
+//            }
+//        } catch {
+//            print(error)
+//        }
     }
     
     private func getUserDataPublisher() -> AnyPublisher<UserData, Never> {
@@ -178,6 +178,6 @@ extension TimerModel {
     
     func completedDailyHabit() { // 타이머 완료시 실행되는 메서드
         
-        CoreDataManager.shared.createDailyHabitInfo(day: date, goalTime: 7, hasDone: true, note: "3번째 날입니다.")
+//        CoreDataManager.shared.createDailyHabitInfo(day: date, goalTime: 7, hasDone: true, note: "3번째 날입니다.")
     }
 }

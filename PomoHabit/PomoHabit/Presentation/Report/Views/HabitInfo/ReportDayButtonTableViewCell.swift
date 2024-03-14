@@ -14,7 +14,7 @@ final class ReportDayButtonTableViewCell: UITableViewCell {
     // MARK: - Data Properties
     
     private let dayStates: [DayButton.Day] = [.mon, .tue, .wed, .thu, .fri, .sat, .sun]
-    var daysButtonSelectionState: [Bool]?
+    private var daysButtonSelectionState: [Bool]?
     
     // MARK: - UI Properties
     
@@ -94,5 +94,13 @@ extension ReportDayButtonTableViewCell: UICollectionViewDataSource {
         cell.contentView.addSubview(dayButton)
         
         return cell
+    }
+}
+
+// MARK: - Data Helpers
+
+extension ReportDayButtonTableViewCell {
+    func initData(_ daysButtonSelectionState: [Bool]?) {
+        self.daysButtonSelectionState = daysButtonSelectionState
     }
 }

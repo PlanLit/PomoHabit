@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23D56" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
-    <entity name="DailyHabitInfo" representedClassName="DailyHabitInfo" syncable="YES" codeGenerationType="class">
-        <attribute name="day" optional="YES" attributeType="String"/>
+    <entity name="TotalHabitInfo" representedClassName="TotalHabitInfo" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="goalTime" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="hasDone" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="note" optional="YES" attributeType="String"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
+        <attribute name="alarmTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="nickname" optional="YES" attributeType="String"/>
-        <attribute name="startTime" optional="YES" attributeType="String"/>
         <attribute name="targetDate" optional="YES" attributeType="String"/>
         <attribute name="targetHabit" optional="YES" attributeType="String"/>
         <attribute name="whiteNoiseType" optional="YES" attributeType="String"/>
