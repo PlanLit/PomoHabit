@@ -220,7 +220,7 @@ extension WeeklyCalendarView {
     }
     
     private func setSubTitleLabel() {
-        weeklyHabitProgressLabel.setSubTitleLabel(text: "진행 상태")
+        weeklyHabitProgressLabel.setSubTitleLabel(text: "주간 달성율")
         habitInfoLabel.setSubTitleLabel(text: "습관 정보")
         noteInfoLabel.setSubTitleLabel(text: "메모")
     }

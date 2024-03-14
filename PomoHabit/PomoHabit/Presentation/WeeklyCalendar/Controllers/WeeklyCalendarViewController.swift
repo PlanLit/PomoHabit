@@ -13,7 +13,7 @@ import SnapKit
 
 final class WeeklyCalendarViewController: BaseViewController {
     var weeklyDates: [Date] = []
-    
+    var weeklyHabitState: [HabitState] = []
     // MARK: - Properties
     
     private lazy var weeklyCalendarView: WeeklyCalendarView = {
@@ -36,6 +36,9 @@ final class WeeklyCalendarViewController: BaseViewController {
     
     override func viewDidLayoutSubviews() { // 해당 메소드 안에서만 오토레이 아웃으로 설정된 UI/View의 Frame 사이즈를 알 수 있음
         super.viewDidLayoutSubviews()
+        let progress = Float(weeklyHabitState.filter{$0 == .done}.count) / 7.0
+        
+        setUpWeeklyHabbitProgressView(progress: progress)
     }
 }
 
@@ -67,7 +70,7 @@ extension WeeklyCalendarViewController {
 extension WeeklyCalendarViewController {
     private func setUpWeeklyHabbitProgressView(progress : Float) {
         let weeklyCalendarViewWidth = weeklyCalendarView.frame.width
-        let progressCircleOffset = Int(weeklyCalendarViewWidth * CGFloat(progress)) - 5
+        let progressCircleOffset = Int(weeklyCalendarViewWidth * CGFloat(progress)) - 15
         
         weeklyCalendarView.setProgressCircleImg(offset: progressCircleOffset)
         weeklyCalendarView.setWeeklyHabitProgressView(progress: progress)
@@ -104,7 +107,7 @@ extension WeeklyCalendarViewController {
     }
     
     private func getWeeklyHabitState() {
-        var weeklyHabitState: [HabitState] = []
+      
         do {
             for date in weeklyDates {
                 let dateHabitState = try CoreDataManager.shared.getSelectedHabitInfo(selectedDate: date).map{$0.hasDone}
