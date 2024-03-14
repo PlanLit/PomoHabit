@@ -5,6 +5,7 @@
 //  Created by Joon Baek on 2024/02/29.
 //
 
+import Combine
 import UIKit
 
 import SnapKit
@@ -12,6 +13,8 @@ import SnapKit
 // MARK: - MemoView
 
 final class MemoView: BaseView {
+    
+    private let 
 
     // MARK: - UI Properties
     

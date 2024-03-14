@@ -30,10 +30,10 @@ final class TimerView: BaseView {
     private lazy var goalDaysCountLabel = makeGoalDaysCountLabel(text: "주5일", backgroundColor: .pobitStone0)
     private lazy var startTimeLabel = makeBlackBodyLabel(text: "09:40AM", fontSize: 16)
     private lazy var habitLabel = makeHabitLabel()
-    private lazy var memoButton = makeMemoButton()
+    private lazy var memoButton = makeIconButton(with: "📝")
     private lazy var dividerView = makeDividerView(height: 1)
-    private lazy var whiteNoiseInfoLabel = makeBlackBodyLabel(text: "🎧 배경음을 선택해보세요!", fontSize: 16)
-    private lazy var whiteNoiseButton = makeWhiteNoiseEditButton()
+    private lazy var whiteNoiseInfoLabel = makeBlackBodyLabel(text: "배경음을 선택해보세요!", fontSize: 16)
+    private lazy var whiteNoiseButton = makeIconButton(with: "🎧")
     
     private lazy var starView = UIImageView(image: UIImage(named: "Star"))
     private (set) var circleProgressBar = CircleProgressBar()
@@ -143,7 +143,7 @@ extension TimerView {
 // MARK: - Action Helpers
 
 extension TimerView {
-    func updateTimerButtonState(_ state: TimerState) {
+    func updateTimerButtonUI(with state: TimerState) {
         switch state {
         case .stopped:
             timerButton.setTitle("시작", for: .normal)
@@ -162,7 +162,7 @@ extension TimerView {
     
     func updateViewWithUserData(_ userData: UserData) {
         habitLabel.text = userData.targetHabit
-        startTimeLabel.text = userData.startTime
+        startTimeLabel.text = "\(userData.alarmTime)"
         let targetDatesArray = userData.targetDate.split(separator: ",").map(String.init)
         goalDaysCountLabel.text = "주\(targetDatesArray.count)일"
     }
@@ -199,7 +199,7 @@ extension TimerView {
         memoButton.snp.makeConstraints { make in
             make.centerY.equalTo(habitLabel)
             make.trailing.equalTo(startTimeLabel)
-            make.size.equalTo(24)
+            make.size.equalTo(28)
         }
         
         dividerView.snp.makeConstraints { make in
@@ -215,14 +215,14 @@ extension TimerView {
         whiteNoiseButton.snp.makeConstraints { make in
             make.centerY.equalTo(whiteNoiseInfoLabel)
             make.trailing.equalTo(startTimeLabel)
-            make.size.equalTo(20)
+            make.size.equalTo(28)
         }
     }
     
     private func makeTimerHeaderView() -> UIView {
         let view = UIView()
         view.layer.cornerRadius = 8
-        view.layer.borderColor = UIColor.pobitStone4.cgColor
+        view.layer.borderColor = UIColor.pobitStone3.cgColor
         view.layer.borderWidth = 1
         view.backgroundColor = .clear
         
@@ -259,16 +259,12 @@ extension TimerView {
         return label
     }
     
-    private func makeMemoButton() -> UIButton {
+    private func makeIconButton(with icon: String) -> UIButton {
         let button = UIButton()
-        button.backgroundColor = .gray
-        
-        return button
-    }
-    
-    private func makeWhiteNoiseEditButton() -> UIButton {
-        let button = UIButton()
-        button.backgroundColor = .gray
+        button.setTitle(icon, for: .normal)
+        button.layer.borderColor = UIColor.pobitStone4.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 5
         
         return button
     }

@@ -18,8 +18,8 @@ final class CircleProgressBar: BaseView {
     
     // MARK: - UI Properties
     
-    private lazy var progressLayer = makeLayer(strokeColor: .pobitRed, strokeEnd: 1)
-    private lazy var trackLayer = makeLayer(strokeColor: .pobitSkin, strokeEnd: 1)
+    private lazy var progressLayer = makeLayer(strokeColor: .pobitRed)
+    private lazy var trackLayer = makeLayer(strokeColor: .pobitSkin)
     private lazy var dashedCircleLayer = makeDashedCircleLayer()
     
     private var todayLabel = UILabel().setPrimaryColorLabel(text: "오늘")
@@ -85,13 +85,26 @@ extension CircleProgressBar {
 // MARK: - Action Helpers
 
 extension CircleProgressBar {
+    func updateProgressBarUI(with state: TimerState) {
+        switch state {
+        case .stopped:
+            progressLayer.strokeEnd = 0
+            trackLayer.strokeEnd = 1
+            trackLayer.backgroundColor = UIColor.black.cgColor
+        case .running:
+            break
+        case .finished:
+            progressLayer.strokeEnd = 1
+        }
+    }
+    
     func setProgressWithAnimation(duration: TimeInterval) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.fromValue = 1
-        animation.toValue = 0
+        animation.fromValue = 0
+        animation.toValue = 1
         animation.duration = duration
         animation.fillMode = .forwards
-        animation.isRemovedOnCompletion = false
+        animation.isRemovedOnCompletion = true
         progressLayer.add(animation, forKey: "progressAnimation")
     }
     
@@ -113,10 +126,10 @@ extension CircleProgressBar {
 // MARK: - Factory Method
 
 extension CircleProgressBar {
-    private func makeLayer(strokeColor: UIColor, strokeEnd: CGFloat) -> CAShapeLayer {
+    private func makeLayer(strokeColor: UIColor) -> CAShapeLayer {
         let layer = CAShapeLayer()
         layer.strokeColor = strokeColor.cgColor
-        layer.strokeEnd = strokeEnd
+        layer.strokeEnd = 1
         layer.fillColor = UIColor.clear.cgColor
         layer.lineWidth = 40
         layer.lineCap = .round
