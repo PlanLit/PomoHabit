@@ -144,6 +144,21 @@ extension CoreDataManager {
     }
 }
 
+// MARK: - MyPage
+
+extension CoreDataManager {
+    func updateUsernickName(nickname: String) {
+        do {
+            let userData = try fetchUser()
+            
+            userData?.setValue(nickname, forKey: "nickname")
+            saveContext()
+        } catch {
+            print(error)
+        }
+    }
+}
+
 
 // MARK: - Timer
 
