@@ -19,9 +19,9 @@ final class MyPageView: BaseView {
     
     // MARK: - 닉네임 UI
     
-    private let nickNameLabel: UILabel = {
+     private let nickNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "닉네임"
+        label.text = "Mary"
         label.textColor = .pobitStone2
         label.font = Pretendard.bold(size: 20)
         
@@ -232,6 +232,22 @@ extension MyPageView {
     }
 }
 
+// MARK: - Method
+
+extension MyPageView {
+    func updateTotalMinutesLabel(_ text: String) {
+        totalMinutesLabel.text = text
+    }
+    
+    func updateTotalDaysLabel(_ text: String) {
+        totalDaysLabel.text = text
+    }
+    
+    func openNicknameLabel() -> UILabel {
+        return nickNameLabel
+    }
+}
+
 // MARK: - UITableViewDataSource
 
 extension MyPageView: UITableViewDataSource {
@@ -258,17 +274,5 @@ extension MyPageView: UITableViewDataSource {
 extension MyPageView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
-// MARK: - Method
-
-extension MyPageView {
-    func updateTotalMinutesLabel(_ text: String) {
-        totalMinutesLabel.text = text
-    }
-    
-    func updateTotalDaysLabel(_ text: String) {
-        totalDaysLabel.text = text
     }
 }
