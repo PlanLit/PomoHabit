@@ -97,7 +97,7 @@ extension WeeklyCalendarHabitInfoView {
         timeInfoView.setUplabel(text: duringTime, font: Pretendard.medium(size: 15))
     }
     
-    func setTargetInfoView(goalTime: String) {
+    func setTargetInfoView(goalTime: Int16) {
         targetInfoView.setUplabel(text: "목표시간 : \(goalTime)m", font: Pretendard.medium(size: 15))
     }
     

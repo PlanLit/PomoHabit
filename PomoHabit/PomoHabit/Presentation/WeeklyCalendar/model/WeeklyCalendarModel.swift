@@ -8,10 +8,10 @@ import UIKit
 
 import SnapKit
 
-enum HabitState : Int{
-    case done = 0
-    case doNot = 1
-    case notStart = 2
+enum HabitState{
+    case done
+    case doNot
+    case notStart
 }
 
 extension HabitState {
