@@ -400,6 +400,6 @@ extension OnboardingHabitRegisterViewController {
         
         CoreDataManager.shared.createUser(nickname: data.nickname, targetHabit: data.targetHabit, targetDate: data.targetDate, alarmTime: data.alarmTime, whiteNoiseType: data.whiteNoiseType)
         
-//        CoreDataManager.shared.setMockupTotalHabitInfo(today: <#T##Date#>, targetDate: <#T##String#>)
+        CoreDataManager.shared.setMockupTotalHabitInfo(today: Date(), targetDate: data.targetDate)
     }
 }

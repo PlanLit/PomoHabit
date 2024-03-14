@@ -14,6 +14,7 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
     // MARK: - Data Properties
     
     private lazy var user: User? = getUserData()
+    private lazy var totalHabitInfItems: [TotalHabitInfo]? = try? CoreDataManager.shared.fetchTotalHabitInfo()
     private let todayDate = { // 오늘 날짜 정수
         let currentDate = Date()
         let calendar = Calendar.current
@@ -33,9 +34,6 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        getMonthHabitCompletedInfo()
-        getSelectedDayHabitInfo(selectedDay: "2024-03-08")
         
         setAddSubviews()
         setAutoLayout()
@@ -109,17 +107,23 @@ extension ReportViewController {
             let button = UIButton(type: .system)
             button.tintColor = .black
             button.setImage(.verticalMenu, for: .normal)
-            button.overrideUserInterfaceStyle = .dark
             
             let habitInfo = UIAction(title: "습관 정보", handler: { _ in
-                self.presentBottomSheet(rootView: ReportHabitInfoView(frame: .null, 
+                self.presentBottomSheet(rootView: ReportHabitInfoView(frame: .null,
                                                                       daysButtonSelectionState: self.getMonthData(),
-                                                                      startTime: self.user?.alarmTime?.description),
+                                                                      startTime: self.user?.alarmTime?.timeToString()),
                                         detents: [.medium()])
             })
             
             let habitEdit = UIAction(title: "습관 변경", attributes: .destructive, handler: { _ in
+                let alertController = UIAlertController(title: "", message: "진행 중인 습관을 초기화하시겠습니까?", preferredStyle: .alert)
                 
+                alertController.addAction(UIAlertAction(title: "네", style: .destructive, handler: { action in
+                    
+                }))
+                alertController.addAction(UIAlertAction(title: "아니요", style: .cancel, handler: nil))
+                
+                self.present(alertController, animated: true, completion: nil)
             })
             
             let menus = UIMenu(children: [habitInfo, habitEdit])
@@ -156,8 +160,9 @@ extension ReportViewController {
         func getTheBoxView(_ day: Int,_ state: Check,_ width: UInt = 56,_ height: UInt = 45) -> UIButton {
             let boxView = {
                 let boxView = UIButton(type: .system, primaryAction: .init(handler: { _ in
-                    print("day: \(day)")
-                    self.presentBottomSheet(rootView: ReportHabitDetailView(), detents: [.large()])
+                    let reportHabitDetailView = ReportHabitDetailView(frame: .zero, self.totalHabitInfItems?[day])
+                    reportHabitDetailView.reportViewController = self
+                    self.presentBottomSheet(rootView: reportHabitDetailView, detents: [.large()])
                 }))
                 boxView.backgroundColor = .pobitRed
                 boxView.layer.cornerRadius = 10
@@ -183,35 +188,35 @@ extension ReportViewController {
         
         let gridView = VStackView(alignment: .center, [
             HStackView([
-                getTheBoxView(1, .complete, 56*3, 45),
+                getTheBoxView(0, .complete, 56*3, 45),
             ]),
             HStackView([
+                getTheBoxView(1, .complete),
                 getTheBoxView(2, .complete),
-                getTheBoxView(3, .complete),
+                getTheBoxView(3, .fail),
                 getTheBoxView(4, .fail),
-                getTheBoxView(5, .fail),
-                getTheBoxView(6, .complete),
+                getTheBoxView(5, .complete),
             ]),
             HStackView([
+                getTheBoxView(6, .complete),
                 getTheBoxView(7, .complete),
                 getTheBoxView(8, .complete),
                 getTheBoxView(9, .complete),
                 getTheBoxView(10, .complete),
-                getTheBoxView(11, .complete),
             ]),
             HStackView([
+                getTheBoxView(11, .complete),
                 getTheBoxView(12, .complete),
                 getTheBoxView(13, .complete),
                 getTheBoxView(14, .complete),
                 getTheBoxView(15, .complete),
-                getTheBoxView(16, .complete),
             ]),
             HStackView([
+                getTheBoxView(16, .rest),
                 getTheBoxView(17, .rest),
                 getTheBoxView(18, .rest),
-                getTheBoxView(19, .rest),
+                getTheBoxView(19, .complete),
                 getTheBoxView(20, .complete),
-                getTheBoxView(21, .complete),
             ]),
         ])
         
@@ -234,6 +239,7 @@ extension ReportViewController {
 extension ReportViewController {
     private func getMonthHabitCompletedInfo() {
         do {
+//            try CoreDataManager.shared.habit
 //            print("CoreDataManager.shared.fetchDailyHabitInfos: ", try CoreDataManager.shared.fetchDailyHabitInfos())
 //            let monthHabitCompletedInfo = try CoreDataManager.shared.fetchDailyHabitInfos().map{$0.hasDone} // 한달 동안의 습관 완료 기록, 습관을 시작하는날이 아닌경우에는 표시안됨
         } catch {
@@ -242,9 +248,7 @@ extension ReportViewController {
     }
     
     private func getSelectedDayHabitInfo(selectedDay: String) { // selectedDay 매개변수를 통해 해당하는 날짜의 습관정보를 불러옴, 날짜 형식 2024-03-08
-//        do {
-//            let habitInfos = try CoreDataManager.shared.fetchDailyHabitInfos()
-//            print("habitInfos:", habitInfos)
+        do {
 //            let habitInfoDays = habitInfos.compactMap{$0.day}
 //            if let index = habitInfoDays.firstIndex(where: {$0 == selectedDay}) {
 //                let selectedHabitInfo = habitInfos[index]
@@ -253,9 +257,9 @@ extension ReportViewController {
 //                let hasDone = selectedHabitInfo.hasDone
 //                guard let note = selectedHabitInfo.note else { return }
 //            }
-//        } catch {
-//            print(error)
-//        }
+        } catch {
+            print(error)
+        }
     }
     
     private func getUserData() -> User? {

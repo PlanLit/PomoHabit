@@ -78,8 +78,3 @@ extension HabitIndicatorView {
         return label
     }
 }
-
-@available(iOS 17, *)
-#Preview(traits: .fixedLayout(width: 350, height: 100)) {
-    return HabitIndicatorView()
-}
