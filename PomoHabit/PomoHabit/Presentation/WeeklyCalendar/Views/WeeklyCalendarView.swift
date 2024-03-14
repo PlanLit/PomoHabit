@@ -247,7 +247,7 @@ extension WeeklyCalendarView {
         weeklyHabitState = setData
     }
     
-    func setHabitInfoView(state: HabitState, targetHabit: String,duringTime: String,goalTime: String) {
+    func setHabitInfoView(state: HabitState, targetHabit: String,duringTime: String,goalTime: Int16) {
         habitInfoView.setTitleInfoView(state: state, targetHabit: targetHabit)
         habitInfoView.setTimeInfoView(duringTime: duringTime)
         habitInfoView.setTargetInfoView(goalTime: goalTime)
