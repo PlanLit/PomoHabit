@@ -105,9 +105,9 @@ extension CoreDataManager {
         }
     }
     
-    func fetchDailyHabitInfos() throws -> [DailyHabitInfo] {
+    func fetchTotalHabitInfo() throws -> [TotalHabitInfo] {
         do {
-            let dailyHabitInfos: [DailyHabitInfo] = try fetchObjects(for: DailyHabitInfo.self)
+            let dailyHabitInfos: [TotalHabitInfo] = try fetchObjects(for: TotalHabitInfo.self)
             
             return dailyHabitInfos
         } catch let error {
@@ -120,7 +120,7 @@ extension CoreDataManager {
 // MARK: - Onboarding
 
 extension CoreDataManager {
-    func createUser(nickname: String, targetHabit: String, targetDate: String, startTime: String, whiteNoiseType: String?) { // User 엔티티 저장
+    func createUser(nickname: String, targetHabit: String, targetDate: String, alarmTime: Date, whiteNoiseType: String?) { // User 엔티티 저장
         // db에 이미 존재하는 유저가 있는지 확인
         do {
             if let _ = try fetchUser() {
@@ -137,7 +137,7 @@ extension CoreDataManager {
         user.nickname = nickname // 닉네임
         user.targetHabit = targetHabit // 습관정보
         user.targetDate = targetDate // 습관 진행요일
-        user.startTime = startTime // 습관 진행 시간
+        user.alarmTime = alarmTime // 매일 시작하기로한 시간 - 알람 시간
         user.whiteNoiseType = whiteNoiseType // 사운드
         
         saveContext()
@@ -148,18 +148,89 @@ extension CoreDataManager {
 // MARK: - Timer
 
 extension CoreDataManager {
-    func createDailyHabitInfo(day: String, goalTime: Int16, hasDone: Bool, note: String) { // DailyHabitInfo 엔티티 저장
+    func createTotalHabitInfo(date: Date, goalTime: Int16, hasDone: Bool, note: String) { // DailyHabitInfo 엔티티 저장
         let context = persistentContainer.viewContext
-        let dailyHabitInfo = DailyHabitInfo(context: context)
+        let totalHabitInfo = TotalHabitInfo(context: context)
         
-        dailyHabitInfo.day = day // 날짜
-        dailyHabitInfo.goalTime = goalTime // 목표 시간
-        dailyHabitInfo.hasDone = hasDone // 완료여부
-        dailyHabitInfo.note = note // 메모
+        totalHabitInfo.date = date
+        totalHabitInfo.goalTime = goalTime
+        totalHabitInfo.hasDone = hasDone
+        totalHabitInfo.note = note
         
         saveContext()
     }
 }
+// MARK: - MockData
+
+extension CoreDataManager {
+    func setMockupTotalHabitInfo(today: Date,targetDate: String) { // 목업 데이터 생성
+        let targetDayInfos = targetDate.split(separator: ",").map{String($0)}
+        let calendar = Calendar.current
+        var appendCount = 0
+        var goalTime = 5
+        var date = today
+        
+        if targetDayInfos.contains(date.getDayOfWeek()){ // 오늘 습관을 진행하는 날짜인지 확인후 목데이터에 추가
+            createTotalHabitInfo(date: date, goalTime: Int16(goalTime), hasDone: false, note: "")
+        }
+        
+        while appendCount != 20 {
+            date = calendar.date(byAdding: .day,value: 1, to: date) ?? Date()
+            
+            if targetDayInfos.contains(date.getDayOfWeek()) { // 습관 진행하는 요일이면 추가
+                goalTime += 1
+                createTotalHabitInfo(date: date, goalTime: Int16(goalTime), hasDone: false, note: "")
+                appendCount += 1
+            }
+        }
+    }
+}
+
+// MARK: - Timer 습관 완료후 오늘 날짜의 TotalHabitInfo MockData 수정
+
+extension CoreDataManager {
+    func completedTodyHabit(completedDate: Date, note: String) {
+        do {
+            let totalHabitInfo = try fetchTotalHabitInfo()
+            for (idx,habitInfo) in totalHabitInfo.enumerated() {
+                guard let habitInfoDate = habitInfo.date else { return }
+                if habitInfoDate.comparisonDate(targetDate: completedDate) {
+                    totalHabitInfo[idx].setValue(completedDate, forKey: "date")
+                    totalHabitInfo[idx].setValue(true, forKey: "hasDone")
+                    totalHabitInfo[idx].setValue(note, forKey: "note")
+                }
+                
+                saveContext()
+            }
+        } catch {
+            print(error)
+        }
+    }
+}
+
+// MARK: - TotalHabitInfo 특정 날짜 정보 얻기
+
+extension CoreDataManager {
+    func getSelectedHabitInfo(selectedDate: Date) throws -> TotalHabitInfo? {
+        do {
+            let totalHabitInfo = try fetchTotalHabitInfo()
+            for (idx,habitInfo) in totalHabitInfo.enumerated() {
+                let habitInfoDate = habitInfo.date ?? Date()
+                if habitInfoDate.comparisonDate(targetDate: selectedDate) {
+                    
+                    return totalHabitInfo[idx]
+                }
+            }
+        } catch {
+            print(error)
+            print("Fetching user failed with error: \(error)")
+            throw CoreDataError.fetchFailed(reason: error.localizedDescription)
+        }
+        
+        return nil
+    }
+}
+
 
 // MARK: - 해당 엔티티 All Delete
 
