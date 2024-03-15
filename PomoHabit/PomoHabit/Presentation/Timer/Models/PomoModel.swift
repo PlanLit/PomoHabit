@@ -13,8 +13,10 @@ enum TimerState {
     case stopped
     /// 진행 중
     case running
-    /// 완료
+    /// 타이머 종료
     case finished
+    /// 완료
+    case done
 }
 
 struct UserData {
@@ -100,7 +102,9 @@ extension TimerViewModel {
         case .running:
             break
         case .finished:
-            completedDailyHabit()
+            recordCompletedHabit()
+        case .done:
+            handleDoneStatus()
         }
     }
     
@@ -108,8 +112,8 @@ extension TimerViewModel {
         timerStatePublisher.send(.running)
         remainingTimePublisher.value = 0
         
-        timer = Timer.publish(every: 1, on: .main, in: .common) // 1초마다 트리거
-        // autoConnect?
+        timer = Timer.publish(every: 1, on: .main, in: .common)
+        // 구독이 시작되는 즉시 타이머를 활성화
             .autoconnect()
             .sink { [weak self] _ in
                 guard let self = self else { return }
@@ -119,10 +123,15 @@ extension TimerViewModel {
                 
                 // 목표시간에 도달하면 타이머 종료
                 if newTime >= self.timerDuration {
-                    self.timerStatePublisher.send(.finished)
+                    print(timerStatePublisher.value)
                     self.timer?.cancel()
+                    self.timerStatePublisher.send(.finished)
                 }
             }
+    }
+    
+    private func handleDoneStatus() {
+        timerStatePublisher.send(.done)
     }
 }
 
@@ -152,8 +161,10 @@ extension TimerViewModel {
             
             guard let goalTime = selectedHabitInfo?.goalTime else { return } // 목표 시간
             
-            //            self.timerDuration = TimeInterval(goalTime * 60)
-            self.timerDuration = TimeInterval(goalTime)
+            self.timerDuration = TimeInterval(goalTime * 60)
+            
+            /// test용 주석
+//            self.timerDuration = TimeInterval(goalTime)
         } catch {
             print(error)
         }
@@ -164,9 +175,9 @@ extension TimerViewModel {
             .eraseToAnyPublisher()
     }
     
-    func completedDailyHabit() { // 타이머 완료시 실행되는 메서드
-        
-//        CoreDataManager.shared.createTotalHabitInfo(date: currentDate, goalTime: Int16(timerDuration) / 60, hasDone: true, note: "3번째 날입니다.")
-        print("습관 달성")
+    // 타이머 완료시 실행되는 메서드
+    func recordCompletedHabit() {
+        CoreDataManager.shared.createTotalHabitInfo(date: currentDate, goalTime: Int16(timerDuration) / 60, hasDone: true, note: "3번째 날입니다.")
+        timerStatePublisher.send(.done)
     }
 }
