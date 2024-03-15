@@ -45,7 +45,7 @@ extension TimerViewController {
         output.memoButtonAction
             .sink { _ in
                 DispatchQueue.main.async {
-                    self.presentBottomSheet(rootView: MemoView())
+                    self.presentBottomSheet(viewController: MemoViewController())
                 }
             }
             .store(in: &cancellables)
@@ -53,7 +53,7 @@ extension TimerViewController {
         output.whiteNoiseButtonAction
             .sink { _ in
                 DispatchQueue.main.async {
-                    self.presentBottomSheet(rootView: WhiteNoiseView(), detents: [.medium()])
+                    self.presentBottomSheet(viewController: WhiteNoiseViewController(), detents: [.medium()])
                 }
             }
             .store(in: &cancellables)

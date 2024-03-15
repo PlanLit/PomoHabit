@@ -109,10 +109,11 @@ extension ReportViewController {
             button.setImage(.verticalMenu, for: .normal)
             
             let habitInfo = UIAction(title: "습관 정보", handler: { _ in
-                self.presentBottomSheet(rootView: ReportHabitInfoView(frame: .null,
-                                                                      daysButtonSelectionState: self.getMonthData(),
-                                                                      startTime: self.user?.alarmTime?.timeToString()),
-                                        detents: [.medium()])
+                self.presentBottomSheet(viewController: UIViewController())
+//                self.presentBottomSheet(rootView: ReportHabitInfoView(frame: .null,
+//                                                                      daysButtonSelectionState: self.getMonthData(),
+//                                                                      startTime: self.user?.alarmTime?.timeToString()),
+//                                        detents: [.medium()])
             })
             
             let habitEdit = UIAction(title: "습관 변경", attributes: .destructive, handler: { _ in
@@ -162,7 +163,8 @@ extension ReportViewController {
                 let boxView = UIButton(type: .system, primaryAction: .init(handler: { _ in
                     let reportHabitDetailView = ReportHabitDetailView(frame: .zero, self.totalHabitInfItems?[day])
                     reportHabitDetailView.reportViewController = self
-                    self.presentBottomSheet(rootView: reportHabitDetailView, detents: [.large()])
+//                    self.presentBottomSheet(rootView: reportHabitDetailView, detents: [.large()])
+                    self.presentBottomSheet(viewController: UIViewController())
                 }))
                 boxView.backgroundColor = .pobitRed
                 boxView.layer.cornerRadius = 10
