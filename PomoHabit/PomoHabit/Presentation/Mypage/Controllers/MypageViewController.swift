@@ -20,6 +20,7 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
     private var customNavigationController: UINavigationController? = nil
     private let openSourceViewController = OpenSourceViewController()
     private let customerServiceViewController = CustomerServiceViewController()
+    
     // MARK: - View Lifecycle
     
     override func loadView() {
@@ -37,7 +38,12 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
     }
 }
 
-extension MyPageViewController{
+extension MyPageViewController: EditButtonDelegate {
+    func editButtonTapped() {
+        nicknameEditView.isHidden = false
+        presentBottomSheet(viewController: NicknameViewController())
+    }
+    
     func forEditButtonDelegate() {
         myPageRootView.editButtonDelegate = self
     }
