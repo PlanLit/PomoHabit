@@ -21,4 +21,16 @@ extension UIView {
         
         return view
     }
+    
+    var hasNotch: Bool {
+        if #available(iOS 11.0, *) {
+            return safeAreaInsets.top > 20
+        }
+        return false
+    }
+    
+    /// Constraint 설정 시 노치 유무로 기기 대응
+    func constraintByNotch(_ hasNotch: CGFloat, _ noNotch: CGFloat) -> CGFloat {
+        return self.hasNotch ? hasNotch : noNotch
+    }
 }
