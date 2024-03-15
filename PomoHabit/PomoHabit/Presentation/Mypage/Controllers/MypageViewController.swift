@@ -17,7 +17,9 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
     
     private let myPageRootView = MyPageView()
     private let nicknameEditView = NicknameEditView()
-    
+    private var customNavigationController: UINavigationController? = nil
+    private let openSourceViewController = OpenSourceViewController()
+        private let cSViewController = CSViewController()
     // MARK: - View Lifecycle
     
     override func loadView() {
@@ -28,8 +30,10 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        myPageRootView.tableView.delegate = self
         setTotalHabitInfo()
+        
+        customNavigationController = navigationController
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -54,4 +58,25 @@ extension MyPageViewController {
 //            
 //        }
     }
+}
+
+extension MyPageViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let selectModel = myPageCellModels[indexPath.row]
+        
+        switch selectModel.title {
+            case "오픈 소스 사용":
+                if let navigationController = customNavigationController {
+                    navigationController.pushViewController(openSourceViewController, animated: true)
+                }
+            case "고객 센터":
+                if let navigationController = customNavigationController {
+                    navigationController.pushViewController(cSViewController, animated: true)
+                }
+            default:
+                break
+            }
+        }
 }
