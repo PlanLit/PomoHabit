@@ -35,7 +35,7 @@ final class PobitNavigationBarView: UIView {
     
     private lazy var dismissButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .lightGray
+        button.backgroundColor = .clear
         return button
     }()
     
