@@ -116,15 +116,10 @@ extension ReportViewController {
             button.setImage(.verticalMenu, for: .normal)
             
             let habitInfo = UIAction(title: "습관 정보", handler: { _ in
-//                self.presentBottomSheet(rootView: ReportHabitInfoView(frame: .null,
-//                                                                      daysButtonSelectionState: self.getMonthData(),
-//                                                                      startTime: self.user?.alarmTime?.dateToString(format: "hh : mm a")),
-//                                        detents: [.medium()])
-//                self.presentBottomSheet(viewController: UIViewController())
-//                self.presentBottomSheet(rootView: ReportHabitInfoView(frame: .null,
-//                                                                      daysButtonSelectionState: self.getMonthData(),
-//                                                                      startTime: self.user?.alarmTime?.timeToString()),
-//                                        detents: [.medium()])
+                let reportHabitInfoViewController = ReportHabitInfoViewController()
+                reportHabitInfoViewController.setData(self.getMonthData(), self.user?.alarmTime?.dateToString(format: "hh : mm a"))
+                self.presentBottomSheet(viewController: reportHabitInfoViewController,
+                                        detents: [.medium()])
             })
             
             let habitEdit = UIAction(title: "습관 변경", attributes: .destructive, handler: { _ in
@@ -177,9 +172,9 @@ extension ReportViewController {
     private func makeGridView() -> VStackView {
         func getTheBoxView(_ index: Int,_ width: UInt = 56,_ height: UInt = 45) -> UIButton {
             let boxView = UIButton(type: .system, primaryAction: .init(handler: { _ in
-                let reportHabitDetailView = ReportHabitDetailView(frame: .zero, self.totalHabitInfItems?[index])
-                reportHabitDetailView.reportViewController = self
-//                self.presentBottomSheet(rootView: reportHabitDetailView, detents: [.large()])
+                let reportHabitDetailViewController = ReportHabitDetailViewController()
+                reportHabitDetailViewController.setData(self.totalHabitInfItems?[index])
+                self.presentBottomSheet(viewController: reportHabitDetailViewController, detents: [.large()])
             }))
             boxView.layer.cornerRadius = 10
             boxView.clipsToBounds = true

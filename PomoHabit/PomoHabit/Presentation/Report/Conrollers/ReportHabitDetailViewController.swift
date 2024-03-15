@@ -1,5 +1,5 @@
 //
-//  ReportHabitDetailView.swift
+//  ReportHabitDetailViewController.swift
 //  PomoHabit
 //
 //  Created by JiHoon K on 2/29/24.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-// MARK: - ReportHabitDetailView
+// MARK: - ReportHabitDetailViewController
 
-final class ReportHabitDetailView: BaseView {
+final class ReportHabitDetailViewController: BaseViewController {
     
     // MARK: - Data Properties
     
@@ -17,34 +17,27 @@ final class ReportHabitDetailView: BaseView {
     
     // MARK: - UI Properties
 
-    var reportViewController: ReportViewController?
     private lazy var headerView: VStackView = makeHeaderView()
     private lazy var mainContainerView: VStackView = makeMainContainerView()
     private lazy var noteFieldView: UITextView = NoteTextView()
     
     // MARK: - Life Cycles
     
-    init(frame: CGRect,_ totalHabitInfo: TotalHabitInfo?) {
-        super.init(frame: frame)
-        
-        self.totalHabitInfo = totalHabitInfo
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         setAddSubviews()
         setAutoLayout()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.endEditing(true)
+        self.view.endEditing(true)
     }
 }
 
-extension ReportHabitDetailView {
+extension ReportHabitDetailViewController {
     private func setAddSubviews() {
-        addSubViews([
+        view.addSubViews([
             headerView,
             mainContainerView
         ])
@@ -52,22 +45,26 @@ extension ReportHabitDetailView {
     
     private func setAutoLayout() {
         headerView.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top).offset(50)
-            make.trailing.equalTo(self.snp.trailing).offset(-LayoutLiterals.minimumHorizontalSpacing)
-            make.leading.equalTo(self.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
+            make.top.equalTo(self.view.snp.top).offset(50)
+            make.trailing.equalTo(self.view.snp.trailing).offset(-LayoutLiterals.minimumHorizontalSpacing)
+            make.leading.equalTo(self.view.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
         }
         
         mainContainerView.snp.makeConstraints { make in
             make.top.equalTo(headerView.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
-            make.trailing.equalTo(self.snp.trailing).offset(-LayoutLiterals.minimumHorizontalSpacing)
-            make.leading.equalTo(self.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
+            make.trailing.equalTo(self.view.snp.trailing).offset(-LayoutLiterals.minimumHorizontalSpacing)
+            make.leading.equalTo(self.view.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
         }
+    }
+    
+    func setData(_ totalHabitInfo: TotalHabitInfo?) {
+        self.totalHabitInfo = totalHabitInfo
     }
 }
 
 // MARK: - Factory Methods
 
-extension ReportHabitDetailView {
+extension ReportHabitDetailViewController {
     private func makeHeaderView() -> VStackView {
         let dateLabel = {
             let label = UILabel()
@@ -98,7 +95,7 @@ extension ReportHabitDetailView {
         let registButton = {
             let button = PobitButton(type: .system, primaryAction: .init(handler: { _ in
                 CoreDataManager.shared.completedTodyHabit(completedDate: self.totalHabitInfo?.date ?? Date(), note: self.noteFieldView.text)
-                self.reportViewController?.dismiss(animated: true)
+                self.dismiss(animated: true)
             }))
             button.setTitle("수정하기", for: .normal)
             button.backgroundColor = .pobitRed

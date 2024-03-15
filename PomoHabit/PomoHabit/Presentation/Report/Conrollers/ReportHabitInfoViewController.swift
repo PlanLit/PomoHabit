@@ -1,5 +1,5 @@
 //
-//  ReportHabitInfoView.swift
+//  ReportHabitInfoViewController.swift
 //  PomoHabit
 //
 //  Created by JiHoon K on 2/29/24.
@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - ReportHabitInfoViewController
 
-final class ReportHabitInfoView: BaseView {
+final class ReportHabitInfoViewController: BaseViewController {
     
     // MARK: - Data Properties
     
@@ -22,41 +22,39 @@ final class ReportHabitInfoView: BaseView {
     
     // MARK: - Life Cycles
     
-    init(frame: CGRect, daysButtonSelectionState: [Bool]?, startTime: String?) {
-        super.init(frame: frame)
-        
-        self.daysButtonSelectionState = daysButtonSelectionState
-        self.startTime = startTime
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
         setAddSubviews()
         setAutoLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
 // MARK: - Layout Helpers
 
-extension ReportHabitInfoView {
+extension ReportHabitInfoViewController {
     private func setAddSubviews() {
-        self.addSubview(tableView)
+        self.view.addSubview(tableView)
     }
     
     private func setAutoLayout() {
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top)
-            make.trailing.equalTo(self.snp.trailing).offset(-LayoutLiterals.minimumHorizontalSpacing)
-            make.bottom.equalTo(self.snp.bottom)
-            make.leading.equalTo(self.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
+            make.top.equalTo(self.view.snp.top)
+            make.trailing.equalTo(self.view.snp.trailing).offset(-LayoutLiterals.minimumHorizontalSpacing)
+            make.bottom.equalTo(self.view.snp.bottom)
+            make.leading.equalTo(self.view.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
         }
+    }
+    
+    func setData(_ daysButtonSelectionState: [Bool]?,_ startTime: String?) {
+        self.daysButtonSelectionState = daysButtonSelectionState
+        self.startTime = startTime
     }
 }
 
 // MARK: - Factory Methods
 
-extension ReportHabitInfoView {
+extension ReportHabitInfoViewController {
     private func makeTableView() -> UITableView {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.dataSource = self
@@ -99,7 +97,7 @@ extension ReportHabitInfoView {
 
 // MARK: - UITableViewDataSource
 
-extension ReportHabitInfoView: UITableViewDataSource {
+extension ReportHabitInfoViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -139,7 +137,7 @@ extension ReportHabitInfoView: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 
-extension ReportHabitInfoView: UITableViewDelegate {
+extension ReportHabitInfoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 65
     }
