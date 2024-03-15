@@ -22,7 +22,7 @@ final class TabBarController: UITabBarController {
         super.viewDidLoad()
         
         setTabBar()
-        adjustTabBarItemPosition(yOffset: 8)
+        adjustTabBarIconPositionBasedOnDevice()
     }
 }
 
@@ -40,13 +40,20 @@ extension TabBarController {
     }
     
     private func adjustTabBarItemPosition(yOffset: CGFloat) {
-            guard let items = self.tabBar.items else { return }
-
-            for item in items {
-                // 이미지 인셋 조정으로 아이템의 위치 변경
-                item.imageInsets = UIEdgeInsets(top: yOffset, left: 0, bottom: -yOffset, right: 0)
-                // 타이틀 위치 조정
-                item.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: yOffset)
-            }
+        guard let items = self.tabBar.items else { return }
+        
+        for item in items {
+            // 이미지 인셋 조정으로 인한 아이템의 위치 변경
+            item.imageInsets = UIEdgeInsets(top: yOffset, left: 0, bottom: -yOffset, right: 0)
+            // 타이틀 위치 조정
+            item.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: yOffset)
         }
+    }
+    
+    private func adjustTabBarIconPositionBasedOnDevice() {
+        let hasNotch = view.hasNotch
+        let yOffset: CGFloat = hasNotch ? 8 : -4
+        
+        adjustTabBarItemPosition(yOffset: yOffset)
+    }
 }
