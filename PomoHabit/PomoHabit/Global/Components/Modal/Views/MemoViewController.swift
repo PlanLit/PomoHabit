@@ -12,33 +12,27 @@ import SnapKit
 
 // MARK: - MemoView
 
-final class MemoView: BaseView {
-    
-    private let 
+final class MemoViewController: BaseViewController {
 
     // MARK: - UI Properties
     
     private lazy var navigationBar = PobitNavigationBarView(title: "메모", viewType: .withDismissButton)
     private lazy var textView = NoteTextView()
     private lazy var submitButton = PobitButton.makePlainButton(title: "등록하기", backgroundColor: .pobitRed)
+
+    // MARK: - Life Cycle
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+    override func viewDidLoad() {
         setAddSubViews()
         setAutoLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
 // MARK: - Layout Helpers
 
-extension MemoView {
+extension MemoViewController {
     private func setAddSubViews() {
-        addSubViews([navigationBar, textView, submitButton])
+        view.addSubViews([navigationBar, textView, submitButton])
     }
     
     private func setAutoLayout() {
@@ -55,7 +49,7 @@ extension MemoView {
         }
         
         submitButton.snp.makeConstraints { make in
-            make.bottom.equalTo(keyboardLayoutGuide.snp.top).offset(-LayoutLiterals.minimumHorizontalSpacing)
+            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-LayoutLiterals.minimumHorizontalSpacing)
             make.leading.trailing.equalTo(textView)
             make.height.equalTo(62)
         }
