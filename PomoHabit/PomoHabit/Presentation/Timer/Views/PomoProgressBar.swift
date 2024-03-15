@@ -24,10 +24,10 @@ final class CircleProgressBar: BaseView {
     
     private var todayLabel = UILabel().setPrimaryColorLabel(text: "오늘")
     
-    private let timeLabel: UILabel = {
+    private lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.textColor = .pobitBlack
-        label.font = Pretendard.bold(size: 44)
+        label.font = Pretendard.bold(size: constraintByNotch(44, 32))
         label.text = "05:00"
         
         return label
@@ -62,7 +62,7 @@ extension CircleProgressBar {
     
     private func setAutoLayout() {
         todayLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(96)
+            make.top.equalToSuperview().offset(constraintByNotch(96, 84))
             make.centerX.equalToSuperview()
         }
         
@@ -118,7 +118,7 @@ extension CircleProgressBar {
         layer.strokeColor = strokeColor.cgColor
         layer.strokeEnd = strokeEnd
         layer.fillColor = UIColor.clear.cgColor
-        layer.lineWidth = 40
+        layer.lineWidth = constraintByNotch(40, 36)
         layer.lineCap = .round
         
         return layer
