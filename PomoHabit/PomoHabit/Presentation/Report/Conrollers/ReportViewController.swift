@@ -13,33 +13,31 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
     
     // MARK: - Data Properties
     
-    private lazy var user: User? = getUserData()
-    private let todayDate = { // 오늘 날짜 정수
-        let currentDate = Date()
-        let calendar = Calendar.current
-        
-        return calendar.component(.day, from: currentDate)
-    }()
+    private lazy var user: User? = try? CoreDataManager.shared.fetchUser()
+    private lazy var totalHabitInfItems: [TotalHabitInfo]? = try? CoreDataManager.shared.fetchTotalHabitInfo()
     
     // MARK: - UI Properties
     
-    private let navigationBar = PobitNavigationBarView(title: "이번달 습관 달성률", viewType: .plain)
+    private let navigationBar = PobitNavigationBarView(title: "습관 달성률", viewType: .plain)
     private lazy var headerView: HStackView = makeHeaderView()
     private lazy var imageCollectionViewController: ReportImageCollectionViewController = makeImageCollectionViewController()
-    private lazy var calendarNaviView: VStackView = makeCalendarNaviView()
-    private lazy var gridView: VStackView = makeGridView(31) // 월마다 바뀌는 일 수 주입
-    private lazy var messageBoxView: UILabel = makeMessageBoxView("모두 완료하면 토마토가 웃는 얼굴이 돼요")
+    private lazy var gridView: VStackView = makeGridView()
+    private lazy var habitIndicatorView = HabitIndicatorView()
+//    private lazy var messageBoxView: UILabel = makeMessageBoxView("모두 완료하면 토마토가 웃는얼굴이 돼요")
     
     // MARK: - Life Cycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getMonthHabitCompletedInfo()
-        getSelectedDayHabitInfo(selectedDay: "2024-03-08")
-        
         setAddSubviews()
         setAutoLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchData()
     }
 }
 
@@ -52,51 +50,50 @@ extension ReportViewController {
         view.addSubViews([
             navigationBar,
             headerView,
-            calendarNaviView,
             imageCollectionViewController.view,
             gridView,
-            messageBoxView
+            habitIndicatorView,
+//            messageBoxView
         ])
     }
     
     private func setAutoLayout() {
         navigationBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
-            make.leading.trailing.equalToSuperview()
+            make.left.right.equalToSuperview()
             make.height.equalTo(58)
         }
         
         headerView.snp.makeConstraints { make in
-            make.top.equalTo(navigationBar.snp.bottom)
+            make.top.equalTo(navigationBar.snp.bottom).offset(LayoutLiterals.minimumVerticalSpacing)
             make.left.equalTo(LayoutLiterals.minimumHorizontalSpacing)
             make.right.equalTo(-LayoutLiterals.minimumHorizontalSpacing)
-            make.height.equalTo(50)
+            make.height.equalTo(55)
         }
         
         imageCollectionViewController.view.snp.makeConstraints { make in
-            make.top.equalTo(headerView.snp.bottom)
+            make.top.equalTo(headerView.snp.bottom).offset(LayoutLiterals.minimumVerticalSpacing)
             make.left.right.equalToSuperview()
             make.height.equalTo(74)
         }
         
-        calendarNaviView.snp.makeConstraints { make in
-            make.top.equalTo(imageCollectionViewController.view.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
-            make.left.equalToSuperview().offset(35)
-            make.right.equalToSuperview().offset(-35)
-            make.height.equalTo(44)
-        }
-        
         gridView.snp.makeConstraints { make in
-            make.top.equalTo(calendarNaviView.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
-            make.left.right.equalToSuperview()
+            make.top.equalTo(imageCollectionViewController.view.snp.bottom).offset(LayoutLiterals.minimumVerticalSpacing)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(45*5+(10*4))
         }
         
-        messageBoxView.snp.makeConstraints { make in
-            make.right.equalTo(view.snp.right).offset(-LayoutLiterals.minimumHorizontalSpacing)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-LayoutLiterals.upperSecondarySpacing)
-            make.left.equalTo(view.snp.left).offset(LayoutLiterals.minimumHorizontalSpacing)
-            make.height.equalTo(35)
+        habitIndicatorView.snp.makeConstraints { make in
+            make.top.equalTo(gridView.snp.bottom).offset(LayoutLiterals.minimumVerticalSpacing)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-LayoutLiterals.minimumVerticalSpacing)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(250)
         }
+        
+//        messageBoxView.snp.makeConstraints { make in
+//            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-LayoutLiterals.minimumVerticalSpacing)
+//            make.centerX.equalToSuperview()
+//        }
     }
 }
 
@@ -106,37 +103,49 @@ extension ReportViewController {
     private func makeHeaderView() -> HStackView {
         let titleLabel = {
             let label = UILabel()
-            label.text = "독서"
+            label.text = user?.targetHabit
             label.font = Pretendard.bold(size: 30)
             label.textAlignment = .center
             
             return label
         }()
         
-//        let rightMenuButton = {
-//            let button = UIButton(type: .system)
-//            button.tintColor = .black
-//            button.setImage(.verticalMenu, for: .normal)
-//            button.overrideUserInterfaceStyle = .dark
-//            
-//            let habitInfo = UIAction(title: "습관 정보", handler: { _ in
-//                self.presentBottomSheet(rootView: ReportHabitInfoView(frame: .null, 
-//                                                                      daysButtonSelectionState: self.getMonthData(),
-//                                                                      startTime: self.user?.startTime),
-//                                        detents: [.medium()])
-//            })
-//            
-//            let habitEdit = UIAction(title: "습관 변경", handler: { _ in
-//                
-//            })
-//            
-//            let menus = UIMenu(children: [habitInfo, habitEdit])
-//            
-//            button.menu = menus
-//            button.showsMenuAsPrimaryAction = true
-//            
-//            return button
-//        }()
+        let rightMenuButton = {
+            let button = UIButton(type: .system)
+            button.tintColor = .black
+            button.setImage(.verticalMenu, for: .normal)
+            
+            let habitInfo = UIAction(title: "습관 정보", handler: { _ in
+                let reportHabitInfoViewController = ReportHabitInfoViewController()
+                reportHabitInfoViewController.setData(self.getMonthData(), self.user?.alarmTime?.dateToString(format: "hh : mm a"))
+                self.presentBottomSheet(viewController: reportHabitInfoViewController,
+                                        detents: [.medium()])
+            })
+            
+            let habitEdit = UIAction(title: "습관 변경", attributes: .destructive, handler: { _ in
+                let alertController = UIAlertController(title: "", message: "진행 중인 습관을 초기화하시겠습니까?", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "네", style: .destructive, handler: { action in
+                    let nickname = self.user?.nickname
+                    
+                    CoreDataManager.shared.deleteAllData(entityName: "User")
+                    CoreDataManager.shared.deleteAllData(entityName: "TotalHabitInfo")
+                    
+                    let onboardingHabitRegisterViewController = OnboardingHabitRegisterViewController()
+                    onboardingHabitRegisterViewController.setData(nickname)
+                    
+                    self.navigationController?.setViewControllers([onboardingHabitRegisterViewController], animated: true)
+                }))
+                alertController.addAction(UIAlertAction(title: "아니요", style: .cancel, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+            })
+            
+            let menus = UIMenu(children: [habitInfo, habitEdit])
+            
+            button.menu = menus
+            button.showsMenuAsPrimaryAction = true
+            
+            return button
+        }()
         
         let blankView = {
             let blankView = UIButton(type: .system)
@@ -148,8 +157,8 @@ extension ReportViewController {
         
         return HStackView([
             blankView,
-            titleLabel
-//            rightMenuButton
+            titleLabel,
+            rightMenuButton
         ])
     }
     
@@ -159,84 +168,47 @@ extension ReportViewController {
         
         return imageCollectionViewController
     }
-    
-    private func makeCalendarNaviView() -> VStackView {
-        let leftButton = {
-            let button = UIButton(type: .system, primaryAction: .init(handler: { _ in
-                print("leftButton")
+
+    private func makeGridView() -> VStackView {
+        func getTheBoxView(_ index: Int,_ width: UInt = 56,_ height: UInt = 45) -> UIButton {
+            let boxView = UIButton(type: .system, primaryAction: .init(handler: { _ in
+                let reportHabitDetailViewController = ReportHabitDetailViewController()
+                reportHabitDetailViewController.setData(self.totalHabitInfItems?[index])
+                self.presentBottomSheet(viewController: reportHabitDetailViewController, detents: [.large()])
             }))
+            boxView.layer.cornerRadius = 10
+            boxView.clipsToBounds = true
             
-            button.setImage(.arrowLeft, for: .normal)
-            button.tintColor = .black
-            
-            return button
-        }()
-        
-        let centerTitle = {
             let label = UILabel()
-            label.font = Pretendard.bold(size: 20)
-            label.textColor = .darkGray
-            label.text = "1월"
             
-            return label
-        }()
-        
-        let rightButton = {
-            let button = UIButton(type: .system, primaryAction: .init(handler: { _ in
-                print("rightButton")
-            }))
-            
-            button.setImage(.arrowRight, for: .normal)
-            button.tintColor = .black
-            
-            return button
-        }()
-        
-        let bottomLine = {
-            let bottomLine = UIView()
-            bottomLine.backgroundColor = .lightGray
-            bottomLine.snp.makeConstraints { make in
-                make.height.equalTo(0.5)
+            if totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" == Date().dateToString(format: "MMdd") {
+                label.text = "오늘"
+                label.font = Pretendard.bold(size: 18)
+                label.textColor = .white
+                boxView.addSubview(label)
+                
+                label.snp.makeConstraints { make in
+                    make.centerX.equalToSuperview()
+                    make.centerY.equalToSuperview()
+                }
             }
             
-            return bottomLine
-        }()
-        
-        return VStackView(spacing: CGFloat(LayoutLiterals.upperPrimarySpacing), alignment: .fill, [
-            HStackView(alignment: .center, [
-                leftButton,
-                centerTitle,
-                rightButton,
-            ]),
-            bottomLine
-        ])
-    }
-
-    private func makeGridView(_ days: Int) -> VStackView {
-        func getTheBoxView(_ day: Int,_ state: Check) -> UIButton {
-            let boxView = {
-                let boxView = UIButton(type: .system, primaryAction: .init(handler: { _ in
-                    print("day: \(day)")
-                    self.presentBottomSheet(rootView: ReportHabitDetailView(), detents: [.large()])
-                }))
-                boxView.backgroundColor = .pobitRed
-                boxView.layer.cornerRadius = 10
-                boxView.alpha = day <= todayDate ? 1 : 0.1
-                boxView.snp.makeConstraints { make in
-                    make.width.equalTo(56)
-                    make.height.equalTo(45)
-                }
-                
-                return boxView
-            }()
+            boxView.alpha = totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" <= Date().dateToString(format: "MMdd") ? 1 : 0.1
+            if totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" == Date().dateToString(format: "MMdd") &&
+                totalHabitInfItems![index].hasDone == false { // item의 날자가 오늘이고 습관 완료 안했을때 알파 값 낮춤
+                boxView.alpha = 0.1
+            }
             
-            switch state {
-            case .complete:
-                boxView.backgroundColor = day <= 3 ? .pobitGreen : .pobitRed
-            case .fail:
+            if totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" > Date().dateToString(format: "MMdd") ||
+                totalHabitInfItems![index].hasDone { // item의 날자가 오늘보다 미래이거나 완료 했으면 했다는 색 표시
+                boxView.backgroundColor = index == 0 ? .pobitGreen : .pobitRed
+            } else { // 그 외에는 안했다는거
                 boxView.backgroundColor = .pobitStone2
-            case .rest:
-                boxView.backgroundColor = .white
+            }
+            
+            boxView.snp.makeConstraints { make in
+                make.width.equalTo(width)
+                make.height.equalTo(height)
             }
              
             return boxView
@@ -244,99 +216,92 @@ extension ReportViewController {
         
         let gridView = VStackView(alignment: .center, [
             HStackView([
-                getTheBoxView(1, .complete),
-                getTheBoxView(2, .complete),
-                getTheBoxView(3, .complete),
+                getTheBoxView(0, 56*3, 45),
             ]),
             HStackView([
-                getTheBoxView(4, .fail),
-                getTheBoxView(5, .fail),
-                getTheBoxView(6, .complete),
-                getTheBoxView(7, .complete),
-                getTheBoxView(8, .complete),
+                getTheBoxView(1),
+                getTheBoxView(2),
+                getTheBoxView(3),
+                getTheBoxView(4),
+                getTheBoxView(5),
             ]),
             HStackView([
-                getTheBoxView(9, .complete),
-                getTheBoxView(10, .complete),
-                getTheBoxView(11, .complete),
-                getTheBoxView(12, .complete),
-                getTheBoxView(13, .complete),
+                getTheBoxView(6),
+                getTheBoxView(7),
+                getTheBoxView(8),
+                getTheBoxView(9),
+                getTheBoxView(10),
             ]),
             HStackView([
-                getTheBoxView(14, .complete),
-                getTheBoxView(15, .complete),
-                getTheBoxView(16, .complete),
-                getTheBoxView(17, .rest),
-                getTheBoxView(18, .rest),
+                getTheBoxView(11),
+                getTheBoxView(12),
+                getTheBoxView(13),
+                getTheBoxView(14),
+                getTheBoxView(15),
             ]),
             HStackView([
-                getTheBoxView(19, .rest),
-                getTheBoxView(20, .complete),
-                getTheBoxView(21, .complete),
-                getTheBoxView(22, .complete),
-                getTheBoxView(23, .complete),
-            ]),
-            HStackView([
-                getTheBoxView(24, .complete),
-                getTheBoxView(25, .complete),
-                getTheBoxView(26, .complete),
-                getTheBoxView(27, .complete),
-                getTheBoxView(28, .complete),
+                getTheBoxView(16),
+                getTheBoxView(17),
+                getTheBoxView(18),
+                getTheBoxView(19),
+                getTheBoxView(20),
             ]),
         ])
-        
-        // 월별 마다 이거 조정 필요
-        gridView.addArrangedSubview(
-            HStackView([
-                getTheBoxView(29, .complete),
-                getTheBoxView(30, .complete),
-                getTheBoxView(31, .complete),
-            ])
-        )
-        
-        gridView.backgroundColor = UIColor(red: 253/255, green: 249/255, blue: 249/255, alpha: 0.1)
         
         return gridView
     }
     
     private func makeMessageBoxView(_ message: String) -> UILabel {
-        let messageBoxView = UILabel()
-        messageBoxView.font = Pretendard.regular(size: 16)
-        messageBoxView.text = message
-        messageBoxView.backgroundColor = UIColor(hex: "#FFDADA")
-        messageBoxView.textAlignment = .center
+        let functionExecutedKey = "wasShownMessageBoxView"
         
-        return messageBoxView
+        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 7, left: 15, bottom: 7, right: 15))
+        label.alpha = 0
+        
+        // 앱이 설치된 이후로 한번만 메세지를 보여주기 위함
+        if UserDefaults.standard.bool(forKey: functionExecutedKey) == false {
+            label.text = message
+            label.textAlignment = .center
+            label.font = Pretendard.regular(size: 16)
+            label.backgroundColor = UIColor(hex: "#FFDADA")
+            label.textColor = .pobitBlack
+            
+            UIView.animate(withDuration: 3,
+                           delay: 1,
+                           usingSpringWithDamping: 0.6,
+                           initialSpringVelocity: 0.2,
+                           options: .curveEaseInOut) {
+                label.alpha = 1
+            } completion: { _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    UIView.animate(withDuration: 3,
+                                   delay: 0,
+                                   usingSpringWithDamping: 0.6,
+                                   initialSpringVelocity: 0.2,
+                                   options: .curveEaseInOut) {
+                        label.alpha = 0
+                    }
+                }
+            }
+            UserDefaults.standard.set(true, forKey: functionExecutedKey)
+        }
+        
+        return label
     }
 }
 
 // MARK: - Data Helpers
 
 extension ReportViewController {
-    private func getMonthHabitCompletedInfo() {
-        do {
-//            print("CoreDataManager.shared.fetchDailyHabitInfos: ", try CoreDataManager.shared.fetchDailyHabitInfos())
-//            let monthHabitCompletedInfo = try CoreDataManager.shared.fetchDailyHabitInfos().map{$0.hasDone} // 한달 동안의 습관 완료 기록, 습관을 시작하는날이 아닌경우에는 표시안됨
-        } catch {
-            print(error)
-        }
-    }
     
-    private func getSelectedDayHabitInfo(selectedDay: String) { // selectedDay 매개변수를 통해 해당하는 날짜의 습관정보를 불러옴, 날짜 형식 2024-03-08
-//        do {
-//            let habitInfos = try CoreDataManager.shared.fetchDailyHabitInfos()
-//            print("habitInfos:", habitInfos)
-//            let habitInfoDays = habitInfos.compactMap{$0.day}
-//            if let index = habitInfoDays.firstIndex(where: {$0 == selectedDay}) {
-//                let selectedHabitInfo = habitInfos[index]
-//                guard let day = selectedHabitInfo.day else { return }
-//                let goalTime = selectedHabitInfo.goalTime
-//                let hasDone = selectedHabitInfo.hasDone
-//                guard let note = selectedHabitInfo.note else { return }
-//            }
-//        } catch {
-//            print(error)
-//        }
+    // 데이터 fetch 해주는데, lazy로 선언된 프로퍼티가 사용이 안되있으면 리로드가 불필요하다고 판단하여 조건문 처리.
+    private func fetchData() {
+        if user != nil {
+            user = try? CoreDataManager.shared.fetchUser()
+        }
+        
+        if totalHabitInfItems != nil {
+            totalHabitInfItems = try? CoreDataManager.shared.fetchTotalHabitInfo()
+        }
     }
     
     private func getUserData() -> User? {

@@ -1,5 +1,5 @@
 //
-//  ReportHabitDetailView.swift
+//  ReportHabitDetailViewController.swift
 //  PomoHabit
 //
 //  Created by JiHoon K on 2/29/24.
@@ -7,32 +7,37 @@
 
 import UIKit
 
-// MARK: - ReportHabitDetailView
+// MARK: - ReportHabitDetailViewController
 
-final class ReportHabitDetailView: BaseView {
+final class ReportHabitDetailViewController: BaseViewController {
+    
+    // MARK: - Data Properties
+    
+    private var totalHabitInfo: TotalHabitInfo?
     
     // MARK: - UI Properties
 
     private lazy var headerView: VStackView = makeHeaderView()
     private lazy var mainContainerView: VStackView = makeMainContainerView()
+    private lazy var noteFieldView: UITextView = NoteTextView()
     
     // MARK: - Life Cycles
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         setAddSubviews()
         setAutoLayout()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
 
-extension ReportHabitDetailView {
+extension ReportHabitDetailViewController {
     private func setAddSubviews() {
-        addSubViews([
+        view.addSubViews([
             headerView,
             mainContainerView
         ])
@@ -40,26 +45,30 @@ extension ReportHabitDetailView {
     
     private func setAutoLayout() {
         headerView.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top).offset(50)
-            make.trailing.equalTo(self.snp.trailing).offset(-LayoutLiterals.minimumHorizontalSpacing)
-            make.leading.equalTo(self.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
+            make.top.equalTo(self.view.snp.top).offset(50)
+            make.trailing.equalTo(self.view.snp.trailing).offset(-LayoutLiterals.minimumHorizontalSpacing)
+            make.leading.equalTo(self.view.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
         }
         
         mainContainerView.snp.makeConstraints { make in
             make.top.equalTo(headerView.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
-            make.trailing.equalTo(self.snp.trailing).offset(-LayoutLiterals.minimumHorizontalSpacing)
-            make.leading.equalTo(self.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
+            make.trailing.equalTo(self.view.snp.trailing).offset(-LayoutLiterals.minimumHorizontalSpacing)
+            make.leading.equalTo(self.view.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
         }
+    }
+    
+    func setData(_ totalHabitInfo: TotalHabitInfo?) {
+        self.totalHabitInfo = totalHabitInfo
     }
 }
 
 // MARK: - Factory Methods
 
-extension ReportHabitDetailView {
+extension ReportHabitDetailViewController {
     private func makeHeaderView() -> VStackView {
         let dateLabel = {
             let label = UILabel()
-            label.text = Date().dateToString()
+            label.text = totalHabitInfo?.date?.dateToString()
             label.font = Pretendard.bold(size: 50)
             label.textColor = .pobitBlack
             
@@ -67,7 +76,7 @@ extension ReportHabitDetailView {
         }()
         
         return VStackView([
-            UILabel().setPrimaryColorLabel(text: "Date"),
+            UILabel().setPrimaryColorLabel(text: totalHabitInfo?.date?.dateToString() ?? ""),
             dateLabel,
         ])
     }
@@ -83,40 +92,28 @@ extension ReportHabitDetailView {
             return view
         }()
         
-        let trashButton = {
-            let button = PobitButton(primaryAction: .init(handler: { _ in
-                
-            }))
-            button.setImage(UIImage(systemName: "trash"), for: .normal)
-            button.tintColor = .pobitStone1
-            button.layer.borderColor = UIColor.pobitRed.cgColor
-            button.layer.cornerRadius = 10
-            button.snp.makeConstraints { make in
-                make.width.equalTo(62)
-            }
-            
-            return button
-        }()
-        
         let registButton = {
-            let button = PobitButton.makePlainButton(title: "수정하기", backgroundColor: .pobitRed)
+            let button = PobitButton(type: .system, primaryAction: .init(handler: { _ in
+                CoreDataManager.shared.completedTodyHabit(completedDate: self.totalHabitInfo?.date ?? Date(), note: self.noteFieldView.text)
+                self.dismiss(animated: true)
+            }))
+            button.setTitle("수정하기", for: .normal)
+            button.backgroundColor = .pobitRed
+            button.tintColor = .white
+            button.updateFont(font: Pretendard.medium(size: 24))
+            button.layer.borderWidth = 0
             button.layer.cornerRadius = 10
             
             return button
         }()
         
-        let textView = NoteTextView()
+        noteFieldView.text = totalHabitInfo?.note
         
-        let bottomButtonContainer = HStackView(alignment: .fill, distribution: .fill, [
-            trashButton,
-            registButton
-        ])
-        
-        bottomButtonContainer.snp.makeConstraints { make in
+        registButton.snp.makeConstraints { make in
             make.height.equalTo(62)
         }
         
-        textView.snp.makeConstraints { make in
+        noteFieldView.snp.makeConstraints { make in
             make.height.equalTo(300)
         }
         
@@ -125,12 +122,12 @@ extension ReportHabitDetailView {
             HStackView(spacing: 5, alignment: .fill, distribution: .fill, [
                 makeTextLabel("목표시간", Pretendard.bold(size: 20), .darkGray),
                 makeTextLabel(":", Pretendard.bold(size: 20), .darkGray),
-                makeTextLabel("5분", Pretendard.medium(size: 20), .darkGray),
+                makeTextLabel("\(totalHabitInfo?.goalTime ?? 5)분", Pretendard.medium(size: 20), .darkGray),
                 UIView()
             ]),
             makeTextLabel("메모", Pretendard.bold(size: 24), .darkGray),
-            textView,
-            bottomButtonContainer
+            noteFieldView,
+            registButton
         ])
     }
     

@@ -13,10 +13,10 @@ final class OnboardingHabitRegisterViewController: BaseViewController {
     
     // MARK: - Data Properties
     
-    private var nickName: String?
+    private var nickname: String?
     private var habitTitle: String?
     private var daysButtonSelectionState: [Bool] = [false, false, false, false, false, false, false]
-    private var habitStartTime: Date?
+    private var habitAlarmTime: Date?
     
     // MARK: - Logic Properties
     
@@ -123,7 +123,7 @@ extension OnboardingHabitRegisterViewController {
             self.view.endEditing(true)
             self.addTableViewCellDataAndUpdate(.init(chatDirection: .outgoing, message: self.habitTitle, cellType: .title))
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "무슨 요일에 할거야? 5일 이상을 정해줘!"))
+                self.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "무슨 요일에 할 거야? 5일 이상을 정해줘!"))
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self.addTableViewCellDataAndUpdate(.init(chatDirection: .outgoing, cellType: .days))
                 }
@@ -177,7 +177,7 @@ extension OnboardingHabitRegisterViewController {
             }
             if self.hasShownDaysCell == false && trueCount >= 5 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "몇시에 할거야?"))
+                    self.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "몇 시에 할 거야?"))
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         self.addTableViewCellDataAndUpdate(.init(chatDirection: .outgoing, cellType: .time))
                     }
@@ -192,10 +192,10 @@ extension OnboardingHabitRegisterViewController {
     
     private func makeOnboardingDatePickerTableViewCell(_ indexPath: IndexPath) -> OnboardingDatePickerTableViewCell {
         let cell = OnboardingDatePickerTableViewCell()
-        cell.setData(habitStartTime ?? Date()) { [weak self] date in
-            if self?.habitStartTime == nil {
+        cell.setData(habitAlarmTime ?? Date(timeIntervalSinceReferenceDate: .zero)) { [weak self] date in
+            if self?.habitAlarmTime == nil {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self?.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "좋아 다 됬어! 우리 꼭 습관을 만들어보자!"))
+                    self?.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "좋아 다 됐어! 우리 꼭 습관을 만들어보자!"))
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         self?.registerButton.snp.updateConstraints({ make in
                             make.height.equalTo(82)
@@ -212,7 +212,7 @@ extension OnboardingHabitRegisterViewController {
                     }
                 }
             }
-            self?.habitStartTime = date
+            self?.habitAlarmTime = date
         }
         
         return cell
@@ -232,8 +232,8 @@ extension OnboardingHabitRegisterViewController {
     // 처음 채팅뷰에 진입했을때 한번만 실행시켜야함.
     private func sayHello() {
         let messages: [OnboardingChattingCellData] = [.init(chatDirection: .incoming, cellType: .profilePicture),
-                                                      .init(chatDirection: .incoming, message: "안녕! 앱을 실행해줘서 고마워!"),
-                                                      .init(chatDirection: .incoming, message: "나는 새로운 습관 형성을 도와줄 가이드야."),
+                                                      .init(chatDirection: .incoming, message: "안녕 \(nickname ?? "")! 앱을 실행해 줘서 고마워!"),
+                                                      .init(chatDirection: .incoming, message: "나는 새로운 습관 형성을 도와줄 가이드야"),
                                                       .init(chatDirection: .incoming, message: "어떤 습관을 만들고 싶어?")]
         var index = UnsentMessagesIndex(unsentMessagesCount: messages.count)
         DispatchQueue.main.async {
@@ -261,7 +261,7 @@ extension OnboardingHabitRegisterViewController {
     private func fetchRegisterButtonState() {
         func isUserInputComplete() -> Bool { // 유저가 모든 데이터를 제대로 입력했는지 확인하는 함수
             if habitTitle == nil { return false }
-            if habitStartTime == nil { return false }
+            if habitAlarmTime == nil { return false }
             var daysOnCount = 0
             for state in self.daysButtonSelectionState {
                 if state { daysOnCount += 1 }
@@ -374,10 +374,10 @@ extension OnboardingHabitRegisterViewController {
 
 extension OnboardingHabitRegisterViewController {
     func setData(_ nickname: String?) {
-        self.nickName = nickname
+        self.nickname = nickname
     }
     
-    private func convertDataForCoreData() -> (nickName: String, targetHabit: String, targetDate: String, startTime: String, whiteNoiseType: String?) {
+    private func convertDataForCoreData() -> (nickname: String, targetHabit: String, targetDate: String, alarmTime: Date, whiteNoiseType: String?) {
         // 무슨 요일
         var targetDate = ""
         let daysAll = ["월", "화", "수", "목", "금", "토", "일"]
@@ -388,20 +388,18 @@ extension OnboardingHabitRegisterViewController {
         }
         if targetDate.last == "," { targetDate.removeLast() }
         
-        // 습관 시작 시간
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh : mm a"
-        let formattedStartTime = dateFormatter.string(from: habitStartTime ?? Date())
-        
-        return (nickName: nickName ?? "",
+        return (nickname: nickname ?? "",
                 targetHabit: habitTitle ?? "",
                 targetDate: targetDate,
-                startTime: formattedStartTime,
-                whiteNoiseType: nil)
+                alarmTime: habitAlarmTime ?? Date(),
+                whiteNoiseType: "")
     }
     
     private func saveData() {
         let data = convertDataForCoreData()
-//        CoreDataManager.shared.createUser(nickname: data.nickName, targetHabit: data.targetHabit, targetDate: data.targetDate, startTime: data.startTime, whiteNoiseType: data.whiteNoiseType)
+        
+        CoreDataManager.shared.createUser(nickname: data.nickname, targetHabit: data.targetHabit, targetDate: data.targetDate, alarmTime: data.alarmTime, whiteNoiseType: data.whiteNoiseType)
+        
+//        CoreDataManager.shared.setMockupTotalHabitInfo(today: Date(), targetDate: data.targetDate)
     }
 }
