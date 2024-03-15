@@ -100,7 +100,7 @@ extension ReportDayButtonTableViewCell: UICollectionViewDataSource {
 // MARK: - Data Helpers
 
 extension ReportDayButtonTableViewCell {
-    func initData(_ daysButtonSelectionState: [Bool]?) {
+    func setData(_ daysButtonSelectionState: [Bool]?) {
         self.daysButtonSelectionState = daysButtonSelectionState
     }
 }

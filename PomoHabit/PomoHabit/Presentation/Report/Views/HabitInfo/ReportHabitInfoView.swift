@@ -112,7 +112,7 @@ extension ReportHabitInfoView: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = ReportDayButtonTableViewCell()
-            cell.initData(daysButtonSelectionState)
+            cell.setData(daysButtonSelectionState)
             
             return cell
         case 1:
