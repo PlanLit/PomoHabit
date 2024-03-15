@@ -178,9 +178,24 @@ extension ReportViewController {
             }))
             boxView.layer.cornerRadius = 10
             boxView.clipsToBounds = true
+            
+            let label = UILabel()
+            
+            if totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" == Date().dateToString(format: "MMdd") {
+                label.text = "오늘"
+                label.font = Pretendard.bold(size: 18)
+                label.textColor = .white
+                boxView.addSubview(label)
+                
+                label.snp.makeConstraints { make in
+                    make.centerX.equalToSuperview()
+                    make.centerY.equalToSuperview()
+                }
+            }
+            
             boxView.alpha = totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" <= Date().dateToString(format: "MMdd") ? 1 : 0.1
             if totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" == Date().dateToString(format: "MMdd") &&
-                !totalHabitInfItems![index].hasDone { // item의 날자가 오늘이고 습관 완료 안했을때 알파 값 낮춤
+                totalHabitInfItems![index].hasDone == false { // item의 날자가 오늘이고 습관 완료 안했을때 알파 값 낮춤
                 boxView.alpha = 0.1
             }
             
