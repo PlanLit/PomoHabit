@@ -116,10 +116,15 @@ extension ReportViewController {
             button.setImage(.verticalMenu, for: .normal)
             
             let habitInfo = UIAction(title: "습관 정보", handler: { _ in
-                self.presentBottomSheet(rootView: ReportHabitInfoView(frame: .null,
-                                                                      daysButtonSelectionState: self.getMonthData(),
-                                                                      startTime: self.user?.alarmTime?.dateToString(format: "hh : mm a")),
-                                        detents: [.medium()])
+//                self.presentBottomSheet(rootView: ReportHabitInfoView(frame: .null,
+//                                                                      daysButtonSelectionState: self.getMonthData(),
+//                                                                      startTime: self.user?.alarmTime?.dateToString(format: "hh : mm a")),
+//                                        detents: [.medium()])
+//                self.presentBottomSheet(viewController: UIViewController())
+//                self.presentBottomSheet(rootView: ReportHabitInfoView(frame: .null,
+//                                                                      daysButtonSelectionState: self.getMonthData(),
+//                                                                      startTime: self.user?.alarmTime?.timeToString()),
+//                                        detents: [.medium()])
             })
             
             let habitEdit = UIAction(title: "습관 변경", attributes: .destructive, handler: { _ in
@@ -174,11 +179,10 @@ extension ReportViewController {
             let boxView = UIButton(type: .system, primaryAction: .init(handler: { _ in
                 let reportHabitDetailView = ReportHabitDetailView(frame: .zero, self.totalHabitInfItems?[index])
                 reportHabitDetailView.reportViewController = self
-                self.presentBottomSheet(rootView: reportHabitDetailView, detents: [.large()])
+//                self.presentBottomSheet(rootView: reportHabitDetailView, detents: [.large()])
             }))
             boxView.layer.cornerRadius = 10
             boxView.clipsToBounds = true
-            
             boxView.alpha = totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" <= Date().dateToString(format: "MMdd") ? 1 : 0.1
             if totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" == Date().dateToString(format: "MMdd") &&
                 !totalHabitInfItems![index].hasDone { // item의 날자가 오늘이고 습관 완료 안했을때 알파 값 낮춤

@@ -11,7 +11,7 @@ import SnapKit
 
 // MARK: - WhiteNoiseView
 
-final class WhiteNoiseView: BaseView {
+final class WhiteNoiseViewController: BaseViewController {
 
     // MARK: - UI Properties
   
@@ -40,24 +40,17 @@ final class WhiteNoiseView: BaseView {
     
     // MARK: - Life Cycle
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+    override func viewDidLoad() {
         setAddSubViews()
         setAutoLayout()
-        backgroundColor = .red
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
 // MARK: - Layout Helpers
 
-extension WhiteNoiseView {
+extension WhiteNoiseViewController {
     private func setAddSubViews() {
-        addSubViews([navigationBar, whiteNoiseLabel, editButton, tableView])
+        view.addSubViews([navigationBar, whiteNoiseLabel, editButton, tableView])
     }
     
     private func setAutoLayout() {
@@ -89,13 +82,13 @@ extension WhiteNoiseView {
 
 // MARK: - UITableViewDelegate
 
-extension WhiteNoiseView: UITableViewDelegate {
+extension WhiteNoiseViewController: UITableViewDelegate {
     
 }
 
 // MARK: - UITableViewDataSource
 
-extension WhiteNoiseView: UITableViewDataSource {
+extension WhiteNoiseViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tempModel.count
     }

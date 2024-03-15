@@ -35,7 +35,8 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        presentBottomSheet(rootView: nicknameEditView, detents: [.large()])
+        presentBottomSheet(viewController: UIViewController())
+//        presentBottomSheet(rootView: nicknameEditView, detents: [.large()])
     }
 }
 
