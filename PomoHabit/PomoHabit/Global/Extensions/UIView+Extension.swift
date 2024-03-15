@@ -23,10 +23,7 @@ extension UIView {
     }
     
     var hasNotch: Bool {
-        if #available(iOS 11.0, *) {
-            return safeAreaInsets.top > 20
-        }
-        return false
+        return !( (UIScreen.main.bounds.width / UIScreen.main.bounds.height) > 0.5 )
     }
     
     /// Constraint 설정 시 노치 유무로 기기 대응
