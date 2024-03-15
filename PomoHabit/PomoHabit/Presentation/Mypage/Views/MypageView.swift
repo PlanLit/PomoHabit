@@ -135,7 +135,7 @@ final class MyPageView: BaseView {
     
     // MARK: - TableView
     
-     lazy var tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let myPageTableView = UITableView(frame: .zero, style: .plain)
         myPageTableView.separatorStyle = .singleLine
         myPageTableView.dataSource = self
@@ -247,6 +247,10 @@ extension MyPageView {
     func getNicknameLabel() -> UILabel {
         return nickNameLabel
     }
+    
+    func getTableView() -> UITableView {
+            return tableView
+        }
 }
 
 // MARK: - UITableViewDataSource
@@ -270,27 +274,3 @@ extension MyPageView: UITableViewDataSource {
         return cell
     }
 }
-
-// MARK: - UITableViewDelegate
-
-//extension MyPageView: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        
-//        let selectModel = myPageCellModels[indexPath.row]
-//        
-//        switch selectModel.title {
-//        case "오픈 소스 사용":
-//            if let navigationController = self.navigationController {
-//                            navigationController.pushViewController(openSourceViewController, animated: true)
-//                        }
-//            break
-//        case "고객 센터":
-//            // let newViewController = YourNewViewController()
-//                        // navigationController?.pushViewController(newViewController, animated: true)
-//            break
-//        default:
-//            break
-//        }
-//    }
-//}

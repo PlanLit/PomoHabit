@@ -19,7 +19,7 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
     private let nicknameEditView = NicknameEditView()
     private var customNavigationController: UINavigationController? = nil
     private let openSourceViewController = OpenSourceViewController()
-        private let cSViewController = CSViewController()
+    private let customerServiceViewController = CustomerServiceViewController()
     // MARK: - View Lifecycle
     
     override func loadView() {
@@ -30,17 +30,16 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        myPageRootView.tableView.delegate = self
-        setTotalHabitInfo()
         
-        customNavigationController = navigationController
+        myPageRootView.getTableView().delegate = self
+        setTotalHabitInfo()
+        setupCustomNavigationController()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        presentBottomSheet(viewController: UIViewController())
-//        presentBottomSheet(rootView: nicknameEditView, detents: [.large()])
+        presentBottomSheet(viewController: NicknameViewController())
     }
 }
 
@@ -48,17 +47,27 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
 
 extension MyPageViewController {
     private func setTotalHabitInfo() {
-//        do {
-//            let dailyHabitInfos = try CoreDataManager.shared.fetchDailyHabitInfos() // 전체 DailyHabit 데이터
-//            let totalHabitDoneCount = dailyHabitInfos.filter{ $0.hasDone == true }.count // 습관 진행 일수
-//            let totlaHabitDuringTime = dailyHabitInfos.filter{ $0.hasDone == true }.map{$0.goalTime}.reduce(0, +) // 진행 총 시간 , 분단위
-//            // 완료한 습관 수를 어떻게 할것인지 상의 필요할것 같습니다.
-//            
-//        } catch {
-//            
-//        }
+        //        do {
+        //            let dailyHabitInfos = try CoreDataManager.shared.fetchDailyHabitInfos() // 전체 DailyHabit 데이터
+        //            let totalHabitDoneCount = dailyHabitInfos.filter{ $0.hasDone == true }.count // 습관 진행 일수
+        //            let totlaHabitDuringTime = dailyHabitInfos.filter{ $0.hasDone == true }.map{$0.goalTime}.reduce(0, +) // 진행 총 시간 , 분단위
+        //            // 완료한 습관 수를 어떻게 할것인지 상의 필요할것 같습니다.
+        //            
+        //        } catch {
+        //            
+        //        }
     }
 }
+
+// MARK: - Method
+
+extension MyPageViewController {
+    private func setupCustomNavigationController() {
+        customNavigationController = navigationController
+    }
+}
+
+// MARK: - UITableViewDelegate
 
 extension MyPageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -67,16 +76,17 @@ extension MyPageViewController: UITableViewDelegate {
         let selectModel = myPageCellModels[indexPath.row]
         
         switch selectModel.title {
-            case "오픈 소스 사용":
-                if let navigationController = customNavigationController {
-                    navigationController.pushViewController(openSourceViewController, animated: true)
-                }
-            case "고객 센터":
-                if let navigationController = customNavigationController {
-                    navigationController.pushViewController(cSViewController, animated: true)
-                }
-            default:
-                break
+        case "오픈 소스 사용":
+            if let navigationController = customNavigationController {
+                navigationController.pushViewController(openSourceViewController, animated: true)
             }
+        case "고객 센터":
+            if let navigationController = customNavigationController {
+                navigationController.pushViewController(customerServiceViewController, animated: true)
+            }
+        default:
+            break
         }
+        navigationController?.isNavigationBarHidden = false
+    }
 }
