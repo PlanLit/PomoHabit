@@ -18,7 +18,7 @@ final class CircleProgressBar: BaseView {
     
     // MARK: - UI Properties
     
-    private lazy var progressLayer = makeLayer(strokeColor: .pobitRed, strokeEnd: 1)
+    private lazy var progressLayer = makeLayer(strokeColor: .pobitRed, strokeEnd: 0)
     private lazy var trackLayer = makeLayer(strokeColor: .pobitSkin, strokeEnd: 1)
     private lazy var dashedCircleLayer = makeDashedCircleLayer()
     
@@ -85,13 +85,27 @@ extension CircleProgressBar {
 // MARK: - Action Helpers
 
 extension CircleProgressBar {
+    func updateProgressBarUI(with state: TimerState) {
+        switch state {
+        case .stopped:
+            // TODO: 비활성화시 옅은 색상
+            break
+        case .running:
+            break
+        case .finished:
+            progressLayer.strokeEnd = 1
+        case .done:
+            break
+        }
+    }
+    
     func setProgressWithAnimation(duration: TimeInterval) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.fromValue = 1
-        animation.toValue = 0
+        animation.fromValue = 0
+        animation.toValue = 1
         animation.duration = duration
         animation.fillMode = .forwards
-        animation.isRemovedOnCompletion = false
+        animation.isRemovedOnCompletion = true
         progressLayer.add(animation, forKey: "progressAnimation")
     }
     
