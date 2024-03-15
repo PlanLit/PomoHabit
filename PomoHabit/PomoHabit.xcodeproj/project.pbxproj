@@ -35,8 +35,8 @@
 		378034A32B8F8D8A0046E6B8 /* PomoProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278222B8F88FB00BA7373 /* PomoProgressBar.swift */; };
 		378034A42B8F8D8D0046E6B8 /* PomoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278232B8F88FF00BA7373 /* PomoModel.swift */; };
 		378034A82B8F9C810046E6B8 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378034A72B8F9C810046E6B8 /* BottomSheetViewController.swift */; };
-		378034AB2B8F9D7A0046E6B8 /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378034AA2B8F9D7A0046E6B8 /* MemoView.swift */; };
-		378034AD2B8FAB5B0046E6B8 /* WhiteNoiseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378034AC2B8FAB5B0046E6B8 /* WhiteNoiseView.swift */; };
+		378034AB2B8F9D7A0046E6B8 /* MemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378034AA2B8F9D7A0046E6B8 /* MemoViewController.swift */; };
+		378034AD2B8FAB5B0046E6B8 /* WhiteNoiseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378034AC2B8FAB5B0046E6B8 /* WhiteNoiseViewController.swift */; };
 		378034AF2B8FACE50046E6B8 /* WhiteNoiseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378034AE2B8FACE50046E6B8 /* WhiteNoiseTableViewCell.swift */; };
 		37B811CD2B9B74BE00A6694E /* InputOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B811CC2B9B74BE00A6694E /* InputOutputProtocol.swift */; };
 		37B811CF2B9B76F100A6694E /* Combine+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B811CE2B9B76F100A6694E /* Combine+Extensions.swift */; };
@@ -113,8 +113,8 @@
 		376B91B62B8C6AF6004CBB16 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		376B91B92B8CE6B6004CBB16 /* PobitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PobitButton.swift; sourceTree = "<group>"; };
 		378034A72B8F9C810046E6B8 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
-		378034AA2B8F9D7A0046E6B8 /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
-		378034AC2B8FAB5B0046E6B8 /* WhiteNoiseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteNoiseView.swift; sourceTree = "<group>"; };
+		378034AA2B8F9D7A0046E6B8 /* MemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewController.swift; sourceTree = "<group>"; };
+		378034AC2B8FAB5B0046E6B8 /* WhiteNoiseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteNoiseViewController.swift; sourceTree = "<group>"; };
 		378034AE2B8FACE50046E6B8 /* WhiteNoiseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteNoiseTableViewCell.swift; sourceTree = "<group>"; };
 		37B811CC2B9B74BE00A6694E /* InputOutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputOutputProtocol.swift; sourceTree = "<group>"; };
 		37B811CE2B9B76F100A6694E /* Combine+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine+Extensions.swift"; sourceTree = "<group>"; };
@@ -380,8 +380,8 @@
 		378034A92B8F9D360046E6B8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				378034AA2B8F9D7A0046E6B8 /* MemoView.swift */,
-				378034AC2B8FAB5B0046E6B8 /* WhiteNoiseView.swift */,
+				378034AA2B8F9D7A0046E6B8 /* MemoViewController.swift */,
+				378034AC2B8FAB5B0046E6B8 /* WhiteNoiseViewController.swift */,
 				378034AE2B8FACE50046E6B8 /* WhiteNoiseTableViewCell.swift */,
 			);
 			path = Views;
@@ -654,7 +654,7 @@
 				F88EB2D82B8DC0EB0073BDDA /* WeeklyCalendarModel.swift in Sources */,
 				F8A4FB992B96F2A300E46EA1 /* ReportHabitDetailView.swift in Sources */,
 				BAFEE1542B96F900009F0D25 /* MypageTableViewCell.swift in Sources */,
-				378034AD2B8FAB5B0046E6B8 /* WhiteNoiseView.swift in Sources */,
+				378034AD2B8FAB5B0046E6B8 /* WhiteNoiseViewController.swift in Sources */,
 				F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */,
 				F870D85C2B8EFF3900DA4659 /* UILabel+Extension.swift in Sources */,
 				F85F8F5B2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift in Sources */,
@@ -672,7 +672,7 @@
 				F8A4FB962B96F2A300E46EA1 /* ReportViewController.swift in Sources */,
 				37B811CD2B9B74BE00A6694E /* InputOutputProtocol.swift in Sources */,
 				37144C6A2B8C32D6008565C4 /* ViewController.swift in Sources */,
-				378034AB2B8F9D7A0046E6B8 /* MemoView.swift in Sources */,
+				378034AB2B8F9D7A0046E6B8 /* MemoViewController.swift in Sources */,
 				E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */,
 				E0BEE14B2B99366600A2C4C4 /* OnboardingChattingCellData.swift in Sources */,
 				378034A12B8F8D830046E6B8 /* PomoViewController.swift in Sources */,
