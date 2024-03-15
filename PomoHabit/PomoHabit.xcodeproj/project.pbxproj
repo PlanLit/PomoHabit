@@ -76,8 +76,8 @@
 		F8A4FB952B96F2A300E46EA1 /* ReportImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB8D2B96F2A300E46EA1 /* ReportImageCollectionViewController.swift */; };
 		F8A4FB962B96F2A300E46EA1 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB8E2B96F2A300E46EA1 /* ReportViewController.swift */; };
 		F8A4FB972B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB912B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift */; };
-		F8A4FB982B96F2A300E46EA1 /* ReportHabitInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB922B96F2A300E46EA1 /* ReportHabitInfoView.swift */; };
-		F8A4FB992B96F2A300E46EA1 /* ReportHabitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB942B96F2A300E46EA1 /* ReportHabitDetailView.swift */; };
+		F8A4FB982B96F2A300E46EA1 /* ReportHabitInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB922B96F2A300E46EA1 /* ReportHabitInfoViewController.swift */; };
+		F8A4FB992B96F2A300E46EA1 /* ReportHabitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB942B96F2A300E46EA1 /* ReportHabitDetailViewController.swift */; };
 		F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD372B8C7FC900712CBF /* NoteView.swift */; };
 		F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD392B8C7FF200712CBF /* NoteTextView.swift */; };
 /* End PBXBuildFile section */
@@ -152,8 +152,8 @@
 		F8A4FB8D2B96F2A300E46EA1 /* ReportImageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportImageCollectionViewController.swift; sourceTree = "<group>"; };
 		F8A4FB8E2B96F2A300E46EA1 /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		F8A4FB912B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportDayButtonTableViewCell.swift; sourceTree = "<group>"; };
-		F8A4FB922B96F2A300E46EA1 /* ReportHabitInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHabitInfoView.swift; sourceTree = "<group>"; };
-		F8A4FB942B96F2A300E46EA1 /* ReportHabitDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHabitDetailView.swift; sourceTree = "<group>"; };
+		F8A4FB922B96F2A300E46EA1 /* ReportHabitInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHabitInfoViewController.swift; sourceTree = "<group>"; };
+		F8A4FB942B96F2A300E46EA1 /* ReportHabitDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHabitDetailViewController.swift; sourceTree = "<group>"; };
 		F8E3CD372B8C7FC900712CBF /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		F8E3CD392B8C7FF200712CBF /* NoteTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -530,6 +530,8 @@
 			children = (
 				F8A4FB8E2B96F2A300E46EA1 /* ReportViewController.swift */,
 				F8A4FB8D2B96F2A300E46EA1 /* ReportImageCollectionViewController.swift */,
+				F8A4FB922B96F2A300E46EA1 /* ReportHabitInfoViewController.swift */,
+				F8A4FB942B96F2A300E46EA1 /* ReportHabitDetailViewController.swift */,
 			);
 			path = Conrollers;
 			sourceTree = "<group>";
@@ -538,7 +540,6 @@
 			isa = PBXGroup;
 			children = (
 				F8A4FB902B96F2A300E46EA1 /* HabitInfo */,
-				F8A4FB932B96F2A300E46EA1 /* HabitEdit */,
 				E004EA602BA2497A000AD37C /* HabitIndicatorView.swift */,
 			);
 			path = Views;
@@ -547,18 +548,9 @@
 		F8A4FB902B96F2A300E46EA1 /* HabitInfo */ = {
 			isa = PBXGroup;
 			children = (
-				F8A4FB922B96F2A300E46EA1 /* ReportHabitInfoView.swift */,
 				F8A4FB912B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift */,
 			);
 			path = HabitInfo;
-			sourceTree = "<group>";
-		};
-		F8A4FB932B96F2A300E46EA1 /* HabitEdit */ = {
-			isa = PBXGroup;
-			children = (
-				F8A4FB942B96F2A300E46EA1 /* ReportHabitDetailView.swift */,
-			);
-			path = HabitEdit;
 			sourceTree = "<group>";
 		};
 		F8E3CD362B8C7FB600712CBF /* Note */ = {
@@ -652,7 +644,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F88EB2D82B8DC0EB0073BDDA /* WeeklyCalendarModel.swift in Sources */,
-				F8A4FB992B96F2A300E46EA1 /* ReportHabitDetailView.swift in Sources */,
+				F8A4FB992B96F2A300E46EA1 /* ReportHabitDetailViewController.swift in Sources */,
 				BAFEE1542B96F900009F0D25 /* MypageTableViewCell.swift in Sources */,
 				378034AD2B8FAB5B0046E6B8 /* WhiteNoiseViewController.swift in Sources */,
 				F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */,
@@ -694,7 +686,7 @@
 				F8A4FB972B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift in Sources */,
 				373D0DF22B8F7B45004CC2C7 /* PobitNavigationBarView.swift in Sources */,
 				E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */,
-				F8A4FB982B96F2A300E46EA1 /* ReportHabitInfoView.swift in Sources */,
+				F8A4FB982B96F2A300E46EA1 /* ReportHabitInfoViewController.swift in Sources */,
 				F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */,
 				37144C682B8C32D6008565C4 /* SceneDelegate.swift in Sources */,
 				73DFA2592B90274700C381A7 /* OnboardingChattingTableViewCell.swift in Sources */,
