@@ -111,7 +111,7 @@ extension TimerView {
         }
         
         timerHeaderView.snp.makeConstraints { make in
-            make.top.equalTo(navigationBar.snp.bottom).offset(24)
+            make.top.equalTo(navigationBar.snp.bottom).offset(constraintByNotch(24, 12))
             make.leading.trailing.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
             make.height.equalTo(152)
         }
@@ -119,20 +119,20 @@ extension TimerView {
         setupTimerHeaderView()
         
         starView.snp.makeConstraints { make in
-            make.top.equalTo(timerHeaderView.snp.bottom).offset(36)
+            make.top.equalTo(timerHeaderView.snp.bottom).offset(constraintByNotch(36, 12))
             make.centerX.equalToSuperview()
             make.width.equalTo(120)
             make.height.equalTo(72)
         }
         
         circleProgressBar.snp.makeConstraints { make in
-            make.top.equalTo(timerHeaderView.snp.bottom).offset(68)
+            make.top.equalTo(timerHeaderView.snp.bottom).offset(constraintByNotch(68, 44))
             make.centerX.equalToSuperview()
-            make.size.equalTo(280)
+            make.size.equalTo(constraintByNotch(280, 240))
         }
         
         timerButton.snp.makeConstraints { make in
-            make.top.equalTo(circleProgressBar.snp.bottom).offset(LayoutLiterals.lowerPrimarySpacing)
+            make.top.equalTo(circleProgressBar.snp.bottom).offset(constraintByNotch(24, 12))
             make.centerX.equalToSuperview()
             make.width.equalTo(134)
             make.height.equalTo(58)
