@@ -23,7 +23,7 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
     private lazy var imageCollectionViewController: ReportImageCollectionViewController = makeImageCollectionViewController()
     private lazy var gridView: VStackView = makeGridView()
     private lazy var habitIndicatorView = HabitIndicatorView()
-    private lazy var messageBoxView: UILabel = makeMessageBoxView("모두 완료하면 토마토가 웃는얼굴이 돼요")
+//    private lazy var messageBoxView: UILabel = makeMessageBoxView("모두 완료하면 토마토가 웃는얼굴이 돼요")
     
     // MARK: - Life Cycles
     
@@ -53,7 +53,7 @@ extension ReportViewController {
             imageCollectionViewController.view,
             gridView,
             habitIndicatorView,
-            messageBoxView
+//            messageBoxView
         ])
     }
     
@@ -90,10 +90,10 @@ extension ReportViewController {
             make.width.equalTo(250)
         }
         
-        messageBoxView.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-LayoutLiterals.minimumVerticalSpacing)
-            make.centerX.equalToSuperview()
-        }
+//        messageBoxView.snp.makeConstraints { make in
+//            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-LayoutLiterals.minimumVerticalSpacing)
+//            make.centerX.equalToSuperview()
+//        }
     }
 }
 
