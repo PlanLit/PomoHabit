@@ -23,6 +23,7 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
     private lazy var imageCollectionViewController: ReportImageCollectionViewController = makeImageCollectionViewController()
     private lazy var gridView: VStackView = makeGridView()
     private lazy var habitIndicatorView = HabitIndicatorView()
+    private lazy var messageBoxView: UILabel = makeMessageBoxView("모두 완료하면 토마토가 웃는얼굴이 돼요")
     
     // MARK: - Life Cycles
     
@@ -52,6 +53,7 @@ extension ReportViewController {
             imageCollectionViewController.view,
             gridView,
             habitIndicatorView,
+            messageBoxView
         ])
     }
     
@@ -86,6 +88,11 @@ extension ReportViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-LayoutLiterals.minimumVerticalSpacing)
             make.centerX.equalToSuperview()
             make.width.equalTo(250)
+        }
+        
+        messageBoxView.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-LayoutLiterals.minimumVerticalSpacing)
+            make.centerX.equalToSuperview()
         }
     }
 }
@@ -231,13 +238,40 @@ extension ReportViewController {
     }
     
     private func makeMessageBoxView(_ message: String) -> UILabel {
-        let messageBoxView = UILabel()
-        messageBoxView.font = Pretendard.regular(size: 16)
-        messageBoxView.text = message
-        messageBoxView.backgroundColor = UIColor(hex: "#FFDADA")
-        messageBoxView.textAlignment = .center
+        let functionExecutedKey = "wasShownMessageBoxView"
         
-        return messageBoxView
+        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 7, left: 15, bottom: 7, right: 15))
+        label.alpha = 0
+        
+        // 앱이 설치된 이후로 한번만 메세지를 보여주기 위함
+        if UserDefaults.standard.bool(forKey: functionExecutedKey) == false {
+            label.text = message
+            label.textAlignment = .center
+            label.font = Pretendard.regular(size: 16)
+            label.backgroundColor = UIColor(hex: "#FFDADA")
+            label.textColor = .pobitBlack
+            
+            UIView.animate(withDuration: 3,
+                           delay: 1,
+                           usingSpringWithDamping: 0.6,
+                           initialSpringVelocity: 0.2,
+                           options: .curveEaseInOut) {
+                label.alpha = 1
+            } completion: { _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    UIView.animate(withDuration: 3,
+                                   delay: 0,
+                                   usingSpringWithDamping: 0.6,
+                                   initialSpringVelocity: 0.2,
+                                   options: .curveEaseInOut) {
+                        label.alpha = 0
+                    }
+                }
+            }
+            UserDefaults.standard.set(true, forKey: functionExecutedKey)
+        }
+        
+        return label
     }
 }
 
