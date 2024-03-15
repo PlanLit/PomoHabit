@@ -42,4 +42,10 @@ extension Date {
             return false
         }
     }
+    
+    func extractTimeFromDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.string(from: date)
+    }
 }

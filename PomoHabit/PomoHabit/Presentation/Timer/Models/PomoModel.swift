@@ -22,7 +22,7 @@ enum TimerState {
 struct UserData {
     var targetHabit: String
     var targetDate: String
-    var alarmTime: Date
+    var alarmTime: String
     var whiteNoiseType: String
 }
 
@@ -53,7 +53,7 @@ final class TimerViewModel: InputOutputProtocol {
     
     private var targetHabit = String()
     private var targetDate = String()
-    private var alarmTime = Date()
+    private var alarmTime = String()
     private var whiteNoiseType = String()
     private let currentDate = Date()
     
@@ -146,9 +146,11 @@ extension TimerViewModel {
                   let alarmTime = userData?.alarmTime,
                   let whiteNoiseType = userData?.whiteNoiseType else { return }
             
+            let alarmTimeString = Date().extractTimeFromDate(alarmTime)
+            
             self.targetHabit = targetHabit
             self.targetDate = targetDate
-            self.alarmTime = alarmTime
+            self.alarmTime = alarmTimeString
             self.whiteNoiseType = whiteNoiseType
         } catch {
             print(error)
@@ -161,10 +163,10 @@ extension TimerViewModel {
             
             guard let goalTime = selectedHabitInfo?.goalTime else { return } // 목표 시간
             
-            self.timerDuration = TimeInterval(goalTime * 60)
+//            self.timerDuration = TimeInterval(goalTime * 60)
             
             /// test용 주석
-//            self.timerDuration = TimeInterval(goalTime)
+            self.timerDuration = TimeInterval(goalTime)
         } catch {
             print(error)
         }
