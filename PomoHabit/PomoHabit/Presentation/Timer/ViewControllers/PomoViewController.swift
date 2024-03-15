@@ -38,19 +38,19 @@ final class TimerViewController: BaseViewController, BottomSheetPresentable {
 extension TimerViewController {
     private func bind() {
         let input = TimerViewModel.Input(memoButtonTapped: rootView.memoButtonTapped,
-                                     whiteNoiseButtonTapped: rootView.whiteNoiseButtonTapped,
-                                     timerButtonTapped: rootView.timerButtonTapped)
+                                         whiteNoiseButtonTapped: rootView.whiteNoiseButtonTapped,
+                                         timerButtonTapped: rootView.timerButtonTapped)
         let output = model.transform(input: input)
         
         output.memoButtonAction
+            .receive(on: DispatchQueue.main)
             .sink { _ in
-                DispatchQueue.main.async {
-                    self.presentBottomSheet(viewController: MemoViewController())
-                }
+                self.presentBottomSheet(viewController: MemoViewController())
             }
             .store(in: &cancellables)
         
         output.whiteNoiseButtonAction
+            .receive(on: DispatchQueue.main)
             .sink { _ in
                 DispatchQueue.main.async {
                     self.presentBottomSheet(viewController: WhiteNoiseViewController(), detents: [.medium()])
@@ -59,33 +59,37 @@ extension TimerViewController {
             .store(in: &cancellables)
         
         output.timerButtonAction
-            .sink { _ in
-                
-            }
+            .sink { _ in }
             .store(in: &cancellables)
         
         output.timerStateDidChange
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] state in
                 self?.rootView.updateTimerButtonUI(with: state)
                 self?.rootView.circleProgressBar.updateProgressBarUI(with: state)
-                if state == .running {
+                
+                switch state {
+                case .stopped:
+                    break
+                case .running:
                     self?.rootView.circleProgressBar.setProgressWithAnimation(duration: self?.model.timerDuration ?? 5)
-                } else {
-                    self?.rootView.circleProgressBar.resetProgressAnimation()
+                case .finished:
+                    self?.rootView.updateTimerButtonUI(with: state)
+                case .done:
+                    self?.showAlert(title: "오늘의 습관을 완료했어요!", message: "\n 내일 다시 만나요 :)", cancelButton: false)
                 }
             }
             .store(in: &cancellables)
         
         output.remainingTime
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] remainingTime in
                 self?.rootView.circleProgressBar.updateTimeLabel(remainingTime)
             }
             .store(in: &cancellables)
         
         output.userData
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] userData in
                 self?.rootView.updateViewWithUserData(userData)
             }

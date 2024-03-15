@@ -1,5 +1,5 @@
 //
-//  MemoView.swift
+//  MemoViewController.swift
 //  PomoHabit
 //
 //  Created by Joon Baek on 2024/02/29.
@@ -10,7 +10,7 @@ import UIKit
 
 import SnapKit
 
-// MARK: - MemoView
+// MARK: - MemoViewController
 
 final class MemoViewController: BaseViewController {
 

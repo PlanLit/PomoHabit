@@ -148,15 +148,14 @@ extension TimerView {
         case .stopped:
             timerButton.setTitle("시작", for: .normal)
             timerButton.backgroundColor = .pobitBlack
-            timerButton.isEnabled = true
         case .running:
             timerButton.setTitle("완료", for: .normal)
             timerButton.backgroundColor = .pobitStone1
-            timerButton.isEnabled = false
         case .finished:
             timerButton.setTitle("완료", for: .normal)
             timerButton.backgroundColor = .pobitBlack
-            timerButton.isEnabled = true
+        case .done:
+            break
         }
     }
     

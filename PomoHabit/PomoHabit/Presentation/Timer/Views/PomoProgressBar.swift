@@ -18,8 +18,8 @@ final class CircleProgressBar: BaseView {
     
     // MARK: - UI Properties
     
-    private lazy var progressLayer = makeLayer(strokeColor: .pobitRed)
-    private lazy var trackLayer = makeLayer(strokeColor: .pobitSkin)
+    private lazy var progressLayer = makeLayer(strokeColor: .pobitRed, strokeEnd: 0)
+    private lazy var trackLayer = makeLayer(strokeColor: .pobitSkin, strokeEnd: 1)
     private lazy var dashedCircleLayer = makeDashedCircleLayer()
     
     private var todayLabel = UILabel().setPrimaryColorLabel(text: "오늘")
@@ -88,13 +88,14 @@ extension CircleProgressBar {
     func updateProgressBarUI(with state: TimerState) {
         switch state {
         case .stopped:
-            progressLayer.strokeEnd = 0
-            trackLayer.strokeEnd = 1
-            trackLayer.backgroundColor = UIColor.black.cgColor
+            // TODO: 비활성화시 옅은 색상
+            break
         case .running:
             break
         case .finished:
             progressLayer.strokeEnd = 1
+        case .done:
+            break
         }
     }
     
@@ -126,10 +127,10 @@ extension CircleProgressBar {
 // MARK: - Factory Method
 
 extension CircleProgressBar {
-    private func makeLayer(strokeColor: UIColor) -> CAShapeLayer {
+    private func makeLayer(strokeColor: UIColor, strokeEnd: CGFloat) -> CAShapeLayer {
         let layer = CAShapeLayer()
         layer.strokeColor = strokeColor.cgColor
-        layer.strokeEnd = 1
+        layer.strokeEnd = strokeEnd
         layer.fillColor = UIColor.clear.cgColor
         layer.lineWidth = 40
         layer.lineCap = .round
