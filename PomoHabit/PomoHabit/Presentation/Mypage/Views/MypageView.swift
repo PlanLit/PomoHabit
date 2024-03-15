@@ -139,7 +139,7 @@ final class MyPageView: BaseView {
         let myPageTableView = UITableView(frame: .zero, style: .plain)
         myPageTableView.separatorStyle = .singleLine
         myPageTableView.dataSource = self
-        myPageTableView.delegate = self
+//        myPageTableView.delegate = self
         myPageTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: MyPageTableViewCell.reuseIdentifier)
         
         return myPageTableView
@@ -225,9 +225,10 @@ extension MyPageView {
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(grayBar2.snp.top).offset(LayoutLiterals.upperPrimarySpacing)
-            make.left.right.bottom.equalToSuperview()
+//            make.left.right.bottom.equalToSuperview()
             make.left.equalToSuperview().offset(LayoutLiterals.minimumHorizontalSpacing)
             make.right.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
+            make.bottom.equalToSuperview()
         }
     }
 }
@@ -246,6 +247,10 @@ extension MyPageView {
     func getNicknameLabel() -> UILabel {
         return nickNameLabel
     }
+    
+    func getTableView() -> UITableView {
+            return tableView
+        }
 }
 
 // MARK: - UITableViewDataSource
@@ -264,15 +269,8 @@ extension MyPageView: UITableViewDataSource {
         cell.textLabel?.text = model.title
         cell.textLabel?.font = Pretendard.regular(size: 20)
         cell.textLabel?.textColor = .pobitStone2
+        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         return cell
-    }
-}
-
-// MARK: - UITableViewDelegate
-
-extension MyPageView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
