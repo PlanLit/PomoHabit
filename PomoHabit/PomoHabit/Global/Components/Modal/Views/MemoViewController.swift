@@ -37,15 +37,15 @@ extension MemoViewController {
     
     private func setAutoLayout() {
         navigationBar.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
+            make.top.equalToSuperview().offset(LayoutLiterals.upperPrimarySpacing)
+            make.leading.trailing.equalToSuperview()
             make.height.equalTo(58)
         }
         
         textView.snp.makeConstraints { make in
-            make.top.equalTo(navigationBar.snp.bottom).offset(50)
+            make.top.equalTo(navigationBar.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
             make.leading.trailing.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
-            make.height.equalTo(500)
-            make.bottom.equalTo(submitButton.snp.top).inset(-68)
+            make.height.equalTo(218)
         }
         
         submitButton.snp.makeConstraints { make in
