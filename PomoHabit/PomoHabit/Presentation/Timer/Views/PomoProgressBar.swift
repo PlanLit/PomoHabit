@@ -18,16 +18,16 @@ final class CircleProgressBar: BaseView {
     
     // MARK: - UI Properties
     
-    private lazy var progressLayer = makeLayer(strokeColor: .pobitRed, strokeEnd: 1)
+    private lazy var progressLayer = makeLayer(strokeColor: .pobitRed, strokeEnd: 0)
     private lazy var trackLayer = makeLayer(strokeColor: .pobitSkin, strokeEnd: 1)
     private lazy var dashedCircleLayer = makeDashedCircleLayer()
     
     private var todayLabel = UILabel().setPrimaryColorLabel(text: "오늘")
     
-    private let timeLabel: UILabel = {
+    private lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.textColor = .pobitBlack
-        label.font = Pretendard.bold(size: 44)
+        label.font = Pretendard.bold(size: constraintByNotch(44, 32))
         label.text = "05:00"
         
         return label
@@ -62,7 +62,7 @@ extension CircleProgressBar {
     
     private func setAutoLayout() {
         todayLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(96)
+            make.top.equalToSuperview().offset(constraintByNotch(96, 84))
             make.centerX.equalToSuperview()
         }
         
@@ -85,13 +85,27 @@ extension CircleProgressBar {
 // MARK: - Action Helpers
 
 extension CircleProgressBar {
+    func updateProgressBarUI(with state: TimerState) {
+        switch state {
+        case .stopped:
+            // TODO: 비활성화시 옅은 색상
+            break
+        case .running:
+            break
+        case .finished:
+            progressLayer.strokeEnd = 1
+        case .done:
+            break
+        }
+    }
+    
     func setProgressWithAnimation(duration: TimeInterval) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.fromValue = 1
-        animation.toValue = 0
+        animation.fromValue = 0
+        animation.toValue = 1
         animation.duration = duration
         animation.fillMode = .forwards
-        animation.isRemovedOnCompletion = false
+        animation.isRemovedOnCompletion = true
         progressLayer.add(animation, forKey: "progressAnimation")
     }
     
@@ -118,7 +132,7 @@ extension CircleProgressBar {
         layer.strokeColor = strokeColor.cgColor
         layer.strokeEnd = strokeEnd
         layer.fillColor = UIColor.clear.cgColor
-        layer.lineWidth = 40
+        layer.lineWidth = constraintByNotch(40, 36)
         layer.lineCap = .round
         
         return layer

@@ -92,8 +92,8 @@ extension WeeklyCollectionViewCell{
         dayLabel.text = text
     }
     
-    func setDateLabelText(text: Int) { // 임시
-        dateLabel.text = "\(text)"
+    func setDateLabelText(text: Date) {
+        dateLabel.text = text.dateToString(format: "dd")
     }
     
     func setCellBackgroundColor(state: HabitState) { //습관 정보에 따라 달라지는 cell배경및 border 함수

@@ -144,6 +144,21 @@ extension CoreDataManager {
     }
 }
 
+// MARK: - MyPage
+
+extension CoreDataManager {
+    func updateUsernickName(nickname: String) {
+        do {
+            let userData = try fetchUser()
+            
+            userData?.setValue(nickname, forKey: "nickname")
+            saveContext()
+        } catch {
+            print(error)
+        }
+    }
+}
+
 
 // MARK: - Timer
 
@@ -163,12 +178,12 @@ extension CoreDataManager {
 // MARK: - MockData
 
 extension CoreDataManager {
-    func setMockupTotalHabitInfo(today: Date,targetDate: String) { // 목업 데이터 생성
+    func setMockupTotalHabitInfo(targetDate: String) { // 목업 데이터 생성
         let targetDayInfos = targetDate.split(separator: ",").map{String($0)}
         let calendar = Calendar.current
         var appendCount = 0
         var goalTime = 5
-        var date = today
+        var date = Date()
         
         if targetDayInfos.contains(date.getDayOfWeek()){ // 오늘 습관을 진행하는 날짜인지 확인후 목데이터에 추가
             createTotalHabitInfo(date: date, goalTime: Int16(goalTime), hasDone: false, note: "")

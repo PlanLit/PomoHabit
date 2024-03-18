@@ -123,7 +123,7 @@ extension OnboardingHabitRegisterViewController {
             self.view.endEditing(true)
             self.addTableViewCellDataAndUpdate(.init(chatDirection: .outgoing, message: self.habitTitle, cellType: .title))
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "무슨 요일에 할거야? 5일 이상을 정해줘!"))
+                self.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "무슨 요일에 할 거야? 5일 이상을 정해줘!"))
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self.addTableViewCellDataAndUpdate(.init(chatDirection: .outgoing, cellType: .days))
                 }
@@ -177,7 +177,7 @@ extension OnboardingHabitRegisterViewController {
             }
             if self.hasShownDaysCell == false && trueCount >= 5 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "몇시에 할거야?"))
+                    self.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "몇 시에 할 거야?"))
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         self.addTableViewCellDataAndUpdate(.init(chatDirection: .outgoing, cellType: .time))
                     }
@@ -195,7 +195,7 @@ extension OnboardingHabitRegisterViewController {
         cell.setData(habitAlarmTime ?? Date(timeIntervalSinceReferenceDate: .zero)) { [weak self] date in
             if self?.habitAlarmTime == nil {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self?.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "좋아 다 됬어! 우리 꼭 습관을 만들어보자!"))
+                    self?.addTableViewCellDataAndUpdate(.init(chatDirection: .incoming, message: "좋아 다 됐어! 우리 꼭 습관을 만들어보자!"))
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         self?.registerButton.snp.updateConstraints({ make in
                             make.height.equalTo(82)
@@ -232,8 +232,8 @@ extension OnboardingHabitRegisterViewController {
     // 처음 채팅뷰에 진입했을때 한번만 실행시켜야함.
     private func sayHello() {
         let messages: [OnboardingChattingCellData] = [.init(chatDirection: .incoming, cellType: .profilePicture),
-                                                      .init(chatDirection: .incoming, message: "안녕 \(nickname ?? "")! 앱을 실행해줘서 고마워!"),
-                                                      .init(chatDirection: .incoming, message: "나는 새로운 습관 형성을 도와줄 가이드야."),
+                                                      .init(chatDirection: .incoming, message: "안녕 \(nickname ?? "")! 앱을 실행해 줘서 고마워!"),
+                                                      .init(chatDirection: .incoming, message: "나는 새로운 습관 형성을 도와줄 가이드야"),
                                                       .init(chatDirection: .incoming, message: "어떤 습관을 만들고 싶어?")]
         var index = UnsentMessagesIndex(unsentMessagesCount: messages.count)
         DispatchQueue.main.async {
@@ -400,6 +400,6 @@ extension OnboardingHabitRegisterViewController {
         
         CoreDataManager.shared.createUser(nickname: data.nickname, targetHabit: data.targetHabit, targetDate: data.targetDate, alarmTime: data.alarmTime, whiteNoiseType: data.whiteNoiseType)
         
-        CoreDataManager.shared.setMockupTotalHabitInfo(today: Date(), targetDate: data.targetDate)
+        CoreDataManager.shared.setMockupTotalHabitInfo(targetDate: data.targetDate)
     }
 }

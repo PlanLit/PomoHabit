@@ -9,6 +9,10 @@ import UIKit
 
 import SnapKit
 
+protocol EditButtonDelegate: AnyObject {
+    func editButtonTapped()
+}
+
 // MARK: - MyPageView
 
 final class MyPageView: BaseView {
@@ -16,6 +20,7 @@ final class MyPageView: BaseView {
     // MARK: - Properties
     
     private let pobitNavigationBarView = PobitNavigationBarView(title: "마이페이지", viewType: .plain)
+    weak var editButtonDelegate: EditButtonDelegate?
     
     // MARK: - 닉네임 UI
     
@@ -139,7 +144,7 @@ final class MyPageView: BaseView {
         let myPageTableView = UITableView(frame: .zero, style: .plain)
         myPageTableView.separatorStyle = .singleLine
         myPageTableView.dataSource = self
-        myPageTableView.delegate = self
+//        myPageTableView.delegate = self
         myPageTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: MyPageTableViewCell.reuseIdentifier)
         
         return myPageTableView
@@ -152,6 +157,7 @@ final class MyPageView: BaseView {
         
         setAddSubviews()
         setupConstraints()
+        setupEditButton()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -225,10 +231,19 @@ extension MyPageView {
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(grayBar2.snp.top).offset(LayoutLiterals.upperPrimarySpacing)
-            make.left.right.bottom.equalToSuperview()
+//            make.left.right.bottom.equalToSuperview()
             make.left.equalToSuperview().offset(LayoutLiterals.minimumHorizontalSpacing)
             make.right.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
+            make.bottom.equalToSuperview()
         }
+    }
+    
+    // MARK: - Setup Methods
+    
+    private func setupEditButton() {
+        editButton.addAction(UIAction(handler: { [weak self] _ in
+            self?.editButtonDelegate?.editButtonTapped()
+        }), for: .touchUpInside)
     }
 }
 
@@ -246,6 +261,10 @@ extension MyPageView {
     func getNicknameLabel() -> UILabel {
         return nickNameLabel
     }
+    
+    func getTableView() -> UITableView {
+            return tableView
+        }
 }
 
 // MARK: - UITableViewDataSource
@@ -264,15 +283,8 @@ extension MyPageView: UITableViewDataSource {
         cell.textLabel?.text = model.title
         cell.textLabel?.font = Pretendard.regular(size: 20)
         cell.textLabel?.textColor = .pobitStone2
+        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         return cell
-    }
-}
-
-// MARK: - UITableViewDelegate
-
-extension MyPageView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

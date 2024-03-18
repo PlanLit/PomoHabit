@@ -17,6 +17,9 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
     
     private let myPageRootView = MyPageView()
     private let nicknameEditView = NicknameEditView()
+    private var customNavigationController: UINavigationController? = nil
+    private let openSourceViewController = OpenSourceViewController()
+    private let customerServiceViewController = CustomerServiceViewController()
     
     // MARK: - View Lifecycle
     
@@ -28,17 +31,23 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        myPageRootView.getTableView().delegate = self
         setTotalHabitInfo()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        presentBottomSheet(rootView: nicknameEditView, detents: [.large()])
+        setupCustomNavigationController()
+        forEditButtonDelegate()
     }
 }
 
+extension MyPageViewController: EditButtonDelegate {
+    func editButtonTapped() {
+        nicknameEditView.isHidden = false
+        presentBottomSheet(viewController: NicknameViewController())
+    }
+    
+    func forEditButtonDelegate() {
+        myPageRootView.editButtonDelegate = self
+    }
+}
 // MARK: - Data 전처리
 
 extension MyPageViewController {
@@ -52,5 +61,37 @@ extension MyPageViewController {
 //        } catch {
 //            
 //        }
+    }
+}
+
+// MARK: - Method
+
+extension MyPageViewController {
+    private func setupCustomNavigationController() {
+        customNavigationController = navigationController
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension MyPageViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let selectModel = myPageCellModels[indexPath.row]
+        
+        switch selectModel.title {
+        case "오픈 소스 사용":
+            if let navigationController = customNavigationController {
+                navigationController.pushViewController(openSourceViewController, animated: true)
+            }
+        case "고객 센터":
+            if let navigationController = customNavigationController {
+                navigationController.pushViewController(customerServiceViewController, animated: true)
+            }
+        default:
+            break
+        }
+        navigationController?.isNavigationBarHidden = false
     }
 }

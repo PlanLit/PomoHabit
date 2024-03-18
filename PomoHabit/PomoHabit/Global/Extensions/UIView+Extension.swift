@@ -21,4 +21,13 @@ extension UIView {
         
         return view
     }
+    
+    var hasNotch: Bool {
+        return !( (UIScreen.main.bounds.width / UIScreen.main.bounds.height) > 0.5 )
+    }
+    
+    /// Constraint 설정 시 노치 유무로 기기 대응
+    func constraintByNotch(_ hasNotch: CGFloat, _ noNotch: CGFloat) -> CGFloat {
+        return self.hasNotch ? hasNotch : noNotch
+    }
 }
