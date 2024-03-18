@@ -179,7 +179,7 @@ extension TimerViewModel {
     
     // 타이머 완료시 실행되는 메서드
     func recordCompletedHabit() {
-        CoreDataManager.shared.createTotalHabitInfo(date: currentDate, goalTime: Int16(timerDuration) / 60, hasDone: true, note: "3번째 날입니다.")
+        CoreDataManager.shared.completedTodyHabit(completedDate: currentDate, note: "")
         timerStatePublisher.send(.done)
     }
 }
