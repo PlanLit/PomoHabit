@@ -9,9 +9,9 @@ import UIKit
 import SnapKit
 
 enum HabitState{
-    case done
-    case doNot
-    case notStart
+    case done // 습관 완료
+    case doNot // 습관 미완료
+    case notStart // 시작하기전
 }
 
 extension HabitState {

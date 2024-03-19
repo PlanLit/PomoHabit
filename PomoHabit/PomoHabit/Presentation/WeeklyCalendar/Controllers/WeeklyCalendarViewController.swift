@@ -12,12 +12,18 @@ import SnapKit
 // MARK: - WeeklyCalendarViewController
 
 final class WeeklyCalendarViewController: BaseViewController {
-    private var weeklyDates: [Date] = []
-    private var weeklyHabitState: [HabitState] = []
     
     // MARK: - Properties
     
+    private var weeklyDates: [Date] = []
+    private var weeklyHabitState: [HabitState] = []
+    var totalHabitInfo: TotalHabitInfo?
     var targetHabit: String?
+    var habitstate: HabitState = .notStart
+    var goalTime: Int16 = 0
+    var duringTime: String = ""
+    
+    // MARK: - Views
     
     private lazy var weeklyCalendarView: WeeklyCalendarView = {
         let view = WeeklyCalendarView()
@@ -30,18 +36,21 @@ final class WeeklyCalendarViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        getWeeklyData()
         getTargetHabit()
-        setWeeklyData()
+        getWeeklyHabitState()
+        
+        setWeeklyCalendView()
+        setWeeklyHabiState()
         setAddSubViews()
         setSetAutoLayout()
-        getWeeklyHabitState()
     }
     
     override func viewDidLayoutSubviews() { // 해당 메소드 안에서만 오토레이 아웃으로 설정된 UI/View의 Frame 사이즈를 알 수 있음
         super.viewDidLayoutSubviews()
-        let progress = Float(weeklyHabitState.filter{$0 == .done}.count) / 7.0
         
-        setUpWeeklyHabbitProgressView(progress: progress)
+        setUpWeeklyHabbitProgressView(progress: getWeeklyProgress())
     }
 }
 
@@ -60,17 +69,17 @@ extension WeeklyCalendarViewController {
     }
 }
 
-// MARK: - Action Helpers
-
-extension WeeklyCalendarViewController {
-    @objc private func name() {
-        
-    }
-}
-
 // MARK: - View 관련 Methods
 
 extension WeeklyCalendarViewController {
+    private func setWeeklyCalendView() {
+        weeklyCalendarView.setWeeklyDates(weeklyDates: weeklyDates)
+    }
+    
+    private func setWeeklyHabiState() {
+        weeklyCalendarView.setWeeklyHabitState(setData: weeklyHabitState)
+    }
+    
     private func setUpWeeklyHabbitProgressView(progress : Float) {
         let weeklyCalendarViewWidth = weeklyCalendarView.frame.width
         let progressCircleOffset = Int(weeklyCalendarViewWidth * CGFloat(progress)) - 15
@@ -78,17 +87,12 @@ extension WeeklyCalendarViewController {
         weeklyCalendarView.setProgressCircleImg(offset: progressCircleOffset)
         weeklyCalendarView.setWeeklyHabitProgressView(progress: progress)
     }
-    
-    func setUPWeeklyHabbitInfoView(state: HabitState, targetHabit: String, duringTime: String, goalTime: Int16, note: String) {
-        weeklyCalendarView.setHabitInfoView(state: state, targetHabit: targetHabit, duringTime: duringTime, goalTime: goalTime)
-        weeklyCalendarView.setNoteContentLabel(note: note)
-    }
 }
 
 // MARK: - Data 관련 method
 
 extension WeeklyCalendarViewController {
-    private func setWeeklyData() {
+    private func getWeeklyData() {
         let calendar = Calendar.current
         
         // MARK: - 현재 주의 시작 날짜
@@ -105,8 +109,6 @@ extension WeeklyCalendarViewController {
             guard let date = calendar.date(byAdding: .day, value: i, to: mondayDate) else { return }
             weeklyDates.append(date)
         }
-
-        weeklyCalendarView.setWeeklyDates(weeklyDates: weeklyDates)
     }
     
     private func getWeeklyHabitState() {
@@ -125,8 +127,6 @@ extension WeeklyCalendarViewController {
                     break
                 }
             }
-            
-            weeklyCalendarView.setWeeklyHabitState(setData: weeklyHabitState)
         } catch {
             print(error)
         }
@@ -147,35 +147,53 @@ extension WeeklyCalendarViewController {
         
         return startTime + " ~ " + endTime
     }
+    
+    private func getWeeklyProgress() -> Float {
+        return Float(weeklyHabitState.filter{$0 == .done}.count) / 7.0
+    }
+    
+    private func getWeeklyHabitInfo(date : Date) {
+        do {
+            totalHabitInfo = try CoreDataManager.shared.getSelectedHabitInfo(selectedDate: date) // 선택한 습관 정보
+        } catch {
+            print(error)
+        }
+        
+    }
+    
+    private func getHabitstate() {
+        guard let habitState = totalHabitInfo?.hasDone else { return } // 습관 진행 현황
+        habitstate = habitState ? HabitState.done : HabitState.doNot // treu : false 처리
+    }
+    private func getGoalTime() {
+        guard let goalTimeData = totalHabitInfo?.goalTime else { return } // 목표 시간
+        goalTime = goalTimeData
+    }
+    private func getDuringTime() {
+        duringTime = getDuringTime(completedDate: totalHabitInfo?.date ?? Date(), goalTime: goalTime) // 습관 진행 기간
+        
+        if habitstate == .doNot || habitstate == .notStart {
+            duringTime = "00:00 ~ 00:00"
+        }
+    }
 }
 
 // MARK: - Delegate
 
 extension WeeklyCalendarViewController: SendSelectedData{
     func sendDate(date: Date) { // 선택한 셀의 날짜
-        do {
-            let selectedHabiInfo = try CoreDataManager.shared.getSelectedHabitInfo(selectedDate: date) // 선택한 습관 정보
-            
-            if selectedHabiInfo == nil { // 쉬는날 or 습관 시작하기 전날
-                weeklyCalendarView.setHabitInfoView(state: .notStart, targetHabit: targetHabit ?? "설정한 습관", duringTime: "00:00 ~ 00:00", goalTime: 0)
-                weeklyCalendarView.setNoteContentLabel(note: "쉬는날 또는 습관 시작 하기 전날입니다.")
-            }
-            
-            guard let selectedHabitState = selectedHabiInfo?.hasDone else { return } // 선택한 습관 상태
-            let habitstate = selectedHabitState ? HabitState.done : HabitState.notStart // treu : false 처리
-            
-            guard let goalTime = selectedHabiInfo?.goalTime else { return } // 목표 시간
-            var duringTime = getDuringTime(completedDate: selectedHabiInfo?.date ?? Date(), goalTime: goalTime) // 습관 진행 기간
-            
-            if !selectedHabitState {
-                duringTime = "00:00 ~ 00:00"
-            }
-            
+        getWeeklyHabitInfo(date: date)
+        getHabitstate()
+        getDuringTime()
+        getGoalTime()
+        getDuringTime()
+        
+        if totalHabitInfo == nil { // 쉬는날 or 습관 시작하기 전날
+            weeklyCalendarView.setHabitInfoView(state: .notStart, targetHabit: targetHabit ?? "설정한 습관", duringTime: "00:00 ~ 00:00", goalTime: 0)
+            weeklyCalendarView.setNoteContentLabel(note: "쉬는날 또는 습관 시작 하기 전날입니다.")
+        } else {
             weeklyCalendarView.setHabitInfoView(state: habitstate, targetHabit: targetHabit ?? "설정한 습관", duringTime: duringTime, goalTime: goalTime)
-            weeklyCalendarView.setNoteContentLabel(note: selectedHabiInfo?.note ?? "")
-        } catch {
-            
-            print(error)
+            weeklyCalendarView.setNoteContentLabel(note: totalHabitInfo?.note ?? "")
         }
     }
 }
