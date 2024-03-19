@@ -87,6 +87,16 @@ extension WeeklyCalendarViewController {
         weeklyCalendarView.setProgressCircleImg(offset: progressCircleOffset)
         weeklyCalendarView.setWeeklyHabitProgressView(progress: progress)
     }
+    
+    private func setSelectedHabitInfo() {
+        if totalHabitInfo == nil { // 쉬는날 or 습관 시작하기 전날
+            weeklyCalendarView.setHabitInfoView(state: .notStart, targetHabit: targetHabit ?? "설정한 습관", duringTime: "00:00 ~ 00:00", goalTime: 0)
+            weeklyCalendarView.setNoteContentLabel(note: "쉬는날 또는 습관 시작 하기 전날입니다.")
+        } else {
+            weeklyCalendarView.setHabitInfoView(state: habitstate, targetHabit: targetHabit ?? "설정한 습관", duringTime: duringTime, goalTime: goalTime)
+            weeklyCalendarView.setNoteContentLabel(note: totalHabitInfo?.note ?? "")
+        }
+    }
 }
 
 // MARK: - Data 관련 method
@@ -187,13 +197,6 @@ extension WeeklyCalendarViewController: SendSelectedData{
         getDuringTime()
         getGoalTime()
         getDuringTime()
-        
-        if totalHabitInfo == nil { // 쉬는날 or 습관 시작하기 전날
-            weeklyCalendarView.setHabitInfoView(state: .notStart, targetHabit: targetHabit ?? "설정한 습관", duringTime: "00:00 ~ 00:00", goalTime: 0)
-            weeklyCalendarView.setNoteContentLabel(note: "쉬는날 또는 습관 시작 하기 전날입니다.")
-        } else {
-            weeklyCalendarView.setHabitInfoView(state: habitstate, targetHabit: targetHabit ?? "설정한 습관", duringTime: duringTime, goalTime: goalTime)
-            weeklyCalendarView.setNoteContentLabel(note: totalHabitInfo?.note ?? "")
-        }
+        setSelectedHabitInfo()
     }
 }
