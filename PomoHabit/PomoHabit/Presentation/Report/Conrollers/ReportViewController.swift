@@ -171,6 +171,7 @@ extension ReportViewController {
     
     private func makeImageCollectionViewController() -> ReportImageCollectionViewController {
         let imageCollectionViewController = ReportImageCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        imageCollectionViewController.setDate(getHabitAchievementRate())
         imageCollectionViewController.didMove(toParent: self)
         
         return imageCollectionViewController
@@ -183,7 +184,7 @@ extension ReportViewController {
         title.textAlignment = .center
         
         let rate = UILabel()
-        rate.text = "75%"
+        rate.text = "\(getHabitAchievementRate())%"
         rate.font = Pretendard.regular(size: 16)
         rate.textAlignment = .center
         
@@ -363,6 +364,17 @@ extension ReportViewController {
         }
         
         return days
+    }
+    
+    // 달성률 구하는 함수
+    private func getHabitAchievementRate() -> Int {
+        guard let totalHabitInfItems = totalHabitInfItems else { return 0 }
+        
+        var hasDoneCount: Double = 0
+        totalHabitInfItems.forEach { habit in if habit.hasDone { hasDoneCount += 1.0 } }
+        hasDoneCount = hasDoneCount/Double(totalHabitInfItems.count) * 100
+        
+        return Int(hasDoneCount)
     }
 }
 

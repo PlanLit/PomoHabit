@@ -16,6 +16,7 @@ final class ReportImageCollectionViewController: UICollectionViewController {
     private let cellID = "reportImageCell"
     private let itemSize: CGFloat = 100.0 - 18.0
     private var centeredItemIndex: IndexPath = [0, 0]
+    private var habitAcheivementRate: Int = 0
     
     // MARK: - Life Cycles
     
@@ -54,7 +55,7 @@ extension ReportImageCollectionViewController {
     
     private func configureCell(_ cell: UICollectionViewCell, for indexPath: IndexPath) {
         let circleGaugeImageView = CircleGaugeImageView(frame: cell.bounds)
-        circleGaugeImageView.setProgress(to: 0.75, withAnimation: true)
+        circleGaugeImageView.setProgress(to: CGFloat(habitAcheivementRate)/CGFloat(100), withAnimation: true)
         circleGaugeImageView.setImage(.tomatoCharacter)
         
         if indexPath != centeredItemIndex {
@@ -65,6 +66,10 @@ extension ReportImageCollectionViewController {
         
         cell.contentView.subviews.forEach { $0.removeFromSuperview() }
         cell.contentView.addSubview(circleGaugeImageView)
+    }
+    
+    func setDate(_ habitAcheivementRate: Int) {
+        self.habitAcheivementRate = habitAcheivementRate
     }
 }
 
