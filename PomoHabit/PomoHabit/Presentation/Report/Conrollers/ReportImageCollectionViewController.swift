@@ -14,7 +14,7 @@ final class ReportImageCollectionViewController: UICollectionViewController {
     // MARK: - Properties
     
     private let cellID = "reportImageCell"
-    private let itemSize: Int = 74
+    private let itemSize: CGFloat = 100.0 - 18.0
     private var centeredItemIndex: IndexPath = [0, 0]
     
     // MARK: - Life Cycles
@@ -53,24 +53,18 @@ extension ReportImageCollectionViewController {
     }
     
     private func configureCell(_ cell: UICollectionViewCell, for indexPath: IndexPath) {
-        let imageView: UIImageView = {
-            let imageView = UIImageView(frame: cell.bounds)
-            imageView.image = .tomatoCharacter
-            imageView.contentMode = .scaleAspectFit
-            imageView.layer.cornerRadius = imageView.frame.height / 2
-            imageView.clipsToBounds = true
-            
-            return imageView
-        }()
+        let circleGaugeImageView = CircleGaugeImageView(frame: cell.bounds)
+        circleGaugeImageView.setProgress(to: 0.75, withAnimation: true)
+        circleGaugeImageView.setImage(.tomatoCharacter)
         
         if indexPath != centeredItemIndex {
             let reducedSize = itemSize-(itemSize/7)
-            imageView.frame.size = .init(width: reducedSize, height: reducedSize)
-            imageView.alpha = 0.5
+            circleGaugeImageView.frame.size = .init(width: reducedSize, height: reducedSize)
+            circleGaugeImageView.alpha = 0.5
         }
         
         cell.contentView.subviews.forEach { $0.removeFromSuperview() }
-        cell.contentView.addSubview(imageView)
+        cell.contentView.addSubview(circleGaugeImageView)
     }
 }
 

@@ -74,7 +74,7 @@ extension ReportViewController {
         imageCollectionViewController.view.snp.makeConstraints { make in
             make.top.equalTo(headerView.snp.bottom).offset(LayoutLiterals.minimumVerticalSpacing)
             make.left.right.equalToSuperview()
-            make.height.equalTo(74)
+            make.height.equalTo(100)
         }
         
         gridView.snp.makeConstraints { make in
