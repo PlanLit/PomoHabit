@@ -65,6 +65,7 @@
 		E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */; };
 		E0C5B5472B8D63B200A77BAE /* DayButtonsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5462B8D63B200A77BAE /* DayButtonsTableViewCell.swift */; };
 		E0F29C162BAAB6AA00DEA573 /* CircleGaugeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F29C152BAAB6AA00DEA573 /* CircleGaugeImageView.swift */; };
+		F85C43342BAAB2BE00121442 /* WeeklyHabitInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C43332BAAB2BE00121442 /* WeeklyHabitInfoModel.swift */; };
 		F85F8F572B8DE33C00E69922 /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F562B8DE33C00E69922 /* BasePaddingLabel.swift */; };
 		F85F8F592B8DE54F00E69922 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F582B8DE54F00E69922 /* Date+Extension.swift */; };
 		F85F8F5B2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F5A2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift */; };
@@ -72,7 +73,7 @@
 		F85F8F632B8E26E100E69922 /* ImageViewAndLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F622B8E26E100E69922 /* ImageViewAndLabelView.swift */; };
 		F870D85C2B8EFF3900DA4659 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F870D85B2B8EFF3900DA4659 /* UILabel+Extension.swift */; };
 		F87351652B905E04004E89C5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351642B905E04004E89C5 /* TabBarController.swift */; };
-		F88EB2D82B8DC0EB0073BDDA /* WeeklyCalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2D72B8DC0EB0073BDDA /* WeeklyCalendarModel.swift */; };
+		F88EB2D82B8DC0EB0073BDDA /* WeeklyHabitState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2D72B8DC0EB0073BDDA /* WeeklyHabitState.swift */; };
 		F88EB2DA2B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2D92B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift */; };
 		F88EB2DC2B8DC1120073BDDA /* WeeklyCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2DB2B8DC1120073BDDA /* WeeklyCalendarView.swift */; };
 		F8A4FB882B96F27B00E46EA1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115972B901D5E003E6459 /* SnapKit */; };
@@ -147,6 +148,7 @@
 		E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VStackView.swift; sourceTree = "<group>"; };
 		E0C5B5462B8D63B200A77BAE /* DayButtonsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButtonsTableViewCell.swift; sourceTree = "<group>"; };
 		E0F29C152BAAB6AA00DEA573 /* CircleGaugeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleGaugeImageView.swift; sourceTree = "<group>"; };
+		F85C43332BAAB2BE00121442 /* WeeklyHabitInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyHabitInfoModel.swift; sourceTree = "<group>"; };
 		F85F8F562B8DE33C00E69922 /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
 		F85F8F582B8DE54F00E69922 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		F85F8F5A2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -154,7 +156,7 @@
 		F85F8F622B8E26E100E69922 /* ImageViewAndLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewAndLabelView.swift; sourceTree = "<group>"; };
 		F870D85B2B8EFF3900DA4659 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		F87351642B905E04004E89C5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		F88EB2D72B8DC0EB0073BDDA /* WeeklyCalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarModel.swift; sourceTree = "<group>"; };
+		F88EB2D72B8DC0EB0073BDDA /* WeeklyHabitState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyHabitState.swift; sourceTree = "<group>"; };
 		F88EB2D92B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarViewController.swift; sourceTree = "<group>"; };
 		F88EB2DB2B8DC1120073BDDA /* WeeklyCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarView.swift; sourceTree = "<group>"; };
 		F8A4FB8D2B96F2A300E46EA1 /* ReportImageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportImageCollectionViewController.swift; sourceTree = "<group>"; };
@@ -522,7 +524,8 @@
 		F88EB2D62B8DC0AE0073BDDA /* model */ = {
 			isa = PBXGroup;
 			children = (
-				F88EB2D72B8DC0EB0073BDDA /* WeeklyCalendarModel.swift */,
+				F88EB2D72B8DC0EB0073BDDA /* WeeklyHabitState.swift */,
+				F85C43332BAAB2BE00121442 /* WeeklyHabitInfoModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -655,7 +658,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F88EB2D82B8DC0EB0073BDDA /* WeeklyCalendarModel.swift in Sources */,
+				F88EB2D82B8DC0EB0073BDDA /* WeeklyHabitState.swift in Sources */,
 				F8A4FB992B96F2A300E46EA1 /* ReportHabitDetailViewController.swift in Sources */,
 				BAFEE1542B96F900009F0D25 /* MypageTableViewCell.swift in Sources */,
 				378034AD2B8FAB5B0046E6B8 /* WhiteNoiseViewController.swift in Sources */,
@@ -696,6 +699,7 @@
 				378034A42B8F8D8D0046E6B8 /* PomoModel.swift in Sources */,
 				F87351652B905E04004E89C5 /* TabBarController.swift in Sources */,
 				37144C932B8C544D008565C4 /* BaseViewController.swift in Sources */,
+				F85C43342BAAB2BE00121442 /* WeeklyHabitInfoModel.swift in Sources */,
 				F85F8F632B8E26E100E69922 /* ImageViewAndLabelView.swift in Sources */,
 				37CC614C2B90C07900CBAB45 /* BottomSheetPresentable.swift in Sources */,
 				73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */,

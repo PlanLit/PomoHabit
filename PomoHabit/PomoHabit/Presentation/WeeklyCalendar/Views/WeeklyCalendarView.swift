@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 protocol SendSelectedData{
-    func sendDate(date: Date)
+    func sendDate(date: Date,completion: @escaping(WeeklyHabitInfoModel)-> Void)
 }
 
 // MARK: - WeeklyCalendarView
@@ -273,7 +273,11 @@ extension WeeklyCalendarView: UICollectionViewDelegateFlowLayout,UICollectionVie
         return CGSize(width: 65, height: 80)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        dateDelegate?.sendDate(date: weeklyDatesData[indexPath.item])
+        dateDelegate?.sendDate(date: weeklyDatesData[indexPath.item]) { [self] weeklyHabitInfo in
+            
+            setHabitInfoView(state: weeklyHabitInfo.habitstate ?? .notStart, targetHabit: weeklyHabitInfo.targetHabit ?? "습관 정보", duringTime: weeklyHabitInfo.duringTime ?? "00:00 ~ 00:00", goalTime: weeklyHabitInfo.goalTime ?? 0)
+            setNoteContentLabel(note: weeklyHabitInfo.note ?? "")
+        }
     }
 }
 
