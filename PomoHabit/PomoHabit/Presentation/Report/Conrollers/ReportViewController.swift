@@ -21,9 +21,10 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
     private let navigationBar = PobitNavigationBarView(title: "습관 달성률", viewType: .plain)
     private lazy var headerView: HStackView = makeHeaderView()
     private lazy var imageCollectionViewController: ReportImageCollectionViewController = makeImageCollectionViewController()
+    private lazy var habitAchievementLabelView: VStackView = makeHabitAchievementLabelView()
     private lazy var gridView: VStackView = makeGridView()
     private lazy var habitIndicatorView = HabitIndicatorView()
-//    private lazy var messageBoxView: UILabel = makeMessageBoxView("모두 완료하면 토마토가 웃는얼굴이 돼요")
+    private lazy var messageBoxView: UILabel = makeMessageBoxView("모두 완료하면 토마토가 웃는얼굴이 돼요")
     
     // MARK: - Life Cycles
     
@@ -51,9 +52,10 @@ extension ReportViewController {
             navigationBar,
             headerView,
             imageCollectionViewController.view,
+            habitAchievementLabelView,
             gridView,
             habitIndicatorView,
-//            messageBoxView
+            messageBoxView
         ])
     }
     
@@ -77,8 +79,13 @@ extension ReportViewController {
             make.height.equalTo(100)
         }
         
-        gridView.snp.makeConstraints { make in
+        habitAchievementLabelView.snp.makeConstraints { make in
             make.top.equalTo(imageCollectionViewController.view.snp.bottom).offset(LayoutLiterals.minimumVerticalSpacing)
+            make.centerX.equalToSuperview()
+        }
+        
+        gridView.snp.makeConstraints { make in
+            make.top.equalTo(habitAchievementLabelView.snp.bottom).offset(LayoutLiterals.minimumVerticalSpacing)
             make.centerX.equalToSuperview()
             make.height.equalTo(45*5+(10*4))
         }
@@ -90,10 +97,10 @@ extension ReportViewController {
             make.width.equalTo(250)
         }
         
-//        messageBoxView.snp.makeConstraints { make in
-//            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-LayoutLiterals.minimumVerticalSpacing)
-//            make.centerX.equalToSuperview()
-//        }
+        messageBoxView.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.centerX.equalToSuperview()
+        }
     }
 }
 
@@ -167,6 +174,23 @@ extension ReportViewController {
         imageCollectionViewController.didMove(toParent: self)
         
         return imageCollectionViewController
+    }
+    
+    private func makeHabitAchievementLabelView() -> VStackView {
+        let title = UILabel()
+        title.text = "달성률"
+        title.font = Pretendard.regular(size: 16)
+        title.textAlignment = .center
+        
+        let rate = UILabel()
+        rate.text = "75%"
+        rate.font = Pretendard.regular(size: 16)
+        rate.textAlignment = .center
+        
+        return VStackView(spacing: 5, alignment: .center, distribution: .fill, [
+            title,
+            rate
+        ])
     }
 
     private func makeGridView() -> VStackView {
@@ -265,15 +289,15 @@ extension ReportViewController {
             label.backgroundColor = UIColor(hex: "#FFDADA")
             label.textColor = .pobitBlack
             
-            UIView.animate(withDuration: 3,
-                           delay: 1,
+            UIView.animate(withDuration: 2,
+                           delay: 0.5,
                            usingSpringWithDamping: 0.6,
                            initialSpringVelocity: 0.2,
                            options: .curveEaseInOut) {
                 label.alpha = 1
             } completion: { _ in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    UIView.animate(withDuration: 3,
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    UIView.animate(withDuration: 2,
                                    delay: 0,
                                    usingSpringWithDamping: 0.6,
                                    initialSpringVelocity: 0.2,
