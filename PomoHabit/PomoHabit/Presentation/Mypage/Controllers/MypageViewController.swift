@@ -20,6 +20,7 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
     private var customNavigationController: UINavigationController? = nil
     private let openSourceViewController = OpenSourceViewController()
     private let customerServiceViewController = CustomerServiceViewController()
+    private let nicknameDataClouse:((String) -> Void)? = nil
     
     // MARK: - View Lifecycle
     
@@ -31,12 +32,50 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         myPageRootView.getTableView().delegate = self
         setTotalHabitInfo()
         setupCustomNavigationController()
         forEditButtonDelegate()
     }
 }
+
+// MARK: - Data 전처리
+
+extension MyPageViewController {
+    private func setTotalHabitInfo() {
+        //        do {
+        //            let dailyHabitInfos = try CoreDataManager.shared.fetchDailyHabitInfos() // 전체 DailyHabit 데이터
+        //            let totalHabitDoneCount = dailyHabitInfos.filter{ $0.hasDone == true }.count // 습관 진행 일수
+        //            let totlaHabitDuringTime = dailyHabitInfos.filter{ $0.hasDone == true }.map{$0.goalTime}.reduce(0, +) // 진행 총 시간 , 분단위
+        //            // 완료한 습관 수를 어떻게 할것인지 상의 필요할것 같습니다.
+        //
+        //        } catch {
+        //
+        //        }
+    }
+}
+
+// MARK: - Method
+
+extension MyPageViewController {
+    private func setupCustomNavigationController() {
+        customNavigationController = navigationController
+    }
+    
+    func sendDataToNicknamePlaceholder() {
+        let nicknameViewController = NicknameViewController()
+        let nicknameLabel = myPageRootView.getNicknameLabel()
+        
+        nicknameViewController.onDataReceived = { [weak self] data in
+            nicknameLabel.text = data
+            self?.nicknameEditView.setPlaceholderForTextField()
+        }
+        navigationController?.pushViewController(nicknameViewController, animated: true)
+    }
+}
+
+// MARK: - EditButtonDelegate
 
 extension MyPageViewController: EditButtonDelegate {
     func editButtonTapped() {
@@ -46,29 +85,6 @@ extension MyPageViewController: EditButtonDelegate {
     
     func forEditButtonDelegate() {
         myPageRootView.editButtonDelegate = self
-    }
-}
-// MARK: - Data 전처리
-
-extension MyPageViewController {
-    private func setTotalHabitInfo() {
-//        do {
-//            let dailyHabitInfos = try CoreDataManager.shared.fetchDailyHabitInfos() // 전체 DailyHabit 데이터
-//            let totalHabitDoneCount = dailyHabitInfos.filter{ $0.hasDone == true }.count // 습관 진행 일수
-//            let totlaHabitDuringTime = dailyHabitInfos.filter{ $0.hasDone == true }.map{$0.goalTime}.reduce(0, +) // 진행 총 시간 , 분단위
-//            // 완료한 습관 수를 어떻게 할것인지 상의 필요할것 같습니다.
-//            
-//        } catch {
-//            
-//        }
-    }
-}
-
-// MARK: - Method
-
-extension MyPageViewController {
-    private func setupCustomNavigationController() {
-        customNavigationController = navigationController
     }
 }
 

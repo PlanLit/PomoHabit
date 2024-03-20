@@ -122,7 +122,10 @@ extension NicknameEditView: UITextFieldDelegate {
         nicknameEditTextField.becomeFirstResponder()
     }
     
-    private func setPlaceholderForTextField() {
-        nicknameEditTextField.placeholder = mypageView.getNicknameLabel().text
+    func setPlaceholderForTextField() {
+        nicknameEditTextField.placeholder = { [weak self] in
+            
+            return self?.mypageView.getNicknameLabel().text
+        }()
     }
 }
