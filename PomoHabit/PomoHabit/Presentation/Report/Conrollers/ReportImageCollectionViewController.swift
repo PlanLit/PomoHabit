@@ -68,7 +68,7 @@ extension ReportImageCollectionViewController {
         cell.contentView.addSubview(circleGaugeImageView)
     }
     
-    func setDate(_ habitAcheivementRate: Int) {
+    func setData(_ habitAcheivementRate: Int) {
         self.habitAcheivementRate = habitAcheivementRate
     }
 }

@@ -171,7 +171,7 @@ extension ReportViewController {
     
     private func makeImageCollectionViewController() -> ReportImageCollectionViewController {
         let imageCollectionViewController = ReportImageCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        imageCollectionViewController.setDate(getHabitAchievementRate())
+        imageCollectionViewController.setData(getHabitAchievementRate())
         imageCollectionViewController.didMove(toParent: self)
         
         return imageCollectionViewController
@@ -197,9 +197,11 @@ extension ReportViewController {
     private func makeGridView() -> VStackView {
         func getTheBoxView(_ index: Int,_ width: UInt = 56,_ height: UInt = 45) -> UIButton {
             let boxView = UIButton(type: .system, primaryAction: .init(handler: { _ in
-                let reportHabitDetailViewController = ReportHabitDetailViewController()
-                reportHabitDetailViewController.setData(self.totalHabitInfItems?[index])
-                self.presentBottomSheet(viewController: reportHabitDetailViewController, detents: [.large()])
+                if self.totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" <= Date().dateToString(format: "MMdd") {
+                    let reportHabitDetailViewController = ReportHabitDetailViewController()
+                    reportHabitDetailViewController.setData(self.totalHabitInfItems?[index])
+                    self.presentBottomSheet(viewController: reportHabitDetailViewController, detents: [.large()])
+                }
             }))
             boxView.layer.cornerRadius = 10
             boxView.clipsToBounds = true
