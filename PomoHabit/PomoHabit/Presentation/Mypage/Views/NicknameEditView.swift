@@ -97,7 +97,26 @@ extension NicknameEditView {
     }
 }
 
-// MARK: - Method
+// MARK: - Methods
+
+extension NicknameEditView {
+    func setPlaceholderForTextField() {
+        nicknameEditTextField.placeholder = { [weak self] in
+            
+            return self?.mypageView.getNicknameLabel().text
+        }()
+    }
+    
+    private func setupTextFieldDelegate() {
+        nicknameEditTextField.delegate = self
+    }
+    
+    private func setFirstResponderForTextField() {
+        nicknameEditTextField.becomeFirstResponder()
+    }
+}
+
+// MARK: - UITextFieldDelegate
 
 extension NicknameEditView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -112,20 +131,5 @@ extension NicknameEditView: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         return true
-    }
-    
-    private func setupTextFieldDelegate() {
-        nicknameEditTextField.delegate = self
-    }
-    
-    private func setFirstResponderForTextField() {
-        nicknameEditTextField.becomeFirstResponder()
-    }
-    
-    func setPlaceholderForTextField() {
-        nicknameEditTextField.placeholder = { [weak self] in
-            
-            return self?.mypageView.getNicknameLabel().text
-        }()
     }
 }

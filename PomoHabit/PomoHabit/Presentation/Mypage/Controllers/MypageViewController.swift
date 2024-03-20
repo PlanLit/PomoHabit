@@ -20,7 +20,6 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
     private var customNavigationController: UINavigationController? = nil
     private let openSourceViewController = OpenSourceViewController()
     private let customerServiceViewController = CustomerServiceViewController()
-    private let nicknameDataClouse:((String) -> Void)? = nil
     
     // MARK: - View Lifecycle
     
