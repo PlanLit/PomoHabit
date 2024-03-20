@@ -17,11 +17,11 @@ final class WeeklyCalendarViewController: BaseViewController {
     
     private var weeklyDates: [Date] = []
     private var weeklyHabitState: [HabitState] = []
-    var totalHabitInfo: TotalHabitInfo?
-    var targetHabit: String?
-    var habitstate: HabitState = .notStart
-    var goalTime: Int16 = 0
-    var duringTime: String = ""
+    private var totalHabitInfo: TotalHabitInfo?
+    private var targetHabit: String?
+    private var habitstate: HabitState = .notStart
+    private var goalTime: Int16 = 0
+    private var duringTime: String = ""
     
     // MARK: - Views
     
@@ -159,7 +159,7 @@ extension WeeklyCalendarViewController {
     }
     
     private func getWeeklyProgress() -> Float {
-        return Float(weeklyHabitState.filter{$0 == .done}.count) / 7.0
+        return Float(weeklyHabitState.filter{ $0 == .done }.count) / 7.0
     }
     
     private func getWeeklyHabitInfo(date : Date) {
@@ -175,10 +175,12 @@ extension WeeklyCalendarViewController {
         guard let habitState = totalHabitInfo?.hasDone else { return } // 습관 진행 현황
         habitstate = habitState ? HabitState.done : HabitState.doNot // treu : false 처리
     }
+    
     private func getGoalTime() {
         guard let goalTimeData = totalHabitInfo?.goalTime else { return } // 목표 시간
         goalTime = goalTimeData
     }
+    
     private func getDuringTime() {
         duringTime = getDuringTime(completedDate: totalHabitInfo?.date ?? Date(), goalTime: goalTime) // 습관 진행 기간
         
@@ -190,7 +192,7 @@ extension WeeklyCalendarViewController {
 
 // MARK: - Delegate
 
-extension WeeklyCalendarViewController: SendSelectedData{
+extension WeeklyCalendarViewController: SendSelectedData {
     func sendDate(date: Date) { // 선택한 셀의 날짜
         getWeeklyHabitInfo(date: date)
         getHabitstate()
