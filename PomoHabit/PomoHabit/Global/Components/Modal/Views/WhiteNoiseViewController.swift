@@ -6,6 +6,7 @@
 //
 
 import AVFoundation
+import Combine
 import UIKit
 
 import SnapKit
@@ -14,9 +15,16 @@ import SnapKit
 
 final class WhiteNoiseViewController: BaseViewController {
     
+    // MARK: - Subjects
+    
+    private (set) var submitButtonTapped = PassthroughSubject<Void, Never>()
+    private (set) var whiteNoiseSelectedSubject = PassthroughSubject<String, Never>()
+    private var cancellables = Set<AnyCancellable>()
+    
     // MARK: - Properties
     
     private var audioPlayer: AVAudioPlayer?
+    private var selectedWhiteNosie: String?
     
     private let tempModel = ["비 내리는 아침", "고요한 밤의 모닥불 소리", "잔잔한 파도의 위로"]
     
@@ -40,6 +48,9 @@ final class WhiteNoiseViewController: BaseViewController {
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        subscribeSubmitButton()
         setAddSubViews()
         setAutoLayout()
     }
@@ -48,17 +59,12 @@ final class WhiteNoiseViewController: BaseViewController {
 // MARK: - Setups
 
 extension WhiteNoiseViewController {
-    private func play(with title: String) {
-        let url = Bundle.main.url(forResource: title, withExtension: "mp3")
-        if let url = url {
-            do {
-                audioPlayer = try AVAudioPlayer(contentsOf: url)
-                audioPlayer?.prepareToPlay()
-                audioPlayer?.play()
-            } catch {
-                print(error)
+    func subscribeSubmitButton() {
+        submitButton.tapPublisher
+            .sink{ [weak self] _ in
+                self?.submitButtonTapped.send()
             }
-        }
+            .store(in: &cancellables)
     }
 }
 
@@ -96,10 +102,31 @@ extension WhiteNoiseViewController {
     }
 }
 
+// MARK: - Action Helpers
+
+extension WhiteNoiseViewController {
+    private func play(with title: String) {
+        let url = Bundle.main.url(forResource: title, withExtension: "mp3")
+        if let url = url {
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: url)
+                audioPlayer?.prepareToPlay()
+                audioPlayer?.play()
+            } catch {
+                print(error)
+            }
+        }
+    }
+}
+
 // MARK: - UITableViewDelegate
 
 extension WhiteNoiseViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedWhiteNosie = tempModel[indexPath.row]
+        self.selectedWhiteNosie = selectedWhiteNosie
+        self.whiteNoiseSelectedSubject.send(self.selectedWhiteNosie ?? "")
+        
         play(with: tempModel[indexPath.row])
     }
 }

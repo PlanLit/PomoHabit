@@ -16,6 +16,7 @@ final class TimerViewController: BaseViewController, BottomSheetPresentable {
     
     private var model = TimerViewModel()
     private var rootView = TimerView()
+    private var whiteNoiseView = WhiteNoiseViewController()
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -39,7 +40,9 @@ extension TimerViewController {
     private func bind() {
         let input = TimerViewModel.Input(memoButtonTapped: rootView.memoButtonTapped,
                                          whiteNoiseButtonTapped: rootView.whiteNoiseButtonTapped,
-                                         timerButtonTapped: rootView.timerButtonTapped)
+                                         timerButtonTapped: rootView.timerButtonTapped,
+                                         submitButtonTapped: whiteNoiseView.submitButtonTapped, 
+                                         whiteNoiseSelected: whiteNoiseView.whiteNoiseSelectedSubject)
         let output = model.transform(input: input)
         
         output.memoButtonAction
@@ -51,10 +54,8 @@ extension TimerViewController {
         
         output.whiteNoiseButtonAction
             .receive(on: DispatchQueue.main)
-            .sink { _ in
-                DispatchQueue.main.async {
-                    self.presentBottomSheet(viewController: WhiteNoiseViewController(), detents: [.medium()])
-                }
+            .sink { [weak self] in
+                self?.presentBottomSheet(viewController: self?.whiteNoiseView ?? WhiteNoiseViewController(), detents: [.medium()])
             }
             .store(in: &cancellables)
         
