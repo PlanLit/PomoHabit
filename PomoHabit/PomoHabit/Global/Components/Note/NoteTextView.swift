@@ -34,7 +34,7 @@ extension NoteTextView {
         self.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         self.layer.cornerRadius = 10
         self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.gray.cgColor //에셋 설정필요
+        self.layer.borderColor = UIColor.pobitStone4.cgColor //에셋 설정필요
         self.layer.masksToBounds = true
     }
 }
@@ -44,6 +44,10 @@ extension NoteTextView {
 extension NoteTextView {
     func getText() -> String {
         return self.text
+    }
+    
+    func getPlaceholderText() -> String {
+        return placeHolderText
     }
 }
 
@@ -66,7 +70,9 @@ extension NoteTextView: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = placeHolderText
-            textView.textColor = .gray // 에셋 설정 필요
+            textView.textColor = .gray
+        } else {
+            UserDefaults.standard.set(textView.text, forKey: "noteText")
         }
     }
 }

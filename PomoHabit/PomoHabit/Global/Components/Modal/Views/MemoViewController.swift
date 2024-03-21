@@ -12,19 +12,50 @@ import SnapKit
 
 // MARK: - MemoViewController
 
-final class MemoViewController: BaseViewController {
-
+final class MemoViewController: BaseViewController, NavigationBarDelegate {
+    
+    // MARK: - Properties
+    
+    private let timerViewModel = TimerViewModel()
+    
     // MARK: - UI Properties
     
     private lazy var navigationBar = PobitNavigationBarView(title: "메모", viewType: .withDismissButton)
     private lazy var textView = NoteTextView()
     private lazy var submitButton = PobitButton.makePlainButton(title: "등록하기", backgroundColor: .pobitRed)
-
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         setAddSubViews()
         setAutoLayout()
+        setDelegate()
+        addButtonTarget()
+        configureTextview()
+    }
+}
+
+// MARK: - Settings
+
+extension MemoViewController {
+    private func setDelegate() {
+        navigationBar.delegate = self
+    }
+    
+    private func addButtonTarget() {
+        submitButton.addTarget(self, action: #selector(onSubmitButtonTapped), for: .touchUpInside)
+    }
+    
+    private func configureTextview() {
+        if let savedText = UserDefaults.standard.string(forKey: "noteText"), !savedText.isEmpty {
+            textView.text = savedText
+            textView.textColor = .pobitBlack
+        } else {
+            textView.text = textView.getPlaceholderText()
+            textView.textColor = .pobitStone4
+        }
     }
 }
 
@@ -53,5 +84,13 @@ extension MemoViewController {
             make.leading.trailing.equalTo(textView)
             make.height.equalTo(62)
         }
+    }
+}
+
+// MARK: - Action Helpers
+
+extension MemoViewController {
+    @objc func onSubmitButtonTapped() {
+        dismiss(animated: true)
     }
 }
