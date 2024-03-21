@@ -56,7 +56,6 @@ final class TimerView: BaseView {
         setAddSubViews()
         setAutoLayout()
         subscribeButtonEvents()
-        [whiteNoiseInfoLabel, whiteNoiseButton].forEach { $0.isHidden = true }
     }
     
     required init?(coder: NSCoder) {
