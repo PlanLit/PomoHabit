@@ -87,7 +87,7 @@ extension ReportViewController {
         gridView.snp.makeConstraints { make in
             make.top.equalTo(habitAchievementLabelView.snp.bottom).offset(LayoutLiterals.minimumVerticalSpacing)
             make.centerX.equalToSuperview()
-            make.height.equalTo(45*5+(10*4))
+            make.height.equalTo(45 * 5 + (10 * 4))
         }
         
         habitIndicatorView.snp.makeConstraints { make in
@@ -374,7 +374,7 @@ extension ReportViewController {
         
         var hasDoneCount: Double = 0
         totalHabitInfItems.forEach { habit in if habit.hasDone { hasDoneCount += 1.0 } }
-        hasDoneCount = hasDoneCount/Double(totalHabitInfItems.count) * 100
+        hasDoneCount = hasDoneCount / Double(totalHabitInfItems.count) * 100
         
         return Int(hasDoneCount)
     }
