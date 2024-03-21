@@ -76,6 +76,7 @@
 		F88EB2D82B8DC0EB0073BDDA /* WeeklyHabitState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2D72B8DC0EB0073BDDA /* WeeklyHabitState.swift */; };
 		F88EB2DA2B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2D92B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift */; };
 		F88EB2DC2B8DC1120073BDDA /* WeeklyCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2DB2B8DC1120073BDDA /* WeeklyCalendarView.swift */; };
+		F8A179D62BAC164A005AAC18 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F8A179D52BAC164A005AAC18 /* Pretendard-Black.otf */; };
 		F8A4FB882B96F27B00E46EA1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115972B901D5E003E6459 /* SnapKit */; };
 		F8A4FB892B96F27B00E46EA1 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115992B901D5E003E6459 /* SnapKit-Dynamic */; };
 		F8A4FB952B96F2A300E46EA1 /* ReportImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB8D2B96F2A300E46EA1 /* ReportImageCollectionViewController.swift */; };
@@ -159,6 +160,7 @@
 		F88EB2D72B8DC0EB0073BDDA /* WeeklyHabitState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyHabitState.swift; sourceTree = "<group>"; };
 		F88EB2D92B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarViewController.swift; sourceTree = "<group>"; };
 		F88EB2DB2B8DC1120073BDDA /* WeeklyCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarView.swift; sourceTree = "<group>"; };
+		F8A179D52BAC164A005AAC18 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		F8A4FB8D2B96F2A300E46EA1 /* ReportImageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportImageCollectionViewController.swift; sourceTree = "<group>"; };
 		F8A4FB8E2B96F2A300E46EA1 /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		F8A4FB912B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportDayButtonTableViewCell.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 		376B91AD2B8C69B6004CBB16 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				F8A179D52BAC164A005AAC18 /* Pretendard-Black.otf */,
 				376B91AF2B8C6AB9004CBB16 /* Pretendard-Bold.otf */,
 				376B91B62B8C6AF6004CBB16 /* Pretendard-SemiBold.otf */,
 				376B91AE2B8C6AB9004CBB16 /* Pretendard-Medium.otf */,
@@ -647,6 +650,7 @@
 				376B91B72B8C6AF6004CBB16 /* Pretendard-SemiBold.otf in Resources */,
 				37144C6F2B8C32D7008565C4 /* Assets.xcassets in Resources */,
 				376B91B52B8C6ABA004CBB16 /* Pretendard-Regular.otf in Resources */,
+				F8A179D62BAC164A005AAC18 /* Pretendard-Black.otf in Resources */,
 				376B91B22B8C6ABA004CBB16 /* Pretendard-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

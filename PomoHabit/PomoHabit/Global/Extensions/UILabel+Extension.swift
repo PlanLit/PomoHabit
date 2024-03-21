@@ -9,7 +9,7 @@ import UIKit
 
 extension UILabel {
     func setSubTitleLabel(text: String) {
-        self.textColor = UIColor.pobitStone5
+        self.textColor = UIColor.pobitStone2
         self.font = Pretendard.bold(size: 24)
         self.text = text
     }

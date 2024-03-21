@@ -47,7 +47,7 @@ final class WeeklyCalendarView: BaseView {
     private lazy var todayDateLabel: UILabel = {
         let label = UILabel()
         label.text = Date().dateToString()
-        label.font = Pretendard.bold(size: 50)
+        label.font = Pretendard.black(size: 50)
         label.textColor = .pobitBlack
         
         return label
@@ -99,7 +99,7 @@ final class WeeklyCalendarView: BaseView {
     private lazy var noteContentLabel: BasePaddingLabel = {
         let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         label.font = Pretendard.medium(size: 15)
-        label.textColor = .pobitBlack
+        label.textColor = .pobitStone2
         label.numberOfLines = 0
         label.layer.cornerRadius = 10
         label.layer.masksToBounds = true
