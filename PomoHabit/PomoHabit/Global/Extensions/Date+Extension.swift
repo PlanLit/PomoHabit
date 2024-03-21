@@ -27,13 +27,28 @@ extension Date {
         return convertString
     }
     
-    func comparisonDate(targetDate: Date) -> Bool { // 년도 월 일
+    func comparisonDate(fromDate: Date) -> Int? { // 년도 월 일
         //Format해서 비교해주는 이유 : 완료 시간과 목데이터의 시간이 다를 경우도 있기 때문
-        if self.dateToString(format: "yyyy-MM-dd") == targetDate.dateToString(format: "yyyy-MM-dd"){
-            return true
-        } else {
-            return false
+        let dateformat = "yyyy-MM-dd"
+        let targetString = self.dateToString(format: dateformat)
+        let fromString = fromDate.dateToString(format: dateformat)
+        let dateFormatter =  DateFormatter()
+        
+        dateFormatter.dateFormat = dateformat
+        
+        if let targetDate = dateFormatter.date(from: targetString), let fromDate = dateFormatter.date(from: fromString) {
+            switch targetDate.compare(fromDate) {
+            case .orderedAscending: // fromDate 이전 날짜
+                return -1
+                
+            case .orderedSame: // fromDate 동일한 날짜
+                return 0
+                
+            case .orderedDescending: // fromDate 이후 날짜
+                return 1
+            }
         }
+        return nil
     }
     
     func extractTimeFromDate(_ date: Date) -> String {
@@ -41,4 +56,6 @@ extension Date {
         dateFormatter.dateFormat = "HH:mm"
         return dateFormatter.string(from: date)
     }
+    
+    
 }
