@@ -277,3 +277,5 @@ extension CoreDataManager {
         }
     }
 }
+
+// MARK: - CoreData 총 일수, 총 시간

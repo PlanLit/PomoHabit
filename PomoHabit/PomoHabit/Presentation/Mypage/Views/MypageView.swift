@@ -26,7 +26,7 @@ final class MyPageView: BaseView {
     
     private let nickNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "박미달"
+        label.text = ""
         label.textColor = .pobitStone2
         label.font = Pretendard.bold(size: 20)
         

@@ -36,14 +36,31 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
         setTotalHabitInfo()
         setupCustomNavigationController()
         setDelegateforEditButton()
+        setNicknameData()
     }
 }
 
 // MARK: - Data 전처리
 
 extension MyPageViewController {
-    private func setTotalHabitInfo() {
+    private func setNicknameData() {
+        do {
+            if let user = try CoreDataManager.shared.fetchUser() {
+                let userNickname = user.nickname ?? "" //
+                myPageRootView.getNicknameLabel().text = userNickname
+            } else {
+                myPageRootView.getNicknameLabel().text = "없음"
+            }
+        } catch {
+            print("Error")
+        }
     }
+}
+
+    private func setTotalHabitInfo() {
+        do {
+            
+        }
 }
 
 // MARK: - Method
