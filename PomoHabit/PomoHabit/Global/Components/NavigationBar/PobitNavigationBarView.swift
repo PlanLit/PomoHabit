@@ -21,6 +21,7 @@ final class PobitNavigationBarView: UIView {
     // MARK: - Properties
     
     private var viewType: navigationViewType
+    weak var delegate: NavigationBarDelegate?
     
     // MARK: - UI Properties
     
@@ -34,8 +35,14 @@ final class PobitNavigationBarView: UIView {
     private lazy var dividerView = makeDividerView(height: 1)
     
     private lazy var dismissButton: UIButton = {
+        let action = UIAction {[weak self] _ in
+            self?.delegate?.didTapDismissButton()
+        }
+        
         let button = UIButton()
-        button.backgroundColor = .clear
+        button.backgroundColor = .gray
+        button.addAction(action, for: .touchUpInside)
+        
         return button
     }()
     
