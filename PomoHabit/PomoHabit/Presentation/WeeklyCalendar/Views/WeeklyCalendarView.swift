@@ -18,6 +18,8 @@ protocol SendSelectedData{
 final class WeeklyCalendarView: BaseView {
     
     // MARK: - Properties
+    
+    var currentDateIndextpathRow : Int = 0
     var weeklyHabitState: [HabitState] = []
     let weeklyDays = ["월","화","수","목","금","토","일"]
     var weeklyDatesData : [Date] = []
@@ -240,9 +242,18 @@ extension WeeklyCalendarView {
     }
     
     func setWeeklyDates(weeklyDates : [Date]) {
+        if let index = weeklyDates.firstIndex(where: { $0.comparisonDate(fromDate: Date()) == 0}) {
+            currentDateIndextpathRow = index
+        }
+        
         weeklyDatesData = weeklyDates
     }
     
+    func moveToSelectedCell(weeklyDates: [Date]) {
+        if let index = weeklyDates.firstIndex(where: { $0.comparisonDate(fromDate: Date()) == 0}) {
+            weeklyCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .left, animated: translatesAutoresizingMaskIntoConstraints)
+        }
+    }
     func setWeeklyHabitState(setData: [HabitState]) {
         weeklyHabitState = setData
     }
@@ -296,6 +307,11 @@ extension WeeklyCalendarView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeeklyCollectionViewCell.identifier, for: indexPath) as? WeeklyCollectionViewCell else {
             return UICollectionViewCell()
         }
+        if indexPath.item == currentDateIndextpathRow {
+            cell.isSelected = true
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+            cell.setSelcetedCell()
+        }
         
         cell.setDayLabelText(text: weeklyDays[indexPath.item])
         cell.setDateLabelText(text: weeklyDatesData[indexPath.item])
@@ -304,7 +320,4 @@ extension WeeklyCalendarView: UICollectionViewDataSource {
         return cell
     }
 }
-
-// MARK: - GetData
-
 

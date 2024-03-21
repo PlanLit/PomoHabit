@@ -53,6 +53,12 @@ final class WeeklyCalendarViewController: BaseViewController {
         setSetAutoLayout()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        weeklyCalendarView.moveToSelectedCell(weeklyDates: weeklyDates)
+    }
+    
     override func viewDidLayoutSubviews() { // 해당 메소드 안에서만 오토레이 아웃으로 설정된 UI/View의 Frame 사이즈를 알 수 있음
         super.viewDidLayoutSubviews()
         
@@ -123,21 +129,25 @@ extension WeeklyCalendarViewController {
                 let dateHabitState = try CoreDataManager.shared.getSelectedHabitInfo(selectedDate: date).map{$0.hasDone}
                 let currentDate = Date()
                 
-                if date.comparisonDate(fromDate: currentDate) == 1 { // 현재 날짜보다 이후일 경우
-                    weeklyHabitState.append(.notStart)
-                } else {
+                if date.comparisonDate(fromDate: currentDate) == -1 { // 현재 날짜보다 이전 날짜일 경우
                     switch dateHabitState{
                     case true:
                         weeklyHabitState.append(.done)
                         
                     case false:
                         weeklyHabitState.append(.doNot)
-                        
+
                     case nil:
-                        weeklyHabitState.append(.notStart)
+                        weeklyHabitState.append(.dayOff)
                         
                     case .some(_):
                         break
+                    }
+                } else {
+                    if dateHabitState == false {
+                        weeklyHabitState.append(.notStart)
+                    } else {
+                        weeklyHabitState.append(.dayOff)
                     }
                 }
             }
@@ -173,14 +183,14 @@ extension WeeklyCalendarViewController {
             if let selectedHabitInfo = try CoreDataManager.shared.getSelectedHabitInfo(selectedDate: date) { // 습관 진행 날일 경우
                 weeklyHabitInfo.note = selectedHabitInfo.note
                 
-                if date.comparisonDate(fromDate: currentDate) == 1 { // 현재 날짜 보다 이후 일경우
-                    weeklyHabitInfo.habitstate = .notStart
-                    weeklyHabitInfo.goalTime = selectedHabitInfo.goalTime
-                    weeklyHabitInfo.duringTime = "00:00 ~ 00:00"
-                } else { // 현재 날짜 포함 이전일 경우
+                if date.comparisonDate(fromDate: currentDate) == -1{ // 현재 날짜 포함 이전일 경우
                     weeklyHabitInfo.habitstate = selectedHabitInfo.hasDone ?  HabitState.done : HabitState.doNot
                     weeklyHabitInfo.goalTime = selectedHabitInfo.goalTime
                     weeklyHabitInfo.duringTime = getDuringTime(completedDate: date, goalTime: selectedHabitInfo.goalTime)
+                } else { // 현재 날짜 보다 이후 일경우
+                    weeklyHabitInfo.habitstate = .notStart
+                    weeklyHabitInfo.goalTime = selectedHabitInfo.goalTime
+                    weeklyHabitInfo.duringTime = "00:00 ~ 00:00"
                 }
             } else { // 습관 진행 날이 아닐경우
                 weeklyHabitInfo.habitstate = .notStart
