@@ -25,4 +25,8 @@ struct Pretendard {
     static func regular(size: CGFloat) -> UIFont? {
         return UIFont(name: "Pretendard-Regular", size: size) ?? .systemFont(ofSize: size)
     }
+    
+    static func black(size: CGFloat) -> UIFont? {
+        return UIFont(name: "Pretendard-Black", size: size) ?? .systemFont(ofSize: size)
+    }
 }
