@@ -91,7 +91,7 @@ final class MyPageView: BaseView {
     // MARK: - 습관 진행 상태 내용 UI
     
     private lazy var totalDaysLabel: UILabel = {
-        let label = UILabel().setPrimaryColorLabel(text: "4일")
+        let label = UILabel().setPrimaryColorLabel(text: "")
         
         return label
     }()
@@ -103,7 +103,7 @@ final class MyPageView: BaseView {
     }()
     
     private lazy var totalMinutesLabel: UILabel = {
-        let label = UILabel().setPrimaryColorLabel(text: "5분")
+        let label = UILabel().setPrimaryColorLabel(text: "")
         
         return label
     }()
@@ -259,10 +259,12 @@ extension MyPageView {
     }
     
     func getNicknameLabel() -> UILabel {
+        
         return nickNameLabel
     }
     
     func getTableView() -> UITableView {
+        
             return tableView
         }
 }

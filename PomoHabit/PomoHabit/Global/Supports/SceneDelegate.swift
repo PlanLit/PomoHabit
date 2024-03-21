@@ -10,21 +10,28 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
+    let coreDataManager = CoreDataManager.shared
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = scene as? UIWindowScene else { return }
         
-        if let windowScene = scene as? UIWindowScene {
-            let rootVC = UINavigationController(rootViewController: OnboardingLoginViewController())
-            rootVC.isNavigationBarHidden = true
-            
-            let window = UIWindow(windowScene: windowScene)
-            window.overrideUserInterfaceStyle = UIUserInterfaceStyle.light
-            window.rootViewController = rootVC
-            window.makeKeyAndVisible()
-            
-            self.window = window
-        }
+//        let rootViewController: UIViewController = {
+//            if let _ = try? coreDataManager.fetchUser()?.nickname {
+//                
+//                return UINavigationController(rootViewController: TabBarController())
+//            } else {
+//                
+//                return OnboardingLoginViewController()
+//            }
+//        }()
+        
+        let window = UIWindow(windowScene: windowScene)
+        window.overrideUserInterfaceStyle = .light
+//        window.rootViewController = rootViewController
+        window.rootViewController = OnboardingLoginViewController()
+        window.makeKeyAndVisible()
+        
+        self.window = window
     }
     
     func sceneDidDisconnect(_ scene: UIScene) { }
@@ -37,5 +44,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func sceneDidEnterBackground(_ scene: UIScene) { }
 }
-
-

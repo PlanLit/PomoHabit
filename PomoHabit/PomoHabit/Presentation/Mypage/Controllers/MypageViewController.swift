@@ -37,6 +37,7 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
         setupCustomNavigationController()
         setDelegateforEditButton()
         setNicknameData()
+        setTotalHabitInfo()
     }
 }
 
@@ -57,12 +58,15 @@ extension MyPageViewController {
     }
 }
 
+extension MyPageViewController {
     private func setTotalHabitInfo() {
-        do {
-            
-        }
+        let (totalTime, totalDays) = CoreDataManager.shared.getTotalTimeAndDays()
+        let totalTimeString = "\(totalTime) 분"
+        let totalDaysString = "\(totalDays) 일"
+        myPageRootView.updateTotalMinutesLabel(totalTimeString)
+        myPageRootView.updateTotalDaysLabel(totalDaysString)
+    }
 }
-
 // MARK: - Method
 
 extension MyPageViewController {
