@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 protocol SendSelectedData{
-    func sendDate(date: Date)
+    func sendDate(date: Date,completion: @escaping(WeeklyHabitInfoModel)-> Void)
 }
 
 // MARK: - WeeklyCalendarView
@@ -18,6 +18,8 @@ protocol SendSelectedData{
 final class WeeklyCalendarView: BaseView {
     
     // MARK: - Properties
+    
+    var currentDateIndextpathRow : Int = 0
     var weeklyHabitState: [HabitState] = []
     let weeklyDays = ["월","화","수","목","금","토","일"]
     var weeklyDatesData : [Date] = []
@@ -45,7 +47,7 @@ final class WeeklyCalendarView: BaseView {
     private lazy var todayDateLabel: UILabel = {
         let label = UILabel()
         label.text = Date().dateToString()
-        label.font = Pretendard.bold(size: 50)
+        label.font = Pretendard.black(size: 50)
         label.textColor = .pobitBlack
         
         return label
@@ -97,7 +99,7 @@ final class WeeklyCalendarView: BaseView {
     private lazy var noteContentLabel: BasePaddingLabel = {
         let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         label.font = Pretendard.medium(size: 15)
-        label.textColor = .pobitBlack
+        label.textColor = .pobitStone2
         label.numberOfLines = 0
         label.layer.cornerRadius = 10
         label.layer.masksToBounds = true
@@ -240,9 +242,18 @@ extension WeeklyCalendarView {
     }
     
     func setWeeklyDates(weeklyDates : [Date]) {
+        if let index = weeklyDates.firstIndex(where: { $0.comparisonDate(fromDate: Date()) == 0}) {
+            currentDateIndextpathRow = index
+        }
+        
         weeklyDatesData = weeklyDates
     }
     
+    func moveToSelectedCell(weeklyDates: [Date]) {
+        if let index = weeklyDates.firstIndex(where: { $0.comparisonDate(fromDate: Date()) == 0}) {
+            weeklyCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .left, animated: translatesAutoresizingMaskIntoConstraints)
+        }
+    }
     func setWeeklyHabitState(setData: [HabitState]) {
         weeklyHabitState = setData
     }
@@ -273,7 +284,11 @@ extension WeeklyCalendarView: UICollectionViewDelegateFlowLayout,UICollectionVie
         return CGSize(width: 65, height: 80)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        dateDelegate?.sendDate(date: weeklyDatesData[indexPath.item])
+        dateDelegate?.sendDate(date: weeklyDatesData[indexPath.item]) { [self] weeklyHabitInfo in
+            
+            setHabitInfoView(state: weeklyHabitInfo.habitstate ?? .notStart, targetHabit: weeklyHabitInfo.targetHabit ?? "습관 정보", duringTime: weeklyHabitInfo.duringTime ?? "00:00 ~ 00:00", goalTime: weeklyHabitInfo.goalTime ?? 0)
+            setNoteContentLabel(note: weeklyHabitInfo.note ?? "")
+        }
     }
 }
 
@@ -292,6 +307,11 @@ extension WeeklyCalendarView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeeklyCollectionViewCell.identifier, for: indexPath) as? WeeklyCollectionViewCell else {
             return UICollectionViewCell()
         }
+        if indexPath.item == currentDateIndextpathRow {
+            cell.isSelected = true
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+            cell.setSelcetedCell()
+        }
         
         cell.setDayLabelText(text: weeklyDays[indexPath.item])
         cell.setDateLabelText(text: weeklyDatesData[indexPath.item])
@@ -300,7 +320,4 @@ extension WeeklyCalendarView: UICollectionViewDataSource {
         return cell
     }
 }
-
-// MARK: - GetData
-
 

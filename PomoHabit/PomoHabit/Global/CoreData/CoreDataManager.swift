@@ -209,7 +209,7 @@ extension CoreDataManager {
             let totalHabitInfo = try fetchTotalHabitInfo()
             for (idx,habitInfo) in totalHabitInfo.enumerated() {
                 guard let habitInfoDate = habitInfo.date else { return }
-                if habitInfoDate.comparisonDate(targetDate: completedDate) {
+                if habitInfoDate.comparisonDate(fromDate: completedDate) == 0 {
                     totalHabitInfo[idx].setValue(completedDate, forKey: "date")
                     totalHabitInfo[idx].setValue(true, forKey: "hasDone")
                     totalHabitInfo[idx].setValue(note, forKey: "note")
@@ -231,7 +231,7 @@ extension CoreDataManager {
             let totalHabitInfo = try fetchTotalHabitInfo()
             for (idx,habitInfo) in totalHabitInfo.enumerated() {
                 let habitInfoDate = habitInfo.date ?? Date()
-                if habitInfoDate.comparisonDate(targetDate: selectedDate) {
+                if habitInfoDate.comparisonDate(fromDate: selectedDate) == 0 {
                     
                     return totalHabitInfo[idx]
                 }
