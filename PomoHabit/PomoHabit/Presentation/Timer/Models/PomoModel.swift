@@ -33,12 +33,15 @@ final class TimerViewModel: InputOutputProtocol {
         let memoButtonTapped: PassthroughSubject<Void, Never>
         let whiteNoiseButtonTapped: PassthroughSubject<Void, Never>
         let timerButtonTapped: PassthroughSubject<Void, Never>
+        let submitButtonTapped: PassthroughSubject<Void, Never>
+        let whiteNoiseSelected: PassthroughSubject<String, Never>
     }
     
     struct Output {
         let memoButtonAction: AnyPublisher<Void, Never>
         let whiteNoiseButtonAction: AnyPublisher<Void, Never>
         let timerButtonAction: AnyPublisher<Void, Never>
+        let submitButtonAction: AnyPublisher<Void, Never>
         let timerStateDidChange: AnyPublisher<TimerState, Never>
         let remainingTime: AnyPublisher<TimeInterval, Never>
         let userData: AnyPublisher<UserData, Never>
@@ -63,17 +66,32 @@ final class TimerViewModel: InputOutputProtocol {
     }
     
     func transform(input: Input) -> Output {
+        input.whiteNoiseSelected
+            .sink { [weak self] selectedWhiteNoise in
+                print("Selected White Noise: \(selectedWhiteNoise)")
+                self?.whiteNoiseType = selectedWhiteNoise
+            }
+            .store(in: &cancellables)
+        
         let memoAction = input.memoButtonTapped
-            .map { print("Memo button tapped") }
+            .map { print("memoButtonTapped") }
             .eraseToAnyPublisher()
         
         let whiteNoiseButtonAction = input.whiteNoiseButtonTapped
-            .map { print("White Noise button tapped") }
+            .print()
+            .map { print("WhiteNoiseButtonTapped") }
             .eraseToAnyPublisher()
         
         let timerButtonAction = input.timerButtonTapped
             .map {
                 self.handleTimerButtonTapped()
+            }
+            .eraseToAnyPublisher()
+        
+        let submitButtonAction = input.submitButtonTapped
+            .print()
+            .map { [weak self] _ in
+                CoreDataManager.shared.updateWhiteNoiseType(with: self?.whiteNoiseType ?? "")
             }
             .eraseToAnyPublisher()
         
@@ -84,10 +102,10 @@ final class TimerViewModel: InputOutputProtocol {
         return Output(memoButtonAction: memoAction,
                       whiteNoiseButtonAction: whiteNoiseButtonAction,
                       timerButtonAction: timerButtonAction,
+                      submitButtonAction: submitButtonAction,
                       timerStateDidChange: timerStateDidChange,
                       remainingTime: remainingTime,
-                      userData: userDataPublisher
-        )
+                      userData: userDataPublisher)
     }
 }
 

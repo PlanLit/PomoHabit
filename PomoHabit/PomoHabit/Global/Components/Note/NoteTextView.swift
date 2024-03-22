@@ -76,5 +76,3 @@ extension NoteTextView: UITextViewDelegate {
         }
     }
 }
-
-
