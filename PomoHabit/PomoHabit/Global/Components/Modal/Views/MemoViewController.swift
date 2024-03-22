@@ -12,11 +12,7 @@ import SnapKit
 
 // MARK: - MemoViewController
 
-final class MemoViewController: BaseViewController, NavigationBarDelegate {
-    
-    // MARK: - Properties
-    
-    private let timerViewModel = TimerViewModel()
+final class MemoViewController: BaseViewController {
     
     // MARK: - UI Properties
     
@@ -34,6 +30,20 @@ final class MemoViewController: BaseViewController, NavigationBarDelegate {
         setDelegate()
         addButtonTarget()
         configureTextview()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        showSubmitButton()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // TODO: 키보드 내리는 제스처 지훈님 코드랑 익스텐션화 하기
+        view.endEditing(true)
+        hideSubmitButton()
     }
 }
 
@@ -83,6 +93,25 @@ extension MemoViewController {
             make.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-LayoutLiterals.minimumHorizontalSpacing)
             make.leading.trailing.equalTo(textView)
             make.height.equalTo(62)
+        }
+    }
+}
+
+// MARK: - Action Helper
+
+extension MemoViewController {
+    private func showSubmitButton() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.submitButton.alpha = 1
+        })
+        submitButton.isHidden = false
+    }
+    
+    private func hideSubmitButton() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.submitButton.alpha = 0
+        }) { _ in
+            self.submitButton.isHidden = true
         }
     }
 }
