@@ -66,6 +66,14 @@ extension TimerViewController {
             }
             .store(in: &cancellables)
         
+        output.submitButtonAction
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.dismiss(animated: true)
+                self?.showAlert(title: "변경이 완료되었어요!", message: "", cancelButton: false)
+            }
+            .store(in: &cancellables)
+        
         output.timerButtonAction
             .sink { _ in }
             .store(in: &cancellables)
@@ -87,7 +95,7 @@ extension TimerViewController {
                         self?.presentBottomSheet(viewController: MemoViewController())
                     }
                 case .done:
-                    self?.showAlert(title: "오늘의 습관을 완료했어요!", message: "\n 내일 다시 만나요 :)", cancelButton: false)
+                    self?.showAlert(title: "오늘의 습관을 완료했어요!", message: "\n 내일은 수행 시간이 1분 늘어나요 :)", cancelButton: false)
                 }
             }
             .store(in: &cancellables)
