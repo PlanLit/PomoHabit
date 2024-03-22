@@ -16,7 +16,8 @@ final class NicknameViewController: UIViewController {
     // MARK: - Properties
     
     private let nicknameEditView = NicknameEditView()
-    var onDataReceived: ((String) -> Void)? = nil
+//    var onDataReceived: ((String) -> Void)? = nil
+    var onNicknameEdit: ((String) -> Void)?
     
     // MARK: - View Lifecycle
     
@@ -24,6 +25,8 @@ final class NicknameViewController: UIViewController {
         super.viewDidLoad()
         
         setupNicknameEditView()
+        nicknameEditView.editSubmitButton.addTarget(self, action: #selector(didTapNicknameSubmitButton) , for: .touchUpInside)
+        
     }
 }
 
@@ -31,8 +34,8 @@ final class NicknameViewController: UIViewController {
 
 extension NicknameViewController {
     func toReceiveNicknameData(data: String) {
-        onDataReceived?(data)
-        onDataReceived = nil
+//        onDataReceived?(data)
+//        onDataReceived = nil
     }
     
     private func setupNicknameEditView() {
@@ -40,5 +43,12 @@ extension NicknameViewController {
         nicknameEditView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+    }
+    
+    @objc func didTapNicknameSubmitButton() {
+        guard let nickname = nicknameEditView.nicknameEditTextField.text else { return }
+        
+        onNicknameEdit?(nickname)
+        dismiss(animated: true)
     }
 }

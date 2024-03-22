@@ -56,6 +56,8 @@ final class PobitNavigationBarView: UIView {
         setAutoLayout()
         setupDismissButton()
         setTitle(title)
+        
+        dismissButton.isHidden = true
     }
     
     required init?(coder: NSCoder) {
