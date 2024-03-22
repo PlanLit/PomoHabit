@@ -240,7 +240,7 @@ extension OnboardingHabitRegisterViewController {
     private func sayHello() {
         let messages: [OnboardingChattingCellData] = [.init(chatDirection: .incoming, cellType: .profilePicture),
                                                       .init(chatDirection: .incoming, message: "안녕 \(nickname ?? "")!"),
-                                                      .init(chatDirection: .incoming, message: "습관 만들기 앱 PomoHabit에 오신 것을 환영해!"),
+                                                      .init(chatDirection: .incoming, message: "습관 만들기 앱 PomoHabit에 온 것을 환영해!"),
                                                       .init(chatDirection: .incoming, message: "나는 새로운 습관 형성을 도와줄 가이드야!"),
                                                       .init(chatDirection: .outgoing, message: "안녕~"),
                                                       .init(chatDirection: .outgoing, message: "습관 만들기 앱이라고 들었는데?"),
