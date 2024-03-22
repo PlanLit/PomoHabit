@@ -280,7 +280,7 @@ extension CoreDataManager {
 // MARK: - CoreData 총 일수, 총 시간
 
 extension CoreDataManager {
-    func getTotalTimeAndDays() -> (totalTime: Int, total: Int){
+    func getTotalTimeAndDays() -> (totalTime: Int, total: Int) {
         do {
             let totalHabitInfos = try CoreDataManager.shared.fetchTotalHabitInfo()
             var totalHabitDoneCount = 0
@@ -295,7 +295,7 @@ extension CoreDataManager {
             return (totalHabitDuringTime, totalHabitDoneCount)
             
         } catch {
-            print("Error")
+            print(error)
             return (0, 0)
         }
     }

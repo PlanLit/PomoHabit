@@ -26,7 +26,6 @@ final class MyPageView: BaseView {
     
     private let nickNameLabel: UILabel = {
         let label = UILabel()
-        label.text = ""
         label.textColor = .pobitStone2
         label.font = Pretendard.bold(size: 20)
         
@@ -265,8 +264,8 @@ extension MyPageView {
     
     func getTableView() -> UITableView {
         
-            return tableView
-        }
+        return tableView
+    }
 }
 
 // MARK: - UITableViewDataSource

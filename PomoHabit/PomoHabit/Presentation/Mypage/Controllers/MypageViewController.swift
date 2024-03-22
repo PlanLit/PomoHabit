@@ -67,6 +67,7 @@ extension MyPageViewController {
         myPageRootView.updateTotalDaysLabel(totalDaysString)
     }
 }
+
 // MARK: - Method
 
 extension MyPageViewController {
