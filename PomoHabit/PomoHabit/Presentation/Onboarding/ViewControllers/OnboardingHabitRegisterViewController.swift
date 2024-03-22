@@ -407,7 +407,7 @@ extension OnboardingHabitRegisterViewController {
                 targetHabit: habitTitle ?? "",
                 targetDate: targetDate,
                 alarmTime: habitAlarmTime ?? Date(),
-                whiteNoiseType: "")
+                whiteNoiseType: "배경음을 선택해보세요!")
     }
     
     private func saveData() {
