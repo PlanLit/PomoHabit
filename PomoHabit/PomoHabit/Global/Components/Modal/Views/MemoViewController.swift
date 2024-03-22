@@ -12,7 +12,7 @@ import SnapKit
 
 // MARK: - MemoViewController
 
-final class MemoViewController: BaseViewController {
+final class MemoViewController: BaseViewController, NavigationBarDelegate {
     
     // MARK: - UI Properties
     

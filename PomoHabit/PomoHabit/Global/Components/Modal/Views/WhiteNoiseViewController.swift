@@ -13,7 +13,7 @@ import SnapKit
 
 // MARK: - WhiteNoiseView
 
-final class WhiteNoiseViewController: BaseViewController {
+final class WhiteNoiseViewController: BaseViewController, NavigationBarDelegate {
     
     // MARK: - Subjects
     
@@ -51,6 +51,7 @@ final class WhiteNoiseViewController: BaseViewController {
         super.viewDidLoad()
         
         subscribeSubmitButton()
+        setDelegate()
         setAddSubViews()
         setAutoLayout()
     }
@@ -65,6 +66,10 @@ extension WhiteNoiseViewController {
                 self?.submitButtonTapped.send()
             }
             .store(in: &cancellables)
+    }
+    
+    private func setDelegate() {
+        navigationBar.delegate = self
     }
 }
 
