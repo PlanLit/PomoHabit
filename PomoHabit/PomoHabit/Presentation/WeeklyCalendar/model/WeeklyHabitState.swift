@@ -9,9 +9,10 @@ import UIKit
 import SnapKit
 
 enum HabitState{
-    case done
-    case doNot
-    case notStart
+    case done // 습관 완료
+    case doNot // 습관 미완료
+    case notStart // 시작하기전
+    case dayOff // 쉬는날
 }
 
 extension HabitState {
@@ -23,6 +24,8 @@ extension HabitState {
             return .pobitStone1
         case .notStart:
             return .white
+        case .dayOff:
+            return .white
         }
     }
     
@@ -33,6 +36,8 @@ extension HabitState {
         case .doNot:
             return UIImage(named: "DoNotImage") ?? UIImage(systemName: "smiley.fill")!
         case .notStart:
+            return UIImage(named: "NotStartImage") ?? UIImage(systemName: "smiley.fill")!
+        case .dayOff:
             return UIImage(named: "NotStartImage") ?? UIImage(systemName: "smiley.fill")!
         }
     }

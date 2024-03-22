@@ -32,9 +32,11 @@ final class CustomerServiceViewController: UIViewController {
         setAddSubviews()
         setupConstraints()
     }
-    
-    // MARK: - UI Setup
-    
+}
+
+// MARK: - Layout Helpers
+
+extension CustomerServiceViewController {
     private func setAddSubviews() {
         view.addSubview(contactEmailLabel)
     }

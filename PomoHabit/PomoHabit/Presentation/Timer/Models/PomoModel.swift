@@ -162,10 +162,10 @@ extension TimerViewModel {
             
             guard let goalTime = selectedHabitInfo?.goalTime else { return } // 목표 시간
             
-//            self.timerDuration = TimeInterval(goalTime * 60)
+            self.timerDuration = TimeInterval(goalTime * 60)
             
             /// test용 주석
-            self.timerDuration = TimeInterval(5)
+//            self.timerDuration = TimeInterval(goalTime)
         } catch {
             print(error)
         }
