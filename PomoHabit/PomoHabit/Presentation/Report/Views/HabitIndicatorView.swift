@@ -7,9 +7,15 @@
 
 import UIKit
 
+// MARK: - HabitIndicatorView
+
 final class HabitIndicatorView: UIView {
     
+    // MARK: - Properties
+    
     private lazy var container: HStackView = makeContainer()
+    
+    // MARK: - Life Cycles
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,6 +28,8 @@ final class HabitIndicatorView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+// MARK: - Leyout Helpers
 
 extension HabitIndicatorView {
     private func setAddSubviews() {
@@ -36,6 +44,8 @@ extension HabitIndicatorView {
         }
     }
 }
+
+// MARK: - Fectory Methods
 
 extension HabitIndicatorView {
     private func makeContainer() -> HStackView {
@@ -53,7 +63,7 @@ extension HabitIndicatorView {
             ]),
             HStackView(spacing: 5, [
                 makeCircle(.pobitRed.withAlphaComponent(0.1)),
-                makeLabel("해야함"),
+                makeLabel("시작 전"),
             ]),
         ])
     }

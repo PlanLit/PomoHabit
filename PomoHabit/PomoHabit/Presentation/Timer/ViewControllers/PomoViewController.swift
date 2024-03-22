@@ -47,8 +47,8 @@ extension TimerViewController {
         
         output.memoButtonAction
             .receive(on: DispatchQueue.main)
-            .sink { _ in
-                self.presentBottomSheet(viewController: MemoViewController())
+            .sink { [weak self] in
+                self?.presentBottomSheet(viewController: MemoViewController())
             }
             .store(in: &cancellables)
         
@@ -83,6 +83,9 @@ extension TimerViewController {
                     self?.rootView.circleProgressBar.setProgressWithAnimation(duration: self?.model.timerDuration ?? 5)
                 case .finished:
                     self?.rootView.updateTimerButtonUI(with: state)
+                    self?.showAlert(title: "메모를 작성하시겠어요?", message: nil) { [weak self] _ in
+                        self?.presentBottomSheet(viewController: MemoViewController())
+                    }
                 case .done:
                     self?.showAlert(title: "오늘의 습관을 완료했어요!", message: "\n 내일 다시 만나요 :)", cancelButton: false)
                 }

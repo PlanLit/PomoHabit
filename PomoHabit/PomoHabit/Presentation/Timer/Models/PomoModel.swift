@@ -47,13 +47,13 @@ final class TimerViewModel: InputOutputProtocol {
         let userData: AnyPublisher<UserData, Never>
     }
     
+    private var timer: AnyCancellable?
+    
     private let timerStatePublisher = CurrentValueSubject<TimerState, Never>(.stopped)
     private lazy var remainingTimePublisher = CurrentValueSubject<TimeInterval, Never>(self.timerDuration)
     private var cancellables = Set<AnyCancellable>()
-    private var timer: AnyCancellable?
     
     private (set) var timerDuration = TimeInterval()
-    
     private var targetHabit = String()
     private var targetDate = String()
     private var alarmTime = String()
@@ -155,7 +155,7 @@ extension TimerViewModel {
 // MARK: - CoreData
 
 extension TimerViewModel {
-    func getUserData() {
+    private func getUserData() {
         do {
             let userData = try CoreDataManager.shared.fetchUser()
             guard let targetHabit = userData?.targetHabit,
@@ -195,8 +195,9 @@ extension TimerViewModel {
     }
     
     // 타이머 완료시 실행되는 메서드
-    func recordCompletedHabit() {
-        CoreDataManager.shared.completedTodyHabit(completedDate: currentDate, note: "")
+    private func recordCompletedHabit() {
+        guard let savedText = UserDefaults.standard.string(forKey: "noteText") else { return }
+        CoreDataManager.shared.completedTodyHabit(completedDate: currentDate, note: savedText)
         timerStatePublisher.send(.done)
     }
 }

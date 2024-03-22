@@ -68,31 +68,19 @@ final class TimerView: BaseView {
 extension TimerView {
     private func subscribeButtonEvents() {
         memoButton.tapPublisher.sink { [weak self] in
-            self?.memoButtonAction()
+            self?.memoButtonTapped.send()
         }
         .store(in: &cancellables)
         
         whiteNoiseButton.tapPublisher.sink { [weak self] in
-            self?.whiteNoiseButtonAction()
+            self?.whiteNoiseButtonTapped.send()
         }
         .store(in: &cancellables)
         
         timerButton.tapPublisher.sink { [weak self] in
-            self?.timerButtonAction()
+            self?.timerButtonTapped.send()
         }
         .store(in: &cancellables)
-    }
-    
-    private func memoButtonAction() {
-        memoButtonTapped.send()
-    }
-    
-    private func whiteNoiseButtonAction() {
-        whiteNoiseButtonTapped.send()
-    }
-    
-    private func timerButtonAction() {
-        timerButtonTapped.send()
     }
 }
 

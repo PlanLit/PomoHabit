@@ -218,7 +218,7 @@ extension CoreDataManager {
             let totalHabitInfo = try fetchTotalHabitInfo()
             for (idx,habitInfo) in totalHabitInfo.enumerated() {
                 guard let habitInfoDate = habitInfo.date else { return }
-                if habitInfoDate.comparisonDate(targetDate: completedDate) {
+                if habitInfoDate.comparisonDate(fromDate: completedDate) == 0 {
                     totalHabitInfo[idx].setValue(completedDate, forKey: "date")
                     totalHabitInfo[idx].setValue(true, forKey: "hasDone")
                     totalHabitInfo[idx].setValue(note, forKey: "note")
@@ -240,7 +240,7 @@ extension CoreDataManager {
             let totalHabitInfo = try fetchTotalHabitInfo()
             for (idx,habitInfo) in totalHabitInfo.enumerated() {
                 let habitInfoDate = habitInfo.date ?? Date()
-                if habitInfoDate.comparisonDate(targetDate: selectedDate) {
+                if habitInfoDate.comparisonDate(fromDate: selectedDate) == 0 {
                     
                     return totalHabitInfo[idx]
                 }
@@ -254,7 +254,6 @@ extension CoreDataManager {
         return nil
     }
 }
-
 
 // MARK: - 해당 엔티티 All Delete
 
@@ -283,6 +282,30 @@ extension CoreDataManager {
     func getSaveCoredataPath(){
         if let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last {
             print("Documents Directory: \(documentsDirectoryURL)")
+        }
+    }
+}
+
+// MARK: - CoreData 총 일수, 총 시간
+
+extension CoreDataManager {
+    func getTotalTimeAndDays() -> (totalTime: Int, total: Int) {
+        do {
+            let totalHabitInfos = try CoreDataManager.shared.fetchTotalHabitInfo()
+            var totalHabitDoneCount = 0
+            var totalHabitDuringTime = 0
+            for habitInfo in totalHabitInfos {
+                if habitInfo.hasDone {
+                    totalHabitDoneCount += 1
+                    totalHabitDuringTime += Int(habitInfo.goalTime)
+                }
+            }
+            
+            return (totalHabitDuringTime, totalHabitDoneCount)
+            
+        } catch {
+            print(error)
+            return (0, 0)
         }
     }
 }

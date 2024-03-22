@@ -39,7 +39,6 @@ extension OnboardingChattingTableViewCell {
     
     private func setAutoLayout() {
         chattingLabel.snp.makeConstraints { make in
-            make.height.equalTo(44)
             make.centerY.equalToSuperview()
         }
     }
@@ -69,7 +68,7 @@ extension OnboardingChattingTableViewCell {
 
 extension OnboardingChattingTableViewCell {
     private func makeChattingLabel() -> BasePaddingLabel {
-        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15))
+        let label = BasePaddingLabel(padding: UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15))
         label.font = Pretendard.medium(size: 16)
         label.backgroundColor = .pobitWhite
         label.layer.cornerRadius = 10
