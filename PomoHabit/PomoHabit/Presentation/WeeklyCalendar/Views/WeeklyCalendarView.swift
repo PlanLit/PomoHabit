@@ -20,7 +20,11 @@ final class WeeklyCalendarView: BaseView {
     // MARK: - Properties
     
     var currentDateIndextpathRow : Int = 0
-    var weeklyHabitState: [HabitState] = []
+    var weeklyHabitState: [HabitState] = [] {
+        didSet {
+            weeklyCollectionView.reloadData()
+        }
+    }
     let weeklyDays = ["월","화","수","목","금","토","일"]
     var weeklyDatesData : [Date] = []
     var dateDelegate: SendSelectedData?
@@ -258,10 +262,10 @@ extension WeeklyCalendarView {
         weeklyHabitState = setData
     }
     
-    func setHabitInfoView(state: HabitState, targetHabit: String,duringTime: String,goalTime: Int16) {
-        habitInfoView.setTitleInfoView(state: state, targetHabit: targetHabit)
-        habitInfoView.setTimeInfoView(duringTime: duringTime)
-        habitInfoView.setTargetInfoView(goalTime: goalTime)
+    func setHabitInfoView(state: HabitState?, targetHabit: String?,duringTime: String?,goalTime: Int16?) {
+        habitInfoView.setTitleInfoView(state: state ?? .dayOff, targetHabit: targetHabit ?? "습관 정보")
+        habitInfoView.setTimeInfoView(duringTime: duringTime ?? "쉬는날")
+        habitInfoView.setTargetInfoView(goalTime: goalTime ?? 0)
     }
     
     func setNoteContentLabel(note: String) {
@@ -285,7 +289,6 @@ extension WeeklyCalendarView: UICollectionViewDelegateFlowLayout,UICollectionVie
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         dateDelegate?.sendDate(date: weeklyDatesData[indexPath.item]) { [self] weeklyHabitInfo in
-            
             setHabitInfoView(state: weeklyHabitInfo.habitstate ?? .notStart, targetHabit: weeklyHabitInfo.targetHabit ?? "습관 정보", duringTime: weeklyHabitInfo.duringTime ?? "00:00 ~ 00:00", goalTime: weeklyHabitInfo.goalTime ?? 0)
             setNoteContentLabel(note: weeklyHabitInfo.note ?? "")
         }
