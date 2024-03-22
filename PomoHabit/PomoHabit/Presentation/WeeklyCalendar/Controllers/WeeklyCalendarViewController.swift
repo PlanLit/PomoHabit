@@ -240,7 +240,7 @@ extension WeeklyCalendarViewController {
             if let selectedHabitInfo = try CoreDataManager.shared.getSelectedHabitInfo(selectedDate: date) { // 습관 진행 날일 경우
                 weeklyHabitInfo.note = selectedHabitInfo.note
                 
-                if date.comparisonDate(fromDate: currentDate) == 1{ // 현재 날짜 포함 이전일 경우
+                if date.comparisonDate(fromDate: currentDate) == 1 { // 현재 날짜 포함 이전일 경우
                     weeklyHabitInfo.habitstate = .notStart
                     weeklyHabitInfo.goalTime = selectedHabitInfo.goalTime
                     weeklyHabitInfo.duringTime = "00:00 ~ 00:00"
