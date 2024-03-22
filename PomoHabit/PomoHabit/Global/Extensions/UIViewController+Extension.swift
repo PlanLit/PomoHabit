@@ -21,4 +21,8 @@ extension UIViewController {
         
         self.present(alertController, animated: true)
     }
+    
+    @objc func didTapSubmitButton() {
+        dismiss(animated: true)
+    }
 }
