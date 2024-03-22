@@ -14,9 +14,8 @@ import SnapKit
 final class MyPageViewController: UIViewController, BottomSheetPresentable {
     
     // MARK: - Properties
-    
+    private lazy var user: User? = try? CoreDataManager.shared.fetchUser()
     private let myPageRootView = MyPageView()
-    private let nicknameEditView = NicknameEditView()
     private var customNavigationController: UINavigationController? = nil
     private let openSourceViewController = OpenSourceViewController()
     private let customerServiceViewController = CustomerServiceViewController()
@@ -45,16 +44,7 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
 
 extension MyPageViewController {
     private func setNicknameData() {
-        do {
-            if let user = try CoreDataManager.shared.fetchUser() {
-                let userNickname = user.nickname ?? "" //
-                myPageRootView.getNicknameLabel().text = userNickname
-            } else {
-                myPageRootView.getNicknameLabel().text = "없음"
-            }
-        } catch {
-            print("Error")
-        }
+        myPageRootView.getNicknameLabel().text = user?.nickname
     }
 }
 
@@ -75,24 +65,25 @@ extension MyPageViewController {
         customNavigationController = navigationController
     }
     
-    func sendDataToNicknamePlaceholder() {
-        let nicknameViewController = NicknameViewController()
-        let nicknameLabel = myPageRootView.getNicknameLabel()
-        
-        nicknameViewController.onDataReceived = { [weak self] data in
-            nicknameLabel.text = data
-            self?.nicknameEditView.setPlaceholderForTextField()
-        }
-        navigationController?.pushViewController(nicknameViewController, animated: true)
-    }
+//    func sendDataToNicknamePlaceholder() {
+//        let nicknameViewController = NicknameViewController()
+//        let nicknameLabel = myPageRootView.getNicknameLabel()
+//        
+//        nicknameViewController.onDataReceived = { [weak self] data in
+//            nicknameLabel.text = data
+//            self?.nicknameEditView.setPlaceholderForTextField()
+//        }
+//        navigationController?.pushViewController(nicknameViewController, animated: true)
+//    }
 }
 
 // MARK: - EditButtonDelegate
 
 extension MyPageViewController: EditButtonDelegate {
     func editButtonTapped() {
-        nicknameEditView.isHidden = false
-        presentBottomSheet(viewController: NicknameViewController())
+        let vc = NicknameViewController()
+        vc.setupNicknameEditView(user?.nickname ?? "")
+        presentBottomSheet(viewController: vc)
     }
     
     func setDelegateforEditButton() {

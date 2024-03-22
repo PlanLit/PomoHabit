@@ -16,8 +16,9 @@ final class NicknameEditView: BaseView {
     // MARK: - Properties
     
     private let pobitNavigationBarView = PobitNavigationBarView(title: "닉네임 수정", viewType: .withDismissButton)
-    private lazy var editSubmitButton = PobitButton.makePlainButton(title: "수정하기", backgroundColor: .pobitRed)
+    private lazy var editSubmitButton = makeEditSubmitButton()
     private let mypageView = MyPageView()
+    private var nicknameEditViewController: NicknameViewController?
     
     // MARK: - UI
     
@@ -46,8 +47,11 @@ final class NicknameEditView: BaseView {
     
     // MARK: - Life Cycle
     
-    override init(frame: CGRect) {
+    init(frame: CGRect,_ nickName: String,_ nicknameEditViewController: NicknameViewController) {
         super.init(frame: frame)
+        
+        self.nicknameEditTextField.text = nickName
+        self.nicknameEditViewController = nicknameEditViewController
         
         setAddSubViews()
         setAutoLayout()
@@ -94,6 +98,19 @@ extension NicknameEditView {
             make.height.equalTo(62)
             make.width.equalTo(324)
         }
+    }
+    
+    private func makeEditSubmitButton() -> PobitButton {
+        let button = PobitButton(type: .system, primaryAction: .init(handler: { _ in
+            self.nicknameEditViewController?.dismiss(animated: true)
+        }))
+        button.setTitle("수정하기", for: .normal)
+        button.backgroundColor = .pobitRed
+        button.setTitleColor(.pobitWhite, for: .normal)
+        button.titleLabel?.font = Pretendard.medium(size: 24)
+        button.layer.borderWidth = 0
+        
+        return button
     }
 }
 

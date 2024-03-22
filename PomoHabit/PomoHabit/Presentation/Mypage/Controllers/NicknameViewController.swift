@@ -15,7 +15,7 @@ final class NicknameViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let nicknameEditView = NicknameEditView()
+    private var nicknameEditView: NicknameEditView?
     var onDataReceived: ((String) -> Void)? = nil
     
     // MARK: - View Lifecycle
@@ -23,21 +23,21 @@ final class NicknameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNicknameEditView()
     }
 }
 
 // MARK: - Method
 
 extension NicknameViewController {
-    func toReceiveNicknameData(data: String) {
-        onDataReceived?(data)
-        onDataReceived = nil
-    }
+//    func toReceiveNicknameData(data: String) {
+//        onDataReceived?(data)
+//        onDataReceived = nil
+//    }
     
-    private func setupNicknameEditView() {
-        view.addSubview(nicknameEditView)
-        nicknameEditView.snp.makeConstraints { make in
+    func setupNicknameEditView(_ nickName: String) {
+        nicknameEditView = NicknameEditView(frame: .zero, nickName, self)
+        view.addSubview(nicknameEditView!)
+        nicknameEditView?.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
