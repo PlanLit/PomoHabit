@@ -105,7 +105,7 @@ extension CircleProgressBar {
         animation.toValue = 1
         animation.duration = duration
         animation.fillMode = .forwards
-        animation.isRemovedOnCompletion = true
+        animation.isRemovedOnCompletion = false
         progressLayer.add(animation, forKey: "progressAnimation")
     }
     

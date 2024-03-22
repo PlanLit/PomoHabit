@@ -103,6 +103,10 @@ extension NicknameEditView {
 // MARK: - Methods
 
 extension NicknameEditView {
+    func setNavigationBarDelegate(self: UIViewController) {
+        pobitNavigationBarView.delegate = self as? NicknameViewController 
+    }
+    
     func setPlaceholderForTextField() {
         nicknameEditTextField.placeholder = { [weak self] in
             

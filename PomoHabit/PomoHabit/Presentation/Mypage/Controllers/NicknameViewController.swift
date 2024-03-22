@@ -11,7 +11,7 @@ import SnapKit
 
 // MARK: - NicknameViewController
 
-final class NicknameViewController: UIViewController {
+final class NicknameViewController: UIViewController, NavigationBarDelegate {
     
     // MARK: - Properties
     
@@ -24,6 +24,7 @@ final class NicknameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setDelegate()
         setupNicknameEditView()
         nicknameEditView.editSubmitButton.addTarget(self, action: #selector(didTapNicknameSubmitButton) , for: .touchUpInside)
         
@@ -33,6 +34,10 @@ final class NicknameViewController: UIViewController {
 // MARK: - Method
 
 extension NicknameViewController {
+    private func setDelegate() {
+        nicknameEditView.setNavigationBarDelegate(self: self)
+    }
+    
     func toReceiveNicknameData(data: String) {
 //        onDataReceived?(data)
 //        onDataReceived = nil

@@ -24,7 +24,7 @@ final class WeeklyCalendarViewController: BaseViewController {
     private lazy var weeklyCalendarView: WeeklyCalendarView = {
         let view = WeeklyCalendarView()
         view.dateDelegate = self
-        
+
         return view
     }()
     
@@ -44,13 +44,19 @@ final class WeeklyCalendarViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getWeeklyData()
-        getTargetHabit()
-        getWeeklyHabitState()
-        setWeeklyCalendView()
-        setWeeklyHabiState()
         setAddSubViews()
         setSetAutoLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        getWeeklyData()
+        setWeeklyCalendView()
+        getTargetHabit()
+        getWeeklyHabitState()
+        setWeeklyHabiState()
+        getTodayHabitInfo()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -105,6 +111,7 @@ extension WeeklyCalendarViewController {
 
 extension WeeklyCalendarViewController {
     private func getWeeklyData() {
+        var getWeeklyDates : [Date] = []
         let calendar = Calendar.current
         
         // MARK: - 현재 주의 시작 날짜
@@ -119,38 +126,56 @@ extension WeeklyCalendarViewController {
         
         for i in 0...6 {
             guard let date = calendar.date(byAdding: .day, value: i, to: mondayDate) else { return }
-            weeklyDates.append(date)
+            getWeeklyDates.append(date)
         }
+        
+        weeklyDates = getWeeklyDates
     }
     
     private func getWeeklyHabitState() {
         do {
+            var getWeeklyHabitState: [HabitState] = []
             for date in weeklyDates {
                 let dateHabitState = try CoreDataManager.shared.getSelectedHabitInfo(selectedDate: date).map{$0.hasDone}
                 let currentDate = Date()
                 
-                if date.comparisonDate(fromDate: currentDate) == -1 { // 현재 날짜보다 이전 날짜일 경우
-                    switch dateHabitState{
+                if date.comparisonDate(fromDate: currentDate) == 1 { // 현재 날짜보다 이후 날짜일 경우
+                    if dateHabitState == false {
+                        getWeeklyHabitState.append(.notStart)
+                    } else {
+                        getWeeklyHabitState.append(.dayOff)
+                    }
+                } else if date.comparisonDate(fromDate: currentDate) == 0 { // 오늘
+                    switch dateHabitState {
                     case true:
-                        weeklyHabitState.append(.done)
+                        getWeeklyHabitState.append(.done)
                         
                     case false:
-                        weeklyHabitState.append(.doNot)
-
+                        getWeeklyHabitState.append(.notStart)
+                        
                     case nil:
-                        weeklyHabitState.append(.dayOff)
+                        getWeeklyHabitState.append(.dayOff)
                         
                     case .some(_):
                         break
                     }
                 } else {
-                    if dateHabitState == false {
-                        weeklyHabitState.append(.notStart)
-                    } else {
-                        weeklyHabitState.append(.dayOff)
+                    switch dateHabitState { // 오늘보다 이전
+                    case true:
+                        getWeeklyHabitState.append(.done)
+                        
+                    case false:
+                        getWeeklyHabitState.append(.doNot)
+                        
+                    case nil:
+                        getWeeklyHabitState.append(.dayOff)
+                        
+                    case .some(_):
+                        break
                     }
                 }
             }
+            weeklyHabitState = getWeeklyHabitState
         } catch {
             print(error)
         }
@@ -167,8 +192,9 @@ extension WeeklyCalendarViewController {
     }
     
     private func getDuringTime(completedDate: Date, goalTime: Int16)-> String {
-        let endTime = completedDate.dateToString(format: "hh:mm")
-        let startTime = Calendar.current.date(byAdding: .minute, value: -Int(goalTime), to: completedDate)?.dateToString(format: "hh:mm") ?? "00:00"
+        let endTime = completedDate.dateToString(format: "HH:mm")
+
+        let startTime = Calendar.current.date(byAdding: .minute, value: -Int(goalTime), to: completedDate)?.dateToString(format: "HH:mm") ?? "00:00"
         
         return startTime + " ~ " + endTime
     }
@@ -177,20 +203,57 @@ extension WeeklyCalendarViewController {
         return Float(weeklyHabitState.filter{ $0 == .done }.count) / 7.0
     }
     
+    private func getTodayHabitInfo() {
+        do {
+            let todayHabitInfo = try CoreDataManager.shared.getSelectedHabitInfo(selectedDate: Date())
+            var todayHabitState : HabitState = .notStart
+            var duringTime: String = ""
+            var goalTime: Int16 = todayHabitInfo?.goalTime ?? 0
+        
+            switch todayHabitInfo?.hasDone {
+            case true:
+                todayHabitState = .done
+                duringTime = getDuringTime(completedDate: todayHabitInfo?.date ?? Date(), goalTime: todayHabitInfo?.goalTime ?? 0)
+                
+            case false:
+                todayHabitState = .notStart
+                duringTime = "00:00 ~ 00:00"
+                
+            case nil:
+                todayHabitState = .dayOff
+                duringTime = "쉬는 날"
+                goalTime = 0
+                
+            case .some(_):
+                break
+            }
+            
+            weeklyCalendarView.setHabitInfoView(state: todayHabitState, targetHabit: weeklyHabitInfo.targetHabit ?? "목표 습관", duringTime: duringTime, goalTime: goalTime)
+        } catch {
+            print(error)
+        }
+    }
+    
     private func setSelectedHabitInfo(date: Date) {
         do {
             let currentDate = Date()
             if let selectedHabitInfo = try CoreDataManager.shared.getSelectedHabitInfo(selectedDate: date) { // 습관 진행 날일 경우
                 weeklyHabitInfo.note = selectedHabitInfo.note
                 
-                if date.comparisonDate(fromDate: currentDate) == -1{ // 현재 날짜 포함 이전일 경우
-                    weeklyHabitInfo.habitstate = selectedHabitInfo.hasDone ?  HabitState.done : HabitState.doNot
-                    weeklyHabitInfo.goalTime = selectedHabitInfo.goalTime
-                    weeklyHabitInfo.duringTime = getDuringTime(completedDate: date, goalTime: selectedHabitInfo.goalTime)
-                } else { // 현재 날짜 보다 이후 일경우
+                if date.comparisonDate(fromDate: currentDate) == 1 { // 현재 날짜 포함 이전일 경우
                     weeklyHabitInfo.habitstate = .notStart
                     weeklyHabitInfo.goalTime = selectedHabitInfo.goalTime
                     weeklyHabitInfo.duringTime = "00:00 ~ 00:00"
+                    
+                } else { // 현재 날짜 보다 이후 일경우
+                    weeklyHabitInfo.habitstate = selectedHabitInfo.hasDone ?  HabitState.done : HabitState.doNot
+                    weeklyHabitInfo.goalTime = selectedHabitInfo.goalTime
+                    if selectedHabitInfo.hasDone {
+                        print(date.dateToString(format: "yyyy-MM-dd HH:mm"))
+                        weeklyHabitInfo.duringTime = getDuringTime(completedDate: date, goalTime: selectedHabitInfo.goalTime)
+                    } else {
+                        weeklyHabitInfo.duringTime = "00:00 ~ 00:00"
+                    }
                 }
             } else { // 습관 진행 날이 아닐경우
                 weeklyHabitInfo.habitstate = .notStart
@@ -212,3 +275,7 @@ extension WeeklyCalendarViewController: SendSelectedData {
         completion(weeklyHabitInfo)
     }
 }
+
+
+
+

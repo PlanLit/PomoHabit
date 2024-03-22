@@ -40,7 +40,7 @@ final class PobitNavigationBarView: UIView {
         }
         
         let button = UIButton()
-        button.backgroundColor = .gray
+        button.setImage(UIImage(named: "Close"), for: .normal)
         button.addAction(action, for: .touchUpInside)
         
         return button
