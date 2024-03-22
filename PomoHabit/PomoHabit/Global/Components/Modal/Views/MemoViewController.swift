@@ -45,7 +45,7 @@ extension MemoViewController {
     }
     
     private func addButtonTarget() {
-        submitButton.addTarget(self, action: #selector(onSubmitButtonTapped), for: .touchUpInside)
+        submitButton.addTarget(self, action: #selector(didTapSubmitButton), for: .touchUpInside)
     }
     
     private func configureTextview() {
@@ -84,13 +84,5 @@ extension MemoViewController {
             make.leading.trailing.equalTo(textView)
             make.height.equalTo(62)
         }
-    }
-}
-
-// MARK: - Action Helpers
-
-extension MemoViewController {
-    @objc func onSubmitButtonTapped() {
-        dismiss(animated: true)
     }
 }
