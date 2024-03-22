@@ -196,6 +196,9 @@ extension ReportViewController {
 
     private func makeGridView() -> VStackView {
         func getTheBoxView(_ index: Int,_ width: UInt = 56,_ height: UInt = 45) -> UIButton {
+            guard let totalHabitInfItems = self.totalHabitInfItems else { return UIButton() }
+            if totalHabitInfItems.count == 0 { return UIButton() }
+            
             let boxView = UIButton(type: .system, primaryAction: .init(handler: { _ in
                 if self.totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" <= Date().dateToString(format: "MMdd") && self.totalHabitInfItems![index].hasDone {
                     let reportHabitDetailViewController = ReportHabitDetailViewController()
@@ -208,7 +211,7 @@ extension ReportViewController {
             
             let label = UILabel()
             
-            if totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" == Date().dateToString(format: "MMdd") {
+            if totalHabitInfItems[index].date?.dateToString(format: "MMdd") ?? "" == Date().dateToString(format: "MMdd") {
                 label.text = "오늘"
                 label.font = Pretendard.bold(size: 18)
                 label.textColor = .white
@@ -220,14 +223,14 @@ extension ReportViewController {
                 }
             }
             
-            boxView.alpha = totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" <= Date().dateToString(format: "MMdd") ? 1 : 0.1
-            if totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" == Date().dateToString(format: "MMdd") &&
-                totalHabitInfItems![index].hasDone == false { // item의 날자가 오늘이고 습관 완료 안했을때 알파 값 낮춤
+            boxView.alpha = totalHabitInfItems[index].date?.dateToString(format: "MMdd") ?? "" <= Date().dateToString(format: "MMdd") ? 1 : 0.1
+            if totalHabitInfItems[index].date?.dateToString(format: "MMdd") ?? "" == Date().dateToString(format: "MMdd") &&
+                totalHabitInfItems[index].hasDone == false { // item의 날자가 오늘이고 습관 완료 안했을때 알파 값 낮춤
                 boxView.alpha = 0.1
             }
             
-            if totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" > Date().dateToString(format: "MMdd") ||
-                totalHabitInfItems![index].hasDone { // item의 날자가 오늘보다 미래이거나 완료 했으면 했다는 색 표시
+            if totalHabitInfItems[index].date?.dateToString(format: "MMdd") ?? "" > Date().dateToString(format: "MMdd") ||
+                totalHabitInfItems[index].hasDone { // item의 날자가 오늘보다 미래이거나 완료 했으면 했다는 색 표시
                 boxView.backgroundColor = index == 0 ? .pobitGreen : .pobitRed
             } else { // 그 외에는 안했다는거
                 boxView.backgroundColor = .pobitStone2
@@ -372,8 +375,11 @@ extension ReportViewController {
     private func getHabitAchievementRate() -> Int {
         guard let totalHabitInfItems = totalHabitInfItems else { return 0 }
         
-        var hasDoneCount: Double = 0
+        var hasDoneCount: Double = 0.0
         totalHabitInfItems.forEach { habit in if habit.hasDone { hasDoneCount += 1.0 } }
+        
+        if hasDoneCount == 0.0 { return 0 }
+        
         hasDoneCount = hasDoneCount / Double(totalHabitInfItems.count) * 100
         
         return Int(hasDoneCount)
