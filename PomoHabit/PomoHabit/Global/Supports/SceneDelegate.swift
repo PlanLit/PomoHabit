@@ -15,20 +15,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = scene as? UIWindowScene else { return }
         
-//        let rootViewController: UIViewController = {
-//            if let _ = try? coreDataManager.fetchUser()?.nickname {
-//                
-//                return UINavigationController(rootViewController: TabBarController())
-//            } else {
-//                
-//                return OnboardingLoginViewController()
-//            }
-//        }()
-        
+        let rootViewController: UIViewController = {
+            if let _ = try? coreDataManager.fetchUser()?.nickname {
+                
+                return  TabBarController()
+            } else {
+                
+                return UINavigationController(rootViewController: OnboardingLoginViewController())
+            }
+        }()
         let window = UIWindow(windowScene: windowScene)
         window.overrideUserInterfaceStyle = .light
-//        window.rootViewController = rootViewController
-        window.rootViewController = OnboardingLoginViewController()
+        window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         
         self.window = window
