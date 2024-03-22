@@ -184,10 +184,14 @@ extension TimerView {
             make.leading.equalTo(goalDaysCountLabel)
         }
         
+        habitLabel.setContentHuggingPriority(.init(249), for: .horizontal)
+        memoButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        
         memoButton.snp.makeConstraints { make in
             make.centerY.equalTo(habitLabel)
             make.trailing.equalTo(startTimeLabel)
             make.size.equalTo(28)
+            make.leading.equalTo(habitLabel.snp.trailing).offset(12)
         }
         
         dividerView.snp.makeConstraints { make in
