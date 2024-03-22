@@ -63,7 +63,7 @@ extension HabitIndicatorView {
             ]),
             HStackView(spacing: 5, [
                 makeCircle(.pobitRed.withAlphaComponent(0.1)),
-                makeLabel("해야함"),
+                makeLabel("시작 전"),
             ]),
         ])
     }

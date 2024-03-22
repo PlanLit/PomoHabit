@@ -16,6 +16,7 @@ final class TimerViewController: BaseViewController, BottomSheetPresentable {
     
     private var model = TimerViewModel()
     private var rootView = TimerView()
+    private lazy var memoModal = MemoViewController()
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -40,20 +41,21 @@ extension TimerViewController {
         let input = TimerViewModel.Input(memoButtonTapped: rootView.memoButtonTapped,
                                          whiteNoiseButtonTapped: rootView.whiteNoiseButtonTapped,
                                          timerButtonTapped: rootView.timerButtonTapped)
+        
         let output = model.transform(input: input)
         
         output.memoButtonAction
             .receive(on: DispatchQueue.main)
-            .sink { _ in
-                self.presentBottomSheet(viewController: MemoViewController())
+            .sink { [weak self] in
+                self?.presentBottomSheet(viewController: MemoViewController())
             }
             .store(in: &cancellables)
         
         output.whiteNoiseButtonAction
             .receive(on: DispatchQueue.main)
-            .sink { _ in
+            .sink { [weak self] in
                 DispatchQueue.main.async {
-                    self.presentBottomSheet(viewController: WhiteNoiseViewController(), detents: [.medium()])
+                    self?.presentBottomSheet(viewController: WhiteNoiseViewController(), detents: [.medium()])
                 }
             }
             .store(in: &cancellables)
@@ -75,6 +77,9 @@ extension TimerViewController {
                     self?.rootView.circleProgressBar.setProgressWithAnimation(duration: self?.model.timerDuration ?? 5)
                 case .finished:
                     self?.rootView.updateTimerButtonUI(with: state)
+                    self?.showAlert(title: "메모를 작성하시겠어요?", message: nil) { [weak self] _ in
+                        self?.presentBottomSheet(viewController: MemoViewController())
+                    }
                 case .done:
                     self?.showAlert(title: "오늘의 습관을 완료했어요!", message: "\n 내일 다시 만나요 :)", cancelButton: false)
                 }
