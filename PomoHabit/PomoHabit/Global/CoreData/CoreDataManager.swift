@@ -174,6 +174,15 @@ extension CoreDataManager {
         
         saveContext()
     }
+    
+    func updateWhiteNoiseType(with whiteNoiseType: String) {
+        let context = persistentContainer.viewContext
+        let userData = User(context: context)
+        
+        userData.whiteNoiseType = whiteNoiseType
+        
+        saveContext()
+    }
 }
 // MARK: - MockData
 

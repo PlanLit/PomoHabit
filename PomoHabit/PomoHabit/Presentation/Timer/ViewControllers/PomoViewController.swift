@@ -59,6 +59,13 @@ extension TimerViewController {
             }
             .store(in: &cancellables)
         
+        output.submitButtonAction
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.dismiss(animated: true)
+            }
+            .store(in: &cancellables)
+        
         output.timerButtonAction
             .sink { _ in }
             .store(in: &cancellables)

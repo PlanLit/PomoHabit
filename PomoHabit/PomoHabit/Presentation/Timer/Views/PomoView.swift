@@ -32,7 +32,7 @@ final class TimerView: BaseView {
     private lazy var habitLabel = makeHabitLabel()
     private lazy var memoButton = makeIconButton(with: "📝")
     private lazy var dividerView = makeDividerView(height: 1)
-    private lazy var whiteNoiseInfoLabel = makeBlackBodyLabel(text: "배경음을 선택해보세요!", fontSize: 16)
+    private lazy var whiteNoiseInfoLabel = makeBlackBodyLabel(text: "초깃값", fontSize: 16)
     private lazy var whiteNoiseButton = makeIconButton(with: "🎧")
     
     private lazy var starView = UIImageView(image: UIImage(named: "Star"))
@@ -160,10 +160,11 @@ extension TimerView {
     }
     
     func updateViewWithUserData(_ userData: UserData) {
+        let targetDatesArray = userData.targetDate.split(separator: ",").map(String.init)
         habitLabel.text = userData.targetHabit
         startTimeLabel.text = "\(userData.alarmTime)"
-        let targetDatesArray = userData.targetDate.split(separator: ",").map(String.init)
         goalDaysCountLabel.text = "주\(targetDatesArray.count)일"
+        whiteNoiseInfoLabel.text = userData.whiteNoiseType
     }
 }
 

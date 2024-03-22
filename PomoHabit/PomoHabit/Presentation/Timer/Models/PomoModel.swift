@@ -74,12 +74,12 @@ final class TimerViewModel: InputOutputProtocol {
             .store(in: &cancellables)
         
         let memoAction = input.memoButtonTapped
-            .map { print("Memo button tapped") }
+            .map { print("memoButtonTapped") }
             .eraseToAnyPublisher()
         
         let whiteNoiseButtonAction = input.whiteNoiseButtonTapped
             .print()
-            .map { print("White Noise button tapped") }
+            .map { print("WhiteNoiseButtonTapped") }
             .eraseToAnyPublisher()
         
         let timerButtonAction = input.timerButtonTapped
@@ -90,7 +90,9 @@ final class TimerViewModel: InputOutputProtocol {
         
         let submitButtonAction = input.submitButtonTapped
             .print()
-            .map { print("submitButtonTapped") }
+            .map { [weak self] _ in
+                CoreDataManager.shared.updateWhiteNoiseType(with: self?.whiteNoiseType ?? "")
+            }
             .eraseToAnyPublisher()
         
         let timerStateDidChange = timerStatePublisher.eraseToAnyPublisher()
