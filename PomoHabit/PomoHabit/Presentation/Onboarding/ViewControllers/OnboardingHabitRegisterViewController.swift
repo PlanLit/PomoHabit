@@ -35,7 +35,7 @@ final class OnboardingHabitRegisterViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setUpSelf()
         
         setAddSubviews()
@@ -47,6 +47,10 @@ final class OnboardingHabitRegisterViewController: BaseViewController {
         
         sayHello()
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 // MARK: - Layout Helpers
@@ -54,6 +58,9 @@ final class OnboardingHabitRegisterViewController: BaseViewController {
 extension OnboardingHabitRegisterViewController {
     private func setUpSelf() {
         view.backgroundColor = UIColor.pobitSkin
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     private func setAddSubviews() {
@@ -232,17 +239,27 @@ extension OnboardingHabitRegisterViewController {
     // 처음 채팅뷰에 진입했을때 한번만 실행시켜야함.
     private func sayHello() {
         let messages: [OnboardingChattingCellData] = [.init(chatDirection: .incoming, cellType: .profilePicture),
-                                                      .init(chatDirection: .incoming, message: "안녕 \(nickname ?? "")! 앱을 실행해 줘서 고마워!"),
-                                                      .init(chatDirection: .incoming, message: "나는 새로운 습관 형성을 도와줄 가이드야"),
+                                                      .init(chatDirection: .incoming, message: "안녕 \(nickname ?? "")!"),
+                                                      .init(chatDirection: .incoming, message: "습관 만들기 앱 PomoHabit에 온 것을 환영해!"),
+                                                      .init(chatDirection: .incoming, message: "나는 새로운 습관 형성을 도와줄 가이드야!"),
+                                                      .init(chatDirection: .outgoing, message: "안녕~"),
+                                                      .init(chatDirection: .outgoing, message: "습관 만들기 앱이라고 들었는데?"),
+                                                      .init(chatDirection: .incoming, message: "맞아!"),
+                                                      .init(chatDirection: .incoming, message: "PomoHabit은 첫날 5분을 시작으로"),
+                                                      .init(chatDirection: .incoming, message: "매일 1분씩 증가!"),
+                                                      .init(chatDirection: .incoming, message: "21일 동안 최소 하나의 습관을"),
+                                                      .init(chatDirection: .incoming, message: "만들 수 있도록 도와주는 앱이야!"),
                                                       .init(chatDirection: .incoming, message: "어떤 습관을 만들고 싶어?")]
+        
         var index = UnsentMessagesIndex(unsentMessagesCount: messages.count)
+        
         DispatchQueue.main.async {
             self.addTableViewCellDataAndUpdate(messages[index.value])
             self.makeCountTimer(executionTargetNumber: messages.count - 1,
                                 withTimeInterval: 2,
-                                action: {
+                                action: { // messages.count - 1 만큼 실행되는 블록
                 self.addTableViewCellDataAndUpdate(messages[index.value])
-            }, ended: {
+            }, ended: { // 마지막에 한번 실행되는 블록
                 self.habitTextFieldView.isHidden = false
                 self.habitTextFieldView.subviews.first?.becomeFirstResponder()
             }).fire()
@@ -251,10 +268,10 @@ extension OnboardingHabitRegisterViewController {
     
     // 채팅 테이블뷰에 데이터와 함께 셀 추가 하는 함수
     private func addTableViewCellDataAndUpdate(_ message: OnboardingChattingCellData) {
-        self.currentMessages.append(message)
-        let indexPath = IndexPath(row: self.currentMessages.count - 1, section: 0)
-        self.chattingTableView.insertRows(at: [indexPath], with: .fade)
-        self.chattingTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        currentMessages.append(message)
+        let indexPath = IndexPath(row: currentMessages.count - 1, section: 0)
+        chattingTableView.insertRows(at: [indexPath], with: .fade)
+        chattingTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
     }
     
     // 이 함수가 호출 됬을때의 데이터 상태에따라 등록하기 버튼 뷰 패치
@@ -263,7 +280,7 @@ extension OnboardingHabitRegisterViewController {
             if habitTitle == nil { return false }
             if habitAlarmTime == nil { return false }
             var daysOnCount = 0
-            for state in self.daysButtonSelectionState {
+            for state in daysButtonSelectionState {
                 if state { daysOnCount += 1 }
             }
             if daysOnCount < 5 { return false }
@@ -308,11 +325,14 @@ extension OnboardingHabitRegisterViewController: UITableViewDataSource {
 
 extension OnboardingHabitRegisterViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if currentMessages[indexPath.row].cellType == .days {
-            return 102 + 25
+        switch currentMessages[indexPath.row].cellType {
+        case .days:
+            return 102 + 10
+        case .profilePicture:
+            return 73
+        default:
+            return 44 + 10
         }
-        
-        return 44 + 25
     }
 }
 
@@ -337,36 +357,31 @@ extension OnboardingHabitRegisterViewController: UITextFieldDelegate {
     }
 }
 
+// MARK: - Keyboard Notification
+
+extension OnboardingHabitRegisterViewController {
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        
+        let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + habitTextFieldView.frame.height, right: 0)
+        chattingTableView.contentInset = contentInset
+        chattingTableView.scrollIndicatorInsets = contentInset
+        chattingTableView.scrollToRow(at: IndexPath(row: currentMessages.count-1, section: 0), at: .bottom, animated: true)
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        chattingTableView.contentInset = .zero
+        chattingTableView.scrollIndicatorInsets = .zero
+    }
+}
+
 // MARK: - Action Helpers
 
 extension OnboardingHabitRegisterViewController {
     @objc func hideKeyboard() {
         view.endEditing(true)
-    }
-}
-
-// MARK: - Types
-
-extension OnboardingHabitRegisterViewController {
-    /// 매번 호출 되기 전 마다 1씩 증가함 + 초기에 정한 unsentMessagesCount 값 보다는 안커짐 (Index out of range Error 방지)
-    private struct UnsentMessagesIndex {
-        private let unsentMessagesCount: Int
-        private var _value: Int
-        
-        var value: Int {
-            mutating get {
-                if _value < unsentMessagesCount {
-                    _value += 1
-                }
-                
-                return _value
-            }
-        }
-        
-        init(unsentMessagesCount: Int, _value: Int = -1) {
-            self.unsentMessagesCount = unsentMessagesCount
-            self._value = _value
-        }
     }
 }
 
@@ -401,5 +416,30 @@ extension OnboardingHabitRegisterViewController {
         CoreDataManager.shared.createUser(nickname: data.nickname, targetHabit: data.targetHabit, targetDate: data.targetDate, alarmTime: data.alarmTime, whiteNoiseType: data.whiteNoiseType)
         
         CoreDataManager.shared.setMockupTotalHabitInfo(targetDate: data.targetDate)
+    }
+}
+
+// MARK: - Types
+
+extension OnboardingHabitRegisterViewController {
+    /// 매번 호출 되기 전 마다 1씩 증가함 + 초기에 정한 unsentMessagesCount 값 보다는 안커짐 (Index out of range Error 방지)
+    private struct UnsentMessagesIndex {
+        private let unsentMessagesCount: Int
+        private var _value: Int
+        
+        var value: Int {
+            mutating get {
+                if _value < unsentMessagesCount {
+                    _value += 1
+                }
+                
+                return _value
+            }
+        }
+        
+        init(unsentMessagesCount: Int, _value: Int = -1) {
+            self.unsentMessagesCount = unsentMessagesCount
+            self._value = _value
+        }
     }
 }
