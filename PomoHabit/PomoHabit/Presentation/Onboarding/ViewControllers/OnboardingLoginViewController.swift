@@ -41,6 +41,7 @@ final class OnboardingLoginViewController: UIViewController {
 extension OnboardingLoginViewController {
     private func setUpSelf() {
         view.backgroundColor = .pobitSkin
+        navigationController?.isNavigationBarHidden = true
     }
     
     private func setAddSubviews() {

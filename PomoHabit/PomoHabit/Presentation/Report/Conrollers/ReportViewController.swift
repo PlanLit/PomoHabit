@@ -200,11 +200,11 @@ extension ReportViewController {
             if totalHabitInfItems.count == 0 { return UIButton() }
             
             let boxView = UIButton(type: .system, primaryAction: .init(handler: { _ in
-                if self.totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" <= Date().dateToString(format: "MMdd") && self.totalHabitInfItems![index].hasDone {
-                    let reportHabitDetailViewController = ReportHabitDetailViewController()
-                    reportHabitDetailViewController.setData(self.totalHabitInfItems?[index])
-                    self.presentBottomSheet(viewController: reportHabitDetailViewController, detents: [.large()])
-                }
+//                if self.totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" <= Date().dateToString(format: "MMdd") && self.totalHabitInfItems![index].hasDone {
+//                    let reportHabitDetailViewController = ReportHabitDetailViewController()
+//                    reportHabitDetailViewController.setData(self.totalHabitInfItems?[index])
+//                    self.presentBottomSheet(viewController: reportHabitDetailViewController, detents: [.large()])
+//                }
             }))
             boxView.layer.cornerRadius = 10
             boxView.clipsToBounds = true
