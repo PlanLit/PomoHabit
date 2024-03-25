@@ -15,13 +15,14 @@ final class NicknameEditView: BaseView {
     
     // MARK: - Properties
     
-    private let pobitNavigationBarView = PobitNavigationBarView(title: "닉네임 수정", viewType: .withDismissButton)
-    private lazy var editSubmitButton = PobitButton.makePlainButton(title: "수정하기", backgroundColor: .pobitRed)
     private let mypageView = MyPageView()
     
-    // MARK: - UI
+    // MARK: - UI Properties
     
-    private let nicknameEditTextField: UITextField = {
+    private let pobitNavigationBarView = PobitNavigationBarView(title: "닉네임 수정", viewType: .withDismissButton)
+    lazy var editSubmitButton = PobitButton.makePlainButton(title: "수정하기", backgroundColor: .pobitRed)
+    
+    private (set) var nicknameEditTextField: UITextField = {
         let textField = UITextField()
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: textField.frame.height))
         textField.leftView = paddingView
@@ -54,6 +55,8 @@ final class NicknameEditView: BaseView {
         setupTextFieldDelegate()
         setFirstResponderForTextField()
         setPlaceholderForTextField()
+        // TODO: 정규식 필요하다면 추가하기
+        nicknameEditLabel.isHidden = true
     }
     
     required init?(coder: NSCoder) {

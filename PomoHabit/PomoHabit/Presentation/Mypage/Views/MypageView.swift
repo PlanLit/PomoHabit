@@ -246,6 +246,14 @@ extension MyPageView {
     }
 }
 
+// MARK: - Action Helpers
+
+extension MyPageView {
+    func updateNicknameLabel(with nickname: String) {
+        nickNameLabel.text = nickname
+    }
+}
+
 // MARK: - Method
 
 extension MyPageView {

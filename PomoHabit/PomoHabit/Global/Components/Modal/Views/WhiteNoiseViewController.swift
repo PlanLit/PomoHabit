@@ -26,7 +26,11 @@ final class WhiteNoiseViewController: BaseViewController, NavigationBarDelegate 
     private var audioPlayer: AVAudioPlayer?
     private var selectedWhiteNosie: String?
     
-    private let tempModel = ["비 내리는 아침", "고요한 밤의 모닥불 소리", "잔잔한 파도의 위로"]
+    private let whiteNoiseMap: [String: String] = [
+        "비 내리는 아침": "rainyMorning",
+        "고요한 밤의 모닥불 소리": "campfire",
+        "잔잔한 파도의 위로": "calmWaves"
+    ]
     
     // MARK: - UI Properties
     
@@ -128,11 +132,13 @@ extension WhiteNoiseViewController {
 
 extension WhiteNoiseViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedWhiteNosie = tempModel[indexPath.row]
+        let key = Array(whiteNoiseMap.keys)[indexPath.row]
+        let selectedWhiteNosie = key
         self.selectedWhiteNosie = selectedWhiteNosie
         self.whiteNoiseSelectedSubject.send(self.selectedWhiteNosie ?? "")
         
-        play(with: tempModel[indexPath.row])
+        guard let fileName = whiteNoiseMap[key] else { return }
+        play(with: fileName)
     }
 }
 
@@ -140,17 +146,17 @@ extension WhiteNoiseViewController: UITableViewDelegate {
 
 extension WhiteNoiseViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tempModel.count
+        return whiteNoiseMap.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: WhiteNoiseTableViewCell.identifier, for: indexPath) as? WhiteNoiseTableViewCell else {
             return UITableViewCell()}
         
+        let key = Array(whiteNoiseMap.keys)[indexPath.row]
         cell.selectionStyle = .none
-        cell.bindCell(with: tempModel[indexPath.item])
+        cell.bindCell(with: key)
         
         return cell
     }
 }
-
