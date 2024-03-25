@@ -45,7 +45,7 @@ final class WeeklyCalendarViewController: BaseViewController {
         super.viewDidLoad()
         
         setAddSubViews()
-        setSetAutoLayout()
+        setAutoLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,10 +79,10 @@ extension WeeklyCalendarViewController {
         view.addSubview(weeklyCalendarView)
     }
     
-    private func setSetAutoLayout() {
+    private func setAutoLayout() {
         weeklyCalendarView.snp.makeConstraints { make in
-            make.top.bottom.equalTo(view.safeAreaLayoutGuide)
-            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+            
         }
     }
 }

@@ -65,7 +65,6 @@ extension WeeklyCalendarHabitInfoView {
         
         targetInfoView.snp.makeConstraints { make in
             make.top.equalTo(titleInfoView.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
-            make.leading.equalTo(timeInfoView.snp.trailing).offset(LayoutLiterals.upperSecondarySpacing)
             make.trailing.equalToSuperview().offset(-LayoutLiterals.upperSecondarySpacing)
             make.bottom.equalToSuperview().offset(-LayoutLiterals.upperSecondarySpacing)
         }

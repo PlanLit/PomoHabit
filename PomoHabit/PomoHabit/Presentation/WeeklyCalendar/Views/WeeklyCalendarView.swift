@@ -163,64 +163,64 @@ extension WeeklyCalendarView {
         
         weeklyCollectionView.snp.makeConstraints { make in
             make.top.equalTo(todayDateLabel.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
-            make.leading.trailing.width.equalToSuperview()
+            make.leading.trailing.width.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
             make.height.equalTo(80)
         }
         
         firstDivider.snp.makeConstraints { make in
             make.top.equalTo(weeklyCollectionView.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
         }
         
         // MARK: - 진행 상태
         
         weeklyHabitProgressLabel.snp.makeConstraints { make in
             make.top.equalTo(firstDivider.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
         }
         
         weeklyHabitProgressView.snp.makeConstraints { make in
             make.top.equalTo(weeklyHabitProgressLabel.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
             make.height.equalTo(10)
         }
         
         progressCircleImageView.snp.makeConstraints { make in
             make.top.equalTo(weeklyHabitProgressLabel.snp.bottom).offset(9)
-            make.leading.equalToSuperview()
+            make.leading.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
         }
         
         secondDivider.snp.makeConstraints { make in
             make.top.equalTo(weeklyHabitProgressView.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
         }
         
         // MARK: - 습관 정보
         
         habitInfoLabel.snp.makeConstraints { make in
             make.top.equalTo(secondDivider.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
         }
         
         habitInfoView.snp.makeConstraints { make in
             make.top.equalTo(habitInfoLabel.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
         }
         thirdDivider.snp.makeConstraints { make in
             make.top.equalTo(habitInfoView.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
         }
         
         // MARK: - 메모
         
         noteInfoLabel.snp.makeConstraints { make in
             make.top.equalTo(thirdDivider.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
         }
         
         noteContentLabel.snp.makeConstraints { make in
             make.top.equalTo(noteInfoLabel.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
             make.bottom.equalToSuperview()
         }
     }
@@ -240,6 +240,7 @@ extension WeeklyCalendarView {
     }
     
     func setProgressCircleImg(offset: Int) {
+        print(offset)
         progressCircleImageView.snp.updateConstraints { make in
             make.leading.equalToSuperview().offset(offset)
         }
