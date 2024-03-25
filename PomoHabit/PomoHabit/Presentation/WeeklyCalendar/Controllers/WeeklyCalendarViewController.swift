@@ -99,11 +99,13 @@ extension WeeklyCalendarViewController {
     }
     
     private func setUpWeeklyHabbitProgressView(progress : Float) {
-        let weeklyCalendarViewWidth = weeklyCalendarView.frame.width
-        let progressCircleOffset = Int(weeklyCalendarViewWidth * CGFloat(progress)) - 15
-        
-        weeklyCalendarView.setProgressCircleImg(offset: progressCircleOffset)
-        weeklyCalendarView.setWeeklyHabitProgressView(progress: progress)
+        if progress != 0 {
+            let weeklyCalendarViewWidth = weeklyCalendarView.frame.width
+            let progressCircleOffset = Int(weeklyCalendarViewWidth * CGFloat(progress)) - 15
+            
+            weeklyCalendarView.setProgressCircleImg(offset: progressCircleOffset)
+            weeklyCalendarView.setWeeklyHabitProgressView(progress: progress)
+        }
     }
 }
 
