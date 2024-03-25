@@ -5,7 +5,8 @@
 //  Created by 원동진 on 3/25/24.
 //
 
-import Foundation
+// MARK: - ViewControllerFactory
+
 class ViewControllerFactory {
     static func makeWeeklyCalendarViewController() -> WeeklyCalendarViewController {
         let viewController = WeeklyCalendarViewController(weeklyHabitInfo: WeeklyHabitInfoModel())

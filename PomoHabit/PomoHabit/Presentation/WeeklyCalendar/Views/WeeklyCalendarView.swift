@@ -144,7 +144,8 @@ extension WeeklyCalendarView {
         }
         
         navigationBarView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
         }
         
         // MARK: - 오늘 날짜 UI
@@ -169,58 +170,58 @@ extension WeeklyCalendarView {
         
         firstDivider.snp.makeConstraints { make in
             make.top.equalTo(weeklyCollectionView.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
-            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
+            make.leading.trailing.equalTo(weeklyCollectionView)
         }
         
         // MARK: - 진행 상태
         
         weeklyHabitProgressLabel.snp.makeConstraints { make in
             make.top.equalTo(firstDivider.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
-            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
+            make.leading.trailing.equalTo(weeklyCollectionView)
         }
         
         weeklyHabitProgressView.snp.makeConstraints { make in
             make.top.equalTo(weeklyHabitProgressLabel.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
-            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
+            make.leading.trailing.equalTo(weeklyCollectionView)
             make.height.equalTo(10)
         }
         
         progressCircleImageView.snp.makeConstraints { make in
             make.top.equalTo(weeklyHabitProgressLabel.snp.bottom).offset(9)
-            make.leading.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
+            make.leading.equalToSuperview().offset(LayoutLiterals.upperPrimarySpacing)
         }
         
         secondDivider.snp.makeConstraints { make in
             make.top.equalTo(weeklyHabitProgressView.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
-            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
+            make.leading.trailing.equalTo(weeklyCollectionView)
         }
         
         // MARK: - 습관 정보
         
         habitInfoLabel.snp.makeConstraints { make in
             make.top.equalTo(secondDivider.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
-            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
+            make.leading.trailing.equalTo(weeklyCollectionView)
         }
         
         habitInfoView.snp.makeConstraints { make in
             make.top.equalTo(habitInfoLabel.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
-            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
+            make.leading.trailing.equalTo(weeklyCollectionView)
         }
         thirdDivider.snp.makeConstraints { make in
             make.top.equalTo(habitInfoView.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
-            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
+            make.leading.trailing.equalTo(weeklyCollectionView)
         }
         
         // MARK: - 메모
         
         noteInfoLabel.snp.makeConstraints { make in
             make.top.equalTo(thirdDivider.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
-            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
+            make.leading.equalTo(weeklyCollectionView)
         }
         
         noteContentLabel.snp.makeConstraints { make in
             make.top.equalTo(noteInfoLabel.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
-            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.upperPrimarySpacing)
+            make.leading.trailing.equalTo(weeklyCollectionView)
             make.bottom.equalToSuperview()
         }
     }

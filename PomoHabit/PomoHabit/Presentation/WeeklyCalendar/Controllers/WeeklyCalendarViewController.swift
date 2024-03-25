@@ -41,11 +41,15 @@ final class WeeklyCalendarViewController: BaseViewController {
     
     // MARK: - Life Cycle
     
+    override func loadView() {
+        super.loadView()
+        
+        view = weeklyCalendarView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setAddSubViews()
-        setAutoLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
