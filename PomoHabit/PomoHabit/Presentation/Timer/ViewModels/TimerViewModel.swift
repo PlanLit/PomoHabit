@@ -1,5 +1,5 @@
 //
-//  TimerModel.swift
+//  TimerViewModel.swift
 //  PomoHabit
 //
 //  Created by Joon Baek on 2024/02/27.
@@ -26,7 +26,7 @@ struct UserData {
     var whiteNoiseType: String
 }
 
-// MARK: - TimerModel
+// MARK: - TimerViewModel
 
 final class TimerViewModel: InputOutputProtocol {
     struct Input {
