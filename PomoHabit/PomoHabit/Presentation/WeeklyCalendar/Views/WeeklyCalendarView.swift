@@ -240,7 +240,6 @@ extension WeeklyCalendarView {
     }
     
     func setProgressCircleImg(offset: Int) {
-        print(offset)
         progressCircleImageView.snp.updateConstraints { make in
             make.leading.equalToSuperview().offset(offset)
         }
