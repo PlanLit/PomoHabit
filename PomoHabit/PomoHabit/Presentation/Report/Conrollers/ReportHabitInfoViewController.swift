@@ -9,24 +9,31 @@ import UIKit
 
 // MARK: - ReportHabitInfoViewController
 
-final class ReportHabitInfoViewController: BaseViewController {
+final class ReportHabitInfoViewController: BaseViewController, NavigationBarDelegate {
     
     // MARK: - Data Properties
     
-    private var daysButtonSelectionState: [Bool]? // 유저가 입력했던 월화수 데이터 (임시)
+    private var daysButtonSelectionState: [Bool]?
     private var startTime: String?
     
     // MARK: - UI Properties
     
+    private let pobitNavigationBarView = PobitNavigationBarView(title: "습관 정보", viewType: .withDismissButton)
     private lazy var tableView: UITableView = makeTableView()
     
     // MARK: - Life Cycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        pobitNavigationBarView.delegate = self
+        
         setAddSubviews()
         setAutoLayout()
+    }
+    
+    func didTapDismissButton() {
+        self.dismiss(animated: true)
     }
 }
 
@@ -34,15 +41,21 @@ final class ReportHabitInfoViewController: BaseViewController {
 
 extension ReportHabitInfoViewController {
     private func setAddSubviews() {
-        self.view.addSubview(tableView)
+        view.addSubViews([pobitNavigationBarView, tableView])
     }
     
     private func setAutoLayout() {
+        pobitNavigationBarView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(LayoutLiterals.upperPrimarySpacing)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(58)
+        }
+        
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(self.view.snp.top)
-            make.trailing.equalTo(self.view.snp.trailing).offset(-LayoutLiterals.minimumHorizontalSpacing)
-            make.bottom.equalTo(self.view.snp.bottom)
-            make.leading.equalTo(self.view.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
+            make.top.equalTo(pobitNavigationBarView.snp.bottom)
+            make.trailing.equalTo(view.snp.trailing).offset(-LayoutLiterals.minimumHorizontalSpacing)
+            make.bottom.equalTo(view.snp.bottom)
+            make.leading.equalTo(view.snp.leading).offset(LayoutLiterals.minimumHorizontalSpacing)
         }
     }
     
@@ -157,7 +170,7 @@ extension ReportHabitInfoViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if section%2 == 0 && section != tableView.numberOfSections - 1 {
+        if section % 2 == 0 && section != tableView.numberOfSections - 1 {
             return makeSeparatorView()
         }
         
