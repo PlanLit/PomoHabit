@@ -82,7 +82,6 @@ extension WeeklyCalendarViewController {
     private func setAutoLayout() {
         weeklyCalendarView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
-            
         }
     }
 }
