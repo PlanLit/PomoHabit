@@ -43,9 +43,6 @@
 		37B811D12B9B788D00A6694E /* GesturePublisher+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B811D02B9B788D00A6694E /* GesturePublisher+Extensions.swift */; };
 		37CC614C2B90C07900CBAB45 /* BottomSheetPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CC614B2B90C07900CBAB45 /* BottomSheetPresentable.swift */; };
 		37D860582BABB9D3008E7001 /* NavigationBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D860572BABB9D3008E7001 /* NavigationBarDelegate.swift */; };
-		37D8605C2BAC053E008E7001 /* 비 내리는 아침.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37D8605A2BAC053E008E7001 /* 비 내리는 아침.mp3 */; };
-		37D8605D2BAC053E008E7001 /* 잔잔한 파도의 위로.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37D8605B2BAC053E008E7001 /* 잔잔한 파도의 위로.mp3 */; };
-		37D8605F2BAC0E30008E7001 /* 고요한 밤의 모닥불 소리.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37D8605E2BAC0E30008E7001 /* 고요한 밤의 모닥불 소리.mp3 */; };
 		73DFA21F2B8D8D8E00C381A7 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */; };
 		73DFA2592B90274700C381A7 /* OnboardingChattingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA2582B90274700C381A7 /* OnboardingChattingTableViewCell.swift */; };
 		73DFA2632B903DB600C381A7 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFA2622B903DB600C381A7 /* String+Extension.swift */; };
@@ -68,6 +65,9 @@
 		E0C5B5442B8D5D9A00A77BAE /* HStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5412B8D5D9900A77BAE /* HStackView.swift */; };
 		E0C5B5452B8D5D9A00A77BAE /* VStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */; };
 		E0C5B5472B8D63B200A77BAE /* DayButtonsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C5B5462B8D63B200A77BAE /* DayButtonsTableViewCell.swift */; };
+		E0CA6C182BB15DBA00AAA9A0 /* rainyMorning.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E0CA6C152BB15DBA00AAA9A0 /* rainyMorning.mp3 */; };
+		E0CA6C192BB15DBA00AAA9A0 /* campfire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E0CA6C162BB15DBA00AAA9A0 /* campfire.mp3 */; };
+		E0CA6C1A2BB15DBA00AAA9A0 /* calmWaves.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E0CA6C172BB15DBA00AAA9A0 /* calmWaves.mp3 */; };
 		E0F29C162BAAB6AA00DEA573 /* CircleGaugeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F29C152BAAB6AA00DEA573 /* CircleGaugeImageView.swift */; };
 		F85C43342BAAB2BE00121442 /* WeeklyHabitInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C43332BAAB2BE00121442 /* WeeklyHabitInfoModel.swift */; };
 		F85F8F572B8DE33C00E69922 /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F562B8DE33C00E69922 /* BasePaddingLabel.swift */; };
@@ -88,6 +88,7 @@
 		F8A4FB972B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB912B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift */; };
 		F8A4FB982B96F2A300E46EA1 /* ReportHabitInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB922B96F2A300E46EA1 /* ReportHabitInfoViewController.swift */; };
 		F8A4FB992B96F2A300E46EA1 /* ReportHabitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB942B96F2A300E46EA1 /* ReportHabitDetailViewController.swift */; };
+		F8DE57A02BB143780003D3DB /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DE579F2BB143780003D3DB /* ViewControllerFactory.swift */; };
 		F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD372B8C7FC900712CBF /* NoteView.swift */; };
 		F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD392B8C7FF200712CBF /* NoteTextView.swift */; };
 /* End PBXBuildFile section */
@@ -131,9 +132,6 @@
 		37B811D02B9B788D00A6694E /* GesturePublisher+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GesturePublisher+Extensions.swift"; sourceTree = "<group>"; };
 		37CC614B2B90C07900CBAB45 /* BottomSheetPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetPresentable.swift; sourceTree = "<group>"; };
 		37D860572BABB9D3008E7001 /* NavigationBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarDelegate.swift; sourceTree = "<group>"; };
-		37D8605A2BAC053E008E7001 /* 비 내리는 아침.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "비 내리는 아침.mp3"; path = "../../../../../../../../Downloads/비 내리는 아침.mp3"; sourceTree = "<group>"; };
-		37D8605B2BAC053E008E7001 /* 잔잔한 파도의 위로.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "잔잔한 파도의 위로.mp3"; path = "../../../../../../../../Downloads/잔잔한 파도의 위로.mp3"; sourceTree = "<group>"; };
-		37D8605E2BAC0E30008E7001 /* 고요한 밤의 모닥불 소리.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "고요한 밤의 모닥불 소리.mp3"; path = "../../../../../../../../Downloads/고요한 밤의 모닥불 소리.mp3"; sourceTree = "<group>"; };
 		73DFA21E2B8D8D8E00C381A7 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 		73DFA2582B90274700C381A7 /* OnboardingChattingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingChattingTableViewCell.swift; sourceTree = "<group>"; };
 		73DFA2622B903DB600C381A7 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -156,6 +154,9 @@
 		E0C5B5412B8D5D9900A77BAE /* HStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HStackView.swift; sourceTree = "<group>"; };
 		E0C5B5422B8D5D9A00A77BAE /* VStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VStackView.swift; sourceTree = "<group>"; };
 		E0C5B5462B8D63B200A77BAE /* DayButtonsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButtonsTableViewCell.swift; sourceTree = "<group>"; };
+		E0CA6C152BB15DBA00AAA9A0 /* rainyMorning.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = rainyMorning.mp3; sourceTree = "<group>"; };
+		E0CA6C162BB15DBA00AAA9A0 /* campfire.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = campfire.mp3; sourceTree = "<group>"; };
+		E0CA6C172BB15DBA00AAA9A0 /* calmWaves.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = calmWaves.mp3; sourceTree = "<group>"; };
 		E0F29C152BAAB6AA00DEA573 /* CircleGaugeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleGaugeImageView.swift; sourceTree = "<group>"; };
 		F85C43332BAAB2BE00121442 /* WeeklyHabitInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyHabitInfoModel.swift; sourceTree = "<group>"; };
 		F85F8F562B8DE33C00E69922 /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
@@ -174,6 +175,7 @@
 		F8A4FB912B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportDayButtonTableViewCell.swift; sourceTree = "<group>"; };
 		F8A4FB922B96F2A300E46EA1 /* ReportHabitInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHabitInfoViewController.swift; sourceTree = "<group>"; };
 		F8A4FB942B96F2A300E46EA1 /* ReportHabitDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHabitDetailViewController.swift; sourceTree = "<group>"; };
+		F8DE579F2BB143780003D3DB /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		F8E3CD372B8C7FC900712CBF /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		F8E3CD392B8C7FF200712CBF /* NoteTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -279,6 +281,7 @@
 				E0C5B53C2B8D5AC000A77BAE /* DayButton */,
 				F8E3CD362B8C7FB600712CBF /* Note */,
 				376B91B92B8CE6B6004CBB16 /* PobitButton.swift */,
+				F8DE579F2BB143780003D3DB /* ViewControllerFactory.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -295,7 +298,7 @@
 		37144C7F2B8C341E008565C4 /* Supports */ = {
 			isa = PBXGroup;
 			children = (
-				37D860592BAC0521008E7001 /* WhiteNoise */,
+				E0CA6C142BB15DB100AAA9A0 /* WhiteNoise */,
 				376B91AD2B8C69B6004CBB16 /* Fonts */,
 				37144C652B8C32D6008565C4 /* AppDelegate.swift */,
 				37144C672B8C32D6008565C4 /* SceneDelegate.swift */,
@@ -419,16 +422,6 @@
 			path = "Combine+";
 			sourceTree = "<group>";
 		};
-		37D860592BAC0521008E7001 /* WhiteNoise */ = {
-			isa = PBXGroup;
-			children = (
-				37D8605A2BAC053E008E7001 /* 비 내리는 아침.mp3 */,
-				37D8605E2BAC0E30008E7001 /* 고요한 밤의 모닥불 소리.mp3 */,
-				37D8605B2BAC053E008E7001 /* 잔잔한 파도의 위로.mp3 */,
-			);
-			path = WhiteNoise;
-			sourceTree = "<group>";
-		};
 		73DFA2542B9026C900C381A7 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -522,6 +515,16 @@
 				E0C5B5412B8D5D9900A77BAE /* HStackView.swift */,
 			);
 			path = StackViews;
+			sourceTree = "<group>";
+		};
+		E0CA6C142BB15DB100AAA9A0 /* WhiteNoise */ = {
+			isa = PBXGroup;
+			children = (
+				E0CA6C172BB15DBA00AAA9A0 /* calmWaves.mp3 */,
+				E0CA6C162BB15DBA00AAA9A0 /* campfire.mp3 */,
+				E0CA6C152BB15DBA00AAA9A0 /* rainyMorning.mp3 */,
+			);
+			path = WhiteNoise;
 			sourceTree = "<group>";
 		};
 		F88EB2D42B8DC07B0073BDDA /* Controllers */ = {
@@ -665,12 +668,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37D8605C2BAC053E008E7001 /* 비 내리는 아침.mp3 in Resources */,
-				37D8605F2BAC0E30008E7001 /* 고요한 밤의 모닥불 소리.mp3 in Resources */,
 				37144C722B8C32D7008565C4 /* LaunchScreen.storyboard in Resources */,
-				37D8605D2BAC053E008E7001 /* 잔잔한 파도의 위로.mp3 in Resources */,
 				376B91B32B8C6ABA004CBB16 /* Pretendard-Bold.otf in Resources */,
+				E0CA6C1A2BB15DBA00AAA9A0 /* calmWaves.mp3 in Resources */,
+				E0CA6C192BB15DBA00AAA9A0 /* campfire.mp3 in Resources */,
 				376B91B72B8C6AF6004CBB16 /* Pretendard-SemiBold.otf in Resources */,
+				E0CA6C182BB15DBA00AAA9A0 /* rainyMorning.mp3 in Resources */,
 				37144C6F2B8C32D7008565C4 /* Assets.xcassets in Resources */,
 				376B91B52B8C6ABA004CBB16 /* Pretendard-Regular.otf in Resources */,
 				F8A179D62BAC164A005AAC18 /* Pretendard-Black.otf in Resources */,
@@ -706,6 +709,7 @@
 				F85F8F612B8E25EE00E69922 /* WeeklyCalendarHabitInfoView.swift in Sources */,
 				BAA38AE72BA3E94800CAF619 /* OpenSourceViewController.swift in Sources */,
 				BAFEE14E2B96F7C3009F0D25 /* MypageModel.swift in Sources */,
+				F8DE57A02BB143780003D3DB /* ViewControllerFactory.swift in Sources */,
 				BAA38AE52BA3E65300CAF619 /* OnboardingHabitRegisterViewController.swift in Sources */,
 				F8A4FB962B96F2A300E46EA1 /* ReportViewController.swift in Sources */,
 				37B811CD2B9B74BE00A6694E /* InputOutputProtocol.swift in Sources */,

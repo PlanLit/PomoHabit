@@ -20,6 +20,7 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
     private var customNavigationController: UINavigationController? = nil
     private let openSourceViewController = OpenSourceViewController()
     private let customerServiceViewController = CustomerServiceViewController()
+    private let nicknameViewController = NicknameViewController()
     
     // MARK: - View Lifecycle
     
@@ -38,6 +39,9 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
         setDelegateforEditButton()
         setNicknameData()
         setTotalHabitInfo()
+        nicknameViewController.onNicknameEdit = { nickname in
+            self.myPageRootView.updateNicknameLabel(with: nickname)
+        }
     }
 }
 
@@ -87,12 +91,20 @@ extension MyPageViewController {
     }
 }
 
+// MARK: - Action Helper
+
+extension MyPageViewController {
+    func editNickname(with nickname: String) {
+        myPageRootView.updateNicknameLabel(with: nickname)
+    }
+}
+
 // MARK: - EditButtonDelegate
 
 extension MyPageViewController: EditButtonDelegate {
     func editButtonTapped() {
         nicknameEditView.isHidden = false
-        presentBottomSheet(viewController: NicknameViewController())
+        presentBottomSheet(viewController: nicknameViewController)
     }
     
     func setDelegateforEditButton() {
@@ -106,17 +118,16 @@ extension MyPageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let selectModel = myPageCellModels[indexPath.row]
+        _ = myPageCellModels[indexPath.row]
         
-        switch selectModel.title {
-        case "오픈 소스 사용":
-            if let navigationController = customNavigationController {
-                navigationController.pushViewController(openSourceViewController, animated: true)
-            }
-        case "고객 센터":
-            if let navigationController = customNavigationController {
-                navigationController.pushViewController(customerServiceViewController, animated: true)
-            }
+        switch indexPath.row {
+        case 0:
+//            navigationController?.pushViewController(openSourceViewController, animated: true)
+            presentBottomSheet(viewController: openSourceViewController)
+        case 1:
+//            navigationController?.pushViewController(customerServiceViewController, animated: true)
+            presentBottomSheet(viewController: customerServiceViewController)
+            
         default:
             break
         }
