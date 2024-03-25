@@ -41,11 +41,15 @@ final class WeeklyCalendarViewController: BaseViewController {
     
     // MARK: - Life Cycle
     
+    override func loadView() {
+        super.loadView()
+        
+        view = weeklyCalendarView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setAddSubViews()
-        setSetAutoLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,10 +83,9 @@ extension WeeklyCalendarViewController {
         view.addSubview(weeklyCalendarView)
     }
     
-    private func setSetAutoLayout() {
+    private func setAutoLayout() {
         weeklyCalendarView.snp.makeConstraints { make in
-            make.top.bottom.equalTo(view.safeAreaLayoutGuide)
-            make.leading.trailing.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
 }
@@ -99,11 +102,13 @@ extension WeeklyCalendarViewController {
     }
     
     private func setUpWeeklyHabbitProgressView(progress : Float) {
-        let weeklyCalendarViewWidth = weeklyCalendarView.frame.width
-        let progressCircleOffset = Int(weeklyCalendarViewWidth * CGFloat(progress)) - 15
-        
-        weeklyCalendarView.setProgressCircleImg(offset: progressCircleOffset)
-        weeklyCalendarView.setWeeklyHabitProgressView(progress: progress)
+        if progress != 0 {
+            let weeklyCalendarViewWidth = weeklyCalendarView.frame.width
+            let progressCircleOffset = Int(weeklyCalendarViewWidth * CGFloat(progress)) - 15
+            
+            weeklyCalendarView.setProgressCircleImg(offset: progressCircleOffset)
+            weeklyCalendarView.setWeeklyHabitProgressView(progress: progress)
+        }
     }
 }
 
