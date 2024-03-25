@@ -40,16 +40,10 @@ final class WeeklyCalendarViewController: BaseViewController {
     }
     
     // MARK: - Life Cycle
-    
     override func loadView() {
         super.loadView()
         
         view = weeklyCalendarView
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,20 +67,6 @@ final class WeeklyCalendarViewController: BaseViewController {
         super.viewDidLayoutSubviews()
         
         setUpWeeklyHabbitProgressView(progress: getWeeklyProgress())
-    }
-}
-
-// MARK: - Layout Helpers
-
-extension WeeklyCalendarViewController {
-    private func setAddSubViews() {
-        view.addSubview(weeklyCalendarView)
-    }
-    
-    private func setAutoLayout() {
-        weeklyCalendarView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
-        }
     }
 }
 
