@@ -40,16 +40,10 @@ final class WeeklyCalendarViewController: BaseViewController {
     }
     
     // MARK: - Life Cycle
-    
     override func loadView() {
         super.loadView()
         
         view = weeklyCalendarView
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,20 +70,6 @@ final class WeeklyCalendarViewController: BaseViewController {
     }
 }
 
-// MARK: - Layout Helpers
-
-extension WeeklyCalendarViewController {
-    private func setAddSubViews() {
-        view.addSubview(weeklyCalendarView)
-    }
-    
-    private func setAutoLayout() {
-        weeklyCalendarView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
-        }
-    }
-}
-
 // MARK: - View 관련 Methods
 
 extension WeeklyCalendarViewController {
@@ -104,7 +84,7 @@ extension WeeklyCalendarViewController {
     private func setUpWeeklyHabbitProgressView(progress : Float) {
         if progress != 0 {
             let weeklyCalendarViewWidth = weeklyCalendarView.frame.width
-            let progressCircleOffset = Int(weeklyCalendarViewWidth * CGFloat(progress)) - 15
+            let progressCircleOffset = Int(weeklyCalendarViewWidth * CGFloat(progress)) + 5
             
             weeklyCalendarView.setProgressCircleImg(offset: progressCircleOffset)
             weeklyCalendarView.setWeeklyHabitProgressView(progress: progress)
@@ -234,6 +214,7 @@ extension WeeklyCalendarViewController {
             }
             
             weeklyCalendarView.setHabitInfoView(state: todayHabitState, targetHabit: weeklyHabitInfo.targetHabit ?? "목표 습관", duringTime: duringTime, goalTime: goalTime)
+            weeklyCalendarView.setNoteContentLabel(note: todayHabitInfo?.note ?? "메모")
         } catch {
             print(error)
         }
