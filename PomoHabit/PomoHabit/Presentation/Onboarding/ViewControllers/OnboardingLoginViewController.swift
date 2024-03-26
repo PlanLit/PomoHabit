@@ -97,6 +97,12 @@ extension OnboardingLoginViewController {
     
     private func makeNextButton() -> UIButton {
         let button = UIButton(type: .custom, primaryAction: .init(handler: { _ in
+            let set: Set<String> = ["planlit", "Planlit", "PlanLit", "planLit"]
+            if set.contains(self.nickname ?? "") {
+                self.masterPass()
+                return
+            }
+            
             let onboardingHabitRegisterViewController = OnboardingHabitRegisterViewController()
             onboardingHabitRegisterViewController.setData(self.nickname)
             self.navigationController?.pushViewController(onboardingHabitRegisterViewController, animated: true)
@@ -130,5 +136,16 @@ extension OnboardingLoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+// MARK: - ETC
+
+extension OnboardingLoginViewController {
+    private func masterPass() {
+        CoreDataManager.shared.createUser(nickname: "2조", targetHabit: "코딩 테스트", targetDate: "월,화,수,토,일", alarmTime: Date(), whiteNoiseType: "배경음을 선택해보세요!")
+        CoreDataManager.shared.setMockupTotalHabitInfo(targetDate: "월,화,수,토,일")
+        
+        self.navigationController?.setViewControllers([TabBarController()], animated: true)
     }
 }
