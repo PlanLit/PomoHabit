@@ -97,6 +97,7 @@ extension TimerViewController {
                     self?.rootView.circleProgressBar.setProgressWithAnimation(duration: self?.viewModel.timerDuration ?? 5)
                 case .finished:
                     self?.rootView.updateTimerButtonUI(with: state)
+                    self?.whiteNoiseView.stop()
                     self?.showAlert(title: "메모를 작성하시겠어요?", message: nil) { [weak self] _ in
                         self?.presentBottomSheet(viewController: MemoViewController())
                     }
