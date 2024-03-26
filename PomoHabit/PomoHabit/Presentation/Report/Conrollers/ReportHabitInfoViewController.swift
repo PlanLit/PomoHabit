@@ -33,7 +33,7 @@ final class ReportHabitInfoViewController: BaseViewController, NavigationBarDele
     }
     
     func didTapDismissButton() {
-        self.dismiss(animated: true)
+        dismiss(animated: true)
     }
 }
 
@@ -178,6 +178,10 @@ extension ReportHabitInfoViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 40.25
+        if section % 2 == 0 && section != tableView.numberOfSections - 1 {
+            return 40.25
+        }
+        
+        return 0
     }
 }
