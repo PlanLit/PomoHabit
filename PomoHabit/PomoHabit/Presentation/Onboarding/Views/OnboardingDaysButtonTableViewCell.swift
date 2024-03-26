@@ -19,8 +19,11 @@ final class OnboardingDaysButtonTableViewCell: UITableViewCell {
 
     // MARK: - Life Cycles
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    init(style: UITableViewCell.CellStyle, reuseIdentifier: String?,_ daysButtonSelectionState: [Bool]?,_ action:((Int, Bool) -> Void)?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.daysButtonSelectionState = daysButtonSelectionState
+        self.action = action
         
         setSelf()
         
@@ -49,11 +52,6 @@ extension OnboardingDaysButtonTableViewCell {
             make.trailing.equalToSuperview().offset(-LayoutLiterals.minimumHorizontalSpacing)
             make.centerY.equalToSuperview()
         }
-    }
-    
-    func setData(_ daysButtonSelectionState: [Bool]?,_ action:((Int, Bool) -> Void)?) {
-        self.daysButtonSelectionState = daysButtonSelectionState
-        self.action = action
     }
 }
 

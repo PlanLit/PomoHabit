@@ -175,8 +175,7 @@ extension OnboardingHabitRegisterViewController {
     }
     
     private func makeOnboardingDaysButtonTableViewCell() -> OnboardingDaysButtonTableViewCell {
-        let cell = OnboardingDaysButtonTableViewCell()
-        cell.setData(daysButtonSelectionState) { inx, state in
+        let cell = OnboardingDaysButtonTableViewCell(style: .default, reuseIdentifier: nil, daysButtonSelectionState) { inx, state in
             self.daysButtonSelectionState[inx] = state
             var trueCount = 0
             for state in self.daysButtonSelectionState {
