@@ -8,15 +8,15 @@
 import Combine
 import Foundation
 
-enum TimerState {
+enum TimerState: String {
     /// 진행 전
-    case stopped
+    case stopped = "stopped"
     /// 진행 중
-    case running
+    case running = "running"
     /// 타이머 종료
-    case finished
+    case finished = "finished"
     /// 완료
-    case done
+    case done = "done"
 }
 
 struct UserData {
@@ -109,9 +109,21 @@ final class TimerViewModel: InputOutputProtocol {
     }
 }
 
+// MARK: - Internal Methods
+
+extension TimerViewModel {
+    func updateState(_ newState: TimerState) {
+        timerStatePublisher.send(newState)
+    }
+}
+
 // MARK: - HandleTimer
 
 extension TimerViewModel {
+    private func saveTimerState() {
+        UserDefaultsManager.shared.saveTimerState(timerStatePublisher.value)
+    }
+    
     private func handleTimerButtonTapped() {
         switch timerStatePublisher.value {
         case .stopped:
@@ -196,8 +208,9 @@ extension TimerViewModel {
     
     // 타이머 완료시 실행되는 메서드
     private func recordCompletedHabit() {
-        guard let savedText = UserDefaults.standard.string(forKey: "noteText") else { return }
-        CoreDataManager.shared.completedTodyHabit(completedDate: currentDate, note: savedText)
+        let savedText = UserDefaults.standard.string(forKey: "noteText")
+        CoreDataManager.shared.completedTodyHabit(completedDate: currentDate, note: savedText ?? "")
+        UserDefaultsManager.shared.saveTimerState(timerStatePublisher.value)
         timerStatePublisher.send(.done)
     }
 }

@@ -15,6 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = scene as? UIWindowScene else { return }
         
+        let timerState = UserDefaultsManager.shared.loadTimerState()
+        
         let rootViewController: UIViewController = {
             if let _ = try? coreDataManager.fetchUser()?.nickname {
                 
@@ -34,7 +36,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func sceneDidDisconnect(_ scene: UIScene) { }
     
-    func sceneDidBecomeActive(_ scene: UIScene) { }
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        guard let timerViewController = window?.rootViewController as? TimerViewController else { return }
+        timerViewController.loadTimerState()
+    }
     
     func sceneWillResignActive(_ scene: UIScene) { }
     

@@ -14,7 +14,7 @@ final class TimerViewController: BaseViewController, BottomSheetPresentable {
     
     // MARK: - Properties
     
-    private var model = TimerViewModel()
+    private var viewModel = TimerViewModel()
     private var rootView = TimerView()
     private var whiteNoiseView = WhiteNoiseViewController()
     
@@ -32,6 +32,12 @@ final class TimerViewController: BaseViewController, BottomSheetPresentable {
         
         bind()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadTimerState()
+    }
 }
 
 // MARK: - Bindings
@@ -42,8 +48,8 @@ extension TimerViewController {
                                          whiteNoiseButtonTapped: rootView.whiteNoiseButtonTapped,
                                          timerButtonTapped: rootView.timerButtonTapped,
                                          submitButtonTapped: whiteNoiseView.submitButtonTapped, 
-                                         whiteNoiseSelected: whiteNoiseView.whiteNoiseSelectedSubject)
-        let output = model.transform(input: input)
+                                         whiteNoiseSelected: whiteNoiseView.whiteNoiseSelected)
+        let output = viewModel.transform(input: input)
         
         output.memoButtonAction
             .receive(on: DispatchQueue.main)
@@ -88,7 +94,7 @@ extension TimerViewController {
                 case .stopped:
                     break
                 case .running:
-                    self?.rootView.circleProgressBar.setProgressWithAnimation(duration: self?.model.timerDuration ?? 5)
+                    self?.rootView.circleProgressBar.setProgressWithAnimation(duration: self?.viewModel.timerDuration ?? 5)
                 case .finished:
                     self?.rootView.updateTimerButtonUI(with: state)
                     self?.showAlert(title: "메모를 작성하시겠어요?", message: nil) { [weak self] _ in
@@ -113,5 +119,14 @@ extension TimerViewController {
                 self?.rootView.updateViewWithUserData(userData)
             }
             .store(in: &cancellables)
+    }
+}
+
+// MARK: - Internal Methods
+
+extension TimerViewController {
+    func loadTimerState() {
+        let timerState = UserDefaultsManager.shared.loadTimerState()
+        viewModel.updateState(timerState)
     }
 }
