@@ -55,8 +55,6 @@ final class NicknameEditView: BaseView {
         setupTextFieldDelegate()
         setFirstResponderForTextField()
         setPlaceholderForTextField()
-        // TODO: 정규식 필요하다면 추가하기
-        nicknameEditLabel.isHidden = true
     }
     
     required init?(coder: NSCoder) {
@@ -104,14 +102,15 @@ extension NicknameEditView {
 
 extension NicknameEditView {
     func setNavigationBarDelegate(self: UIViewController) {
-        pobitNavigationBarView.delegate = self as? NicknameViewController 
+        pobitNavigationBarView.delegate = self as? NicknameViewController
     }
     
     func setPlaceholderForTextField() {
-        nicknameEditTextField.placeholder = { [weak self] in
-            
-            return self?.mypageView.getNicknameLabel().text
-        }()
+        if let nickname = mypageView.getNicknameLabel().text {
+            nicknameEditTextField.placeholder = nickname
+        } else {
+            nicknameEditTextField.placeholder = "없음"
+        }
     }
     
     private func setupTextFieldDelegate() {

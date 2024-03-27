@@ -143,7 +143,6 @@ final class MyPageView: BaseView {
         let myPageTableView = UITableView(frame: .zero, style: .plain)
         myPageTableView.separatorStyle = .singleLine
         myPageTableView.dataSource = self
-//        myPageTableView.delegate = self
         myPageTableView.register(MyPageTableViewCell.self, forCellReuseIdentifier: MyPageTableViewCell.reuseIdentifier)
         
         return myPageTableView
@@ -230,7 +229,6 @@ extension MyPageView {
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(grayBar2.snp.top).offset(LayoutLiterals.upperPrimarySpacing)
-//            make.left.right.bottom.equalToSuperview()
             make.left.equalToSuperview().offset(LayoutLiterals.minimumHorizontalSpacing)
             make.right.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
             make.bottom.equalToSuperview()

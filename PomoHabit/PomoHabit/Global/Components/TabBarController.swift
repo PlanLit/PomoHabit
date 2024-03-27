@@ -16,7 +16,7 @@ final class TabBarController: UITabBarController {
     let firstVC = TimerViewController()
     let secondVC = ReportViewController()
     let thirdVC = ViewControllerFactory.makeWeeklyCalendarViewController()
-    let fourthVC = MyPageViewController()
+    let fourthVC = ViewControllerFactory.makeMypageViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()

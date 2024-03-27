@@ -18,9 +18,23 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
     private let myPageRootView = MyPageView()
     private let nicknameEditView = NicknameEditView()
     private var customNavigationController: UINavigationController? = nil
-    private let openSourceViewController = OpenSourceViewController()
-    private let customerServiceViewController = CustomerServiceViewController()
-    private let nicknameViewController = NicknameViewController()
+    private var openSourceViewController = OpenSourceViewController()
+    private var customerServiceViewController = CustomerServiceViewController()
+    private var nicknameViewController = NicknameViewController()
+    
+    // MARK: - Initializer
+    
+    init(openSourceViewController: OpenSourceViewController, customerServiceViewController: CustomerServiceViewController, nicknameViewController: NicknameViewController) {
+        self.openSourceViewController = openSourceViewController
+        self.customerServiceViewController = customerServiceViewController
+        self.nicknameViewController = nicknameViewController
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - View Lifecycle
     
@@ -42,6 +56,7 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
         nicknameViewController.onNicknameEdit = { nickname in
             self.myPageRootView.updateNicknameLabel(with: nickname)
         }
+        sendDataToNicknamePlaceholder()
     }
 }
 
@@ -51,7 +66,7 @@ extension MyPageViewController {
     private func setNicknameData() {
         do {
             if let user = try CoreDataManager.shared.fetchUser() {
-                let userNickname = user.nickname ?? "" //
+                let userNickname = user.nickname ?? ""
                 myPageRootView.getNicknameLabel().text = userNickname
             } else {
                 myPageRootView.getNicknameLabel().text = "없음"
@@ -80,14 +95,12 @@ extension MyPageViewController {
     }
     
     func sendDataToNicknamePlaceholder() {
-        let nicknameViewController = NicknameViewController()
         let nicknameLabel = myPageRootView.getNicknameLabel()
-        
+        nicknameViewController.nicknameLabelPlaceholder = nicknameLabel.text
         nicknameViewController.onDataReceived = { [weak self] data in
             nicknameLabel.text = data
             self?.nicknameEditView.setPlaceholderForTextField()
         }
-        navigationController?.pushViewController(nicknameViewController, animated: true)
     }
 }
 
@@ -103,8 +116,8 @@ extension MyPageViewController {
 
 extension MyPageViewController: EditButtonDelegate {
     func editButtonTapped() {
-        nicknameEditView.isHidden = false
         presentBottomSheet(viewController: nicknameViewController)
+        sendDataToNicknamePlaceholder()
     }
     
     func setDelegateforEditButton() {
@@ -122,10 +135,8 @@ extension MyPageViewController: UITableViewDelegate {
         
         switch indexPath.row {
         case 0:
-//            navigationController?.pushViewController(openSourceViewController, animated: true)
             presentBottomSheet(viewController: openSourceViewController)
         case 1:
-//            navigationController?.pushViewController(customerServiceViewController, animated: true)
             presentBottomSheet(viewController: customerServiceViewController)
             
         default:

@@ -13,4 +13,10 @@ class ViewControllerFactory {
         
         return viewController
     }
+    
+    static func makeMypageViewController() -> MyPageViewController {
+        let viewController = MyPageViewController(openSourceViewController: OpenSourceViewController(), customerServiceViewController: CustomerServiceViewController(), nicknameViewController: NicknameViewController())
+        
+        return viewController
+    }
 }
