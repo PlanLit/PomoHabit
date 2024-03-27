@@ -46,7 +46,6 @@ extension ReportHabitInfoViewController {
         pobitNavigationBarView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(LayoutLiterals.upperPrimarySpacing)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(58)
         }
         
         tableView.snp.makeConstraints { make in

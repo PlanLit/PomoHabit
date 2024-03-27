@@ -67,7 +67,6 @@ extension ReportViewController {
         navigationBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.left.right.equalToSuperview()
-            make.height.equalTo(58)
         }
         
         headerView.snp.makeConstraints { make in
