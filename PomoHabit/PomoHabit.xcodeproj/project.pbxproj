@@ -30,10 +30,10 @@
 		376B91B52B8C6ABA004CBB16 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 376B91B12B8C6ABA004CBB16 /* Pretendard-Regular.otf */; };
 		376B91B72B8C6AF6004CBB16 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 376B91B62B8C6AF6004CBB16 /* Pretendard-SemiBold.otf */; };
 		376B91BA2B8CE6B6004CBB16 /* PobitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B91B92B8CE6B6004CBB16 /* PobitButton.swift */; };
-		378034A12B8F8D830046E6B8 /* PomoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278202B8F88E200BA7373 /* PomoViewController.swift */; };
-		378034A22B8F8D860046E6B8 /* PomoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278212B8F88F700BA7373 /* PomoView.swift */; };
-		378034A32B8F8D8A0046E6B8 /* PomoProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278222B8F88FB00BA7373 /* PomoProgressBar.swift */; };
-		378034A42B8F8D8D0046E6B8 /* PomoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278232B8F88FF00BA7373 /* PomoModel.swift */; };
+		378034A12B8F8D830046E6B8 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278202B8F88E200BA7373 /* TimerViewController.swift */; };
+		378034A22B8F8D860046E6B8 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278212B8F88F700BA7373 /* TimerView.swift */; };
+		378034A32B8F8D8A0046E6B8 /* TimerProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278222B8F88FB00BA7373 /* TimerProgressBar.swift */; };
+		378034A42B8F8D8D0046E6B8 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376278232B8F88FF00BA7373 /* TimerViewModel.swift */; };
 		378034A82B8F9C810046E6B8 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378034A72B8F9C810046E6B8 /* BottomSheetViewController.swift */; };
 		378034AB2B8F9D7A0046E6B8 /* MemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378034AA2B8F9D7A0046E6B8 /* MemoViewController.swift */; };
 		378034AD2B8FAB5B0046E6B8 /* WhiteNoiseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378034AC2B8FAB5B0046E6B8 /* WhiteNoiseViewController.swift */; };
@@ -112,10 +112,10 @@
 		373D0DF12B8F7B45004CC2C7 /* PobitNavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PobitNavigationBarView.swift; sourceTree = "<group>"; };
 		373D0DF32B8F7B5B004CC2C7 /* LayoutLiterals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutLiterals.swift; sourceTree = "<group>"; };
 		375AC9D42B8F817B002F82FF /* CAShapeLayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Extension.swift"; sourceTree = "<group>"; };
-		376278202B8F88E200BA7373 /* PomoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoViewController.swift; sourceTree = "<group>"; };
-		376278212B8F88F700BA7373 /* PomoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoView.swift; sourceTree = "<group>"; };
-		376278222B8F88FB00BA7373 /* PomoProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoProgressBar.swift; sourceTree = "<group>"; };
-		376278232B8F88FF00BA7373 /* PomoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomoModel.swift; sourceTree = "<group>"; };
+		376278202B8F88E200BA7373 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		376278212B8F88F700BA7373 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		376278222B8F88FB00BA7373 /* TimerProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProgressBar.swift; sourceTree = "<group>"; };
+		376278232B8F88FF00BA7373 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
 		376B91A92B8C681A004CBB16 /* Pretendard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pretendard.swift; sourceTree = "<group>"; };
 		376B91AB2B8C6835004CBB16 /* ColorLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorLiterals.swift; sourceTree = "<group>"; };
 		376B91AE2B8C6AB9004CBB16 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
@@ -193,6 +193,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3709E8142BB16B8B004EECAE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		37144C592B8C32D6008565C4 = {
 			isa = PBXGroup;
 			children = (
@@ -312,9 +319,9 @@
 		37144C812B8C3434008565C4 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
-				375AC9CB2B8F7FF0002F82FF /* ViewControllers */,
+				375AC9CA2B8F7FE0002F82FF /* ViewModels */,
 				375AC9C82B8F7FC4002F82FF /* Views */,
-				375AC9CA2B8F7FE0002F82FF /* Models */,
+				3709E8142BB16B8B004EECAE /* Model */,
 			);
 			path = Timer;
 			sourceTree = "<group>";
@@ -349,24 +356,25 @@
 		375AC9C82B8F7FC4002F82FF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				376278212B8F88F700BA7373 /* PomoView.swift */,
-				376278222B8F88FB00BA7373 /* PomoProgressBar.swift */,
+				375AC9CB2B8F7FF0002F82FF /* ViewControllers */,
+				376278212B8F88F700BA7373 /* TimerView.swift */,
+				376278222B8F88FB00BA7373 /* TimerProgressBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		375AC9CA2B8F7FE0002F82FF /* Models */ = {
+		375AC9CA2B8F7FE0002F82FF /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				376278232B8F88FF00BA7373 /* PomoModel.swift */,
+				376278232B8F88FF00BA7373 /* TimerViewModel.swift */,
 			);
-			path = Models;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		375AC9CB2B8F7FF0002F82FF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				376278202B8F88E200BA7373 /* PomoViewController.swift */,
+				376278202B8F88E200BA7373 /* TimerViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -717,7 +725,7 @@
 				378034AB2B8F9D7A0046E6B8 /* MemoViewController.swift in Sources */,
 				E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */,
 				E0BEE14B2B99366600A2C4C4 /* OnboardingChattingCellData.swift in Sources */,
-				378034A12B8F8D830046E6B8 /* PomoViewController.swift in Sources */,
+				378034A12B8F8D830046E6B8 /* TimerViewController.swift in Sources */,
 				37B811D12B9B788D00A6694E /* GesturePublisher+Extensions.swift in Sources */,
 				37144C662B8C32D6008565C4 /* AppDelegate.swift in Sources */,
 				376B91AA2B8C681A004CBB16 /* Pretendard.swift in Sources */,
@@ -725,9 +733,9 @@
 				37144C8E2B8C5339008565C4 /* UIView+Extension.swift in Sources */,
 				E096400D2B9A85BA0075C2D0 /* OnboardingLoginViewController.swift in Sources */,
 				F88EB2DC2B8DC1120073BDDA /* WeeklyCalendarView.swift in Sources */,
-				378034A22B8F8D860046E6B8 /* PomoView.swift in Sources */,
+				378034A22B8F8D860046E6B8 /* TimerView.swift in Sources */,
 				E0C5B5472B8D63B200A77BAE /* DayButtonsTableViewCell.swift in Sources */,
-				378034A42B8F8D8D0046E6B8 /* PomoModel.swift in Sources */,
+				378034A42B8F8D8D0046E6B8 /* TimerViewModel.swift in Sources */,
 				F87351652B905E04004E89C5 /* TabBarController.swift in Sources */,
 				37144C932B8C544D008565C4 /* BaseViewController.swift in Sources */,
 				F85C43342BAAB2BE00121442 /* WeeklyHabitInfoModel.swift in Sources */,
@@ -747,7 +755,7 @@
 				E004EA612BA2497A000AD37C /* HabitIndicatorView.swift in Sources */,
 				73DFA26F2B90AF6700C381A7 /* OnboardingDaysButtonTableViewCell.swift in Sources */,
 				E0BEE1492B99284300A2C4C4 /* OnboardingProfilePictureTableViewCell.swift in Sources */,
-				378034A32B8F8D8A0046E6B8 /* PomoProgressBar.swift in Sources */,
+				378034A32B8F8D8A0046E6B8 /* TimerProgressBar.swift in Sources */,
 				378034AF2B8FACE50046E6B8 /* WhiteNoiseTableViewCell.swift in Sources */,
 				BAA38AE92BA3EE2E00CAF619 /* CustomerServiceViewController.swift in Sources */,
 				F88EB2DA2B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift in Sources */,
