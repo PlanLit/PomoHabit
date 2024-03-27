@@ -175,8 +175,7 @@ extension OnboardingHabitRegisterViewController {
     }
     
     private func makeOnboardingDaysButtonTableViewCell() -> OnboardingDaysButtonTableViewCell {
-        let cell = OnboardingDaysButtonTableViewCell()
-        cell.setData(daysButtonSelectionState) { inx, state in
+        let cell = OnboardingDaysButtonTableViewCell(style: .default, reuseIdentifier: nil, daysButtonSelectionState) { inx, state in
             self.daysButtonSelectionState[inx] = state
             var trueCount = 0
             for state in self.daysButtonSelectionState {
@@ -260,8 +259,10 @@ extension OnboardingHabitRegisterViewController {
                                 action: { // messages.count - 1 만큼 실행되는 블록
                 self.addTableViewCellDataAndUpdate(messages[index.value])
             }, ended: { // 마지막에 한번 실행되는 블록
-                self.habitTextFieldView.isHidden = false
-                self.habitTextFieldView.subviews.first?.becomeFirstResponder()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.habitTextFieldView.isHidden = false
+                    self.habitTextFieldView.subviews.first?.becomeFirstResponder()
+                }
             }).fire()
         }
     }

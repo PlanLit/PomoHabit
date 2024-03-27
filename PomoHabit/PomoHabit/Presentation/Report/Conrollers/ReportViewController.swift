@@ -39,6 +39,10 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
         super.viewWillAppear(animated)
         
         fetchData()
+        
+        DispatchQueue.main.async {
+            self.updateUI()
+        }
     }
 }
 
@@ -100,6 +104,25 @@ extension ReportViewController {
         messageBoxView.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide)
             make.centerX.equalToSuperview()
+        }
+    }
+    
+    private func updateUI() {
+        imageCollectionViewController.setData(getHabitAchievementRate())
+        imageCollectionViewController.collectionView.reloadData()
+        
+        if let habitAchievementLabel = habitAchievementLabelView.arrangedSubviews.last as? UILabel {
+            habitAchievementLabel.text = "\(getHabitAchievementRate())%"
+        }
+        
+        let newGridView = makeGridView()
+        gridView.removeFromSuperview()
+        gridView = newGridView
+        view.addSubview(gridView)
+        gridView.snp.makeConstraints { make in
+            make.top.equalTo(habitAchievementLabelView.snp.bottom).offset(LayoutLiterals.minimumVerticalSpacing)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(45 * 5 + (10 * 4))
         }
     }
 }
@@ -200,11 +223,12 @@ extension ReportViewController {
             if totalHabitInfItems.count == 0 { return UIButton() }
             
             let boxView = UIButton(type: .system, primaryAction: .init(handler: { _ in
-//                if self.totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" <= Date().dateToString(format: "MMdd") && self.totalHabitInfItems![index].hasDone {
-//                    let reportHabitDetailViewController = ReportHabitDetailViewController()
-//                    reportHabitDetailViewController.setData(self.totalHabitInfItems?[index])
-//                    self.presentBottomSheet(viewController: reportHabitDetailViewController, detents: [.large()])
-//                }
+                if self.totalHabitInfItems![index].date?.dateToString(format: "MMdd") ?? "" <= Date().dateToString(format: "MMdd") && self.totalHabitInfItems![index].hasDone {
+                    let reportHabitDetailViewController = ReportHabitDetailViewController()
+                    reportHabitDetailViewController.setData(self.totalHabitInfItems?[index])
+                    
+                    self.presentBottomSheet(viewController: reportHabitDetailViewController, detents: [.large()])
+                }
             }))
             boxView.layer.cornerRadius = 10
             boxView.clipsToBounds = true
