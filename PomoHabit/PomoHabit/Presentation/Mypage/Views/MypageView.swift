@@ -184,7 +184,6 @@ extension MyPageView {
         pobitNavigationBarView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(58)
         }
         
         nickNameLabel.snp.makeConstraints { make in
