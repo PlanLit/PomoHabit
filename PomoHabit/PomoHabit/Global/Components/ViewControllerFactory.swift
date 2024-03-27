@@ -7,7 +7,13 @@
 
 // MARK: - ViewControllerFactory
 
-class ViewControllerFactory {
+final class ViewControllerFactory {
+    static func makeTimerViewController() -> TimerViewController {
+        let viewController = TimerViewController(viewModel: TimerViewModel(), rootView: TimerView())
+        
+        return viewController
+    }
+    
     static func makeWeeklyCalendarViewController() -> WeeklyCalendarViewController {
         let viewController = WeeklyCalendarViewController(weeklyHabitInfo: WeeklyHabitInfoModel())
         

@@ -12,15 +12,29 @@ import UIKit
 
 final class TimerViewController: BaseViewController, BottomSheetPresentable {
     
+    // MARK: - Subjects
+    
+    private let viewDidLoadSubject = PassthroughSubject<Void, Never>()
+    
     // MARK: - Properties
     
-    private var model = TimerViewModel()
-    private var rootView = TimerView()
-    private var whiteNoiseView = WhiteNoiseViewController()
+    private var viewModel: TimerViewModel
+    private var rootView: TimerView
+    private lazy var whiteNoiseView = WhiteNoiseViewController()
     
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Life Cycle
+    
+    init(viewModel: TimerViewModel, rootView: TimerView) {
+        self.viewModel = viewModel
+        self.rootView = rootView
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         
@@ -30,7 +44,9 @@ final class TimerViewController: BaseViewController, BottomSheetPresentable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         bind()
+        viewDidLoadSubject.send()
     }
 }
 
@@ -38,12 +54,13 @@ final class TimerViewController: BaseViewController, BottomSheetPresentable {
 
 extension TimerViewController {
     private func bind() {
-        let input = TimerViewModel.Input(memoButtonTapped: rootView.memoButtonTapped,
+        let input = TimerViewModel.Input(viewDidLoadSubject: viewDidLoadSubject,
+                                         memoButtonTapped: rootView.memoButtonTapped,
                                          whiteNoiseButtonTapped: rootView.whiteNoiseButtonTapped,
                                          timerButtonTapped: rootView.timerButtonTapped,
                                          submitButtonTapped: whiteNoiseView.submitButtonTapped, 
-                                         whiteNoiseSelected: whiteNoiseView.whiteNoiseSelectedSubject)
-        let output = model.transform(input: input)
+                                         whiteNoiseSelected: whiteNoiseView.whiteNoiseSelected)
+        let output = viewModel.transform(input: input)
         
         output.memoButtonAction
             .receive(on: DispatchQueue.main)
@@ -88,9 +105,10 @@ extension TimerViewController {
                 case .stopped:
                     break
                 case .running:
-                    self?.rootView.circleProgressBar.setProgressWithAnimation(duration: self?.model.timerDuration ?? 5)
+                    self?.rootView.circleProgressBar.setProgressWithAnimation(duration: self?.viewModel.timerDuration ?? 5)
                 case .finished:
                     self?.rootView.updateTimerButtonUI(with: state)
+                    self?.whiteNoiseView.stop()
                     self?.showAlert(title: "메모를 작성하시겠어요?", message: nil) { [weak self] _ in
                         self?.presentBottomSheet(viewController: MemoViewController())
                     }

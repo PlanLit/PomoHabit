@@ -18,7 +18,7 @@ final class WhiteNoiseViewController: BaseViewController, NavigationBarDelegate 
     // MARK: - Subjects
     
     private (set) var submitButtonTapped = PassthroughSubject<Void, Never>()
-    private (set) var whiteNoiseSelectedSubject = PassthroughSubject<String, Never>()
+    private (set) var whiteNoiseSelected = PassthroughSubject<String, Never>()
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Properties
@@ -126,6 +126,10 @@ extension WhiteNoiseViewController {
             }
         }
     }
+    
+    func stop() {
+        audioPlayer?.stop()
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -135,7 +139,7 @@ extension WhiteNoiseViewController: UITableViewDelegate {
         let key = Array(whiteNoiseMap.keys)[indexPath.row]
         let selectedWhiteNosie = key
         self.selectedWhiteNosie = selectedWhiteNosie
-        self.whiteNoiseSelectedSubject.send(self.selectedWhiteNosie ?? "")
+        self.whiteNoiseSelected.send(self.selectedWhiteNosie ?? "")
         
         guard let fileName = whiteNoiseMap[key] else { return }
         play(with: fileName)

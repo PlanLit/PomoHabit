@@ -13,7 +13,7 @@ final class TabBarController: UITabBarController {
     
     // MARK: - Properties
     
-    let firstVC = TimerViewController()
+    let firstVC = ViewControllerFactory.makeTimerViewController()
     let secondVC = ReportViewController()
     let thirdVC = ViewControllerFactory.makeWeeklyCalendarViewController()
     let fourthVC = ViewControllerFactory.makeMypageViewController()
