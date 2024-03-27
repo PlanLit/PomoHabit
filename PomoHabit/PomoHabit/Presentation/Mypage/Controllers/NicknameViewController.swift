@@ -18,7 +18,6 @@ final class NicknameViewController: UIViewController, NavigationBarDelegate {
     private let nicknameEditView = NicknameEditView()
     var onDataReceived: ((String) -> Void)? 
     var onNicknameEdit: ((String) -> Void)?
-    var onDataReceivedFromMyPage: (() -> Void)?
     var nicknameLabelPlaceholder: String?
     
     // MARK: - View Lifecycle
@@ -28,7 +27,7 @@ final class NicknameViewController: UIViewController, NavigationBarDelegate {
         
         setupNicknameEditView()
         setDelegate()
-        nicknameEditView.editSubmitButton.addTarget(self, action: #selector(didTapNicknameSubmitButton) , for: .touchUpInside)
+        setupEditSubmitButton()
         placeholderContent ()
     }
 }
@@ -58,9 +57,12 @@ extension NicknameViewController {
     
     @objc func didTapNicknameSubmitButton() {
         guard let nickname = nicknameEditView.nicknameEditTextField.text else { return }
-        
+        CoreDataManager.shared.updateUsernickName(nickname:nickname)
         onNicknameEdit?(nickname)
-        onDataReceivedFromMyPage?()
         dismiss(animated: true)
+    }
+    
+    func setupEditSubmitButton() {
+        nicknameEditView.editSubmitButton.addTarget(self, action: #selector(didTapNicknameSubmitButton) , for: .touchUpInside)
     }
 }
