@@ -135,17 +135,17 @@ final class WeeklyCalendarView: BaseView {
 extension WeeklyCalendarView {
     private func setAddSubViews() {
         self.addSubview(scrollView)
+        
         scrollView.addSubViews([navigationBarView,todayLabel,todayDateLabel,weeklyCollectionView,firstDivider,weeklyHabitProgressLabel,weeklyHabitProgressView,progressCircleImageView,secondDivider,habitInfoLabel,habitInfoView,thirdDivider,noteInfoLabel,noteContentLabel])
     }
     
     private func setAutoLayout() {
         scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalTo(safeAreaLayoutGuide)
         }
         
         navigationBarView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide)
-            make.leading.trailing.equalToSuperview()
+            make.top.leading.trailing.equalToSuperview()
         }
         
         // MARK: - 오늘 날짜 UI
