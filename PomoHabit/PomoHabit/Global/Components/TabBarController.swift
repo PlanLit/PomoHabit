@@ -52,7 +52,7 @@ extension TabBarController {
     
     private func adjustTabBarIconPositionBasedOnDevice() {
         let hasNotch = view.hasNotch
-        let yOffset: CGFloat = hasNotch ? 8 : -4
+        let yOffset: CGFloat = hasNotch ? 6 : -4
         
         adjustTabBarItemPosition(yOffset: yOffset)
     }
