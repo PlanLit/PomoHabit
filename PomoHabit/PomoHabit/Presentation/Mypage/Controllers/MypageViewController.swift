@@ -53,9 +53,7 @@ final class MyPageViewController: UIViewController, BottomSheetPresentable {
         setDelegateforEditButton()
         setNicknameData()
         setTotalHabitInfo()
-        nicknameViewController.onNicknameEdit = { nickname in
-            self.myPageRootView.updateNicknameLabel(with: nickname)
-        }
+        setupOnNicknameEdit()
         sendDataToNicknamePlaceholder()
     }
 }
@@ -109,6 +107,12 @@ extension MyPageViewController {
 extension MyPageViewController {
     func editNickname(with nickname: String) {
         myPageRootView.updateNicknameLabel(with: nickname)
+    }
+    
+    func setupOnNicknameEdit() {
+        nicknameViewController.onNicknameEdit = { nickname in
+            self.myPageRootView.updateNicknameLabel(with: nickname)
+        }
     }
 }
 
