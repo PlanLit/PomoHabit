@@ -8,15 +8,15 @@
 import Combine
 import Foundation
 
-enum TimerState {
+enum TimerState: String {
     /// 진행 전
-    case stopped
+    case stopped = "stopped"
     /// 진행 중
-    case running
+    case running = "running"
     /// 타이머 종료
-    case finished
+    case finished = "finished"
     /// 완료
-    case done
+    case done = "done"
 }
 
 struct UserData {
@@ -30,6 +30,7 @@ struct UserData {
 
 final class TimerViewModel: InputOutputProtocol {
     struct Input {
+        let viewDidLoadSubject: PassthroughSubject<Void, Never>
         let memoButtonTapped: PassthroughSubject<Void, Never>
         let whiteNoiseButtonTapped: PassthroughSubject<Void, Never>
         let timerButtonTapped: PassthroughSubject<Void, Never>
@@ -66,6 +67,12 @@ final class TimerViewModel: InputOutputProtocol {
     }
     
     func transform(input: Input) -> Output {
+        input.viewDidLoadSubject
+            .sink { [weak self] _ in
+                self?.loadTimerState()
+            }
+            .store(in: &cancellables)
+        
         input.whiteNoiseSelected
             .sink { [weak self] selectedWhiteNoise in
                 print("Selected White Noise: \(selectedWhiteNoise)")
@@ -112,6 +119,10 @@ final class TimerViewModel: InputOutputProtocol {
 // MARK: - HandleTimer
 
 extension TimerViewModel {
+    private func saveTimerState() {
+        UserDefaultsManager.shared.saveTimerState(timerStatePublisher.value)
+    }
+    
     private func handleTimerButtonTapped() {
         switch timerStatePublisher.value {
         case .stopped:
@@ -152,6 +163,19 @@ extension TimerViewModel {
     }
 }
 
+// MARK: - UserDefaults
+
+extension TimerViewModel {
+    private func updateState(_ newState: TimerState) {
+        timerStatePublisher.send(newState)
+    }
+    
+    private func loadTimerState() {
+        let timerState = UserDefaultsManager.shared.loadTimerState()
+        updateState(timerState)
+    }
+}
+
 // MARK: - CoreData
 
 extension TimerViewModel {
@@ -180,10 +204,10 @@ extension TimerViewModel {
             
             guard let goalTime = selectedHabitInfo?.goalTime else { return } // 목표 시간
             
-            self.timerDuration = TimeInterval(goalTime * 60)
+//            self.timerDuration = TimeInterval(goalTime * 60)
             
             /// test용 주석
-//            self.timerDuration = TimeInterval(goalTime)
+            self.timerDuration = TimeInterval(goalTime)
         } catch {
             print(error)
         }
@@ -196,8 +220,9 @@ extension TimerViewModel {
     
     // 타이머 완료시 실행되는 메서드
     private func recordCompletedHabit() {
-        guard let savedText = UserDefaults.standard.string(forKey: "noteText") else { return }
-        CoreDataManager.shared.completedTodyHabit(completedDate: currentDate, note: savedText)
+        let savedText = UserDefaults.standard.string(forKey: "noteText")
+        CoreDataManager.shared.completedTodyHabit(completedDate: currentDate, note: savedText ?? "")
+        UserDefaultsManager.shared.saveTimerState(timerStatePublisher.value)
         timerStatePublisher.send(.done)
     }
 }

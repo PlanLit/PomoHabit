@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3709E8182BB1DD4C004EECAE /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3709E8172BB1DD4C004EECAE /* UserDefaultsManager.swift */; };
 		37144C662B8C32D6008565C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C652B8C32D6008565C4 /* AppDelegate.swift */; };
 		37144C682B8C32D6008565C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C672B8C32D6008565C4 /* SceneDelegate.swift */; };
 		37144C6A2B8C32D6008565C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C692B8C32D6008565C4 /* ViewController.swift */; };
@@ -94,6 +95,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3709E8172BB1DD4C004EECAE /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		37144C622B8C32D6008565C4 /* PomoHabit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomoHabit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37144C652B8C32D6008565C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37144C672B8C32D6008565C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -200,11 +202,36 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		3709E8152BB1DD23004EECAE /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3709E8162BB1DD38004EECAE /* UserDefaults */,
+				37144C792B8C3379008565C4 /* CoreData */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		3709E8162BB1DD38004EECAE /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				3709E8172BB1DD4C004EECAE /* UserDefaultsManager.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		3709E81B2BB2BD11004EECAE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		37144C592B8C32D6008565C4 = {
 			isa = PBXGroup;
 			children = (
 				37144C642B8C32D6008565C4 /* PomoHabit */,
 				37144C632B8C32D6008565C4 /* Products */,
+				3709E81B2BB2BD11004EECAE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -220,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				37144C7A2B8C33A6008565C4 /* Global */,
+				3709E8152BB1DD23004EECAE /* Data */,
 				37144C7B2B8C33AC008565C4 /* Presentation */,
 				37144C732B8C32D7008565C4 /* Info.plist */,
 			);
@@ -240,7 +268,6 @@
 			children = (
 				37144C912B8C543D008565C4 /* Base */,
 				37144C7C2B8C340E008565C4 /* Extensions */,
-				37144C792B8C3379008565C4 /* CoreData */,
 				37144C7E2B8C3419008565C4 /* Utilites */,
 				37144C7D2B8C3413008565C4 /* Components */,
 				376B91B82B8CE44E004CBB16 /* Literals */,
@@ -621,6 +648,7 @@
 				37144C5E2B8C32D6008565C4 /* Sources */,
 				37144C5F2B8C32D6008565C4 /* Frameworks */,
 				37144C602B8C32D6008565C4 /* Resources */,
+				3709E81E2BB2BD11004EECAE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -726,6 +754,8 @@
 				E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */,
 				E0BEE14B2B99366600A2C4C4 /* OnboardingChattingCellData.swift in Sources */,
 				378034A12B8F8D830046E6B8 /* TimerViewController.swift in Sources */,
+				378034A12B8F8D830046E6B8 /* PomoViewController.swift in Sources */,
+				3709E8182BB1DD4C004EECAE /* UserDefaultsManager.swift in Sources */,
 				37B811D12B9B788D00A6694E /* GesturePublisher+Extensions.swift in Sources */,
 				37144C662B8C32D6008565C4 /* AppDelegate.swift in Sources */,
 				376B91AA2B8C681A004CBB16 /* Pretendard.swift in Sources */,
@@ -911,7 +941,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2DG35ZK3GC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomoHabit/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -944,7 +974,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2DG35ZK3GC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomoHabit/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";

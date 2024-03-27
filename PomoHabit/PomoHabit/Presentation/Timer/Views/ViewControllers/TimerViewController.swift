@@ -12,6 +12,10 @@ import UIKit
 
 final class TimerViewController: BaseViewController, BottomSheetPresentable {
     
+    // MARK: - Subjects
+    
+    private let viewDidLoadSubject = PassthroughSubject<Void, Never>()
+    
     // MARK: - Properties
     
     private var viewModel: TimerViewModel
@@ -40,7 +44,9 @@ final class TimerViewController: BaseViewController, BottomSheetPresentable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         bind()
+        viewDidLoadSubject.send()
     }
 }
 
@@ -48,11 +54,12 @@ final class TimerViewController: BaseViewController, BottomSheetPresentable {
 
 extension TimerViewController {
     private func bind() {
-        let input = TimerViewModel.Input(memoButtonTapped: rootView.memoButtonTapped,
+        let input = TimerViewModel.Input(viewDidLoadSubject: viewDidLoadSubject,
+                                         memoButtonTapped: rootView.memoButtonTapped,
                                          whiteNoiseButtonTapped: rootView.whiteNoiseButtonTapped,
                                          timerButtonTapped: rootView.timerButtonTapped,
                                          submitButtonTapped: whiteNoiseView.submitButtonTapped, 
-                                         whiteNoiseSelected: whiteNoiseView.whiteNoiseSelectedSubject)
+                                         whiteNoiseSelected: whiteNoiseView.whiteNoiseSelected)
         let output = viewModel.transform(input: input)
         
         output.memoButtonAction
@@ -101,6 +108,7 @@ extension TimerViewController {
                     self?.rootView.circleProgressBar.setProgressWithAnimation(duration: self?.viewModel.timerDuration ?? 5)
                 case .finished:
                     self?.rootView.updateTimerButtonUI(with: state)
+                    self?.whiteNoiseView.stop()
                     self?.showAlert(title: "메모를 작성하시겠어요?", message: nil) { [weak self] _ in
                         self?.presentBottomSheet(viewController: MemoViewController())
                     }
