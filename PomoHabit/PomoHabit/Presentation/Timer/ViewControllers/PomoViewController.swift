@@ -12,6 +12,10 @@ import UIKit
 
 final class TimerViewController: BaseViewController, BottomSheetPresentable {
     
+    // MARK: - Subjects
+    
+    private let viewDidLoadSubject = PassthroughSubject<Void, Never>()
+    
     // MARK: - Properties
     
     private var viewModel = TimerViewModel()
@@ -30,13 +34,9 @@ final class TimerViewController: BaseViewController, BottomSheetPresentable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bind()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        loadTimerState()
+        bind()
+        viewDidLoadSubject.send()
     }
 }
 
@@ -44,7 +44,8 @@ final class TimerViewController: BaseViewController, BottomSheetPresentable {
 
 extension TimerViewController {
     private func bind() {
-        let input = TimerViewModel.Input(memoButtonTapped: rootView.memoButtonTapped,
+        let input = TimerViewModel.Input(viewDidLoadSubject: viewDidLoadSubject,
+                                         memoButtonTapped: rootView.memoButtonTapped,
                                          whiteNoiseButtonTapped: rootView.whiteNoiseButtonTapped,
                                          timerButtonTapped: rootView.timerButtonTapped,
                                          submitButtonTapped: whiteNoiseView.submitButtonTapped, 
@@ -120,14 +121,5 @@ extension TimerViewController {
                 self?.rootView.updateViewWithUserData(userData)
             }
             .store(in: &cancellables)
-    }
-}
-
-// MARK: - Internal Methods
-
-extension TimerViewController {
-    func loadTimerState() {
-        let timerState = UserDefaultsManager.shared.loadTimerState()
-        viewModel.updateState(timerState)
     }
 }
