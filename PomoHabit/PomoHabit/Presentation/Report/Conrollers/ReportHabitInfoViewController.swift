@@ -18,15 +18,13 @@ final class ReportHabitInfoViewController: BaseViewController, NavigationBarDele
     
     // MARK: - UI Properties
     
-    private let pobitNavigationBarView = PobitNavigationBarView(title: "습관 정보", viewType: .withDismissButton)
+    private lazy var pobitNavigationBarView = makeNavigationBarView()
     private lazy var tableView: UITableView = makeTableView()
     
     // MARK: - Life Cycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        pobitNavigationBarView.delegate = self
         
         setAddSubviews()
         setAutoLayout()
@@ -68,6 +66,13 @@ extension ReportHabitInfoViewController {
 // MARK: - Factory Methods
 
 extension ReportHabitInfoViewController {
+    private func makeNavigationBarView() -> PobitNavigationBarView {
+        let naviBarView = PobitNavigationBarView(title: "습관 정보", viewType: .withDismissButton)
+        naviBarView.delegate = self
+        
+        return naviBarView
+    }
+    
     private func makeTableView() -> UITableView {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.dataSource = self
