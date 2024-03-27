@@ -16,9 +16,10 @@ final class NicknameViewController: UIViewController, NavigationBarDelegate {
     // MARK: - Properties
     
     private let nicknameEditView = NicknameEditView()
-    var onDataReceived: ((String) -> Void)? 
-    var onNicknameEdit: ((String) -> Void)?
-    var nicknameLabelPlaceholder: String?
+    
+    private var onDataReceived: ((String) -> Void)?
+    private var onNicknameEdit: ((String) -> Void)?
+    private var nicknameLabelPlaceholder: String?
     
     // MARK: - View Lifecycle
     
