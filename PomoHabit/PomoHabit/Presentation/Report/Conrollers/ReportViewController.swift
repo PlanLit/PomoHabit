@@ -21,7 +21,7 @@ final class ReportViewController: BaseViewController, BottomSheetPresentable {
     private let navigationBar = PobitNavigationBarView(title: "습관 달성률", viewType: .plain)
     private lazy var headerView: HStackView = makeHeaderView()
     private lazy var imageCollectionViewController: ReportImageCollectionViewController = makeImageCollectionViewController()
-    private lazy var habitAchievementLabelView: VStackView = makeHabitAchievementLabelView()
+    private lazy var habitAchievementLabelView: UILabel = makeHabitAchievementLabelView()
     private lazy var gridView: VStackView = makeGridView()
     private lazy var habitIndicatorView = HabitIndicatorView()
     private lazy var messageBoxView: UILabel = makeMessageBoxView("모두 완료하면 토마토가 웃는얼굴이 돼요")
@@ -111,9 +111,7 @@ extension ReportViewController {
         imageCollectionViewController.setData(getHabitAchievementRate())
         imageCollectionViewController.collectionView.reloadData()
         
-        if let habitAchievementLabel = habitAchievementLabelView.arrangedSubviews.last as? UILabel {
-            habitAchievementLabel.text = "\(getHabitAchievementRate())%"
-        }
+        habitAchievementLabelView.text = "\(getHabitAchievementRate())%"
         
         let newGridView = makeGridView()
         gridView.removeFromSuperview()
@@ -200,21 +198,13 @@ extension ReportViewController {
         return imageCollectionViewController
     }
     
-    private func makeHabitAchievementLabelView() -> VStackView {
-        let title = UILabel()
-        title.text = "달성률"
-        title.font = Pretendard.regular(size: 16)
-        title.textAlignment = .center
-        
+    private func makeHabitAchievementLabelView() -> UILabel {
         let rate = UILabel()
         rate.text = "\(getHabitAchievementRate())%"
-        rate.font = Pretendard.regular(size: 16)
+        rate.font = Pretendard.semiBold(size: 16)
         rate.textAlignment = .center
         
-        return VStackView(spacing: 5, alignment: .center, distribution: .fill, [
-            title,
-            rate
-        ])
+        return rate
     }
 
     private func makeGridView() -> VStackView {
