@@ -18,13 +18,23 @@ final class TimerViewController: BaseViewController, BottomSheetPresentable {
     
     // MARK: - Properties
     
-    private var viewModel = TimerViewModel()
-    private var rootView = TimerView()
-    private var whiteNoiseView = WhiteNoiseViewController()
+    private var viewModel: TimerViewModel
+    private var rootView: TimerView
+    private lazy var whiteNoiseView = WhiteNoiseViewController()
     
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Life Cycle
+    
+    init(viewModel: TimerViewModel, rootView: TimerView) {
+        self.viewModel = viewModel
+        self.rootView = rootView
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         
