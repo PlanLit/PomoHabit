@@ -8,24 +8,6 @@
 import Combine
 import Foundation
 
-enum TimerState: String {
-    /// 진행 전
-    case stopped = "stopped"
-    /// 진행 중
-    case running = "running"
-    /// 타이머 종료
-    case finished = "finished"
-    /// 완료
-    case done = "done"
-}
-
-struct UserData {
-    var targetHabit: String
-    var targetDate: String
-    var alarmTime: String
-    var whiteNoiseType: String
-}
-
 // MARK: - TimerViewModel
 
 final class TimerViewModel: InputOutputProtocol {
