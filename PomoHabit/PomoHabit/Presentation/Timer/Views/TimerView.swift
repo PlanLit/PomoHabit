@@ -95,7 +95,6 @@ extension TimerView {
         navigationBar.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(58)
         }
         
         timerHeaderView.snp.makeConstraints { make in

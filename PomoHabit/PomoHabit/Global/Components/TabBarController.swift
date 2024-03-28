@@ -16,7 +16,7 @@ final class TabBarController: UITabBarController {
     let firstVC = ViewControllerFactory.makeTimerViewController()
     let secondVC = ReportViewController()
     let thirdVC = ViewControllerFactory.makeWeeklyCalendarViewController()
-    let fourthVC = MyPageViewController()
+    let fourthVC = ViewControllerFactory.makeMypageViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +52,7 @@ extension TabBarController {
     
     private func adjustTabBarIconPositionBasedOnDevice() {
         let hasNotch = view.hasNotch
-        let yOffset: CGFloat = hasNotch ? 8 : -4
+        let yOffset: CGFloat = hasNotch ? 6 : -4
         
         adjustTabBarItemPosition(yOffset: yOffset)
     }

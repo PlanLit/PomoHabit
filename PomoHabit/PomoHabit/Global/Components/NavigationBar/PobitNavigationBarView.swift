@@ -71,16 +71,15 @@ extension PobitNavigationBarView {
     }
     
     private func setAutoLayout() {
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
-        }
-        
-        dividerView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(LayoutLiterals.upperPrimarySpacing)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(1)
-            make.bottom.equalToSuperview()
+            titleLabel.snp.makeConstraints { make in
+                make.centerY.equalToSuperview()
+                make.leading.equalToSuperview().inset(LayoutLiterals.minimumHorizontalSpacing)
+            }
+            dividerView.snp.makeConstraints { make in
+                make.top.equalTo(titleLabel.snp.bottom).offset(LayoutLiterals.upperSecondarySpacing)
+                make.leading.trailing.equalToSuperview()
+                make.height.equalTo(1)
+                make.bottom.equalToSuperview()
         }
     }
     

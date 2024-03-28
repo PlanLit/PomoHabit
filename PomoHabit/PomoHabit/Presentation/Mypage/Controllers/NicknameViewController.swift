@@ -16,18 +16,20 @@ final class NicknameViewController: UIViewController, NavigationBarDelegate {
     // MARK: - Properties
     
     private let nicknameEditView = NicknameEditView()
-    var onDataReceived: ((String) -> Void)? = nil
+    
+    var onDataReceived: ((String) -> Void)?
     var onNicknameEdit: ((String) -> Void)?
+    var nicknameLabelPlaceholder: String?
     
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setDelegate()
         setupNicknameEditView()
-        nicknameEditView.editSubmitButton.addTarget(self, action: #selector(didTapNicknameSubmitButton) , for: .touchUpInside)
-        
+        setDelegate()
+        setupEditSubmitButton()
+        placeholderContent ()
     }
 }
 
@@ -39,8 +41,12 @@ extension NicknameViewController {
     }
     
     func toReceiveNicknameData(data: String) {
-//        onDataReceived?(data)
-//        onDataReceived = nil
+        onDataReceived?(data)
+        onDataReceived = nil
+    }
+    
+    func placeholderContent () {
+        nicknameEditView.nicknameEditTextField.placeholder = nicknameLabelPlaceholder
     }
     
     private func setupNicknameEditView() {
@@ -52,8 +58,30 @@ extension NicknameViewController {
     
     @objc func didTapNicknameSubmitButton() {
         guard let nickname = nicknameEditView.nicknameEditTextField.text else { return }
-        
+        CoreDataManager.shared.updateUsernickName(nickname:nickname)
         onNicknameEdit?(nickname)
         dismiss(animated: true)
+    }
+    
+    func setupEditSubmitButton() {
+        nicknameEditView.editSubmitButton.addTarget(self, action: #selector(didTapNicknameSubmitButton) , for: .touchUpInside)
+    }
+    
+    func setOnDataReceivedHandler(handler: ((String) -> Void)?) {
+        self.onDataReceived = handler
+    }
+    
+    func getOnDataReceivedHandler() -> ((String) -> Void)? {
+        
+        return self.onDataReceived
+    }
+    
+    func setNicknameLabelPlaceholder(placeholder: String?) {
+        self.nicknameLabelPlaceholder = placeholder
+    }
+    
+    func getNicknameLabelPlaceholder() -> String? {
+        
+        return self.nicknameLabelPlaceholder
     }
 }
