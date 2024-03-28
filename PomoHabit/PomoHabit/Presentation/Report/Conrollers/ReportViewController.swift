@@ -207,6 +207,9 @@ extension ReportViewController {
     }
 
     private func makeGridView() -> VStackView {
+        guard let totalHabitInfItems = totalHabitInfItems else { return VStackView([UIView()]) }
+        if totalHabitInfItems.count < 21 { return VStackView([UIView()]) }
+        
         func getTheBoxView(_ index: Int,_ width: UInt = 56,_ height: UInt = 45) -> UIButton {
             guard let totalHabitInfItems = self.totalHabitInfItems else { return UIButton() }
             if totalHabitInfItems.count == 0 { return UIButton() }
