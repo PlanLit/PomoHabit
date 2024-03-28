@@ -196,17 +196,28 @@ extension CoreDataManager {
         
         if targetDayInfos.contains(date.getDayOfWeek()){ // 오늘 습관을 진행하는 날짜인지 확인후 목데이터에 추가
             createTotalHabitInfo(date: date, goalTime: Int16(goalTime), hasDone: false, note: "")
-        }
-        
-        while appendCount != 20 {
-            date = calendar.date(byAdding: .day,value: 1, to: date) ?? Date()
-            
-            if targetDayInfos.contains(date.getDayOfWeek()) { // 습관 진행하는 요일이면 추가
-                goalTime += 1
-                createTotalHabitInfo(date: date, goalTime: Int16(goalTime), hasDone: false, note: "")
-                appendCount += 1
+            while appendCount != 20 {
+                date = calendar.date(byAdding: .day,value: 1, to: date) ?? Date()
+                
+                if targetDayInfos.contains(date.getDayOfWeek()) { // 습관 진행하는 요일이면 추가
+                    goalTime += 1
+                    createTotalHabitInfo(date: date, goalTime: Int16(goalTime), hasDone: false, note: "")
+                    appendCount += 1
+                }
+            }
+        } else {
+            while appendCount != 21 {
+                date = calendar.date(byAdding: .day,value: 1, to: date) ?? Date()
+                
+                if targetDayInfos.contains(date.getDayOfWeek()) { // 습관 진행하는 요일이면 추가
+                    goalTime += 1
+                    createTotalHabitInfo(date: date, goalTime: Int16(goalTime), hasDone: false, note: "")
+                    appendCount += 1
+                }
             }
         }
+        
+      
     }
 }
 
