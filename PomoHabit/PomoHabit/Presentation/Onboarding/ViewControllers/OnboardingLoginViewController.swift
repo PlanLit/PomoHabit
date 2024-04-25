@@ -103,9 +103,13 @@ extension OnboardingLoginViewController {
                 return
             }
             
-            let onboardingHabitRegisterViewController = OnboardingHabitRegisterViewController()
-            onboardingHabitRegisterViewController.setData(self.nickname)
-            self.navigationController?.pushViewController(onboardingHabitRegisterViewController, animated: true)
+            if self.checkNicknameValidity() {
+                let onboardingHabitRegisterViewController = OnboardingHabitRegisterViewController()
+                onboardingHabitRegisterViewController.setData(self.nickname)
+                self.navigationController?.pushViewController(onboardingHabitRegisterViewController, animated: true)
+            } else {
+                // 알럿 창 띄우기
+            }
         }))
         button.setImage(UIImage(named: "arrow"), for: .normal)
         button.layer.opacity = 0.5
@@ -135,6 +139,21 @@ extension OnboardingLoginViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        return true
+    }
+}
+
+// MARK: - Helpers
+
+extension OnboardingLoginViewController {
+    /// 닉네임 글자수가 2 이상, 16 이하이면서, 공백이 없으면 true 반환
+    private func checkNicknameValidity() -> Bool {
+        guard let nickname = nickname else { return false }
+        
+        if nickname.count < 2 || nickname.count > 16 || nickname.contains(" ") {
+            return false
+        }
+        
         return true
     }
 }
