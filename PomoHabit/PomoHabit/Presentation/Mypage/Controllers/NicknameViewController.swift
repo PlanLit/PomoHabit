@@ -67,6 +67,8 @@ extension NicknameViewController {
         nicknameEditView.editSubmitButton.addTarget(self, action: #selector(didTapNicknameSubmitButton) , for: .touchUpInside)
     }
     
+    // private화 하면 쓸 method
+    
     func setOnDataReceivedHandler(handler: ((String) -> Void)?) {
         self.onDataReceived = handler
     }

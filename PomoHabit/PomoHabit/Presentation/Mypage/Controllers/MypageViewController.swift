@@ -97,7 +97,7 @@ extension MyPageViewController {
         nicknameViewController.nicknameLabelPlaceholder = nicknameLabel.text
         nicknameViewController.onDataReceived = { [weak self] data in
             nicknameLabel.text = data
-            self?.nicknameEditView.setPlaceholderForTextField()
+            self?.nicknameViewController.placeholderContent()
         }
     }
 }
