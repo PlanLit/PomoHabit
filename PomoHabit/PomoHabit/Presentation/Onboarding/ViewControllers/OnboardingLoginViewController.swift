@@ -91,6 +91,9 @@ extension OnboardingLoginViewController {
         textField.addLeftPadding()
         textField.addRightPadding()
         textField.delegate = self
+        textField.snp.makeConstraints { make in
+            make.width.equalTo(185)
+        }
         
         return textField
     }
