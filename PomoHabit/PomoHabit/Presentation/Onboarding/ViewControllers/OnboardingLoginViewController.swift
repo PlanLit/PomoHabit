@@ -109,6 +109,9 @@ extension OnboardingLoginViewController {
                 self.navigationController?.pushViewController(onboardingHabitRegisterViewController, animated: true)
             } else {
                 // 알럿 창 띄우기
+                let alertController = UIAlertController(title: "올바른 닉네임을 입력해 주세요!", message: "2자 이상, 16자 이하, 공백 포함 불가능", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in }))
+                self.present(alertController, animated: true, completion: nil)
             }
         }))
         button.setImage(UIImage(named: "arrow"), for: .normal)
