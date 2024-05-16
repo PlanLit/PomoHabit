@@ -44,7 +44,6 @@ final class TimerViewController: BaseViewController, BottomSheetPresentable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         bind()
         viewDidLoadSubject.send()
     }

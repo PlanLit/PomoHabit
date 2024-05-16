@@ -31,10 +31,14 @@ final class TimerViewModel: InputOutputProtocol {
     }
     
     private var timer: AnyCancellable?
+    private let coreDataManager: CoreDataManagerProtocol
+    private let userDefaultsManager: UserDefaultsManagerProtocol
     
     private let timerStatePublisher = CurrentValueSubject<TimerState, Never>(.stopped)
     private lazy var remainingTimePublisher = CurrentValueSubject<TimeInterval, Never>(self.timerDuration)
     private var cancellables = Set<AnyCancellable>()
+    
+    // MARK: - Properties
     
     private (set) var timerDuration = TimeInterval()
     private var targetHabit = String()
@@ -43,10 +47,17 @@ final class TimerViewModel: InputOutputProtocol {
     private var whiteNoiseType = String()
     private let currentDate = Date()
     
-    init() {
+    // MARK: - Life Cycle
+    
+    init(coreDataManager: CoreDataManagerProtocol, userDefaultsManager: UserDefaultsManagerProtocol) {
+        self.coreDataManager = coreDataManager
+        self.userDefaultsManager = userDefaultsManager
+        
         getUserData()
         getSelectedDayHabitInfo(selectedDay: currentDate)
     }
+    
+    // MARK: - Transform
     
     func transform(input: Input) -> Output {
         input.viewDidLoadSubject
@@ -79,8 +90,8 @@ final class TimerViewModel: InputOutputProtocol {
         
         let submitButtonAction = input.submitButtonTapped
             .print()
-            .map { [weak self] _ in
-                CoreDataManager.shared.updateWhiteNoiseType(with: self?.whiteNoiseType ?? "")
+            .map { [weak self] _ -> Void in
+                self?.coreDataManager.updateWhiteNoiseType(with: self?.whiteNoiseType ?? "")
             }
             .eraseToAnyPublisher()
         
@@ -101,10 +112,6 @@ final class TimerViewModel: InputOutputProtocol {
 // MARK: - HandleTimer
 
 extension TimerViewModel {
-    private func saveTimerState() {
-        UserDefaultsManager.shared.saveTimerState(timerStatePublisher.value)
-    }
-    
     private func handleTimerButtonTapped() {
         switch timerStatePublisher.value {
         case .stopped:
@@ -153,7 +160,7 @@ extension TimerViewModel {
     }
     
     private func loadTimerState() {
-        let timerState = UserDefaultsManager.shared.loadTimerState()
+        let timerState = userDefaultsManager.loadTimerState()
         updateState(timerState)
     }
 }
@@ -163,7 +170,7 @@ extension TimerViewModel {
 extension TimerViewModel {
     private func getUserData() {
         do {
-            let userData = try CoreDataManager.shared.fetchUser()
+            let userData = try coreDataManager.fetchUser()
             guard let targetHabit = userData?.targetHabit,
                   let targetDate = userData?.targetDate,
                   let alarmTime = userData?.alarmTime,
@@ -182,29 +189,32 @@ extension TimerViewModel {
     
     private func getSelectedDayHabitInfo(selectedDay: Date) {
         do {
-            let selectedHabitInfo = try CoreDataManager.shared.getSelectedHabitInfo(selectedDate: currentDate)
+            let selectedHabitInfo = try coreDataManager.getSelectedHabitInfo(selectedDate: currentDate)
             
             guard let goalTime = selectedHabitInfo?.goalTime else { return } // 목표 시간
             
-//            self.timerDuration = TimeInterval(goalTime * 60)
+            //            self.timerDuration = TimeInterval((goalTime - 1) * 60)
             
             /// test용 주석
-            self.timerDuration = TimeInterval(goalTime)
+            self.timerDuration = TimeInterval(goalTime - 1)
         } catch {
             print(error)
         }
     }
     
     private func getUserDataPublisher() -> AnyPublisher<UserData, Never> {
-        return Just(UserData(targetHabit: targetHabit, targetDate: targetDate, alarmTime: alarmTime, whiteNoiseType: whiteNoiseType))
-            .eraseToAnyPublisher()
+        return Just(UserData(targetHabit: targetHabit,
+                             targetDate: targetDate,
+                             alarmTime: alarmTime,
+                             whiteNoiseType: whiteNoiseType))
+        .eraseToAnyPublisher()
     }
     
     // 타이머 완료시 실행되는 메서드
     private func recordCompletedHabit() {
         let savedText = UserDefaults.standard.string(forKey: "noteText")
-        CoreDataManager.shared.completedTodyHabit(completedDate: currentDate, note: savedText ?? "")
-        UserDefaultsManager.shared.saveTimerState(timerStatePublisher.value)
+        coreDataManager.completedTodyHabit(completedDate: currentDate, note: savedText ?? "")
+        userDefaultsManager.saveTimerState(timerStatePublisher.value)
         timerStatePublisher.send(.done)
     }
 }

@@ -9,7 +9,7 @@
 
 final class ViewControllerFactory {
     static func makeTimerViewController() -> TimerViewController {
-        let viewController = TimerViewController(viewModel: TimerViewModel(), rootView: TimerView())
+        let viewController = TimerViewController(viewModel: TimerViewModel(coreDataManager: CoreDataManager.shared, userDefaultsManager: UserDefaultsManager.shared), rootView: TimerView())
         
         return viewController
     }

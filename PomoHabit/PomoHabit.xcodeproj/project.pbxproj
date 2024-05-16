@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3708BCBF2BB992C50089B50F /* CoreDataManagerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3708BCBE2BB992C50089B50F /* CoreDataManagerProtocols.swift */; };
 		3709E8182BB1DD4C004EECAE /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3709E8172BB1DD4C004EECAE /* UserDefaultsManager.swift */; };
 		37144C662B8C32D6008565C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C652B8C32D6008565C4 /* AppDelegate.swift */; };
 		37144C682B8C32D6008565C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37144C672B8C32D6008565C4 /* SceneDelegate.swift */; };
@@ -85,7 +86,6 @@
 		F88EB2DC2B8DC1120073BDDA /* WeeklyCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2DB2B8DC1120073BDDA /* WeeklyCalendarView.swift */; };
 		F8A179D62BAC164A005AAC18 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F8A179D52BAC164A005AAC18 /* Pretendard-Black.otf */; };
 		F8A4FB882B96F27B00E46EA1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115972B901D5E003E6459 /* SnapKit */; };
-		F8A4FB892B96F27B00E46EA1 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = E0F115992B901D5E003E6459 /* SnapKit-Dynamic */; };
 		F8A4FB952B96F2A300E46EA1 /* ReportImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB8D2B96F2A300E46EA1 /* ReportImageCollectionViewController.swift */; };
 		F8A4FB962B96F2A300E46EA1 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB8E2B96F2A300E46EA1 /* ReportViewController.swift */; };
 		F8A4FB972B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB912B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift */; };
@@ -97,6 +97,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3708BCBE2BB992C50089B50F /* CoreDataManagerProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerProtocols.swift; sourceTree = "<group>"; };
 		3709E8172BB1DD4C004EECAE /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		37144C622B8C32D6008565C4 /* PomoHabit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomoHabit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37144C652B8C32D6008565C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -191,7 +192,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8A4FB892B96F27B00E46EA1 /* SnapKit-Dynamic in Frameworks */,
 				F8A4FB882B96F27B00E46EA1 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +265,7 @@
 			children = (
 				37396CA82B96103C001E81F3 /* PobitModel.xcdatamodeld */,
 				37396CBB2B97823D001E81F3 /* CoreDataManager.swift */,
+				3708BCBE2BB992C50089B50F /* CoreDataManagerProtocols.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -662,7 +663,6 @@
 			name = PomoHabit;
 			packageProductDependencies = (
 				E0F115972B901D5E003E6459 /* SnapKit */,
-				E0F115992B901D5E003E6459 /* SnapKit-Dynamic */,
 			);
 			productName = PomoHabit;
 			productReference = 37144C622B8C32D6008565C4 /* PomoHabit.app */;
@@ -758,6 +758,7 @@
 				37B811CD2B9B74BE00A6694E /* InputOutputProtocol.swift in Sources */,
 				37144C6A2B8C32D6008565C4 /* ViewController.swift in Sources */,
 				378034AB2B8F9D7A0046E6B8 /* MemoViewController.swift in Sources */,
+				3708BCBF2BB992C50089B50F /* CoreDataManagerProtocols.swift in Sources */,
 				E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */,
 				E0BEE14B2B99366600A2C4C4 /* OnboardingChattingCellData.swift in Sources */,
 				378034A12B8F8D830046E6B8 /* TimerViewController.swift in Sources */,
@@ -947,7 +948,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 24032802;
 				DEVELOPMENT_TEAM = 2DG35ZK3GC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomoHabit/Info.plist;
@@ -961,7 +962,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.PlanLit.PomoHabit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -980,7 +981,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 24032802;
 				DEVELOPMENT_TEAM = 2DG35ZK3GC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomoHabit/Info.plist;
@@ -994,7 +995,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.PlanLit.PomoHabit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1046,11 +1047,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E0F115962B901D5E003E6459 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		E0F115992B901D5E003E6459 /* SnapKit-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E0F115962B901D5E003E6459 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
 
