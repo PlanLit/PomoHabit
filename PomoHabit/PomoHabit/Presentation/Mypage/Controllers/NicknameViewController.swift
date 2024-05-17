@@ -62,7 +62,6 @@ extension NicknameViewController {
         CoreDataManager.shared.updateUsernickName(nickname:nickname)
         onNicknameEdit?(nickname)
         dismiss(animated: true)
-        
     }
     
     func setupEditSubmitButton() {
