@@ -235,8 +235,8 @@ extension WeeklyCalendarViewController {
                     weeklyHabitInfo.habitstate = selectedHabitInfo.hasDone ?  HabitState.done : HabitState.doNot
                     weeklyHabitInfo.goalTime = selectedHabitInfo.goalTime
                     if selectedHabitInfo.hasDone {
-                        print(date.dateToString(format: "yyyy-MM-dd HH:mm"))
-                        weeklyHabitInfo.duringTime = getDuringTime(completedDate: date, goalTime: selectedHabitInfo.goalTime)
+                        
+                        weeklyHabitInfo.duringTime = getDuringTime(completedDate: selectedHabitInfo.date ?? Date(), goalTime: selectedHabitInfo.goalTime)
                     } else {
                         weeklyHabitInfo.duringTime = "00:00 ~ 00:00"
                     }
