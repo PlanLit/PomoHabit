@@ -2,10 +2,18 @@
 
 ![image](https://github.com/PlanLit/PomoHabit/assets/97212841/f521e861-1bf6-4a07-8ceb-f05558a50e80)
 
-<br/><br/>
+<br/>
 
-- 📱 **서비스 링크**: [https://apps.apple.com/kr/app/뽀빗/id6479586437](https://apps.apple.com/kr/app/%EB%BD%80%EB%B9%97/id6479586437)
-- 📱 **포빗 노션 링크**: [https://www.notion.so/teamsparta/2-2a171d679ae5469bb360083f1e5d2995](https://www.notion.so/2-2a171d679ae5469bb360083f1e5d2995?pvs=21)
+### 
+
+- **프로젝트 명** : 뽀빗(PomoHabit)
+- **소개**
+    - 한 줄 정리 : 하루 최소 5분으로 시작하는 습관 형성앱
+    - 내용 :  5분에서 시작해  하루 1분씩 25분이 될때까지 늘어나는 점진적 과부하를 통해 한달에 습관 하나를 형성하는데 도움을 줍니다.
+<br/>
+
+- 📱 **서비스 링크**: [https://apps.apple.com/kr/app/뽀빗](https://apps.apple.com/kr/app/%EB%BD%80%EB%B9%97/id6479586437)
+- 📱 **포빗 노션 링크**: [https://www.notion.so/teamsparta](https://www.notion.so/2-2a171d679ae5469bb360083f1e5d2995?pvs=21)
 
 <br/>
 
