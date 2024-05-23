@@ -19,12 +19,11 @@
 
 ## 🧑‍💻 팀원 소개 (Team)
 
-| https://github.com/joonBaek12 | https://github.com/dongjin97 | https://github.com/Deferare | https://github.com/Lilyhly |
+| https://github.com/joonBaek12 | https://github.com/dongjin97 |  https://github.com/Lilyhly | https://github.com/Deferare |
 | --- | --- | --- | --- |
-| <img width="250" alt="image" src="https://github.com/Team-Smeme/Smeem-iOS/assets/86944161/0e0cfcb6-d4d7-41f7-9eb0-7f516480939c" /> | ![image](https://github.com/PlanLit/PomoHabit/assets/97212841/3d9686be-8066-4799-841c-42e6c4ec8776) | ![image](https://github.com/PlanLit/PomoHabit/assets/97212841/c72ec640-0f93-4cf8-9d89-c51032c808a0) | ![image](https://github.com/PlanLit/PomoHabit/assets/97212841/a9cb76da-c935-4ac8-9675-ed16fb31f035) |
+| <img width="250" alt="image" src="https://github.com/Team-Smeme/Smeem-iOS/assets/86944161/0e0cfcb6-d4d7-41f7-9eb0-7f516480939c" /> | ![image](https://github.com/PlanLit/PomoHabit/assets/97212841/3d9686be-8066-4799-841c-42e6c4ec8776) | ![image](https://github.com/PlanLit/PomoHabit/assets/97212841/a9cb76da-c935-4ac8-9675-ed16fb31f035) | ![image](https://github.com/PlanLit/PomoHabit/assets/97212841/c72ec640-0f93-4cf8-9d89-c51032c808a0) | 
 | iOS Lead Developer | iOS Developer | iOS Developer | iOS Developer |
-| - 프로젝트 구조, coreData 설계 / 리팩토링<br/>- 타이머 뷰 구현<br/> | - 프로젝트 구조 coreData 설계 / 리팩토링<br/>- 주간 캘린더 구현 | - 프로젝트 구조 설계 / 리팩토링<br/>- 온보딩, 레포트 뷰 구현 | - 프로젝트 구조 설계 / 리팩토링<br/>- 마이페이지 뷰 구현 |
-
+| - 프로젝트 구조, coreData 설계 / 리팩토링<br/>- 타이머 뷰 구현<br/> | - 프로젝트 구조 coreData 설계 / 리팩토링<br/>- 주간 캘린더 구현 | - 프로젝트 구조 설계 / 리팩토링<br/>- 마이페이지 뷰 구현| - 프로젝트 구조 설계 / 리팩토링<br/>- 온보딩, 레포트 뷰 구현 | 
 <br/>
 
 ## ⚒️ 기술 스택 (Tech)
