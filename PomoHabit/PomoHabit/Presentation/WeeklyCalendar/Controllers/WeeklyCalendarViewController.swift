@@ -52,11 +52,12 @@ final class WeeklyCalendarViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         getWeeklyData()
-        setWeeklyCalendView()
         getTargetHabit()
         getWeeklyHabitState()
-        setWeeklyHabiState()
         getTodayHabitInfo()
+        setWeeklyCalendView()
+        setWeeklyHabiState()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -123,7 +124,7 @@ extension WeeklyCalendarViewController {
         do {
             var getWeeklyHabitState: [HabitState] = []
             for date in weeklyDates {
-                let dateHabitState = try coreDataManager.getSelectedHabitInfo(selectedDate: date).map{$0.hasDone}
+                let dateHabitState = try coreDataManager.getSelectedHabitInfo(selectedDate: date).map{ $0.hasDone }
                 
                 let currentDate = Date()
                 
