@@ -55,8 +55,8 @@ final class TimerViewController: BaseViewController, BottomSheetPresentable {
 extension TimerViewController {
     private func bind() {
         let input = TimerViewModel.Input(viewDidLoadSubject: viewDidLoadSubject,
-                                         memoButtonTapped: rootView.memoButtonTapped,
-                                         whiteNoiseButtonTapped: rootView.whiteNoiseButtonTapped,
+                                         memoButtonTapped: rootView.timerHeaderView.memoButtonTapped,
+                                         whiteNoiseButtonTapped: rootView.timerHeaderView.whiteNoiseButtonTapped,
                                          timerButtonTapped: rootView.timerButtonTapped,
                                          submitButtonTapped: whiteNoiseView.submitButtonTapped, 
                                          whiteNoiseSelected: whiteNoiseView.whiteNoiseSelected)
@@ -128,7 +128,7 @@ extension TimerViewController {
         output.userData
             .receive(on: DispatchQueue.main)
             .sink { [weak self] userData in
-                self?.rootView.updateViewWithUserData(userData)
+                self?.rootView.timerHeaderView.updateViewWithUserData(userData)
             }
             .store(in: &cancellables)
     }

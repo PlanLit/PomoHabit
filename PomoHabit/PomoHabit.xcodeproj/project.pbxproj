@@ -42,6 +42,7 @@
 		37B811CD2B9B74BE00A6694E /* InputOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B811CC2B9B74BE00A6694E /* InputOutputProtocol.swift */; };
 		37B811CF2B9B76F100A6694E /* Combine+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B811CE2B9B76F100A6694E /* Combine+Extensions.swift */; };
 		37B811D12B9B788D00A6694E /* GesturePublisher+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B811D02B9B788D00A6694E /* GesturePublisher+Extensions.swift */; };
+		37BCADEE2BBEF4FE006EF960 /* TimerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BCADED2BBEF4FE006EF960 /* TimerHeaderView.swift */; };
 		37CC614C2B90C07900CBAB45 /* BottomSheetPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CC614B2B90C07900CBAB45 /* BottomSheetPresentable.swift */; };
 		37D860582BABB9D3008E7001 /* NavigationBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D860572BABB9D3008E7001 /* NavigationBarDelegate.swift */; };
 		37F37DFF2BB537190004FC41 /* TimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F37DFE2BB537190004FC41 /* TimerState.swift */; };
@@ -134,6 +135,7 @@
 		37B811CC2B9B74BE00A6694E /* InputOutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputOutputProtocol.swift; sourceTree = "<group>"; };
 		37B811CE2B9B76F100A6694E /* Combine+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine+Extensions.swift"; sourceTree = "<group>"; };
 		37B811D02B9B788D00A6694E /* GesturePublisher+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GesturePublisher+Extensions.swift"; sourceTree = "<group>"; };
+		37BCADED2BBEF4FE006EF960 /* TimerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHeaderView.swift; sourceTree = "<group>"; };
 		37CC614B2B90C07900CBAB45 /* BottomSheetPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetPresentable.swift; sourceTree = "<group>"; };
 		37D860572BABB9D3008E7001 /* NavigationBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarDelegate.swift; sourceTree = "<group>"; };
 		37F37DFE2BB537190004FC41 /* TimerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerState.swift; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 				375AC9CB2B8F7FF0002F82FF /* ViewControllers */,
 				376278212B8F88F700BA7373 /* TimerView.swift */,
 				376278222B8F88FB00BA7373 /* TimerProgressBar.swift */,
+				37BCADED2BBEF4FE006EF960 /* TimerHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -761,6 +764,7 @@
 				E0C5B53E2B8D5B2700A77BAE /* DayButton.swift in Sources */,
 				E0BEE14B2B99366600A2C4C4 /* OnboardingChattingCellData.swift in Sources */,
 				378034A12B8F8D830046E6B8 /* TimerViewController.swift in Sources */,
+				37BCADEE2BBEF4FE006EF960 /* TimerHeaderView.swift in Sources */,
 				378034A12B8F8D830046E6B8 /* TimerViewController.swift in Sources */,
 				3709E8182BB1DD4C004EECAE /* UserDefaultsManager.swift in Sources */,
 				37B811D12B9B788D00A6694E /* GesturePublisher+Extensions.swift in Sources */,
