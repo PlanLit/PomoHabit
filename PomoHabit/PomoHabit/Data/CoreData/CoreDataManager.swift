@@ -13,7 +13,7 @@ enum CoreDataError: Error {
 
 // MARK: - CoreDataManager
 
-final class CoreDataManager {
+final class CoreDataManager: CoreDataManagerProtocol {
     
     static let shared = CoreDataManager()
     
@@ -159,7 +159,6 @@ extension CoreDataManager {
     }
 }
 
-
 // MARK: - Timer
 
 extension CoreDataManager {
@@ -184,6 +183,7 @@ extension CoreDataManager {
         saveContext()
     }
 }
+
 // MARK: - MockData
 
 extension CoreDataManager {
@@ -274,7 +274,7 @@ extension CoreDataManager {
 // MARK: - CoreData 파일 저장 경로 얻는 함수
 
 extension CoreDataManager {
-    func getSaveCoredataPath(){
+    func getSaveCoredataPath() {
         if let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last {
             print("Documents Directory: \(documentsDirectoryURL)")
         }

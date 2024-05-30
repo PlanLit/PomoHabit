@@ -7,7 +7,12 @@
 
 import Foundation
 
-final class UserDefaultsManager {
+protocol UserDefaultsManagerProtocol {
+    func saveTimerState(_ state: TimerState)
+    func loadTimerState() -> TimerState
+}
+
+final class UserDefaultsManager: UserDefaultsManagerProtocol {
     static let shared = UserDefaultsManager()
     
     private init() {}

@@ -118,9 +118,7 @@ extension CircleProgressBar {
         let seconds = Int(remainingTime) % 60
         let timeString = String(format: "%02d:%02d", minutes, seconds)
         timeLabel.text = timeString
-        DispatchQueue.main.async {
-            self.timeLabel.text = String(format: "%02d:%02d", minutes, seconds)
-        }
+        self.timeLabel.text = String(format: "%02d:%02d", minutes, seconds)
     }
 }
 
