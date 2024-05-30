@@ -72,6 +72,7 @@
 		E0CA6C192BB15DBA00AAA9A0 /* campfire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E0CA6C162BB15DBA00AAA9A0 /* campfire.mp3 */; };
 		E0CA6C1A2BB15DBA00AAA9A0 /* calmWaves.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E0CA6C172BB15DBA00AAA9A0 /* calmWaves.mp3 */; };
 		E0F29C162BAAB6AA00DEA573 /* CircleGaugeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F29C152BAAB6AA00DEA573 /* CircleGaugeImageView.swift */; };
+		F814F64F2C08558D0041BD49 /* CoreDataManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F814F64E2C08558D0041BD49 /* CoreDataManagerProtocol.swift */; };
 		F85C43342BAAB2BE00121442 /* WeeklyHabitInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C43332BAAB2BE00121442 /* WeeklyHabitInfoModel.swift */; };
 		F85F8F572B8DE33C00E69922 /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F562B8DE33C00E69922 /* BasePaddingLabel.swift */; };
 		F85F8F592B8DE54F00E69922 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F582B8DE54F00E69922 /* Date+Extension.swift */; };
@@ -164,6 +165,7 @@
 		E0CA6C162BB15DBA00AAA9A0 /* campfire.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = campfire.mp3; sourceTree = "<group>"; };
 		E0CA6C172BB15DBA00AAA9A0 /* calmWaves.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = calmWaves.mp3; sourceTree = "<group>"; };
 		E0F29C152BAAB6AA00DEA573 /* CircleGaugeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleGaugeImageView.swift; sourceTree = "<group>"; };
+		F814F64E2C08558D0041BD49 /* CoreDataManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerProtocol.swift; sourceTree = "<group>"; };
 		F85C43332BAAB2BE00121442 /* WeeklyHabitInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyHabitInfoModel.swift; sourceTree = "<group>"; };
 		F85F8F562B8DE33C00E69922 /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
 		F85F8F582B8DE54F00E69922 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 			children = (
 				37396CA82B96103C001E81F3 /* PobitModel.xcdatamodeld */,
 				37396CBB2B97823D001E81F3 /* CoreDataManager.swift */,
+				F814F64E2C08558D0041BD49 /* CoreDataManagerProtocol.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -803,6 +806,7 @@
 				37144C952B8C5472008565C4 /* BaseView.swift in Sources */,
 				37D860582BABB9D3008E7001 /* NavigationBarDelegate.swift in Sources */,
 				376B91AC2B8C6835004CBB16 /* ColorLiterals.swift in Sources */,
+				F814F64F2C08558D0041BD49 /* CoreDataManagerProtocol.swift in Sources */,
 				73DFA2632B903DB600C381A7 /* String+Extension.swift in Sources */,
 				37B811CF2B9B76F100A6694E /* Combine+Extensions.swift in Sources */,
 			);

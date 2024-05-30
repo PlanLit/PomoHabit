@@ -13,7 +13,7 @@ enum CoreDataError: Error {
 
 // MARK: - CoreDataManager
 
-final class CoreDataManager {
+final class CoreDataManager: CoreDataManagerProtocol {
     
     static let shared = CoreDataManager()
     

@@ -18,6 +18,7 @@ final class WeeklyCalendarViewController: BaseViewController {
     private var weeklyDates: [Date] = []
     private var weeklyHabitState: [HabitState] = []
     private var weeklyHabitInfo: WeeklyHabitInfoModel
+    private var coreDataManager: CoreDataManagerProtocol
     
     // MARK: - Views
     
@@ -29,7 +30,8 @@ final class WeeklyCalendarViewController: BaseViewController {
     }()
     
     // MARK: - init
-    init(weeklyHabitInfo: WeeklyHabitInfoModel) {
+    init(weeklyHabitInfo: WeeklyHabitInfoModel, coreDataManager: CoreDataManagerProtocol) {
+        self.coreDataManager = coreDataManager
         self.weeklyHabitInfo = weeklyHabitInfo
         
         super.init(nibName: nil, bundle: nil)
@@ -121,7 +123,8 @@ extension WeeklyCalendarViewController {
         do {
             var getWeeklyHabitState: [HabitState] = []
             for date in weeklyDates {
-                let dateHabitState = try CoreDataManager.shared.getSelectedHabitInfo(selectedDate: date).map{$0.hasDone}
+                let dateHabitState = try coreDataManager.getSelectedHabitInfo(selectedDate: date).map{$0.hasDone}
+                
                 let currentDate = Date()
                 
                 if date.comparisonDate(fromDate: currentDate) == 1 { // 현재 날짜보다 이후 날짜일 경우
@@ -168,7 +171,7 @@ extension WeeklyCalendarViewController {
     
     private func getTargetHabit() {
         do {
-            let userInfo = try CoreDataManager.shared.fetchUser()
+            let userInfo = try coreDataManager.fetchUser()
             
             weeklyHabitInfo.targetHabit = userInfo?.targetHabit ?? "습관 이름"
         } catch {
@@ -190,7 +193,7 @@ extension WeeklyCalendarViewController {
     
     private func getTodayHabitInfo() {
         do {
-            let todayHabitInfo = try CoreDataManager.shared.getSelectedHabitInfo(selectedDate: Date())
+            let todayHabitInfo = try coreDataManager.getSelectedHabitInfo(selectedDate: Date())
             var todayHabitState : HabitState = .notStart
             var duringTime: String = ""
             var goalTime: Int16 = todayHabitInfo?.goalTime ?? 0
@@ -223,7 +226,7 @@ extension WeeklyCalendarViewController {
     private func setSelectedHabitInfo(date: Date) {
         do {
             let currentDate = Date()
-            if let selectedHabitInfo = try CoreDataManager.shared.getSelectedHabitInfo(selectedDate: date) { // 습관 진행 날일 경우
+            if let selectedHabitInfo = try coreDataManager.getSelectedHabitInfo(selectedDate: date) { // 습관 진행 날일 경우
                 weeklyHabitInfo.note = selectedHabitInfo.note
                 
                 if date.comparisonDate(fromDate: currentDate) == 1 { // 현재 날짜 포함 이전일 경우
