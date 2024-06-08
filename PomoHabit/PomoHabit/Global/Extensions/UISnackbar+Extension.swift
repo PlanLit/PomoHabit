@@ -2,22 +2,39 @@
 //  UISnackbar+Extension.swift
 //  PomoHabit
 //
-//  Created by 洪立妍 on 4/25/24.
+//  Created by 洪立妍 on 6/8/24.
 //
 
 import UIKit
 
+import SnapKit
+
 final class Snackbar {
     static func showSnackbar(in view: UIView, title: String, message: String) {
-        let snackbarView = SnackbarView(frame: CGRect(x: 0, y: -100, width: view.frame.width, height: 100))
-        snackbarView.configure(title: title, message: message)
+        let snackbarView = SnackbarView()
+        snackbarView.updateContent(title: title, message: message)
         view.addSubview(snackbarView)
-        //뷰 이동하는과정
-        UIView.animate(withDuration: 2, delay: 0, options: .curveEaseInOut, animations: {
-            snackbarView.frame.origin.y = 0
+        
+        snackbarView.snp.makeConstraints { make in
+            make.trailing.leading.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview().offset(100)
+            make.height.equalTo(100)
+        }
+        
+        view.layoutIfNeeded() // 强制布局更新
+        
+        //animation 효과
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+            snackbarView.snp.updateConstraints { make in
+                make.bottom.equalToSuperview().offset(-16)
+            }
+            view.layoutIfNeeded() // 在动画期间强制布局更新
         }, completion: { _ in
-            UIView.animate(withDuration: 2, delay: 2, options: .curveEaseInOut, animations: {
-                snackbarView.frame.origin.y = -100
+            UIView.animate(withDuration: 0.5, delay: 3, options: .curveEaseInOut, animations: {
+                snackbarView.snp.updateConstraints { make in
+                    make.bottom.equalToSuperview().offset(100)
+                }
+                view.layoutIfNeeded() // 在动画期间强制布局更新
             }, completion: { _ in
                 snackbarView.removeFromSuperview()
             })
@@ -32,14 +49,14 @@ extension Snackbar {
         
         override init(frame: CGRect) {
             super.init(frame: frame)
-            configureView()
+            setupView()
         }
         
         required init?(coder aDecoder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
-        //configureView는 SnackbarView의뷰 디자인
-        private func configureView() {
+        //setupView는 SnackbarView 디자인
+        private func setupView() {
             backgroundColor = UIColor.gray.withAlphaComponent(0.9)
             layer.cornerRadius = 8
             titleLabel.textColor = .white
@@ -59,7 +76,7 @@ extension Snackbar {
             }
         }
         //configure는 SnackbarView의 title 하고 message 내용
-        func configure(title: String, message: String) {
+        func updateContent(title: String, message: String) {
             titleLabel.text = title
             messageLabel.text = message
         }
