@@ -29,7 +29,7 @@ final class NicknameViewController: UIViewController, NavigationBarDelegate {
         setupNicknameEditView()
         setDelegate()
         setupEditSubmitButton()
-        placeholderContent ()
+        setPlaceholderContent ()
     }
 }
 
@@ -45,7 +45,7 @@ extension NicknameViewController {
         onDataReceived = nil
     }
     
-    func placeholderContent () {
+    func setPlaceholderContent () {
         nicknameEditView.nicknameEditTextField.placeholder = nicknameLabelPlaceholder
     }
     
