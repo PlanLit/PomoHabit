@@ -95,6 +95,7 @@
 		F8DE57A02BB143780003D3DB /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DE579F2BB143780003D3DB /* ViewControllerFactory.swift */; };
 		F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD372B8C7FC900712CBF /* NoteView.swift */; };
 		F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD392B8C7FF200712CBF /* NoteTextView.swift */; };
+		BACB15DD2B8D682F003CBC50 /* MyPageViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACB15DC2B8D682F003CBC50 /* MyPageViews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
