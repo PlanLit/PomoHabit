@@ -92,6 +92,7 @@
 		F8A4FB972B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB912B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift */; };
 		F8A4FB982B96F2A300E46EA1 /* ReportHabitInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB922B96F2A300E46EA1 /* ReportHabitInfoViewController.swift */; };
 		F8A4FB992B96F2A300E46EA1 /* ReportHabitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4FB942B96F2A300E46EA1 /* ReportHabitDetailViewController.swift */; };
+		F8C5E0FA2C22C4A300FD2354 /* WeeklyCalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C5E0F92C22C4A300FD2354 /* WeeklyCalendarViewModel.swift */; };
 		F8DE57A02BB143780003D3DB /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DE579F2BB143780003D3DB /* ViewControllerFactory.swift */; };
 		F8E3CD382B8C7FC900712CBF /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD372B8C7FC900712CBF /* NoteView.swift */; };
 		F8E3CD3A2B8C7FF200712CBF /* NoteTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3CD392B8C7FF200712CBF /* NoteTextView.swift */; };
@@ -184,6 +185,7 @@
 		F8A4FB912B96F2A300E46EA1 /* ReportDayButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportDayButtonTableViewCell.swift; sourceTree = "<group>"; };
 		F8A4FB922B96F2A300E46EA1 /* ReportHabitInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHabitInfoViewController.swift; sourceTree = "<group>"; };
 		F8A4FB942B96F2A300E46EA1 /* ReportHabitDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHabitDetailViewController.swift; sourceTree = "<group>"; };
+		F8C5E0F92C22C4A300FD2354 /* WeeklyCalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeeklyCalendarViewModel.swift; path = "../../../../../../../../GNUTingGroup/refact/GNUting-iOS/GNUting/WeeklyCalendarViewModel.swift"; sourceTree = "<group>"; };
 		F8DE579F2BB143780003D3DB /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		F8E3CD372B8C7FC900712CBF /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		F8E3CD392B8C7FF200712CBF /* NoteTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTextView.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 		37144C822B8C3437008565C4 /* WeeklyCalendar */ = {
 			isa = PBXGroup;
 			children = (
+				F8C5E0F82C22C48E00FD2354 /* ViewModels */,
 				F88EB2D62B8DC0AE0073BDDA /* model */,
 				F88EB2D52B8DC0A60073BDDA /* Views */,
 				F88EB2D42B8DC07B0073BDDA /* Controllers */,
@@ -639,6 +642,14 @@
 			path = HabitInfo;
 			sourceTree = "<group>";
 		};
+		F8C5E0F82C22C48E00FD2354 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F8C5E0F92C22C4A300FD2354 /* WeeklyCalendarViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		F8E3CD362B8C7FB600712CBF /* Note */ = {
 			isa = PBXGroup;
 			children = (
@@ -776,6 +787,7 @@
 				E096400D2B9A85BA0075C2D0 /* OnboardingLoginViewController.swift in Sources */,
 				F88EB2DC2B8DC1120073BDDA /* WeeklyCalendarView.swift in Sources */,
 				378034A22B8F8D860046E6B8 /* TimerView.swift in Sources */,
+				F8C5E0FA2C22C4A300FD2354 /* WeeklyCalendarViewModel.swift in Sources */,
 				E0C5B5472B8D63B200A77BAE /* DayButtonsTableViewCell.swift in Sources */,
 				378034A42B8F8D8D0046E6B8 /* TimerViewModel.swift in Sources */,
 				F87351652B905E04004E89C5 /* TabBarController.swift in Sources */,

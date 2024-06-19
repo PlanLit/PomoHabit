@@ -15,7 +15,7 @@ final class ViewControllerFactory {
     }
     
     static func makeWeeklyCalendarViewController() -> WeeklyCalendarViewController {
-        let viewController = WeeklyCalendarViewController(weeklyHabitInfo: WeeklyHabitInfoModel(), coreDataManager: CoreDataManager.shared)
+        let viewController = WeeklyCalendarViewController(viewModel: WeeklyCalendarViewModel(coreDataManager: CoreDataManager.shared))
         
         return viewController
     }
