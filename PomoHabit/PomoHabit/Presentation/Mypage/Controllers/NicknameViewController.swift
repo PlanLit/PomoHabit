@@ -30,6 +30,7 @@ final class NicknameViewController: UIViewController, NavigationBarDelegate {
         setDelegate()
         setupEditSubmitButton()
         placeholderContent ()
+        didTapNicknameSubmitButton()
     }
 }
 
@@ -65,6 +66,7 @@ extension NicknameViewController {
     
     func setupEditSubmitButton() {
         nicknameEditView.editSubmitButton.addTarget(self, action: #selector(didTapNicknameSubmitButton) , for: .touchUpInside)
+        Snackbar.showSnackbar(in: self.view, title: "안녕", message: "수정페이지")
     }
     
     func setOnDataReceivedHandler(handler: ((String) -> Void)?) {
