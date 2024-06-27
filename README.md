@@ -41,6 +41,8 @@
 <br/>
 
 ## 🗂️ 프로젝트 구조 (Project Architecture)
+<img width="602" alt="image" src="https://github.com/PlanLit/PomoHabit/assets/97212841/22b6c8f2-98d2-440d-b25a-1a0c1bd4ead8">
+
 <br/>
 
 ## 📌 코드 컨벤션 (Code Convention)
