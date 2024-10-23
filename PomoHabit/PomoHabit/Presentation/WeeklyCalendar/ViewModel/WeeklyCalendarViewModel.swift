@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - WeeklyCalendarViewController
 
-class WeeklyCalendarViewModel: ObservableObject {
+final class WeeklyCalendarViewModel: ObservableObject {
     private let coreDataManager: CoreDataManagerProtocol
     
     // MARK: - Properties
