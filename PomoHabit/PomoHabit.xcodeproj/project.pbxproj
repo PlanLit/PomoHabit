@@ -80,6 +80,7 @@
 		F85F8F5B2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F5A2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift */; };
 		F85F8F612B8E25EE00E69922 /* WeeklyCalendarHabitInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F602B8E25EE00E69922 /* WeeklyCalendarHabitInfoView.swift */; };
 		F85F8F632B8E26E100E69922 /* ImageViewAndLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F8F622B8E26E100E69922 /* ImageViewAndLabelView.swift */; };
+		F86B9B6C2C22DECB000897A0 /* WeeklyCalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B9B6B2C22DECB000897A0 /* WeeklyCalendarViewModel.swift */; };
 		F870D85C2B8EFF3900DA4659 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F870D85B2B8EFF3900DA4659 /* UILabel+Extension.swift */; };
 		F87351652B905E04004E89C5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87351642B905E04004E89C5 /* TabBarController.swift */; };
 		F88EB2D82B8DC0EB0073BDDA /* WeeklyHabitState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EB2D72B8DC0EB0073BDDA /* WeeklyHabitState.swift */; };
@@ -173,6 +174,7 @@
 		F85F8F5A2B8DF0D500E69922 /* WeeklyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCollectionViewCell.swift; sourceTree = "<group>"; };
 		F85F8F602B8E25EE00E69922 /* WeeklyCalendarHabitInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarHabitInfoView.swift; sourceTree = "<group>"; };
 		F85F8F622B8E26E100E69922 /* ImageViewAndLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewAndLabelView.swift; sourceTree = "<group>"; };
+		F86B9B6B2C22DECB000897A0 /* WeeklyCalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeeklyCalendarViewModel.swift; path = PomoHabit/Presentation/WeeklyCalendar/ViewModel/WeeklyCalendarViewModel.swift; sourceTree = SOURCE_ROOT; };
 		F870D85B2B8EFF3900DA4659 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		F87351642B905E04004E89C5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F88EB2D72B8DC0EB0073BDDA /* WeeklyHabitState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyHabitState.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 		37144C822B8C3437008565C4 /* WeeklyCalendar */ = {
 			isa = PBXGroup;
 			children = (
+				F86B9B6D2C22DED3000897A0 /* ViewModel */,
 				F88EB2D62B8DC0AE0073BDDA /* model */,
 				F88EB2D52B8DC0A60073BDDA /* Views */,
 				F88EB2D42B8DC07B0073BDDA /* Controllers */,
@@ -570,6 +573,14 @@
 				E0CA6C152BB15DBA00AAA9A0 /* rainyMorning.mp3 */,
 			);
 			path = WhiteNoise;
+			sourceTree = "<group>";
+		};
+		F86B9B6D2C22DED3000897A0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F86B9B6B2C22DECB000897A0 /* WeeklyCalendarViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		F88EB2D42B8DC07B0073BDDA /* Controllers */ = {
@@ -803,6 +814,7 @@
 				F88EB2DA2B8DC0FC0073BDDA /* WeeklyCalendarViewController.swift in Sources */,
 				37396CAA2B96103C001E81F3 /* PobitModel.xcdatamodeld in Sources */,
 				F85F8F572B8DE33C00E69922 /* BasePaddingLabel.swift in Sources */,
+				F86B9B6C2C22DECB000897A0 /* WeeklyCalendarViewModel.swift in Sources */,
 				BAFEE14C2B96F795009F0D25 /* MypageView.swift in Sources */,
 				F8A4FB952B96F2A300E46EA1 /* ReportImageCollectionViewController.swift in Sources */,
 				37144C952B8C5472008565C4 /* BaseView.swift in Sources */,
