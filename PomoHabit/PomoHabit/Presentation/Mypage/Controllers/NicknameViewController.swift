@@ -29,7 +29,7 @@ final class NicknameViewController: UIViewController, NavigationBarDelegate {
         setupNicknameEditView()
         setDelegate()
         setupEditSubmitButton()
-        placeholderContent ()
+        setPlaceholderContent ()
     }
 }
 
@@ -45,7 +45,7 @@ extension NicknameViewController {
         onDataReceived = nil
     }
     
-    func placeholderContent () {
+    func setPlaceholderContent () {
         nicknameEditView.nicknameEditTextField.placeholder = nicknameLabelPlaceholder
     }
     
@@ -66,6 +66,8 @@ extension NicknameViewController {
     func setupEditSubmitButton() {
         nicknameEditView.editSubmitButton.addTarget(self, action: #selector(didTapNicknameSubmitButton) , for: .touchUpInside)
     }
+    
+    // private화 하면 쓸 method
     
     func setOnDataReceivedHandler(handler: ((String) -> Void)?) {
         self.onDataReceived = handler
